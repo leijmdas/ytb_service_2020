@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserPatentMapper" >
+
+	<select id="getUserPatentByIdAndType" resultType="ytb.user.model.UserPatentModel">
+      SELECT  * FROM user_patent WHERE user_id = #{userId} and patent_type = #{patentType}
+    </select>
+
+    <select id="getUserPatentById" resultType="ytb.user.model.UserPatentModel">
+        SELECT  * FROM user_patent WHERE user_id = #{userId}
+    </select>
+
+    <insert id="addUserPatent" parameterType="ytb.user.model.UserPatentModel"
+            useGeneratedKeys="true" keyProperty="patentId">
+        INSERT INTO user_patent
+        (
+        user_id,
+        patent_name,
+       `patent_number`,
+        first_name,
+        my_name_order,
+        picture_url,
+        `patent_type`,
+        create_time,
+        update_time
+        )
+        VALUES
+        (
+        #{userId},
+        #{patentName},
+        #{patentNumber},
+        #{firstName},
+        #{myNameOrder},
+        #{pictureUrl},
+        #{patentType},
+        now(),
+        now()
+        )
+    </insert>
+
+    <delete id="deleteUserPatent">
+        DELETE FROM user_patent WHERE user_id = #{userId} AND patent_id =#{patentId}
+    </delete>
+
+    <update id="updateUserPatent" parameterType="ytb.user.model.UserPatentModel">
+        UPDATE user_patent
+        <set>
+            <if test="userId != null and userId !=''">`user_id` = #{userId}, </if>
+            <if test="patentName != null">`patent_name` = #{patentName}, </if>
+            <if test="patentNumber != null">`patent_number` = #{patentNumber}, </if>
+            <if test="firstName != null">`first_name` = #{firstName}, </if>
+            <if test="myNameOrder != null">`my_name_order` = #{myNameOrder}, </if>
+            <if test="pictureUrl != null">`picture_url` = #{pictureUrl}, </if>
+            <if test="patentType != null">`patent_type` = #{patentType},</if>
+            update_time = now()
+        </set>
+    WHERE patent_id =#{patentId}
+    </update>
+
+</mapper>

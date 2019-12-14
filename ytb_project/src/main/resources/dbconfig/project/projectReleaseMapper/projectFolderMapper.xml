@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectFolderMapper" >
+
+
+    <insert id="addFolderModel" parameterType="ytb.project.model.ProjectFolderModel" useGeneratedKeys="true" keyProperty="folderId" keyColumn="folder_id">
+
+        insert into project_folder (
+        parent_id,
+        project_id,
+        talk_id,
+        user_id,
+        folder_name,
+        phase,
+        depth,
+        create_by,
+        update_time,
+        folder_status,
+        auditor,
+        owner_id,
+        folder_type)
+        VALUES (
+		#{parentId},
+		#{projectId},
+		#{talkId},
+		#{userId},
+		#{folderName},
+		#{phase},
+		#{depth},
+		#{createBy},
+		#{updateTime},
+		#{folderStatus},
+		#{auditor},
+		#{ownerId},
+		#{folderType})
+	</insert>
+
+
+    <update id="modifyFolderModel">
+      UPDATE project_folder SET
+          folder_status = #{folderStatus},
+          auditor = #{auditor}
+      WHERE folder_id = #{folderId}
+    </update>
+
+
+    <delete id="deleteFolderModel">
+        delete from project_folder where folder_id = #{folderId}
+    </delete>
+
+    <select id="getFolderModels" parameterType="int" resultType="ytb.project.model.ProjectFolderModel">
+        select * from project_folder where parent_id =#{parentId}
+    </select>
+
+    <select id="getStopFolder" resultType="ytb.project.model.ProjectFolderModel">
+          select * from project_folder
+          where parent_id = #{talkFolder}
+           and phase = #{phase}
+           and folder_type = 8
+    </select>
+
+
+    <select id="getPhaseFolderByParent" resultType="ytb.project.model.ProjectFolderModel">
+          select * from project_folder
+          where parent_id = #{parentId}  and phase = #{phase}
+          and project_id =#{projectId}   and folder_type &lt; 7
+    </select>
+
+    <select id="getFolderModel" resultType="ytb.project.model.ProjectFolderModel">
+         select * from project_folder where folder_id = #{folderId}
+    </select>
+
+    <select id="getPhaseFolders" resultType="ytb.project.model.ProjectFolderModel">
+          select * from project_folder where talk_id =#{talkId}  and phase = #{phase}
+    </select>
+
+    <select id="getUserPhaseFolders" resultType="ytb.project.model.ProjectFolderModel">
+        select * from project_folder where talk_id =#{talkId} and user_id= #{userId} and phase = #{phase}
+    </select>
+
+    <select id="getProjectPhaseFolders" resultType="ytb.project.model.ProjectFolderModel">
+          select * from project_folder where project_id =#{projectId} and user_id= #{userId} and phase = #{phase}
+    </select>
+
+    <select id="getTalkFolders" resultType="ytb.project.model.ProjectFolderModel">
+          select * from project_folder
+          where project_id =#{projectId} and talk_id= #{talkId}
+           and phase = #{phase}
+    </select>
+
+    <select id="getTalkUserFolders" resultType="ytb.project.model.ProjectFolderModel">
+          select * from project_folder
+          where project_id =#{projectId} and talk_id= #{talkId}
+           and phase = #{phase}
+           and user_id = #{userId}
+    </select>
+
+    <select id="getProjectFolders" resultType="ytb.project.model.ProjectFolderModel">
+          select * from project_folder
+          where project_id =#{projectId}
+    </select>
+
+    <select id="getProjectTalkFolders" resultType="ytb.project.model.ProjectFolderModel">
+          select * from project_folder
+          where   talk_id = #{talkId}
+    </select>
+
+</mapper>

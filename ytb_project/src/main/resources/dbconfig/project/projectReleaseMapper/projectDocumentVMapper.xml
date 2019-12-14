@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectDocumentVMapper" >
+
+    <insert id="addProjectDocumentV" parameterType="ytb.project.model.ProjectDocumentModel" useGeneratedKeys="true" keyProperty="documentId" keyColumn="document_id">
+      INSERT INTO
+      	project_document_v
+      	(
+			document_id_v,
+			name,
+			doc_type,
+			document,
+			save_mode,
+			pic_type,
+			doc_path,
+			doc_size
+		)
+		VALUES
+		(
+			#{documentIdV},
+			#{name},
+			#{docType},
+			#{document},
+			#{saveMode},
+			#{picType},
+			#{docPath},
+			#{docSize}
+		)
+	</insert>
+
+    <delete id="deleteProjectDocumentV" parameterType="int">
+        delete from project_document where document_id = #{documentId}
+    </delete>
+
+    <select id="getProjectDocument" parameterType="int" resultType="ytb.project.model.ProjectDocumentVModel">
+        select * from project_document where document_id = #{documentId}
+    </select>
+
+    <update id="modifyProjectDocument">
+		update project_document set
+		document = #{document}
+		where document_id = #{documentId}
+	</update>
+    <update id="modifyProjectDocumentName">
+		update project_document set
+		name = #{name},
+		document = #{document}
+		where document_id = #{documentId}
+	</update>
+
+</mapper>

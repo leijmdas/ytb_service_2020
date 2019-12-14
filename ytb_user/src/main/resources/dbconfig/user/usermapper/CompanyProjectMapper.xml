@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.CompanyProjectMapper" >
+
+	<select id="getCompanyProjectListById" resultType="ytb.user.model.CompanyProjectModel">
+      SELECT  * FROM company_project WHERE company_id = #{companyId}
+    </select>
+
+    <insert id="addCompanyProject" parameterType="ytb.user.model.CompanyProjectModel"
+            useGeneratedKeys="true" keyProperty="projectId">
+        INSERT INTO company_project
+        (
+        company_id,
+        `start_time`,
+       `end_time`,
+        project_name,
+        `company_name`,
+        image
+        )
+        VALUES
+        (
+        #{companyId},
+        #{startTime},
+        #{endTime},
+        #{projectName},
+        #{companyName},
+        #{image}
+        )
+    </insert>
+
+    <delete id="deleteCompanyProject">
+        delete from company_project where company_id = #{companyId} and project_id = #{projectId}
+
+    </delete>
+
+    <update id="updateCompanyProject" parameterType="ytb.user.model.CompanyProjectModel">
+      update company_project
+      <set>
+          <if test="companyId != null">`company_id` = #{companyId}, </if>
+          <if test="startTime != null">`start_time` = #{startTime}, </if>
+          <if test="endTime != null">`end_time` = #{endTime}, </if>
+          <if test="projectName != null">`project_name` = #{projectName}, </if>
+          <if test="companyName != null">`company_name` = #{companyName}, </if>
+          <if test="image != null">`image` = #{image} </if>
+      </set>
+        where project_id = #{projectId}
+    </update>
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.ReqItemMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="itemId" keyProperty="itemId">
+        insert dict_req_item(template_id,req_item_no,req_item_desc,value) values(#{templateId},#{reqItemNo},#{reqItemDesc},#{value})
+    </insert>
+
+    <select id="selectListByTemplateId" parameterType="int" resultType="ytb.manager.template.model.Dict_Req_Item">
+        SELECT
+        req.*, wj.Title workJobName,
+        tpl.Title templateName
+        FROM
+        dict_req_item req
+        LEFT JOIN dict_work_job wj ON req.workjob_id = wj.work_job_id,
+        dict_template tpl
+        WHERE
+        req.template_id = tpl.template_id
+        AND tpl.template_id = #{templateId}
+    </select>
+
+    <delete id="deleteListByTemplateId" parameterType="int">
+        delete from dict_req_item where template_id = #{templateId}
+    </delete>
+
+    <update id="updateReqItem" parameterType="ytb.manager.template.model.Dict_Req_Item">
+        update dict_req_item set workjob_id = #{workJobId} , value = #{value}
+        WHERE item_id = #{itemId}
+    </update>
+
+</mapper>

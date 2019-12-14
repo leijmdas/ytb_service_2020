@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.tagtable.ProcessPriceListAllMapper" >
+
+    <insert id="addBuyPriListAll" parameterType="ytb.project.model.tagtable.BuyPriceListAllModel" useGeneratedKeys="true" keyProperty="feeId" keyColumn="fee_id">
+
+	</insert>
+
+    <select id="selectProcessListPriceAll" resultType="ytb.project.model.tagtable.ProcessListPriceAllModel">
+
+      select * from process_list_price_all where project_id = #{projectId}  and document_id = #{documentId}
+
+    </select>
+
+</mapper>

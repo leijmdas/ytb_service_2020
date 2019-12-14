@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.tagtable.ProjectMemberTaskMapper" >
+
+
+
+
+
+    <insert id="addProjectMemberTask" parameterType="ytb.project.model.tagtable.ProjectMemberTask" useGeneratedKeys="true" keyProperty="mDutyTaskId" keyColumn="m_duty_task_id">
+
+      insert into project_member_task
+      (member_duty_id,task_name,task_remark,folder_id,create_mode,create_time,finish_time,project_id,task_status,templateId)
+
+      values
+      (#{memberDutyId},#{taskName},#{taskRemark},#{folderId},#{createMode},#{createTime},#{finishTime},#{projectId},#{taskStatus},#{templateId})
+
+	</insert>
+
+    
+    <select id="getProjectMemberTasks" resultType="ytb.project.model.tagtable.ProjectMemberTask">
+        select * from project_member_task where member_duty_id = #{memberDutyId}
+
+    </select>
+
+
+    <select id="getProjectMemberTaskById" resultType="ytb.project.model.tagtable.ProjectMemberTask">
+
+         select * from project_member_task where m_duty_task_id = #{mDutyTaskId}
+
+    </select>
+
+    <select id="selectProMeTaskByPId" resultType="ytb.project.model.tagtable.ProjectMemberTask">
+
+          select * from project_member_task t where t.project_id = #{projectId} and mode>0
+
+    </select>
+
+
+    <select id="getPhaseTask" resultType="ytb.project.model.tagtable.ProjectMemberTask">
+
+        select * from project_member_task t where t.task_name = #{taskName} and t.project_id = #{projectId}
+
+    </select>
+
+    <delete id="delProjectMemberTask">
+
+       delete from project_member_task where m_duty_task_id = #{mDutyTaskId}
+
+    </delete>
+
+    <update id="modifyPhaseTask">
+
+        update project_member_task set
+
+        task_remark = #{taskRemark}
+
+        where m_duty_task_id = #{mDutyTaskId}
+
+
+    </update>
+
+
+</mapper>

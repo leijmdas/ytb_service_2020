@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.CompanyHonorMapper" >
+
+	<select id="getCompanyHonorListById" resultType="ytb.user.model.CompanyHonorModel">
+      SELECT  * FROM company_honor WHERE company_id = #{companyId} and honor_type=#{honorType}
+    </select>
+
+    <select id="getAllCompanyHonorList" resultType="ytb.user.model.CompanyHonorModel">
+        SELECT  * FROM company_honor WHERE company_id = #{companyId}
+    </select>
+    <insert id="addCompanyHonor" parameterType="ytb.user.model.CompanyHonorModel"
+            useGeneratedKeys="true" keyProperty="honorId">
+        INSERT INTO company_honor
+        (
+        company_id,
+        honor_name,
+       `honor_date`,
+        organize_name,
+        image,
+        honor_type
+        )
+        VALUES
+        (
+        #{companyId},
+        #{honorName},
+        #{honorDate},
+        #{organizeName},
+        #{image},
+        #{honorType}
+        )
+    </insert>
+
+    <update id="updateCompanyHonor" parameterType="ytb.user.model.CompanyHonorModel">
+        UPDATE company_honor
+        <set>
+            <if test="companyId != null and companyId !=''">`company_id` = #{companyId}, </if>
+            <if test="honorName != null">`honor_name` = #{honorName}, </if>
+            <if test="honorDate != null">`honor_date` = #{honorDate}, </if>
+            <if test="organizeName != null">`organize_name` = #{organizeName}, </if>
+            <if test="image != null">`image` = #{image}, </if>
+            <if test="honorType != null and honorType !=''">`honor_type` = #{honorType} </if>
+        </set>
+    WHERE honor_id =#{honorId}
+    </update>
+
+    <delete id="deleteCompanyHonor">
+        delete from company_honor where honor_id = #{honorId} and company_id = #{companyId}
+    </delete>
+
+</mapper>

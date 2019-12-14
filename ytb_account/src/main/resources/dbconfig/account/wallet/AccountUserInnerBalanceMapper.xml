@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.account.wallet.dao.transaction.AccountUserInnerBalanceMapper">
+
+	<update id="updateBalanceB2FMinusServiceFee">
+
+		UPDATE account_user_inner
+		SET	account_user_inner.balance = account_user_inner.balance - #{balance} ,
+		account_user_inner.payout_agent = account_user_inner.payout_agent + #{balance},
+		account_user_inner.balance_out = account_user_inner.balance_out + #{balance}
+		 WHERE account_user_inner.inner_id  = #{innerId}
+		 AND  account_user_inner.balance >= #{balance}
+
+	</update>
+
+	<update id="updateBalanceReduceByInnerId">
+
+		UPDATE account_user_inner
+		SET	account_user_inner.balance = account_user_inner.balance - #{balance},
+		account_user_inner.payout_agent = account_user_inner.payout_agent + #{balance},
+		account_user_inner.balance_out = account_user_inner.balance_out + #{balance}
+		 WHERE account_user_inner.inner_id  = #{innerId}
+		 AND  account_user_inner.balance >= #{balance}
+
+	</update>
+
+
+	<update id="updateBalanceReduceByWithdraw">
+
+		UPDATE account_user_inner
+				SET 	account_user_inner.balance = account_user_inner.balance - #{balance},
+		account_user_inner.payout_agent = account_user_inner.payout_agent + #{balance},
+		account_user_inner.balance_out=  account_user_inner.balance_out + #{balance}
+		 WHERE	 account_user_inner.inner_id  = #{innerId}
+		 AND  account_user_inner.balance >= #{balance}
+
+
+	</update>
+
+	<update id="updateBalanceReduceByWithdrawCash">
+
+		UPDATE account_user_inner
+
+		SET
+
+		account_user_inner.balance = account_user_inner.balance - #{balance},
+
+		account_user_inner.takeout_money = account_user_inner.takeout_money + #{balance},
+
+		account_user_inner.balance_out=  account_user_inner.balance_out + #{balance}
+
+
+		 WHERE
+
+		 account_user_inner.inner_id  = #{innerId}
+		 AND
+
+		 account_user_inner.balance >= #{balance}
+
+
+	</update>
+
+
+	<update id="updateBalanceIncreaseByInnerId">
+
+		UPDATE account_user_inner
+
+		SET
+
+		account_user_inner.balance = account_user_inner.balance + #{balance},
+
+		account_user_inner.balance_in = account_user_inner.balance_in + #{balance}
+
+		 WHERE
+
+		 account_user_inner.inner_id  = #{innerId}
+		 AND
+
+		 account_user_inner.balance >= 0
+
+		 AND
+		account_user_inner.balance_in>=0
+
+
+
+
+
+	</update>
+
+
+	<update id="updateIncreaseIncrease">
+
+		update account_user_inner
+
+		set
+
+		account_user_inner.balance = account_user_inner.balance + #{balance}
+
+		where
+
+		 account_user_inner.inner_id  = #{innerId}
+		 and
+
+		 account_user_inner.balance >= 0
+
+	</update>
+
+
+	<update id="updateBalanceReduce">
+
+		UPDATE account_user_inner
+
+		SET
+
+		account_user_inner.balance = account_user_inner.balance - #{balance}
+
+
+		 WHERE
+
+		 account_user_inner.inner_id  = #{innerId}
+		 AND
+
+		 account_user_inner.balance >= #{balance}
+
+
+	  AND (account_user_inner.balance - #{balance})>=0
+
+	</update>
+	<update id="updateBalanceAndOutReduce">
+
+		UPDATE account_user_inner
+
+		SET
+
+		account_user_inner.balance = account_user_inner.balance - #{balance},
+
+		account_user_inner.balance_out = account_user_inner.balance_out + #{balance}
+
+		 WHERE
+
+		 account_user_inner.inner_id  = #{innerId}
+		 AND
+
+		 account_user_inner.balance >= #{balance}
+
+
+	  AND (account_user_inner.balance - #{balance})>=0
+
+	</update>
+
+	<update id="updateFrozen">
+
+		UPDATE account_user_inner
+
+		SET
+
+		account_user_inner.balance = account_user_inner.balance - #{balance},
+	account_user_inner.balance = account_user_inner.balance - #{balance},
+
+		 WHERE
+
+		 account_user_inner.inner_id  = #{innerId}
+		 AND
+
+		 account_user_inner.balance >= #{balance}
+
+
+	  AND account_user_inner.balance - #{balance}>0
+
+	</update>
+
+
+	<update id="f2fMinusPayoutAgent">
+
+		 UPDATE account_user_inner SET account_user_inner.payout_agent = account_user_inner.payout_agent - #{balance}
+		 WHERE  account_user_inner.inner_id  = #{innerId}
+		 AND  account_user_inner.payout_agent >= #{balance}
+
+
+
+	</update>
+
+	<update id="f2fAddPayoutAgent">
+
+		 UPDATE account_user_inner SET account_user_inner.payout_agent = account_user_inner.payout_agent + #{balance}
+		 WHERE  account_user_inner.inner_id  = #{innerId}
+
+
+
+	</update>
+	<update id="updateIncreaseBalanceAgentByInnerId">
+
+		UPDATE account_user_inner
+
+		SET
+
+		account_user_inner.payout_agent = account_user_inner.payout_agent + #{balance}
+
+
+
+		 WHERE
+	 account_user_inner.inner_id  = #{innerId}
+
+
+
+
+
+	</update>
+
+
+	<update id="updateTakeoutMoneyReduceByInnerId">
+
+		UPDATE account_user_inner
+
+		SET
+
+		account_user_inner.takeout_money = account_user_inner.takeout_money - #{balance}
+
+
+
+		 WHERE
+	 account_user_inner.inner_id  = #{innerId}
+
+		 AND
+
+		 account_user_inner.payout_agent >= #{balance}
+
+
+
+	</update>
+
+
+	<update id="updateTakeoutMoneyByInnerId">
+
+		UPDATE account_user_inner
+
+		SET
+
+		account_user_inner.balance = account_user_inner.balance - #{balance},
+
+		account_user_inner.takeout_money= account_user_inner.takeout_money + #{takeoutMoney},
+
+
+		WHERE
+
+		 account_user_inner.inner_id  = #{innerId}
+		 AND
+
+		 account_user_inner.balance >= #{balance}
+
+		 AND
+
+		account_user_inner.takeout_money>0
+
+	</update>
+
+
+	<update id="updatePbFrozen2Balance">
+
+		UPDATE account_user_inner
+		SET account_user_inner.income_agent = account_user_inner.income_agent - #{totalBalance},
+ 		account_user_inner.balance = account_user_inner.balance + #{balance},
+		account_user_inner.balance_in = account_user_inner.balance_in + #{balance}
+		 WHERE	 account_user_inner.inner_id  = #{toInnerId}
+ 		 AND account_user_inner.income_agent - #{totalBalance}>=0
+
+	</update>
+
+
+	<update id="updateBalanceInIncreaseByInnerId">
+
+		UPDATE account_user_inner
+
+		SET	account_user_inner.balance_in = account_user_inner.balance_in + #{balance}
+		 WHERE  account_user_inner.inner_id  = #{innerId}
+
+	</update>
+	<update id="updateProjectBalanceAgentIncreaseByInnerId">
+
+		UPDATE account_user_inner
+		SET
+		account_user_inner.income_agent = account_user_inner.income_agent + #{balance}
+		 WHERE
+		 account_user_inner.inner_id  = #{innerId}
+
+	</update>
+
+	<select id="queryAccountUserInner" resultType="ytb.account.wallet.model.AccountUserInner">
+		select * from  account_user_inner
+		WHERE user_id  = #{userId}
+		and company_id = #{companyId}
+		and pay_password = #{payPassword}
+	</select>
+
+	<select id="queryAccountUserInnerByInnerId" resultType="ytb.account.wallet.model.AccountUserInner">
+		select * from  account_user_inner WHERE inner_id  = #{innerId}
+	</select>
+
+	<update id="updateProjectBalanceAgentReduceByInnerId">
+		UPDATE  account_user_inner
+		SET	income_agent = income_agent - #{balance}
+		WHERE inner_id  = #{innerId}
+		 AND income_agent - #{balance}>0
+	</update>
+
+
+</mapper>

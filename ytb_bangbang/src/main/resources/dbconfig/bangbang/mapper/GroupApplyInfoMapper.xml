@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.GroupApplyInfoDao" >
+
+    <!--添加申请记录-->
+    <insert id="AddRecord" useGeneratedKeys="true" keyProperty="id" parameterType="ytb.bangbang.model.Group_Apply_InfoModel">
+        INSERT INTO user_apply_group(userid,to_user_id,groupId,apply_type,create_time,IsAgree) VALUES (#{userId},#{toUserId},#{groupId},#{type},now(),#{isAgree});
+    </insert>
+    <!--同意添加-->
+    <update id="setIsAgree" parameterType="int">
+        UPDATE user_apply_group SET isagree=#{isAgree} WHERE userId=#{userId} AND groupId=#{groupId};
+    </update>
+
+    <update id="changeIsAgree">
+        UPDATE user_apply_group SET IsAgree=#{inviteStatus} WHERE id=#{id}
+    </update>
+    <!--申请的id记录-->
+    <select id="GetApplyInfo">
+         SELECT userid,to_user_id,groupId,create_time,IsAgree FROM  user_apply_group WHERE to_user_id = #{toUserId}
+    </select>
+    <!--判断当前申请记录是否存在-->
+    <select id="IsExistence" resultType="int">
+        SELECT count(*) FROM  user_apply_group WHERE user_id=#{userId} AND groupId=#{groupId};
+    </select>
+    <!--获取个人申请群组记录-->
+    <select id="GetUserApplyInfo">
+        SELECT userid,to_user_id,groupId,create_time,IsAgree FROM  user_apply_group WHERE userId = #{userId} AND groupId = #{groupId}
+    </select>
+    
+    <select id="getUserApplyGroupInfo" resultMap="getUserApplyGroupInfoMap">
+        SELECT * from user_apply_group WHERE id=#{inviteId};
+    </select>
+
+    <resultMap id="getUserApplyGroupInfoMap" type="ytb.bangbang.model.Group_Apply_InfoModel">
+        <id column="id" property="id"/>
+        <result column="userId" property="userId"/>
+        <result column="groupId" property="groupId"/>
+        <result column="apply_type" property="type"/>
+        <result column="create_time" property="createTime"/>
+        <result column="To_user_Id" property="toUserId"/>
+        <result column="IsAgree" property="isAgree"/>
+    </resultMap>
+    
+    <!--删除好友记录-->
+    <delete id="DeleteApplyInfo">
+        DELETE FROM user_apply_group WHERE user_id=#{userId} AND groupId=#{groupId}
+    </delete>
+    
+    <select id="getApplyTypeById" resultType="int">
+        SELECT apply_type from user_apply_group WHERE id=#{id}
+    </select>
+</mapper>

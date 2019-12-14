@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.WorkJobCheckMapper">
+
+
+    <select id="getConstraint" resultType="ytb.manager.template.model.Dict_WorkJob_Check">
+      SELECT  * FROM dict_work_job_check where check_id = #{checkId}
+    </select>
+
+    <insert id="addConstraint">
+		insert into dict_work_job_check (template_id,req_item_id,work_job_id)
+		VALUES (#{templateId},#{reqItemId},#{workJobId})
+	</insert>
+
+    <select id="getConstraintList" parameterType="int" resultType="ytb.manager.template.model.Dict_WorkJob_Check">
+      SELECT  * FROM dict_constraint where WorkJobTypeId = #{WorkJobTypeId}
+    </select>
+
+    <update id="modifyConstraint">
+		update dict_work_job_check set
+
+		WorkJobTypeId = #{WorkJobTypeId},
+
+		Title = #{Title},
+
+		IsValid = #{IsValid}
+
+		where check_id = #{checkId}
+
+	</update>
+
+    <delete id="delConstraint">
+
+		delete from dict_work_job_check where check_id = #{checkId}
+
+	</delete>
+
+    <select id="getWorkJobCheckDetailsListBy" parameterType="int" resultType="ytb.manager.template.model.Dict_WorkJob_Check">
+      SELECT  t1.*,t2.Title as templateName,
+      t3.req_item_no as reqItemNo,t3.req_item_desc as reqItemDesc,
+      t4.Title as workJobName
+      FROM dict_work_job_check t1
+      left join dict_template t2 on t1.template_id=t2.template_id
+      left join dict_req_item t3 on t1.req_item_id=t3.item_id
+      left join dict_work_job t4 on t1.work_job_id=t4.work_job_id
+      where t1.template_id = #{templateId}
+    </select>
+
+    <delete id="delWorkJobCheckBy" parameterType="int">
+        delete from dict_work_job_check where check_id=#{checkId}
+    </delete>
+
+    <update id="modifyWorkJobCheck" parameterType="ytb.manager.template.model.Dict_WorkJob_Check">
+        update dict_work_job_check set req_item_id=#{reqItemId},work_job_id=#{workJobId} where check_id=#{checkId}
+    </update>
+
+
+</mapper>

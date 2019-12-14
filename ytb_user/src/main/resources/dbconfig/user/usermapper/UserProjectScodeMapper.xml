@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserProjectScodeMapper" >
+
+    <select id="getProjectScopeList" resultType="map">
+        SELECT
+        a.scode_id AS scodeId,
+        a.user_id AS userId,
+        a.type_id AS typeId,
+        a.create_time AS createTime,
+        a.isprivate AS isPrivate,
+        m.title,
+        m.parentName
+        FROM
+        user_project_scope a
+        LEFT JOIN (
+        SELECT
+        t1.Project_Type_Id,
+        t1.title,
+        (
+        SELECT
+        p.Title
+        FROM
+        ytb_manager.dict_project_type p
+        WHERE
+        p.Project_Type_Id = t1.parent_id
+        ) AS parentName
+        FROM
+        ytb_manager.dict_project_type t1
+        ) AS m ON m.Project_Type_Id = a.type_id
+        <where>
+            <if test="userId !=null and userId !=''">
+                user_id = #{userId}
+            </if>
+            <if test="companyId !=null and companyId !=''">
+                company_id = #{companyId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addProjectScope" parameterType="ytb.user.model.UserProjectScopeModel"
+            useGeneratedKeys="true" keyProperty="scodeId">
+      insert into user_project_scope
+      (
+        user_id,
+        company_id,
+       `type_id`,
+        create_time
+        )
+      values
+        <!--<foreach collection="templateList" item="item" index="index" separator="," >-->
+            (
+            #{userId},
+            #{companyId},
+            #{typeId},
+            now()
+            )
+     <!-- </foreach>-->
+    </insert>
+
+    <update id="updateProjectScode" parameterType="ytb.user.model.UserProjectScopeModel">
+        update user_project_scope
+        <set>
+            <if test="userId != null and userId !=''">`user_id` = #{userId}, </if>
+            <if test="companyId != null and companyId !=''">`company_id` = #{companyId}, </if>
+            <if test="typeId != null">`type_id` = #{typeId}</if>
+        </set>
+        where scode_id = #{scodeId}
+    </update>
+
+    <delete id="deleteProjectScode">
+        DELETE  from user_project_scope where scode_id = #{scodeId}
+    </delete>
+
+    <update id="updateProjectScodeShowOrHide">
+        update user_project_scope
+        set isprivate = #{isShow}
+        where scode_id = #{scodeId}
+    </update>
+
+</mapper>

@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.InvoiceMapper">
+  <resultMap id="BaseResultMap" type="ytb.project.model.Invoice">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="qr_code" jdbcType="VARCHAR" property="qrCode" />
+    <result column="machine_number" jdbcType="INTEGER" property="machineNumber" />
+    <result column="invoice_code" jdbcType="VARCHAR" property="invoiceCode" />
+    <result column="invoice_number" jdbcType="VARCHAR" property="invoiceNumber" />
+    <result column="date_of_invoice" jdbcType="DATE" property="dateOfInvoice" />
+    <result column="check_code" jdbcType="VARCHAR" property="checkCode" />
+    <result column="buy_name" jdbcType="VARCHAR" property="buyName" />
+    <result column="buy_tax_number" jdbcType="VARCHAR" property="buyTaxNumber" />
+    <result column="buy_address" jdbcType="VARCHAR" property="buyAddress" />
+    <result column="buy_phone" jdbcType="VARCHAR" property="buyPhone" />
+    <result column="buy_opening_bank" jdbcType="VARCHAR" property="buyOpeningBank" />
+    <result column="buy_account" jdbcType="VARCHAR" property="buyAccount" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="payee" jdbcType="VARCHAR" property="payee" />
+    <result column="to_review" jdbcType="VARCHAR" property="toReview" />
+    <result column="drawer" jdbcType="VARCHAR" property="drawer" />
+    <result column="sale_name" jdbcType="VARCHAR" property="saleName" />
+    <result column="sale_tax_number" jdbcType="VARCHAR" property="saleTaxNumber" />
+    <result column="sale_address" jdbcType="VARCHAR" property="saleAddress" />
+    <result column="sale_phone" jdbcType="VARCHAR" property="salePhone" />
+    <result column="sale_opening_bank" jdbcType="VARCHAR" property="saleOpeningBank" />
+    <result column="sale_account" jdbcType="VARCHAR" property="saleAccount" />
+    <result column="total_sum" jdbcType="VARCHAR" property="totalSum" />
+    <result column="aggregate_tax" jdbcType="VARCHAR" property="aggregateTax" />
+    <result column="total_price_and_tax" jdbcType="VARCHAR" property="totalPriceAndTax" />
+    <result column="invoice_state" jdbcType="VARCHAR" property="invoiceState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, qr_code, machine_number, invoice_code, invoice_number, date_of_invoice, check_code, 
+    buy_name, buy_tax_number, buy_address, buy_phone, buy_opening_bank, buy_account, 
+    remarks, payee, to_review, drawer, sale_name, sale_tax_number, sale_address, sale_phone, 
+    sale_opening_bank, sale_account, total_sum, aggregate_tax, total_price_and_tax, invoice_state
+  </sql>
+  <select id="selectByExample" parameterType="ytb.project.model.InvoiceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from invoice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from invoice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from invoice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="ytb.project.model.InvoiceExample">
+    delete from invoice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="ytb.project.model.Invoice">
+    insert into invoice (id, qr_code, machine_number, 
+      invoice_code, invoice_number, date_of_invoice, 
+      check_code, buy_name, buy_tax_number, 
+      buy_address, buy_phone, buy_opening_bank, 
+      buy_account, remarks, payee, 
+      to_review, drawer, sale_name, 
+      sale_tax_number, sale_address, sale_phone, 
+      sale_opening_bank, sale_account, total_sum, 
+      aggregate_tax, total_price_and_tax, invoice_state
+      )
+    values (#{id,jdbcType=INTEGER}, #{qrCode,jdbcType=VARCHAR}, #{machineNumber,jdbcType=INTEGER}, 
+      #{invoiceCode,jdbcType=VARCHAR}, #{invoiceNumber,jdbcType=VARCHAR}, #{dateOfInvoice,jdbcType=DATE}, 
+      #{checkCode,jdbcType=VARCHAR}, #{buyName,jdbcType=VARCHAR}, #{buyTaxNumber,jdbcType=VARCHAR}, 
+      #{buyAddress,jdbcType=VARCHAR}, #{buyPhone,jdbcType=VARCHAR}, #{buyOpeningBank,jdbcType=VARCHAR}, 
+      #{buyAccount,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{payee,jdbcType=VARCHAR}, 
+      #{toReview,jdbcType=VARCHAR}, #{drawer,jdbcType=VARCHAR}, #{saleName,jdbcType=VARCHAR}, 
+      #{saleTaxNumber,jdbcType=VARCHAR}, #{saleAddress,jdbcType=VARCHAR}, #{salePhone,jdbcType=VARCHAR}, 
+      #{saleOpeningBank,jdbcType=VARCHAR}, #{saleAccount,jdbcType=VARCHAR}, #{totalSum,jdbcType=VARCHAR}, 
+      #{aggregateTax,jdbcType=VARCHAR}, #{totalPriceAndTax,jdbcType=VARCHAR}, #{invoiceState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ytb.project.model.Invoice"  useGeneratedKeys="true"
+          keyProperty="id" keyColumn="id">
+    insert into invoice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="qrCode != null">
+        qr_code,
+      </if>
+      <if test="machineNumber != null">
+        machine_number,
+      </if>
+      <if test="invoiceCode != null">
+        invoice_code,
+      </if>
+      <if test="invoiceNumber != null">
+        invoice_number,
+      </if>
+      <if test="dateOfInvoice != null">
+        date_of_invoice,
+      </if>
+      <if test="checkCode != null">
+        check_code,
+      </if>
+      <if test="buyName != null">
+        buy_name,
+      </if>
+      <if test="buyTaxNumber != null">
+        buy_tax_number,
+      </if>
+      <if test="buyAddress != null">
+        buy_address,
+      </if>
+      <if test="buyPhone != null">
+        buy_phone,
+      </if>
+      <if test="buyOpeningBank != null">
+        buy_opening_bank,
+      </if>
+      <if test="buyAccount != null">
+        buy_account,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="payee != null">
+        payee,
+      </if>
+      <if test="toReview != null">
+        to_review,
+      </if>
+      <if test="drawer != null">
+        drawer,
+      </if>
+      <if test="saleName != null">
+        sale_name,
+      </if>
+      <if test="saleTaxNumber != null">
+        sale_tax_number,
+      </if>
+      <if test="saleAddress != null">
+        sale_address,
+      </if>
+      <if test="salePhone != null">
+        sale_phone,
+      </if>
+      <if test="saleOpeningBank != null">
+        sale_opening_bank,
+      </if>
+      <if test="saleAccount != null">
+        sale_account,
+      </if>
+      <if test="totalSum != null">
+        total_sum,
+      </if>
+      <if test="aggregateTax != null">
+        aggregate_tax,
+      </if>
+      <if test="totalPriceAndTax != null">
+        total_price_and_tax,
+      </if>
+      <if test="invoiceState != null">
+        invoice_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="qrCode != null">
+        #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="machineNumber != null">
+        #{machineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceCode != null">
+        #{invoiceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceNumber != null">
+        #{invoiceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfInvoice != null">
+        #{dateOfInvoice,jdbcType=DATE},
+      </if>
+      <if test="checkCode != null">
+        #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buyName != null">
+        #{buyName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTaxNumber != null">
+        #{buyTaxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="buyAddress != null">
+        #{buyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="buyPhone != null">
+        #{buyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="buyOpeningBank != null">
+        #{buyOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="buyAccount != null">
+        #{buyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="payee != null">
+        #{payee,jdbcType=VARCHAR},
+      </if>
+      <if test="toReview != null">
+        #{toReview,jdbcType=VARCHAR},
+      </if>
+      <if test="drawer != null">
+        #{drawer,jdbcType=VARCHAR},
+      </if>
+      <if test="saleName != null">
+        #{saleName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleTaxNumber != null">
+        #{saleTaxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="saleAddress != null">
+        #{saleAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="salePhone != null">
+        #{salePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOpeningBank != null">
+        #{saleOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="saleAccount != null">
+        #{saleAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="totalSum != null">
+        #{totalSum,jdbcType=VARCHAR},
+      </if>
+      <if test="aggregateTax != null">
+        #{aggregateTax,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPriceAndTax != null">
+        #{totalPriceAndTax,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceState != null">
+        #{invoiceState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ytb.project.model.InvoiceExample" resultType="java.lang.Long">
+    select count(*) from invoice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update invoice
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.qrCode != null">
+        qr_code = #{record.qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machineNumber != null">
+        machine_number = #{record.machineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.invoiceCode != null">
+        invoice_code = #{record.invoiceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceNumber != null">
+        invoice_number = #{record.invoiceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateOfInvoice != null">
+        date_of_invoice = #{record.dateOfInvoice,jdbcType=DATE},
+      </if>
+      <if test="record.checkCode != null">
+        check_code = #{record.checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyName != null">
+        buy_name = #{record.buyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyTaxNumber != null">
+        buy_tax_number = #{record.buyTaxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyAddress != null">
+        buy_address = #{record.buyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyPhone != null">
+        buy_phone = #{record.buyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyOpeningBank != null">
+        buy_opening_bank = #{record.buyOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyAccount != null">
+        buy_account = #{record.buyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payee != null">
+        payee = #{record.payee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toReview != null">
+        to_review = #{record.toReview,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drawer != null">
+        drawer = #{record.drawer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleName != null">
+        sale_name = #{record.saleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleTaxNumber != null">
+        sale_tax_number = #{record.saleTaxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleAddress != null">
+        sale_address = #{record.saleAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salePhone != null">
+        sale_phone = #{record.salePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleOpeningBank != null">
+        sale_opening_bank = #{record.saleOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleAccount != null">
+        sale_account = #{record.saleAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalSum != null">
+        total_sum = #{record.totalSum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aggregateTax != null">
+        aggregate_tax = #{record.aggregateTax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalPriceAndTax != null">
+        total_price_and_tax = #{record.totalPriceAndTax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceState != null">
+        invoice_state = #{record.invoiceState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update invoice
+    set id = #{record.id,jdbcType=INTEGER},
+      qr_code = #{record.qrCode,jdbcType=VARCHAR},
+      machine_number = #{record.machineNumber,jdbcType=INTEGER},
+      invoice_code = #{record.invoiceCode,jdbcType=VARCHAR},
+      invoice_number = #{record.invoiceNumber,jdbcType=VARCHAR},
+      date_of_invoice = #{record.dateOfInvoice,jdbcType=DATE},
+      check_code = #{record.checkCode,jdbcType=VARCHAR},
+      buy_name = #{record.buyName,jdbcType=VARCHAR},
+      buy_tax_number = #{record.buyTaxNumber,jdbcType=VARCHAR},
+      buy_address = #{record.buyAddress,jdbcType=VARCHAR},
+      buy_phone = #{record.buyPhone,jdbcType=VARCHAR},
+      buy_opening_bank = #{record.buyOpeningBank,jdbcType=VARCHAR},
+      buy_account = #{record.buyAccount,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      payee = #{record.payee,jdbcType=VARCHAR},
+      to_review = #{record.toReview,jdbcType=VARCHAR},
+      drawer = #{record.drawer,jdbcType=VARCHAR},
+      sale_name = #{record.saleName,jdbcType=VARCHAR},
+      sale_tax_number = #{record.saleTaxNumber,jdbcType=VARCHAR},
+      sale_address = #{record.saleAddress,jdbcType=VARCHAR},
+      sale_phone = #{record.salePhone,jdbcType=VARCHAR},
+      sale_opening_bank = #{record.saleOpeningBank,jdbcType=VARCHAR},
+      sale_account = #{record.saleAccount,jdbcType=VARCHAR},
+      total_sum = #{record.totalSum,jdbcType=VARCHAR},
+      aggregate_tax = #{record.aggregateTax,jdbcType=VARCHAR},
+      total_price_and_tax = #{record.totalPriceAndTax,jdbcType=VARCHAR},
+      invoice_state = #{record.invoiceState,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="ytb.project.model.Invoice">
+    update invoice
+    <set>
+      <if test="qrCode != null">
+        qr_code = #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="machineNumber != null">
+        machine_number = #{machineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceCode != null">
+        invoice_code = #{invoiceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceNumber != null">
+        invoice_number = #{invoiceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfInvoice != null">
+        date_of_invoice = #{dateOfInvoice,jdbcType=DATE},
+      </if>
+      <if test="checkCode != null">
+        check_code = #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buyName != null">
+        buy_name = #{buyName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTaxNumber != null">
+        buy_tax_number = #{buyTaxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="buyAddress != null">
+        buy_address = #{buyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="buyPhone != null">
+        buy_phone = #{buyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="buyOpeningBank != null">
+        buy_opening_bank = #{buyOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="buyAccount != null">
+        buy_account = #{buyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="payee != null">
+        payee = #{payee,jdbcType=VARCHAR},
+      </if>
+      <if test="toReview != null">
+        to_review = #{toReview,jdbcType=VARCHAR},
+      </if>
+      <if test="drawer != null">
+        drawer = #{drawer,jdbcType=VARCHAR},
+      </if>
+      <if test="saleName != null">
+        sale_name = #{saleName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleTaxNumber != null">
+        sale_tax_number = #{saleTaxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="saleAddress != null">
+        sale_address = #{saleAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="salePhone != null">
+        sale_phone = #{salePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOpeningBank != null">
+        sale_opening_bank = #{saleOpeningBank,jdbcType=VARCHAR},
+      </if>
+      <if test="saleAccount != null">
+        sale_account = #{saleAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="totalSum != null">
+        total_sum = #{totalSum,jdbcType=VARCHAR},
+      </if>
+      <if test="aggregateTax != null">
+        aggregate_tax = #{aggregateTax,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPriceAndTax != null">
+        total_price_and_tax = #{totalPriceAndTax,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceState != null">
+        invoice_state = #{invoiceState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ytb.project.model.Invoice">
+    update invoice
+    set qr_code = #{qrCode,jdbcType=VARCHAR},
+      machine_number = #{machineNumber,jdbcType=INTEGER},
+      invoice_code = #{invoiceCode,jdbcType=VARCHAR},
+      invoice_number = #{invoiceNumber,jdbcType=VARCHAR},
+      date_of_invoice = #{dateOfInvoice,jdbcType=DATE},
+      check_code = #{checkCode,jdbcType=VARCHAR},
+      buy_name = #{buyName,jdbcType=VARCHAR},
+      buy_tax_number = #{buyTaxNumber,jdbcType=VARCHAR},
+      buy_address = #{buyAddress,jdbcType=VARCHAR},
+      buy_phone = #{buyPhone,jdbcType=VARCHAR},
+      buy_opening_bank = #{buyOpeningBank,jdbcType=VARCHAR},
+      buy_account = #{buyAccount,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      payee = #{payee,jdbcType=VARCHAR},
+      to_review = #{toReview,jdbcType=VARCHAR},
+      drawer = #{drawer,jdbcType=VARCHAR},
+      sale_name = #{saleName,jdbcType=VARCHAR},
+      sale_tax_number = #{saleTaxNumber,jdbcType=VARCHAR},
+      sale_address = #{saleAddress,jdbcType=VARCHAR},
+      sale_phone = #{salePhone,jdbcType=VARCHAR},
+      sale_opening_bank = #{saleOpeningBank,jdbcType=VARCHAR},
+      sale_account = #{saleAccount,jdbcType=VARCHAR},
+      total_sum = #{totalSum,jdbcType=VARCHAR},
+      aggregate_tax = #{aggregateTax,jdbcType=VARCHAR},
+      total_price_and_tax = #{totalPriceAndTax,jdbcType=VARCHAR},
+      invoice_state = #{invoiceState,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

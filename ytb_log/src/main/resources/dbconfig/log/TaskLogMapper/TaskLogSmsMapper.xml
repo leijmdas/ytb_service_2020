@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.log.smslog.dao.TaskLogSmsMapper" >
+
+
+
+	<select id="getTaskLogSmsList" resultType="ytb.log.smslog.model.Tasklog_SmsModel">
+        select * from tasklog_sms where mobile = #{mobile} order by create_time desc
+    </select>
+
+    <insert id="addTaskLogSms" parameterType="ytb.log.smslog.model.Tasklog_SmsModel">
+
+        insert into tasklog_sms (sms_id,user_id,mobile,content,template_id,send_time,retry_times,ret_code,error_msg)
+        values (#{smsId},#{userId},#{mobile},#{content},#{templateId},#{sendTime},#{retryTimes},#{retCode},#{errorMsg})
+
+    </insert>
+
+</mapper>

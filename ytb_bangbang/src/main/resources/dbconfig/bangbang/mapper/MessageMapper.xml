@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.MessageDao" >
+
+    <insert id="addMessage" useGeneratedKeys="true" keyProperty="messageId" parameterType="ytb.bangbang.model.Message">
+INSERT into message (type,receive_user_id,is_read,create_time,invite_id)
+VALUES(#{type},#{receiveUserId},#{read},now(),#{inviteId});
+    </insert>
+
+    <select id="getMsgCounts" resultType="int">
+        SELECT count(*) FROM  message WHERE receive_user_id=#{userId} and is_read=1;
+    </select>
+    
+    <select id="getMsgList" resultMap="getMsgListMap">
+SELECT m.message_id as 'messageId',m.type as 'type',m.receive_user_id as 'receiveUserId',
+m.invite_id as 'inviteId',m.is_read as 'read',m.create_time as 'createTime',
+f.apply_id as 'Apply_id',f.user_id as 'UserID',f.to_user_id as 'ToUserID',
+f.create_time as 'CreateTime',f.isagree as 'IsAgree',f.friends_type_id as 'friendsTypeId',
+(SELECT nick_name from ytb_user.user_info WHERE user_id=f.user_id) as 'userNickName',
+(SELECT nick_name from ytb_user.user_info WHERE user_id=f.to_user_id) as 'friendNickName',
+a.answer_id,a.invite_id,a.form_user_id,
+a.to_user_id,a.content,a.answer_time,
+a.is_read as 'isRead'
+from message m
+INNER JOIN friend_apply_info f on m.invite_id=f.apply_id
+LEFT JOIN answer a on m.invite_id=a.invite_id and m.type=a.source_type
+where m.receive_user_id=#{userId} and m.type=1
+ORDER BY a.answer_time desc;
+    </select>
+<resultMap id="getMsgListMap" type="ytb.bangbang.model.Message">
+    <id column="messageId" property="messageId"/>
+    <result column="type" property="type"/>
+    <result column="receiveUserId" property="receiveUserId"/>
+    <result column="inviteId" property="inviteId"/>
+    <result column="read" property="read"/>
+    <result column="createTime" property="createTime"/>
+    <association property="inviteModel" javaType="ytb.bangbang.model.Friend_Apply_InfoModel">
+        <id column="Apply_id" property="Apply_id"/>
+        <result column="UserID" property="UserID"/>
+        <result column="ToUserID" property="ToUserID"/>
+        <result column="CreateTime" property="CreateTime"/>
+        <result column="IsAgree" property="IsAgree"/>
+        <result column="friendsTypeId" property="friendsTypeId"/>
+        <result column="userNickName" property="userNickName"/>
+        <result column="friendNickName" property="friendNickName"/>
+        <collection property="answers" ofType="ytb.bangbang.model.Answer">
+            <id column="answer_id" property="answerId" />
+            <result column="invite_id" property="inviteId"/>
+            <result column="form_user_id" property="formUserId"/>
+            <result column="to_user_id" property="toUserId"/>
+            <result column="content" property="content"/>
+            <result column="answer_time" property="answerTime"/>
+            <result column="is_read" property="isRead" />
+        </collection>
+    </association>
+
+</resultMap>
+
+    <select id="getGroupMsgList" resultMap="getGroupMsgListMap">
+        SELECT m.* ,u.*,
+          (SELECT nick_name from ytb_user.user_info WHERE user_id=u.userId) as 'userName',
+          (SELECT nick_name from ytb_user.user_info WHERE user_id=u.To_user_Id) as 'toUserName',
+          g.*,a.*
+          from message m
+     LEFT JOIN user_apply_group u on u.id=m.invite_id
+    INNER JOIN group_info g on g.group_id=u.groupId
+    LEFT JOIN answer a on a.invite_id=u.id and a.source_type=m.type
+         where m.receive_user_id=#{userId} and type=2
+       ORDER BY a.answer_time desc;
+    </select>
+
+    <resultMap id="getGroupMsgListMap" type="ytb.bangbang.model.GroupMessage">
+        <id column="message_id" property="messageId"/>
+        <result column="type" property="type"/>
+        <result column="receive_user_id" property="receiveUserId"/>
+        <result column="is_read" property="read"/>
+        <result column="create_time" property="createTime"/>
+        <result column="invite_id" property="inviteId"/>
+        <association property="groupApplyInfoModel" javaType="ytb.bangbang.model.Group_Apply_InfoModel">
+            <id column="id" property="id"/>
+            <result column="userId" property="userId"/>
+            <result column="groupId" property="groupId"/>
+            <result column="apply_type" property="type"/>
+            <result column="create_time" property="createTime"/>
+            <result column="To_user_Id" property="toUserId"/>
+            <result column="IsAgree" property="isAgree"/>
+            <result column="userName" property="userName"/>
+            <result column="toUserName" property="toUserName"/>
+            <association property="groupInfo" javaType="ytb.bangbang.model.GroupInfo">
+                <id column="group_id" property="groupId"/>
+                <result column="group_name" property="groupName"/>
+                <result column="create_time" property="createTime"/>
+                <result column="group_icon" property="groupIcon"/>
+                <result column="group_type" property="groupType"/>
+            </association>
+            <collection property="answers" ofType="ytb.bangbang.model.Answer">
+                <id column="answer_id" property="answerId"/>
+                <result column="invite_id" property="inviteId"/>
+                <result column="form_user_id" property="formUserId"/>
+                <result column="to_user_id" property="toUserId"/>
+                <result column="content" property="content"/>
+                <result column="answer_time" property="answerTime"/>
+                <result column="is_read" property="isRead"/>
+                <result column="source_type" property="type"/>
+            </collection>
+        </association>
+    </resultMap>
+
+    <update id="setIsRead" >
+       UPDATE message SET is_read=2 where receive_user_id=#{userId} and invite_id=#{inviteId} and type=#{type};
+    </update>
+
+    <update id="deleteMsg" >
+       UPDATE message SET is_read=2 where message_id=#{messageId};
+    </update>
+
+    <update id="updateStateById">
+         UPDATE message SET is_read=#{status} where message_id in
+        <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="changeState">
+        UPDATE message SET is_read=1 where  receive_user_id=#{userId} and invite_id=#{inviteId} and type=#{type};
+    </update>
+
+</mapper>

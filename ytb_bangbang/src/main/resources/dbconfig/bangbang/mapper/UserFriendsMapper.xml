@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.UserFriendsDao" >
+    <resultMap id="userFriends" type="ytb.bangbang.model.User_FriendsModel">
+        <id property="User_rltn_id"  column="user_rltn_id"/>
+        <result property="FriendId" column="friend_id"/>
+        <result property="UserId" column="user_id"/>
+        <result property="Remarks" column="Remarks"/>
+    </resultMap>
+    <resultMap id="friendsInfo" type="ytb.bangbang.model.FriendsInfoModel">
+        <!--<result property="Friend_no" column="bangbang_no"/>-->
+        <result property="friendId" column="friend_Id"/>
+        <result property="head" column="user_head"/>
+        <result property="remarks" column="Remarks"/>
+    </resultMap>
+    <!--判断好友是否存在-->
+    <select id="IsFriend" resultType="int">
+        SELECT COUNT(*) FROM  user_friends WHERE user_ID=#{userId} And friend_ID=#{friendId} ;
+    </select>
+    
+    <select id="existFriends" resultType="int">
+        SELECT count(*) from user_friends WHERE user_ID=#{userId} and friends_type_id=#{friendsTypeId}
+    </select>
+    
+    <!--添加好友-->
+    <insert id="AddRecord">
+        INSERT user_friends (friend_id,user_id,remarks,friends_type_id)VALUES(#{friendId},#{userId},#{remarks},#{friendsTypeId});
+    </insert>
+    <!--删除好友-->
+    <delete id="DeleteRecord">
+        DELETE FROM user_friends WHERE user_id=#{userId} AND friend_id=#{friendId}
+    </delete>
+
+    <!--获取全部好友-->
+    <select id="GetUserFriend" resultMap="friendsInfo">
+        SELECT uf.friend_ID,uf.Remarks,ul.user_head FROM user_friends uf
+        JOIN ytb_user.user_login ul ON uf.user_ID=ul.user_id
+        WHERE ul.user_id=#{userId}
+        <if test="remarks!=null">
+        and Remarks like concat(concat('%',#{remarks}),'%')
+        </if>
+        <!--SELECT ul.bangbang_no,f.Remarks,ul.user_head FROM ytb_user.user_login ul-->
+        <!--JOIN (SELECT friend_ID,Remarks FROM  user_friends-->
+        <!--WHERE user_ID=#{userId}-->
+        <!--<if test="remarks!=null">-->
+        <!--and Remarks like concat(concat('%',#{remarks}),'%')-->
+        <!--</if>-->
+        <!--) f ON f.friend_ID=ul.user_id-->
+
+    </select>
+
+
+    <select id="selectUserFriendList" resultType="ytb.bangbang.model.BBUserInfo">
+        SELECT
+        a.user_id AS id,
+        a.nick_name AS username,
+        b.user_head AS avatar,
+        IF (
+        b.is_online,
+        'online',
+        'hide'
+        ) AS 'status',
+        b.user_sign AS sign
+        FROM
+        ytb_user.user_info a
+        INNER JOIN ytb_user.user_login b ON b.user_id = a.user_id
+        WHERE
+        a.user_id IN (
+        SELECT
+        friend_ID
+        FROM
+        ytb_bangbang.user_friends
+        WHERE
+        user_ID = #{userId}
+        )
+    </select>
+
+    <!--获取好友分组-->
+    <select id="selectUserFriendGroupList" resultMap="selectUserFriendGroupListMap">
+        SELECT  t.group_name,t.user_id,
+                t.friends_type_id,
+                a.user_id as id,
+                a.nick_name,
+                b.user_head,
+                b.is_online,
+--                 IF(b.is_online,'online','hide') AS status,
+                b.user_sign
+         from friends_type t
+    LEFT JOIN user_friends u on u.friends_type_id=t.friends_type_id
+    LEFT  JOIN ytb_user.user_info a on u.friend_ID=a.user_id
+    LEFT JOIN  ytb_user.user_login b on b.user_id = a.user_id
+         where t.user_id=#{userId}
+    </select>
+    
+    <resultMap id="selectUserFriendGroupListMap" type="ytb.bangbang.model.UserFriendsGroup">
+        <!--分组Id-->
+        <id column="friends_type_id" property="id"/>
+        <!--分组名称-->
+        <result column="group_name" property="groupname"/>
+        <result column="user_id" property="userId"/>
+        <collection property="list" ofType="ytb.bangbang.model.BBUserInfo">
+            <id column="id" property="id" />
+            <result column="nick_name" property="username"/>
+            <result column="user_head" property="avatar"/>
+            <result column="is_online" property="status"/>
+            <result column="user_sign" property="sign"/>
+        </collection>
+    </resultMap>
+
+    <!--设置备注信息-->
+    <update id="setUserRemarks">
+        UPDATE user_friends SET  Remarks=#{remarks} WHERE user_id=#{userId} AND friend_id=#{friendId};
+    </update>
+
+    <update id="editFriendTyp">
+        UPDATE user_friends SET friends_type_id=#{friendsTypeId} where user_ID=#{userId} and friend_ID=#{friendId};
+    </update>
+
+    <update id="removeFriend">
+        UPDATE user_friends set friends_type_id=#{moveGroupId}
+         where user_ID=#{userId}  and friends_type_id=#{friendsTypeId};
+    </update>
+</mapper>

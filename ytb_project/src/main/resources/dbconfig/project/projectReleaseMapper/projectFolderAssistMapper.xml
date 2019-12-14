@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectFolderAssistMapper" >
+
+    <select id="getProjectAssistList" resultType="ytb.project.model.projectview.ProjectAssistViewModel">
+            SELECT
+        a.folder_id,
+        a.project_id,
+        CONCAT(b.title, 'V', b.doc_ver) AS projectName,
+        b.template_id,
+        b.template_id_ini,
+        b.document_id,
+        CONCAT(u.nick_name, '-工作组') AS groupName,
+        c.phase_no,
+        t.phase,
+        t.phase_status,
+        t.talk_id,
+        c.enter_time,
+        a.user_id,
+        CASE WHEN
+	      a.from_user_id =#{userId} THEN 1
+        ELSE 2 END assistType
+    FROM
+        project_folder_assist a
+    INNER JOIN project_template_assist b ON a.folder_id = b.folder_id
+    INNER JOIN project c ON a.project_id = c.project_id
+    INNER JOIN project_talk t ON a.project_id = t.project_id
+    INNER JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+    WHERE
+        (
+            a.user_id = #{userId}
+            OR a.from_user_id = #{userId}
+        )
+    AND a.folder_status = 1
+    </select>
+
+</mapper>

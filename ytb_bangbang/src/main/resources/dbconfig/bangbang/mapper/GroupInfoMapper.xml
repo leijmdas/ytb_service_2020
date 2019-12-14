@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.GroupInfoDao">
+    <resultMap id="groupInfo" type="ytb.bangbang.model.Group_InfoModel">
+        <id property="Group_id" column="group_id"/>
+        <result property="GroupName" column="group_name"/>
+        <result property="GroupIcon" column="group_icon"/>
+        <result property="CreateTime" column="create_time"/>
+        <result property="GroupType" column="group_type"/>
+    </resultMap>
+    <!--获取用户已加入的群信息-->
+    <select id="GetUserGroupInfoList" resultMap="groupInfo">
+        SELECT  group_info.group_id,group_name,group_info.create_time,group_icon,group_type FROM  group_info JOIN group_user on group_info.group_id= group_user.group_ID
+        WHERE group_user.user_ID=#{userId};
+    </select>
+    <!--获取群信息-->
+    <select id="GetRecord" resultMap="groupInfo">
+        SELECT  group_id,group_name,create_time,group_icon,group_type FROM  group_info
+        WHERE group_ID=#{groupId};
+    </select>
+
+    <select id="getGroupInfoByUserId" resultMap="getGroupInfoByUserIdMap">
+      SELECT t.*,g.group_name as gruopname,g.create_time,g.group_icon,g.group_type,g.group_id
+      from group_user u
+         LEFT JOIN group_type t on t.group_type_id=u.group_type_id
+         LEFT JOIN group_info g on g.group_id=u.group_id
+        WHERE u.user_id=#{userId}
+--      SELECT t.*,g.group_name as gruopname,g.create_time,g.group_icon,g.group_type,g.group_id
+--           from group_type t
+--           LEFT JOIN group_user u on u.group_type_id=t.group_type_id
+--           LEFT JOIN group_info g on g.group_id=u.group_id
+--           where t.user_id=#{userId}
+    </select>
+
+    <resultMap id="getGroupInfoByUserIdMap" type="ytb.bangbang.model.UserGroupsGroup">
+        <id column="group_type_id" property="id"/>
+        <result column="group_name" property="groupname"/>
+        <collection property="list" ofType="ytb.bangbang.model.GroupInfoModel">
+            <id column="group_id" property="id"/>
+            <result column="gruopname" property="groupname"/>
+            <result column="create_time" property="createtime"/>
+            <result column="group_icon" property="avatar"/>
+            <result column="group_type" property="type"/>
+        </collection>
+    </resultMap>
+    
+    <select id="getGroupInfoListByUid" resultMap="getGroupInfoListByUidMap">
+        SELECT g.*
+           from group_user u
+           LEFT JOIN group_info g on g.group_id=u.group_id
+           WHERE u.user_id=#{userId}
+           and u.group_type_id=#{type}
+    </select>
+
+    <resultMap id="getGroupInfoListByUidMap" type="ytb.bangbang.model.GroupInfoModel">
+        <id column="group_id" property="id"/>
+        <result column="group_name" property="groupname"/>
+        <result column="create_time" property="createtime"/>
+        <result column="group_icon" property="avatar"/>
+        <result column="group_type" property="type"/>
+        <result column="group_address" property="address"/>
+    </resultMap>
+
+    <!-- 创建群组-->
+    <insert id="AddRecord" useGeneratedKeys="true" keyProperty="Group_id">
+      INSERT INTO  group_info(group_Name, create_Time, group_Icon,group_Type) VALUES (#{groupName},now(),#{groupIcon},#{groupType})
+    </insert>
+
+    <!-- 删除群组-->
+    <delete id="DeleteRecord">
+       DELETE  FROM group_info WHERE group_id=#{groupId}
+    </delete>
+    <!--群组是否存在-->
+    <select id="IsExtisGroup" resultType="int">
+         SELECT  COUNT(*) FROM  group_info
+        WHERE group_ID=#{groupId};
+    </select>
+
+    <select id="getGroupInfoById" resultMap="getGroupInfoByIdMap">
+        select * from group_info where group_id=#{groupId};
+    </select>
+
+    <resultMap id="getGroupInfoByIdMap" type="ytb.bangbang.model.Group_InfoModel">
+        <id property="Group_id" column="group_id"/>
+        <result property="GroupName" column="group_name"/>
+        <result property="CreateTime" column="create_time"/>
+        <result property="GroupIcon" column="group_icon"/>
+        <result property="GroupType" column="group_type"/>
+    </resultMap>
+
+    <select id="findGroupByGroupName" resultMap="groupInfo">
+        SELECT * FROM group_info WHERE group_Name LIKE CONCAT('%',#{groupName},'%')
+    </select>
+
+    <select id="getUserCreateGroupList" parameterType="int" resultMap="groupInfo">
+        SELECT * FROM ytb_bangbang.group_info g
+        JOIN ytb_bangbang.group_user gu ON g.group_id = gu.group_ID
+        WHERE gu.group_User_Type = 1
+        AND gu.user_ID = #{userId}
+    </select>
+
+    <select id="findGroupsByName" resultMap="findGroupsByNameMap">
+        SELECT g.*,n.*
+        from group_info g
+        LEFT JOIN group_notice n on g.group_id=n.groupId
+        WHERE group_Name LIKE CONCAT('%',#{groupName},'%')
+        and  g.group_Type=2;
+    </select>
+    <resultMap id="findGroupsByNameMap" type="ytb.bangbang.model.GroupInfo">
+        <id property="groupId" column="group_id"/>
+        <result property="groupName" column="group_Name"/>
+        <result property="createTime" column="create_Time"/>
+        <result property="groupIcon" column="group_Icon"/>
+        <result property="groupType" column="group_Type"/>
+        <collection property="groupNoticeModel" ofType="ytb.bangbang.model.GroupNoticeModel">
+            <id property="noticeId" column="noticeId"/>
+            <result property="groupId" column="groupId"/>
+            <result property="noticeMsg" column="noticeMsg"/>
+            <result property="createTime" column="createTime"/>
+        </collection>
+    </resultMap>
+
+     <select id="seachGroup" resultMap="seachGroupMap">
+         SELECT i.group_id,
+                i.group_name,
+                i.group_address,
+       (SELECT count(*) from group_user WHERE group_id=i.group_id) as groupCounts,
+                i.create_time
+            from group_info i
+           WHERE group_type=2
+           <if test="groupName != null">
+              and  i.group_name LIKE CONCAT('%',#{groupName},'%')
+           </if>
+           <if test="groupAddress !=null">
+              and i.group_address LIKE CONCAT('%',#{groupAddress},'%')
+           </if>
+           LIMIT #{pageNo},#{limit};
+     </select>
+    <resultMap id="seachGroupMap" type="ytb.bangbang.model.SeachGroup">
+        <id column="group_id" property="id"/>
+        <result column="group_name" property="groupName"/>
+        <result column="group_address" property="groupAddress"/>
+        <result column="groupCounts" property="groupCounts"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="getAllCounts" resultType="int">
+        SELECT count(*)
+               from group_info
+               WHERE group_type=2
+        <if test="groupName != null">
+            and group_name LIKE CONCAT('%',#{groupName},'%')
+        </if>
+        <if test="groupAddress !=null">
+            and group_address LIKE CONCAT('%',#{groupAddress},'%')
+        </if>
+    </select>
+
+    <select id="viewingGroupData" resultMap="viewingGroupDataMap">
+        SELECT
+             i.group_id,
+             i.group_name,
+             n.noticeId,
+             n.groupId,
+             n.noticeMsg,
+             n.createTime,
+             i.group_address,
+             u.user_id,
+             u.group_user_type,
+             a.nick_name,
+             b.user_head,
+          IF(b.is_online,'online','hide') AS status,
+             b.user_sign
+          from group_info i
+          LEFT JOIN group_notice n ON i.group_id=n.groupId
+          LEFT JOIN group_user u on u.group_id=i.group_id
+          LEFT JOIN ytb_user.user_info a on a.user_id=u.user_id
+          LEFT JOIN  ytb_user.user_login b on b.user_id = a.user_id
+         WHERE
+          ( u.group_user_type=1 or u.group_user_type=2)
+           and i.group_id=#{groupId}
+           ORDER BY n.createTime desc
+    </select>
+    <resultMap id="viewingGroupDataMap" type="ytb.bangbang.model.GroupData">
+        <id column="group_id" property="id"/>
+        <result column="group_name" property="groupName"/>
+        <result column="group_address" property="groupAddress"/>
+        <collection property="notice" ofType="ytb.bangbang.model.GroupNoticeModel">
+            <id column="noticeId" property="noticeId"/>
+            <result column="groupId" property="groupId"/>
+            <result column="noticeMsg" property="noticeMsg"/>
+            <result column="createTime" property="createTime"/>
+        </collection>
+        <collection property="list" ofType="ytb.bangbang.model.GroupUserData">
+           <id column="user_id" property="id"/>
+            <result column="group_user_type" property="type"/>
+            <result column="nick_name" property="username"/>
+            <result column="user_head" property="avatar"/>
+            <result column="status" property="status"/>
+            <result column="user_sign" property="sign"/>
+        </collection>
+    </resultMap>
+    <select id="getGroupTypeById" resultType="int">
+        SELECT group_type from group_info WHERE group_id=#{groupId}
+    </select>
+</mapper>

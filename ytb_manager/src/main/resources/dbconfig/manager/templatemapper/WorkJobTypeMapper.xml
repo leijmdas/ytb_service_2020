@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.WorkJobTypeMapper" >
+
+
+
+	<select id="getWorkJobTypeList" resultType="ytb.manager.template.model.Dict_WorkJobTypeModel">
+      SELECT  * FROM dict_work_job_type
+    </select>
+
+    <insert id="addWorkJobType">
+		insert into dict_work_job_type (work_job_type_name,state,order_no,create_by,work_group_num)
+		VALUES (#{workJobTypeName},#{state},#{orderNo},#{createBy},#{workGroupNum})
+	</insert>
+
+    <select id="getWorkJobType" parameterType="int" resultType="ytb.manager.template.model.Dict_WorkJobTypeModel">
+      SELECT  * FROM dict_work_job_type where work_job_type_id = #{WorkJobTypeId}
+    </select>
+
+    <update id="modifyWorkJobType">
+		update dict_work_job_type set
+		work_job_type_name = #{workJobTypeName},
+		work_group_num = #{workGroupNum},
+		order_no = #{orderNo}
+		where work_job_type_id = #{workJobTypeId}
+	</update>
+
+	<update id="modifySateById">
+        update dict_work_job_type set
+        state = #{state}
+        where work_job_type_id = #{WorkJobTypeId}
+    </update>
+
+    <delete id="delWorkJobType" >
+
+		delete from dict_work_job_type where work_job_type_id = #{WorkJobTypeId}
+
+	</delete>
+
+
+</mapper>

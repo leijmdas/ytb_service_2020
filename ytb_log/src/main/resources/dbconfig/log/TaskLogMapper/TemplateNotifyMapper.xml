@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.log.notify.dao.TemplateNotifyMapper" >
+
+
+
+	<select id="getTaskTemplate" parameterType="int" resultType="ytb.log.notify.model.Template_notifyModel">
+
+      SELECT * FROM template_notify WHERE template_id = #{templateId}
+
+    </select>
+
+    <select id="getTemplateNotify" resultType="ytb.log.notify.model.Template_notifyModel">
+
+      SELECT * FROM template_notify WHERE template_name = #{templateName}
+
+    </select>
+
+    <select id="getTaskTemplateList" parameterType="map"  resultType="ytb.log.notify.model.Template_notifyModel">
+
+      SELECT * FROM template_notify where
+        <if test="notifyChannel!=null and notifyChannel!=''">
+          notify_channel =#{notifyChannel}
+        </if>
+        <if test="notifyChannel==null or notifyChannel==''">
+            notify_channel &lt;&gt;2
+        </if>
+
+    </select>
+
+    <insert id="addTaskTemplate" parameterType="ytb.log.notify.model.Template_notifyModel">
+      insert into template_notify (template_name,notify_channel,notify_type,template_type,template,
+      ali_sms_template,createBy,param_count,template_url)
+      values (#{templateName},#{notifyChannel},#{notifyType},#{templateType},#{template},#{aliSmsTemplate},
+      #{createBy},
+      #{paramCount},   #{templateUrl}       )
+	</insert>
+
+    <update id="modifyTaskTemplate">
+        update template_notify set
+        template_name = #{templateName},
+        notify_channel = #{notifyChannel},
+        notify_type = #{notifyType},
+        template_type = #{templateType},
+        template = #{template},
+        ali_sms_template = #{aliSmsTemplate},
+        param_count = #{paramCount},
+        template_url = #{templateUrl}
+        where template_id = #{templateId}
+    </update>
+
+    <delete id="delTaskTemplate">
+      delete from template_notify where template_id = #{templateId}
+    </delete>
+
+
+</mapper>

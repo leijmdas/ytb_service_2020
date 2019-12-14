@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.CompanyDeviceMapper" >
+
+	<select id="getCompanyDeviceListById" resultType="ytb.user.model.CompanyDeviceModel">
+      SELECT  * FROM company_device WHERE company_id = #{companyId}
+    </select>
+
+    <insert id="addCompanyDevice" parameterType="ytb.user.model.CompanyDeviceModel"
+            useGeneratedKeys="true" keyProperty="deviceId">
+        INSERT INTO company_device
+        (
+        company_id,
+        `name`,
+       `model`,
+        brand,
+        `number`,
+        image
+        )
+        VALUES
+        (
+        #{companyId},
+        #{name},
+        #{model},
+        #{brand},
+        #{number},
+        #{image}
+        )
+    </insert>
+
+    <delete id="deleteCompanyDevice">
+        delete from company_device where company_id = #{companyId} and device_id = #{deviceId}
+
+    </delete>
+
+    <update id="updateCompanyDevice" parameterType="ytb.user.model.CompanyDeviceModel">
+      update company_device
+      <set>
+          <if test="companyId != null and companyId !=''">`company_id` = #{companyId}, </if>
+          <if test="name != null and name !=''">`name` = #{name}, </if>
+          <if test="model != null and model !=''" >`model` = #{model}, </if>
+          <if test="brand != null and brand !=''">`brand` = #{brand}, </if>
+          <if test="number != null and number !=''">`number` = #{number}, </if>
+          <if test="image != null and image !=''">`image` = #{image} </if>
+      </set>
+        where device_id = #{deviceId} and company_id = #{companyId}
+    </update>
+
+</mapper>

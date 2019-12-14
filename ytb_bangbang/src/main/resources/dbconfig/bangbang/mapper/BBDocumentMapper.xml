@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.BBDocumentDao" >
+
+ <insert id="addRecord" useGeneratedKeys="true" keyProperty="documentId" parameterType="ytb.bangbang.model.BBDocument">
+     INSERT INTO bb_document(name,doc_type,doc_path,doc_size,create_time)
+                       VALUES(#{name},#{docType},#{docPath},#{docSize},now());
+ </insert>
+
+    <select id="getDocumentInfo" resultMap="getDocumentInfoMap">
+        SELECT * from bb_document WHERE document_id=#{documentId};
+    </select>
+
+    <resultMap id="getDocumentInfoMap" type="ytb.bangbang.model.BBDocument">
+        <id column="document_id" property="documentId"/>
+        <result column="name" property="name"/>
+        <result column="doc_type" property="docType"/>
+        <result column="doc_path" property="docPath"/>
+        <result column="doc_size" property="docSize"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+</mapper>

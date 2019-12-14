@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.tagtable.ProjectPlanMapper" >
+
+
+    <select id="getProjectPlan" resultType="ytb.project.model.tagtable.ProjectPlanModel">
+
+        select plan_id AS planId,project_id as projectId,document_id as documentId,phase ,
+          date_format(startTime, '%Y-%m-%d %H:%i:%s') as startTime,
+          date_format(phase1, '%Y-%m-%d %H:%i:%s') as phase1,
+          date_format(phase2, '%Y-%m-%d %H:%i:%s') as phase2,
+          date_format(phase3, '%Y-%m-%d %H:%i:%s') as phase3,
+          date_format(phase4, '%Y-%m-%d %H:%i:%s') as phase4,
+          date_format(phase5, '%Y-%m-%d %H:%i:%s') as phase5,
+          date_format(phase6, '%Y-%m-%d %H:%i:%s') as phase6,
+          date_format(endTime, '%Y-%m-%d %H:%i:%s') as endTime
+          from project_plan where project_id = #{projectId} and document_id = #{documentId}
+
+    </select>
+
+</mapper>

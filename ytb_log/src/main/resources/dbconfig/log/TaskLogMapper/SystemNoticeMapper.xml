@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.log.notify.dao.SystemNoticeMapper">
+
+
+    <select id="getMessageList" resultType="map">
+        select id as id,message_text as messageText,message_title as messageTitle,message_type as messageType,date_format(create_time, '%Y-%m-%d
+        %H:%i:%s') as createTime  from message_notice
+       <where>
+           <if test="title !=null and title !=''">
+               message_title like concat('%',#{title},'%')
+           </if>
+           <if test="type !=null and type !=''">
+              and message_type = #{type}
+           </if>
+       </where>
+        ORDER BY id DESC
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getMessageTotal" resultType="int">
+        select count(*)  from message_notice
+        <where>
+            <if test="title !=null and title !=''">
+                message_title like concat('%',#{title},'%')
+            </if>
+            <if test="type !=null and type !=''">
+                and message_type = #{type}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getMessageById" resultType="ytb.log.notify.model.SystemNoticeModel">
+       select * from message_notice where id =#{id}
+    </select>
+
+
+    <insert id="addMessageInfo" parameterType="ytb.log.notify.model.SystemNoticeModel"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into message_notice
+        (message_text,message_title,create_time)
+        values(
+          #{messageText},
+          #{messageTitle},
+          now()
+        )
+    </insert>
+
+    <delete id="deleteSysNotices">
+        delete from message_notice where id= #{id}
+    </delete>
+
+    <update id="updateSysNotices" parameterType="ytb.log.notify.model.SystemNoticeModel">
+        update message_notice set message_title=#{messageTitle},`message_text` = #{messageText} where id = #{id}
+    </update>
+
+    <!--查询用户系统通知列表-->
+    <select id="getUserSysNotices" resultType="ytb.log.notify.model.SystemNoticeModel">
+                SELECT * from(
+                SELECT
+        id,message_text,message_title,message_type,date_format(create_time, '%Y-%m-%d
+        %H:%i:%s') as createTime, '' rec_id,
+        '1' readStatus
+    FROM
+        message_notice
+    WHERE
+        id NOT IN (
+            SELECT
+                message_id
+            FROM
+                message_notice_read
+            WHERE
+                rec_id =#{userId}
+        )
+    UNION ALL
+        SELECT
+            a.id,b.message_text,b.message_title,b.message_type,date_format(b.create_time, '%Y-%m-%d
+        %H:%i:%s') as createTime, a.rec_id,
+            '2' AS readStatus
+        FROM
+            message_notice_read a
+        INNER JOIN message_notice b ON a.message_id = b.id
+        WHERE
+            a.rec_id =#{userId} and a.delete_flag=1 and a.status = 2
+                ) as b ORDER BY b.createTime desc
+    </select>
+
+    <!-- 查询用户未读的系统通知 -->
+    <select id="getUnReadSysNoticesNumber" resultType="int">
+       SELECT COUNT(*) FROM message_notice a WHERE NOT EXISTS(SELECT message_id FROM message_notice_read b WHERE b.rec_id =#{userId} AND a.id=b.message_id)
+    </select>
+
+</mapper>

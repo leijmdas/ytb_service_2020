@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.metadata.dao.MetadataDictMapper">
+  <resultMap id="BaseResultMap" type="ytb.manager.metadata.model.MetadataDict">
+    <id column="metadata_id" jdbcType="INTEGER" property="metadataId" />
+    <result column="subsys_id" jdbcType="INTEGER" property="subsysId" />
+    <result column="metadata_name" jdbcType="VARCHAR" property="metadataName" />
+    <result column="metadata_alias" jdbcType="VARCHAR" property="metadataAlias" />
+    <result column="metadata_memo" jdbcType="VARCHAR" property="metadataMemo" />
+    <result column="metadata_parentid" jdbcType="INTEGER" property="metadataParentid" />
+    <result column="metadata_type" jdbcType="INTEGER" property="metadataType" />
+    <result column="metadata_cached" jdbcType="BIT" property="metadataCached" />
+    <result column="metadata_db" jdbcType="VARCHAR" property="metadataDb" />
+    <result column="metadata_autocreate" jdbcType="BIT" property="metadataAutocreate" />
+    <result column="metadata_stmt" jdbcType="VARCHAR" property="metadataStmt" />
+    <result column="metadata_index" jdbcType="VARCHAR" property="metadataIndex" />
+    <result column="metadata_order" jdbcType="INTEGER" property="metadataOrder"/>
+    <result column="metadata_sort_fields" jdbcType="VARCHAR" property="metadataSortFields"/>
+    <result column="metadata_remark" jdbcType="VARCHAR" property="metadataRemark"/>
+    <result column="ref_src" jdbcType="INTEGER" property="refSrc"/>
+    <result column="ref_object" jdbcType="VARCHAR" property="refObject"/>
+    <result column="ref_param" jdbcType="VARCHAR" property="refParam"/>
+    <result column="metadata_readonly" jdbcType="BIT" property="metadataReadonly"/>
+    <result column="metadata_add_del"  jdbcType="BIT" property="metadataAddDel"/>
+  </resultMap>
+
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    metadata_id, subsys_id, metadata_name, metadata_alias, metadata_memo, metadata_parentid,
+    metadata_type, metadata_cached, metadata_db, metadata_autocreate, metadata_stmt, metadata_index,
+    metadata_order, metadata_remark,metadata_sort_fields,ref_src,ref_object,ref_param,
+    metadata_readonly,metadata_add_del
+  </sql>
+  <select id="selectByExample" parameterType="ytb.manager.metadata.model.MetadataDictExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from metadata_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from metadata_dict
+    where metadata_id = #{metadataId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from metadata_dict
+    where metadata_id = #{metadataId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="ytb.manager.metadata.model.MetadataDictExample">
+    delete from metadata_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="ytb.manager.metadata.model.MetadataDict">
+    insert into metadata_dict (metadata_id, subsys_id, metadata_name,
+      metadata_alias, metadata_memo, metadata_parentid,
+      metadata_type, metadata_cached, metadata_db,
+      metadata_autocreate, metadata_stmt, metadata_index,
+      metadata_order, metadata_remark,metadata_sort_fields,
+      ref_src,ref_object,ref_param,
+      metadata_add_del,metadata_readonly)
+    values (#{metadataId,jdbcType=INTEGER}, #{subsysId,jdbcType=INTEGER}, #{metadataName,jdbcType=VARCHAR},
+      #{metadataAlias,jdbcType=VARCHAR}, #{metadataMemo,jdbcType=VARCHAR}, #{metadataParentid,jdbcType=INTEGER},
+      #{metadataType,jdbcType=INTEGER}, #{metadataCached,jdbcType=BIT}, #{metadataDb,jdbcType=VARCHAR},
+      #{metadataAutocreate,jdbcType=BIT}, #{metadataStmt,jdbcType=VARCHAR}, #{metadataIndex,jdbcType=VARCHAR},
+      #{metadataOrder,jdbcType=INTEGER}, #{metadataRemark,jdbcType=VARCHAR}, #{metadataSortFields,jdbcType=VARCHAR},
+       #{refSrc,jdbcType=INTEGER}, #{refObject,jdbcType=VARCHAR}, #{refParam,jdbcType=VARCHAR}
+       , #{metadataAddDel,jdbcType=BIT}, #{metadataReadonly,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ytb.manager.metadata.model.MetadataDict">
+    insert into metadata_dict
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="metadataId != null">
+        metadata_id,
+      </if>
+      <if test="subsysId != null">
+        subsys_id,
+      </if>
+      <if test="metadataName != null">
+        metadata_name,
+      </if>
+      <if test="metadataAlias != null">
+        metadata_alias,
+      </if>
+      <if test="metadataMemo != null">
+        metadata_memo,
+      </if>
+      <if test="metadataParentid != null">
+        metadata_parentid,
+      </if>
+      <if test="metadataType != null">
+        metadata_type,
+      </if>
+      <if test="metadataCached != null">
+        metadata_cached,
+      </if>
+      <if test="metadataDb != null">
+        metadata_db,
+      </if>
+      <if test="metadataAutocreate != null">
+        metadata_autocreate,
+      </if>
+      <if test="metadataStmt != null">
+        metadata_stmt,
+      </if>
+      <if test="metadataIndex != null">
+        metadata_index,
+      </if>
+      <if test="metadataOrder != null">
+        metadata_order,
+      </if>
+      <if test="metadataRemark != null">
+        metadata_remark,
+      </if>
+      <if test="metadataSortFields != null">
+        metadata_sort_fields,
+      </if>
+
+      <if test="refSrc != null">
+        ref_src,
+      </if>
+      <if test="refObject != null">
+        ref_object,
+      </if>
+      <if test="refParam != null">
+        ref_param,
+      </if>
+      <if test="metadataReadonly != null">
+        metadata_readonly,
+      </if>
+      <if test="metadataAddDel != null">
+        metadata_add_del
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="metadataId != null">
+        #{metadataId,jdbcType=INTEGER},
+      </if>
+      <if test="subsysId != null">
+        #{subsysId,jdbcType=INTEGER},
+      </if>
+      <if test="metadataName != null">
+        #{metadataName,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataAlias != null">
+        #{metadataAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataMemo != null">
+        #{metadataMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataParentid != null">
+        #{metadataParentid,jdbcType=INTEGER},
+      </if>
+      <if test="metadataType != null">
+        #{metadataType,jdbcType=INTEGER},
+      </if>
+      <if test="metadataCached != null">
+        #{metadataCached,jdbcType=BIT},
+      </if>
+      <if test="metadataDb != null">
+        #{metadataDb,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataAutocreate != null">
+        #{metadataAutocreate,jdbcType=BIT},
+      </if>
+      <if test="metadataStmt != null">
+        #{metadataStmt,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataIndex != null">
+        #{metadataIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataOrder != null">
+        #{metadataOrder,jdbcType=INTEGER},
+      </if>
+      <if test="metadataRemark != null">
+        #{metadataRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataSortFields != null">
+        #{metadataSortFields,jdbcType=VARCHAR},
+      </if>
+      <if test="refSrc != null">
+        #{refSrc,jdbcType=INTEGER},
+      </if>
+      <if test="refObject != null">
+        #{refObject,jdbcType=VARCHAR},
+      </if>
+      <if test="refParam != null">
+        #{refParam,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataReadonly != null">
+        #{metadataReadonly,jdbcType=BIT},
+      </if>
+      <if test="metadataAddDel != null">
+        #{metadataAddDel,jdbcType=BIT}
+      </if>
+
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ytb.manager.metadata.model.MetadataDictExample" resultType="java.lang.Long">
+    select count(*) from metadata_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update metadata_dict
+    <set>
+      <if test="record.metadataId != null">
+        metadata_id = #{record.metadataId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subsysId != null">
+        subsys_id = #{record.subsysId,jdbcType=INTEGER},
+      </if>
+      <if test="record.metadataName != null">
+        metadata_name = #{record.metadataName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metadataAlias != null">
+        metadata_alias = #{record.metadataAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metadataMemo != null">
+        metadata_memo = #{record.metadataMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metadataParentid != null">
+        metadata_parentid = #{record.metadataParentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.metadataType != null">
+        metadata_type = #{record.metadataType,jdbcType=INTEGER},
+      </if>
+      <if test="record.metadataCached != null">
+        metadata_cached = #{record.metadataCached,jdbcType=BIT},
+      </if>
+      <if test="record.metadataDb != null">
+        metadata_db = #{record.metadataDb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metadataAutocreate != null">
+        metadata_autocreate = #{record.metadataAutocreate,jdbcType=BIT},
+      </if>
+      <if test="record.metadataStmt != null">
+        metadata_stmt = #{record.metadataStmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metadataIndex != null">
+        metadata_index = #{record.metadataIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metadataOrder != null">
+        metadata_order = #{record.metadataOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.metadataRemark != null">
+        metadata_remark = #{record.metadataRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metadataSortFields != null">
+        metadata_sort_fields = #{record.metadataSortFields,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refSrc != null">
+        ref_src = #{record.refSrc,jdbcType=INTEGER},
+      </if>
+      <if test="record.refObject != null">
+        ref_object = #{record.refObject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metadataReadonly != null">
+        metadata_readonly = #{record.metadataReadonly,jdbcType=BIT},
+      </if>
+      <if test="record.metadataAddDel != null">
+        metadata_add_del = #{record.metadataAddDel,jdbcType=BIT}
+      </if>
+
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update metadata_dict
+    set metadata_id = #{record.metadataId,jdbcType=INTEGER},
+    subsys_id = #{record.subsysId,jdbcType=INTEGER},
+    metadata_name = #{record.metadataName,jdbcType=VARCHAR},
+    metadata_alias = #{record.metadataAlias,jdbcType=VARCHAR},
+    metadata_memo = #{record.metadataMemo,jdbcType=VARCHAR},
+    metadata_parentid = #{record.metadataParentid,jdbcType=INTEGER},
+    metadata_type = #{record.metadataType,jdbcType=INTEGER},
+    metadata_cached = #{record.metadataCached,jdbcType=BIT},
+    metadata_db = #{record.metadataDb,jdbcType=VARCHAR},
+    metadata_autocreate = #{record.metadataAutocreate,jdbcType=BIT},
+    metadata_stmt = #{record.metadataStmt,jdbcType=VARCHAR},
+    metadata_index = #{record.metadataIndex,jdbcType=VARCHAR},
+    metadata_order = #{record.metadataOrder,jdbcType=INTEGER},
+    metadata_remark = #{record.metadataRemark,jdbcType=VARCHAR},
+    metadata_sort_fields = #{record.metadataSortFields,jdbcType=VARCHAR},
+    ref_src = #{record.refSrc,jdbcType=INTEGER},
+    ref_object = #{record.refObject,jdbcType=VARCHAR},
+    ref_param = #{record.refParam,jdbcType=VARCHAR},
+    metadata_readonly = #{record.metadataReadonly,jdbcType=VARCHAR},
+    metadata_add_del = #{record.metadataAddDel,jdbcType=VARCHAR}
+
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="ytb.manager.metadata.model.MetadataDict">
+    update metadata_dict
+    <set>
+      <if test="subsysId != null">
+        subsys_id = #{subsysId,jdbcType=INTEGER},
+      </if>
+      <if test="metadataName != null">
+        metadata_name = #{metadataName,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataAlias != null">
+        metadata_alias = #{metadataAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataMemo != null">
+        metadata_memo = #{metadataMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataParentid != null">
+        metadata_parentid = #{metadataParentid,jdbcType=INTEGER},
+      </if>
+      <if test="metadataType != null">
+        metadata_type = #{metadataType,jdbcType=INTEGER},
+      </if>
+      <if test="metadataCached != null">
+        metadata_cached = #{metadataCached,jdbcType=BIT},
+      </if>
+      <if test="metadataDb != null">
+        metadata_db = #{metadataDb,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataAutocreate != null">
+        metadata_autocreate = #{metadataAutocreate,jdbcType=BIT},
+      </if>
+      <if test="metadataStmt != null">
+        metadata_stmt = #{metadataStmt,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataIndex != null">
+        metadata_index = #{metadataIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataOrder != null">
+        metadata_order = #{metadataOrder,jdbcType=INTEGER},
+      </if>
+      <if test="metadataRemark != null">
+        metadata_remark = #{metadataRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="metadataSortFields != null">
+        metadata_sort_fields = #{metadataSortFields,jdbcType=VARCHAR},
+      </if>
+      <if test="refSrc != null">
+        ref_src = #{refSrc,jdbcType=INTEGER},
+      </if>
+      <if test="refObject != null">
+        ref_object = #{refObject,jdbcType=VARCHAR},
+      </if>
+      <if test="refParam != null">
+        ref_param = #{refParam,jdbcType=VARCHAR},
+      </if>
+      <if test="refParam != null">
+        metadata_readonly = #{metadataReadonly,jdbcType=BIT},
+      </if>
+      <if test="refParam != null">
+        metadata_add_del = #{metadataAddDel,jdbcType=BIT}
+      </if>
+
+    </set>
+    where metadata_id = #{metadataId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ytb.manager.metadata.model.MetadataDict">
+    update metadata_dict
+    set subsys_id = #{subsysId,jdbcType=INTEGER},
+      metadata_name = #{metadataName,jdbcType=VARCHAR},
+      metadata_alias = #{metadataAlias,jdbcType=VARCHAR},
+      metadata_memo = #{metadataMemo,jdbcType=VARCHAR},
+      metadata_parentid = #{metadataParentid,jdbcType=INTEGER},
+      metadata_type = #{metadataType,jdbcType=INTEGER},
+      metadata_cached = #{metadataCached,jdbcType=BIT},
+      metadata_db = #{metadataDb,jdbcType=VARCHAR},
+      metadata_autocreate = #{metadataAutocreate,jdbcType=BIT},
+      metadata_stmt = #{metadataStmt,jdbcType=VARCHAR},
+      metadata_index = #{metadataIndex,jdbcType=VARCHAR},
+      metadata_order = #{metadataOrder,jdbcType=INTEGER},
+      metadata_remark = #{metadataRemark,jdbcType=VARCHAR},
+    metadata_sort_fields = #{metadataSortFields,jdbcType=VARCHAR},
+    ref_src = #{refSrc,jdbcType=INTEGER},
+    ref_object = #{refObject,jdbcType=VARCHAR},
+    ref_param = #{refParam,jdbcType=VARCHAR}，
+    metadata_readonly = #{metadataReadonly,jdbcType=BIT}，
+    metadata_add_del = #{metadataAddDel,jdbcType=BIT}
+
+    where metadata_id = #{metadataId,jdbcType=INTEGER}
+  </update>
+</mapper>

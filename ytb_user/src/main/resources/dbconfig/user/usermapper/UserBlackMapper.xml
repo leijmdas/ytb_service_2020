@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserBlackMapper" >
+        
+    <insert id="insertUserBlack" parameterType="ytb.user.model.UserBlackModel"
+            useGeneratedKeys="true" keyProperty="userId">
+    INSERT into user_black_list(
+      user_id,
+      in_black_time,
+      list_type,
+      user_type
+    )VALUES (
+      #{userId},
+      now(),
+      #{listType},
+      #{userType}
+    )
+    </insert>
+
+    <select id="getUserBlackList" resultType="map">
+        SELECT
+        b.nick_name as nickName,
+        b.login_mobile as phone,
+        date_format(
+        `b`.`login_time`,
+        '%Y-%m-%d %H:%i:%s'
+        ) AS `loginTime`,
+        A.USER_ID as userId,
+        date_format(
+        b.registered_time,
+        '%Y-%m-%d %H:%i:%s'
+        ) AS `registeredTime`,
+        b.user_status as userStatus,
+        c.credit_grade as userGrade
+        FROM
+        user_black_list a
+        INNER JOIN user_login b ON b.user_id = a.user_id
+        INNER JOIN user_info c ON c.user_id = a.user_id
+        WHERE
+        A.USER_TYPE = #{userType}
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+
+    <select id="getUserBlackTotal" resultType="int">
+        select count(user_id) from user_black_list where user_type=#{userType}
+    </select>
+
+
+    <update id="updateUserBlackList">
+        update user_black_list set out_black_time = now() where user_id = #{userId}
+
+    </update>
+
+
+
+
+
+</mapper>

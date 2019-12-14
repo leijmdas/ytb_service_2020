@@ -1,0 +1,33 @@
+call ytb_project.spCreateWorkplan_taskTotal(0,0);
+call ytb_project.spCreateWorkplan_planTotal(0,0);
+call ytb_project.spCreateWorkplan_taskMember(0,0);
+
+select ytb_manager.fnGetWorkPlanPhaseName();
+set @rownum=0;
+select @rownum:=@rownum+1   as f   from ytb_manager.dict_workjob t ;#；//limit 1,5;
+
+
+select project_id,document_id,phase ,sum(seq) from ytb_project.project_task_total
+group by project_id,document_id,phase;
+
+update ytb_project.project_task_total a,
+(select project_id, document_id, phase, min(task_id) as task_total_id
+ from ytb_project.project_task_total
+ group by project_id, document_id, phase) b
+set a.seq = a.task_id - b.task_total_id + 1,
+    a.task_name= replace (a.task_name,'-1-',concat('-',a.seq,'-'))
+where a.project_id = b.project_id
+  and a.document_id = b.document_id
+  and a.phase = b.phase;
+
+
+
+create view ytb_project.vw_work_group_member as
+ select a. project_id,a.document_id,a.user_id,b.real_name from ytb_project.work_group_member a ,
+                                                               ytb_user.user_info b
+ where a.user_id=b.user_id
+
+#  field_src         int default '0'            not null
+# comment '数据来源',
+#  ref_object        varchar(255) default ''    not null,
+#  ref_parameter

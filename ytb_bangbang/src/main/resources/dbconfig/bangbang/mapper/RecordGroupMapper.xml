@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.RecodGroupDao" >
+    <resultMap id="recodGroup" type="ytb.bangbang.model.Record_GroupModel">
+        <id property="Record_id"  column="record_id"/>
+        <result property="GroupId" column="group_id"/>
+        <result property="Content" column="content"/>
+        <result property="FromUser" column="from_user"/>
+        <result property="CreateTime" column="create_time"/>
+    </resultMap>
+    <!--通过群组id获取聊天信息-->
+    <select id="GetRecordGroupList" resultMap="recodGroup">
+        SELECT * FROM record_group WHERE group_ID=#{groupId} ORDER BY create_Time DESC
+    </select>
+    <!--添加聊天记录信息-->
+    <insert id="AddRecordGroup">
+         INSERT  INTO record_group(group_id,content,from_user,create_time)VALUES(#{groupId},#{content},#{fromId},now());
+    </insert>
+
+    <select id="getRecordGroupList" resultMap="getRecordGroupListMap">
+        SELECT g.*,
+        (SELECT nick_name from ytb_user.user_info WHERE user_id=g.from_user) as 'fromUserName'
+        from record_group g
+            WHERE group_id=#{groupId}
+        <if test="beganTime !=null">
+            and create_time >=  #{beganTime}
+        </if>
+        <if test="endTime !=null">
+            and create_time &lt;= #{endTime}
+        </if>
+        <if test="type == 1">
+            and g.content REGEXP '^img\\[\\/\\/bangbang\\.youtobon\\.com\\/bangbangRest\\/bangbang\\/previewImage\\?msgBody\\='
+        </if>
+        <if test="type == 2">
+            and g.content REGEXP '^file\\(\\/\\/bangbang\\.youtobon\\.com\\/bangbangRest\\/bangbang\\/download\\?msgBody\\='
+        </if>
+    </select>
+
+    <resultMap id="getRecordGroupListMap" type="ytb.bangbang.model.Record_GroupModel">
+        <id property="Record_id"  column="record_id"/>
+        <result property="GroupId" column="group_id"/>
+        <result property="Content" column="content"/>
+        <result property="FromUser" column="from_user"/>
+        <result property="CreateTime" column="create_time"/>
+        <result property="fromUserName" column="fromUserName"/>
+    </resultMap>
+
+    <delete id="delGroupFile">
+        delete from record_group where record_id=#{recordId};
+    </delete>
+    
+    <select id="getFromUserById" resultType="int">
+        select from_user from record_group where record_id=#{recordId};
+    </select>
+</mapper>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.InvoiceInfoProjectMapper">
+  <resultMap id="BaseResultMap" type="ytb.project.model.InvoiceInfoProject">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="invoice_id" jdbcType="INTEGER" property="invoiceId" />
+    <result column="postal_address" jdbcType="VARCHAR" property="postalAddress" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="billing_status" jdbcType="INTEGER" property="billingStatus" />
+    <result column="add_time" jdbcType="DATE" property="addTime" />
+    <result column="invoice_type" jdbcType="INTEGER" property="invoiceType" />
+    <result column="express_company" jdbcType="VARCHAR" property="expressCompany" />
+    <result column="express_company_id" jdbcType="VARCHAR" property="expressCompanyId" />
+    <result column="addressee" jdbcType="VARCHAR" property="addressee" />
+    <result column="contact_number" jdbcType="VARCHAR" property="contactNumber" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, invoice_id, postal_address, project_id, billing_status, add_time, invoice_type, 
+    express_company, express_company_id, addressee, contact_number
+  </sql>
+  <select id="selectByExample" parameterType="ytb.project.model.InvoiceInfoProjectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from invoice_info_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from invoice_info_project
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from invoice_info_project
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="ytb.project.model.InvoiceInfoProjectExample">
+    delete from invoice_info_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="ytb.project.model.InvoiceInfoProject">
+    insert into invoice_info_project (id, invoice_id, postal_address, 
+      project_id, billing_status, add_time, 
+      invoice_type, express_company, express_company_id, 
+      addressee, contact_number)
+    values (#{id,jdbcType=INTEGER}, #{invoiceId,jdbcType=INTEGER}, #{postalAddress,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=INTEGER}, #{billingStatus,jdbcType=INTEGER}, #{addTime,jdbcType=DATE}, 
+      #{invoiceType,jdbcType=INTEGER}, #{expressCompany,jdbcType=VARCHAR}, #{expressCompanyId,jdbcType=VARCHAR}, 
+      #{addressee,jdbcType=VARCHAR}, #{contactNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ytb.project.model.InvoiceInfoProject">
+    insert into invoice_info_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="invoiceId != null">
+        invoice_id,
+      </if>
+      <if test="postalAddress != null">
+        postal_address,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="billingStatus != null">
+        billing_status,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="invoiceType != null">
+        invoice_type,
+      </if>
+      <if test="expressCompany != null">
+        express_company,
+      </if>
+      <if test="expressCompanyId != null">
+        express_company_id,
+      </if>
+      <if test="addressee != null">
+        addressee,
+      </if>
+      <if test="contactNumber != null">
+        contact_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceId != null">
+        #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="postalAddress != null">
+        #{postalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="billingStatus != null">
+        #{billingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=DATE},
+      </if>
+      <if test="invoiceType != null">
+        #{invoiceType,jdbcType=INTEGER},
+      </if>
+      <if test="expressCompany != null">
+        #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCompanyId != null">
+        #{expressCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressee != null">
+        #{addressee,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        #{contactNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ytb.project.model.InvoiceInfoProjectExample" resultType="java.lang.Long">
+    select count(*) from invoice_info_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update invoice_info_project
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.invoiceId != null">
+        invoice_id = #{record.invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.postalAddress != null">
+        postal_address = #{record.postalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.billingStatus != null">
+        billing_status = #{record.billingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.addTime != null">
+        add_time = #{record.addTime,jdbcType=DATE},
+      </if>
+      <if test="record.invoiceType != null">
+        invoice_type = #{record.invoiceType,jdbcType=INTEGER},
+      </if>
+      <if test="record.expressCompany != null">
+        express_company = #{record.expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressCompanyId != null">
+        express_company_id = #{record.expressCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressee != null">
+        addressee = #{record.addressee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactNumber != null">
+        contact_number = #{record.contactNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update invoice_info_project
+    set id = #{record.id,jdbcType=INTEGER},
+      invoice_id = #{record.invoiceId,jdbcType=INTEGER},
+      postal_address = #{record.postalAddress,jdbcType=VARCHAR},
+      project_id = #{record.projectId,jdbcType=INTEGER},
+      billing_status = #{record.billingStatus,jdbcType=INTEGER},
+      add_time = #{record.addTime,jdbcType=DATE},
+      invoice_type = #{record.invoiceType,jdbcType=INTEGER},
+      express_company = #{record.expressCompany,jdbcType=VARCHAR},
+      express_company_id = #{record.expressCompanyId,jdbcType=VARCHAR},
+      addressee = #{record.addressee,jdbcType=VARCHAR},
+      contact_number = #{record.contactNumber,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="ytb.project.model.InvoiceInfoProject">
+    update invoice_info_project
+    <set>
+      <if test="invoiceId != null">
+        invoice_id = #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="postalAddress != null">
+        postal_address = #{postalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="billingStatus != null">
+        billing_status = #{billingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=DATE},
+      </if>
+      <if test="invoiceType != null">
+        invoice_type = #{invoiceType,jdbcType=INTEGER},
+      </if>
+      <if test="expressCompany != null">
+        express_company = #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCompanyId != null">
+        express_company_id = #{expressCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressee != null">
+        addressee = #{addressee,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        contact_number = #{contactNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ytb.project.model.InvoiceInfoProject">
+    update invoice_info_project
+    set invoice_id = #{invoiceId,jdbcType=INTEGER},
+      postal_address = #{postalAddress,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=INTEGER},
+      billing_status = #{billingStatus,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=DATE},
+      invoice_type = #{invoiceType,jdbcType=INTEGER},
+      express_company = #{expressCompany,jdbcType=VARCHAR},
+      express_company_id = #{expressCompanyId,jdbcType=VARCHAR},
+      addressee = #{addressee,jdbcType=VARCHAR},
+      contact_number = #{contactNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

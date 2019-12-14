@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/cache
+           http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
+    <context:annotation-config />
+
+    <!--<context:component-scan base-package="com.ytb" />-->
+    <cache:annotation-driven cache-manager="cacheManager" />
+
+    <bean id="cacheManager" class="org.springframework.cache.ytb.common.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ytb.common.ehcache"></property>
+    </bean>
+    <bean id="ytb.common.ehcache" class="org.springframework.cache.ytb.common.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ytb.common.ehcache/ytb.common.ehcache.xml"></property>
+    </bean>
+    <bean id="ehCacheTestService" class="ytb.common.test.demo.ytb.common.ehcache.EhCacheTestServiceImpl"/>
+
+</beans>

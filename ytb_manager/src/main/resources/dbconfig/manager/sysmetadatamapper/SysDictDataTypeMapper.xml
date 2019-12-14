@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.metadata.dao.SysDictDataTypeMapper" >
+
+	<select id="getTypeAndIdByTypeId" resultType="ytb.manager.metadata.model.Sys_DictDataTypeModel" parameterType="int" resultMap="DictDataTypeResultMap">
+		SELECT * FROM dict_datatype WHERE typeid = #{typeId}
+	</select>
+
+	<select id="getDictDataTypeById" resultType="ytb.manager.metadata.model.Sys_DictDataTypeModel" parameterType="int" resultMap="DictDataTypeResultMap">
+		SELECT * FROM dict_datatype WHERE datainnerid = #{dataInnerId}
+	</select>
+
+	<select id="getTree" parameterType="int" resultType="map">
+		SELECT dataid*10000000 as id,dataname as name , 0 as pId FROM dict_datatype WHERE typeid = 1   union
+              select  metadata_id as id,metadata_name as  name , metadata_type*10000000 as pid from metadata_dict order by id asc;
+	</select>
+
+	<select id="getDictDataTypeList" resultType="ytb.manager.metadata.model.Sys_DictDataTypeModel" resultMap="DictDataTypeResultMap">
+		SELECT * FROM dict_datatype
+	</select>
+
+	<select id="getDictByName" resultType="ytb.manager.metadata.model.Sys_DictDataTypeModel" parameterType="String" resultMap="DictDataTypeResultMap">
+		SELECT * FROM dict_datatype WHERE metadata_name = #{metaDataName}
+	</select>
+
+	<insert id="addDictDataType" parameterType="ytb.manager.metadata.model.Sys_DictDataTypeModel">
+		INSERT INTO dict_datatype
+		(
+			typeid,
+			typename,
+			dataname,
+			dataid,
+			createtime,
+			createby,
+			remark
+		)
+		VALUES
+		(
+			#{typeId},
+			#{typeName},
+			#{dataName},
+			#{dataId},
+			#{createTime},
+			#{createBy},
+			#{remark}
+		)
+	</insert>
+
+	<update id="updateDictDataTypeById" parameterType="ytb.manager.metadata.model.Sys_DictDataTypeModel">
+		UPDATE dict_datatype
+		<set>
+			<if test="typeId != null">`typeid` = #{typeId}, </if>
+			<if test="typeName != null">`typename` = #{typeName},</if>
+			<if test="dataName != null">`dataname` = #{dataName}, </if>
+			<if test="dataId != null">`dataid` = #{dataId},</if>
+			<if test="createTime!= null">`createtime` = #{createTime}, </if>
+			<if test="createBy != null">`createby` = #{createBy},</if>
+			<if test="remark != null">`remark` = #{remark},</if>
+		</set>
+		WHERE datainnerid = #{dataInnerId}
+	</update>
+
+	<delete id="deleteDictDataTypeById" parameterType="int">
+		delete from dict_datatype WHERE datainnerid = #{dataInnerId}
+	</delete>
+
+	<resultMap type="ytb.manager.metadata.model.Sys_DictDataTypeModel" id="DictDataTypeResultMap">
+		<!-- 用id属性来映射主键字段 -->
+		<id property="dataInnerId" column="datainnerid"/>
+		<!-- 用result属性来映射非主键字段 -->
+		<result property="typeId" column="typeid"/>
+		<result property="typeName" column="typename"/>
+		<result property="dataName" column="dataname"/>
+		<result property="dataId" column="dataid"/>
+		<result property="createTime" column="createtime"/>
+		<result property="createBy" column="createby"/>
+		<result property="remark" column="remark"/>
+	</resultMap>
+
+</mapper>

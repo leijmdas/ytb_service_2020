@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.tagtable.ProjectMemberDutyMapper" >
+
+
+    <insert id="addWorkGroup" parameterType="ytb.project.model.tagtable.ProjectMemberDutyModel">
+
+	</insert>
+    
+    <select id="getProjectMemberDuty" parameterType="int" resultType="ytb.project.model.tagtable.ProjectMemberDutyModel">
+
+      select * from project_member_duty where member_id =#{memberId}
+
+    </select>
+
+    <select id="getAllProjectMemberDuty" parameterType="int" resultType="map">
+      select * from  ytb_project.vw_project_duty where project_id=#{projectId}
+    </select>
+
+    <select id="getTalkMemberDuty" parameterType="int" resultType="ytb.project.model.tagtable.ProjectMemberDutyModel">
+      select * from  ytb_project.project_member_duty where talk_id=#{talkId}
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.SearchPersonMapper">
+    <resultMap id="projectType" type="ytb.user.model.SearchProjectModel">
+        <id property="projectTypeId" column="ProjectTypeId"/>
+        <result property="parentId" column="ParentId"/>
+        <result property="title" column="Title"/>
+    </resultMap>
+
+    <!--获取专业能力标签-->
+    <select id="getPageTag" resultType="map">
+        SELECT * FROM v_tag_specialty
+        WHERE TagType=2
+        <if test="parentId!=null and parentId !=''">
+            AND parentId =#{parentId}
+        </if>
+    </select>
+    <!--项目类别范围-->
+    <select id="getPageScope" resultMap="projectType">
+        SELECT ProjectTypeId,Title FROM ytb_manager.dict_projecttype
+        <if test="parentId!=null and parentId!=''">
+            WHERE ParentId=#{parentId}
+        </if>
+    </select>
+    <!--条件分页查询-->
+    <select id="getPagePerson" resultType="map">
+        SELECT
+        DISTINCT b.nick_name as nickName,
+        a.user_type as userType,
+        DATE_FORMAT(a.registered_time,'%y-%m-%d') as registeredTime,
+        a.view_number as viewNumber,
+        b.credit_grade as userGrade,
+        b.user_address as userAddress,
+        c.`LEVEL` as userEdu ,
+        a.user_id as userId,
+        d.tagName as tagName,
+        f.title as title,
+        IFNULL(g.attendCount,0)as attendNumber
+        FROM
+        user_login a
+        INNER JOIN user_info b ON a.user_id = b.user_id
+        LEFT JOIN (
+        SELECT
+        max(LEVEL) AS LEVEL,
+        user_id
+        FROM
+        user_education
+        WHERE
+        is_valid = 1
+        GROUP BY
+        user_id
+        ) c ON c.user_id = a.user_id
+        left join(
+        select tag_id,user_id,bb.tagName from user_tag aa
+        INNER JOIN v_tag_specialty bb on aa.tag_id= bb.ID
+        where tag_type =2
+        GROUP BY aa.user_id
+        ) d on d.user_id = a.user_id
+        left join user_tag e on e.user_id = a.user_id
+        left join(
+        select s.user_id,s.type_id,v.title from user_project_scope s
+        inner join v_project_type v on s.type_id = v.type_id
+        where s.isprivate = true
+        GROUP BY s.user_id
+        ) f on f.user_id = a.user_id
+        left join user_project_scope g on g.user_id = a.user_id
+        INNER JOIN v_dict_area ar on b.area_id = ar.area_id
+        left join (
+        select count(attend_obj_id) as attendCount,attend_obj_id from user_attend GROUP BY attend_obj_id
+        )g on g.attend_obj_id = a.user_id
+        WHERE
+        a.user_type = 1
+        <!--昵称模糊查询-->
+        <if test="nickName!=null and nickName!=''">
+            AND a.nick_Name LIKE concat('%',#{nickName},'%')
+        </if>
+        <!--专业标签Id查询-->
+        <if test="level!=null and level!=''">
+            AND c.`LEVEL`=#{level}
+        </if>
+        <if test="userGread!=null and userGread!=''">
+            and b.credit_grade=#{userGread}
+        </if>
+        <if test="tagId!=null and tagId!=''">
+            AND e.tag_id=#{tagId}
+        </if>
+        <!--项目标签Id查询-->
+        <if test="typeId!=null and typeId!=''">
+            AND g.type_id=#{typeId}
+        </if>
+        <!--工作或生活地址查询-->
+        <if test="userAddress!=null and userAddress!=''">
+          and  b.area_id IN (
+            SELECT
+            a.area_id
+            FROM
+            v_dict_area a
+            WHERE
+            a.area_id = #{userAddress}
+            UNION
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            UNION
+            SELECT
+            c.area_id
+            FROM
+            v_dict_area c
+            WHERE
+            c.parent_id IN (
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            )
+            )
+        </if>
+
+        <!--分页-->
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getPagePersonCount" resultType="int">
+        SELECT
+        count(userId)
+        FROM
+        (
+        SELECT
+        b.credit_grade AS userGrade,
+        b.user_address AS userAddress,
+        c.`LEVEL` AS userEdu,
+        a.user_id AS userId,
+        d.tagName AS tagName,
+        f.title AS title
+        FROM
+        user_login a
+        INNER JOIN user_info b ON a.user_id = b.user_id
+        LEFT JOIN (
+        SELECT
+        max(LEVEL) AS LEVEL,
+        user_id
+        FROM
+        user_education
+        WHERE
+        is_valid = 1
+        GROUP BY
+        user_id
+        ) c ON c.user_id = a.user_id
+        LEFT JOIN (
+        SELECT
+        tag_id,
+        user_id,
+        bb.tagName
+        FROM
+        user_tag aa
+        INNER JOIN v_tag_specialty bb ON aa.tag_id = bb.ID
+        WHERE
+        tag_type = 2
+        GROUP BY
+        aa.user_id
+        ) d ON d.user_id = a.user_id
+        LEFT JOIN user_tag e ON e.user_id = a.user_id
+        LEFT JOIN (
+        SELECT
+        s.user_id,
+        s.type_id,
+        v.title
+        FROM
+        user_project_scope s
+        INNER JOIN v_project_type v ON s.type_id = v.type_id
+        WHERE
+        s.isprivate = TRUE
+        GROUP BY
+        s.user_id
+        ) f ON f.user_id = a.user_id
+        LEFT JOIN user_project_scope g ON g.user_id = a.user_id
+        INNER JOIN v_dict_area ar on b.area_id = ar.area_id
+        WHERE
+        a.user_type = 1
+        <if test="nickName!=null and nickName!=''">
+            AND a.nick_Name LIKE concat('%',#{nickName},'%')
+        </if>
+        <!--专业标签Id查询-->
+        <if test="level!=null and level!=''">
+            AND c.`LEVEL`=#{level}
+        </if>
+        <if test="userGread!=null and userGread!=''">
+            and b.credit_grade=#{userGread}
+        </if>
+        <if test="tagId!=null and tagId!=''">
+            AND e.tag_id=#{tagId}
+        </if>
+        <!--工作或生活地址查询-->
+        <if test="userAddress!=null and userAddress!=''">
+            and  b.area_id IN (
+            SELECT
+            a.area_id
+            FROM
+            v_dict_area a
+            WHERE
+            a.area_id = #{userAddress}
+            UNION
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            UNION
+            SELECT
+            c.area_id
+            FROM
+            v_dict_area c
+            WHERE
+            c.parent_id IN (
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            )
+            )
+        </if>
+        GROUP BY
+        a.user_id
+        ) AS b
+    </select>
+
+
+    <!--搜索公司-->
+    <select id="getSearchCompany" resultType="map">
+        SELECT DISTINCT
+        a.company_id AS companyId,
+        a.company_name AS companyName,
+        a.address AS companyAddr,
+        d.tagName AS tagName,
+        b.nick_name AS nickName,
+        f.title AS scodeName,
+        date_format(
+        b.registered_time,
+        '%Y-%m-%d'
+        ) AS registeredTime,
+        b.view_number as viewNumber
+        FROM
+        company_info a
+        INNER JOIN user_login b ON a.company_id = b.user_id
+        LEFT JOIN (
+        SELECT
+        tag_id,
+        aa.company_id,
+        bb.tagName
+        FROM
+        company_tag aa
+        INNER JOIN v_tag_specialty bb ON aa.tag_id = bb.ID
+        WHERE
+        bb.tagType = 2
+        GROUP BY
+        aa.company_id
+        ) d ON d.company_id = a.company_id
+        LEFT JOIN company_tag e ON e.company_id = a.company_id
+        LEFT JOIN (
+        SELECT
+        s.company_id,
+        s.type_id,
+        v.title
+        FROM
+        user_project_scope s
+        INNER JOIN v_project_type v ON s.type_id = v.type_id
+        WHERE
+        s.isprivate = TRUE
+        GROUP BY
+        s.company_id
+        ) f ON f.company_id = a.company_id
+        LEFT JOIN user_project_scope g ON g.company_id = a.company_id
+        left join user_info x on a.company_id = x.user_id
+        WHERE
+        b.user_type = 2
+        <!--昵称模糊查询-->
+        <if test="companyName!=null and companyName!=''">
+            AND a.company_Name LIKE concat('%',#{companyName},'%')
+        </if>
+
+        <if test="tagId!=null and tagId!=''">
+            AND e.tag_id=#{tagId}
+        </if>
+        <!--项目标签Id查询-->
+        <if test="typeId!=null and typeId!=''">
+            AND g.type_id=#{typeId}
+        </if>
+        <if test="userAddress!=null and userAddress!=''">
+            AND x.area_id IN (
+            SELECT
+            a.area_id
+            FROM
+            v_dict_area a
+            WHERE
+            a.area_id = #{userAddress}
+            UNION
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            UNION
+            SELECT
+            c.area_id
+            FROM
+            v_dict_area c
+            WHERE
+            c.parent_id IN (
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            )
+            )
+        </if>
+        ORDER BY b.registered_time desc
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getSearchCompanyCount" resultType="int">
+        SELECT count(companyId) FROM
+        ( SELECT DISTINCT
+        a.company_id AS companyId,
+        a.company_name AS companyName,
+        a.address AS companyAddr,
+        d.tagName AS tagName,
+        b.nick_name AS nickName,
+        f.title AS scodeName,
+        date_format(
+        b.registered_time,
+        '%Y-%m-%d'
+        ) AS registeredTime,
+        b.view_number as viewNumber
+        FROM
+        company_info a
+        INNER JOIN user_login b ON a.company_id = b.user_id
+        LEFT JOIN (
+        SELECT
+        tag_id,
+        aa.company_id,
+        bb.tagName
+        FROM
+        company_tag aa
+        INNER JOIN v_tag_specialty bb ON aa.tag_id = bb.ID
+        WHERE
+        bb.tagType = 2
+        GROUP BY
+        aa.company_id
+        ) d ON d.company_id = a.company_id
+        LEFT JOIN company_tag e ON e.company_id = a.company_id
+        LEFT JOIN (
+        SELECT
+        s.company_id,
+        s.type_id,
+        v.title
+        FROM
+        user_project_scope s
+        INNER JOIN v_project_type v ON s.type_id = v.type_id
+        WHERE
+        s.isprivate = TRUE
+        GROUP BY
+        s.company_id
+        ) f ON f.company_id = a.company_id
+        LEFT JOIN user_project_scope g ON g.company_id = a.company_id
+        left join user_info x on a.company_id = x.user_id
+        WHERE
+        b.user_type = 2
+        <!--昵称模糊查询-->
+        <if test="companyName!=null and companyName!=''">
+            AND a.company_Name LIKE concat('%',#{companyName},'%')
+        </if>
+
+        <if test="tagId!=null and tagId!=''">
+            AND e.tag_id=#{tagId}
+        </if>
+        <!--项目标签Id查询-->
+        <if test="typeId!=null and typeId!=''">
+            AND g.type_id=#{typeId}
+        </if>
+        <if test="userAddress!=null and userAddress!=''">
+            AND x.area_id IN (
+            SELECT
+            a.area_id
+            FROM
+            v_dict_area a
+            WHERE
+            a.area_id = #{userAddress}
+            UNION
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            UNION
+            SELECT
+            c.area_id
+            FROM
+            v_dict_area c
+            WHERE
+            c.parent_id IN (
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            )
+            )
+        </if>
+        ) as b
+    </select>
+
+
+    <!--通过用户id获取其最高学历和教育经历-->
+    <select id="getEducationByUserId" resultType="map">
+      SELECT
+	education_name AS educationName,
+	school_name AS schoolName,
+	DATE_FORMAT(
+		start_date,
+		'%Y-%m-%d'
+	) AS startDate,
+	DATE_FORMAT(
+		end_date,
+		'%Y-%m-%d'
+	) AS endDate,
+	major_name AS majorName
+FROM
+	ytb_user.user_education
+WHERE
+	LEVEL IN (
+		SELECT
+			max(LEVEL) AS LEVEL
+		FROM
+			ytb_user.user_education
+		WHERE
+			user_id = #{userId} and is_valid =1) and user_id =#{userId}
+    </select>
+
+</mapper>

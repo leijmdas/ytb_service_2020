@@ -1,0 +1,35 @@
+server:
+    tomcat:
+        uri-encoding: UTF-8
+        max-threads: 100
+        min-spare-threads: 25
+    port: 80
+#    servlet:
+#        context-path: /hotel
+management:
+    security:
+        enables: false
+    server:
+      port: 81
+spring:
+    application:
+        name: ytb_common
+    main:
+        allow-bean-definition-overriding: true
+#    data:
+#        mongodb:
+#          uri: mongodb://mysql.kunlong.com:27017/project
+redis:
+    hostName: mysql.kunlong.com
+    port: 6379
+    password:
+    timeout: 5000
+
+    maxIdle: 300
+    maxTotal: 1000
+    maxWaitMillis: 1000
+    minEvictableIdleTimeMillis: 300000
+    numTestsPerEvictionRun: 1024
+    timeBetweenEvictionRunsMillis: 30000
+    testOnBorrow: true
+    testWhileIdle: true

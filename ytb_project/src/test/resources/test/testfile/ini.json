@@ -1,0 +1,5975 @@
+{
+  "modify": false,
+  "reqItemList": [
+    {
+      "itemId": 1038,
+      "workJobId": 0,
+      "reqItemNo": "A",
+      "reqItemDesc": "含PCBA电路板设计",
+      "templateId": 548,
+      "value": 1
+    },
+    {
+      "itemId": 1039,
+      "workJobId": 0,
+      "reqItemNo": "B",
+      "reqItemDesc": "含嵌入式软件设计",
+      "templateId": 548,
+      "value": 1
+    },
+    {
+      "itemId": 1040,
+      "workJobId": 0,
+      "reqItemNo": "C",
+      "reqItemDesc": "含机械零部件设计",
+      "templateId": 548,
+      "value": 1
+    },
+    {
+      "itemId": 1041,
+      "workJobId": 0,
+      "reqItemNo": "D",
+      "reqItemDesc": "造型设计",
+      "templateId": 548,
+      "value": 1
+    },
+    {
+      "itemId": 1042,
+      "workJobId": 0,
+      "reqItemNo": "E",
+      "reqItemDesc": "界面设计",
+      "templateId": 548,
+      "value": 1
+    }
+  ],
+  "tagTableRestDataList": {},
+  "tagTableParam": {
+    "value": [
+      {
+        "addable": false,
+        "items": [],
+        "removeable": false
+      }
+    ]
+  },
+  "header": {
+    "phase": 200,
+    "tagDocument": "需求说明书",
+    "tagVersion": "1.0",
+    "tagDocumentRef": [],
+    "docType": 100,
+    "groupId": 3878,
+    "params": {
+      "taxRate": 0.01,
+      "feeRate": 0.1
+    },
+    "templateId": 548,
+    "userId": 202,
+    "reqId": 1461,
+    "template_TYPE_testReport": false,
+    "templateWorkplan": false,
+    "projectTypeId": 0,
+    "repositoryId": 12,
+    "documentId": 41976,
+    "workplanId": 1821,
+    "template_TYPE_workplan_NonePp": false,
+    "talkId": 6597,
+    "projectId": 2785,
+    "templateReq": true
+  },
+  "body": [
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "A.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "项目需求简介",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 5,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": true,
+      "value": [
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "a）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "产品主要功能简介（发单方必填）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": true,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：产品主要功能的说明0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A3"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "b）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "产品主要技术（性能）参数简介",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": true,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：产品主要技术参数的说明0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A5"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "c）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "产品使用环境",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": true,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：产品工作在室内、室外、温度、湿度、潮湿、高温等环境说明0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A7"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "d）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "产品使用人群",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": true,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：产品由专业技术人员、专职操作人员、老人、小孩等人群使用的说明0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A9"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "e）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "希望产品开发设计成果最好达到的目标",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": true,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：希望设计的产品达到成本低、尺寸小、精度高、使用方便等目标的说明0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A11"
+        }
+      ],
+      "key": "tagText$A2"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "depth": 1,
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "！ 以上的“需求简介”资料将发布在平台网上公开展示。以下的资料，只对进入洽谈阶段的人打开。",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "tagType": "tagTitleRed",
+      "rowLimit": 0,
+      "rows": 0,
+      "value": [],
+      "key": "tagTitleRed$A13"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "B.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "产品参考资料（默认：无）",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 3,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": true,
+      "value": [
+        {
+          "horizontal": true,
+          "contentStart": 3,
+          "refString": "",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagRadio",
+          "rowLimit": 1,
+          "rows": 1,
+          "value": [
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": true,
+                  "type": "radio",
+                  "desc": "无（批注：关闭子标题）"
+                },
+                {
+                  "refTagKey": [
+                    "tagText$A16",
+                    "tagText$A23"
+                  ],
+                  "refString": "\"sheet\"$E15",
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "有（批注：展开子标题）"
+                }
+              ],
+              "map": {}
+            }
+          ],
+          "key": "tagRadio$A15"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E15",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "a）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "参考资料1",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": false,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 3,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": true,
+          "value": [
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagTextBox",
+              "rowLimit": 4,
+              "rows": 4,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "text": "参考资料的公司名称：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "填写名称/品牌",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "text": "参考公司的官网：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "链接网址",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "text": "参考产品的名称：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "填写产品名称",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "text": "参考产品的规格或型号：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "填写产品的规格或型号",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "key": "tagTextBox$A17"
+            },
+            {
+              "metadata": {
+                "text": "参考产品的图片：（添加图片）",
+                "type": "text"
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "limit": 5,
+                      "curIndex": 1,
+                      "type": "image",
+                      "desc": "参考产品图片",
+                      "documentIdList": []
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A22"
+            }
+          ],
+          "key": "tagText$A16"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E15",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "b）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "参考资料2",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": false,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 3,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": true,
+          "value": [
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagTextBox",
+              "rowLimit": 4,
+              "rows": 4,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "text": "参考资料的公司名称：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "填写名称/品牌",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "text": "参考公司的官网：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "链接网址",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "text": "参考产品的名称：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "填写产品名称",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "text": "参考产品的规格或型号：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "填写产品的规格或型号",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "key": "tagTextBox$A24"
+            },
+            {
+              "metadata": {
+                "text": "参考产品的图片：（添加图片）",
+                "type": "text"
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "limit": 5,
+                      "curIndex": 1,
+                      "type": "image",
+                      "desc": "参考产品图片",
+                      "documentIdList": []
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A29"
+            }
+          ],
+          "key": "tagText$A23"
+        }
+      ],
+      "key": "tagText$A14"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "C.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "产品规格或操作使用等参考资料（默认：无）",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 3,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": true,
+      "value": [
+        {
+          "horizontal": true,
+          "contentStart": 3,
+          "refString": "",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagRadio",
+          "rowLimit": 1,
+          "rows": 1,
+          "value": [
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "无（批注：关闭子标题）"
+                },
+                {
+                  "refTagKey": [
+                    "tagText$A32",
+                    "tagText$A34"
+                  ],
+                  "refString": "\"sheet\"$E31",
+                  "reqItemId": 0,
+                  "checked": true,
+                  "type": "radio",
+                  "desc": "有（批注：展开子标题）"
+                }
+              ],
+              "map": {}
+            }
+          ],
+          "key": "tagRadio$A31"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E31",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "a）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "参考资料1：",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": true,
+          "value": [
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "documentId": 0,
+                      "type": "file",
+                      "desc": "上传操作使用说明书或规格书等文件"
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A33"
+            }
+          ],
+          "key": "tagText$A32"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E31",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "b）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "参考资料2：",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": true,
+          "value": [
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "documentId": 0,
+                      "type": "file",
+                      "desc": "上传操作使用说明书或规格书等文件"
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A35"
+            }
+          ],
+          "key": "tagText$A34"
+        }
+      ],
+      "key": "tagText$A30"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "D.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "产品开发设计成果的交付形式（必填，可多选。默认：均为有）",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 1,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": true,
+      "value": [
+        {
+          "horizontal": true,
+          "contentStart": 3,
+          "refString": "reqItem:A(含PCBA电路板设计)",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagRadio",
+          "rowLimit": 3,
+          "rows": 3,
+          "value": [
+            {
+              "ref": "reqItem:A(含PCBA电路板设计)",
+              "items": [
+                {
+                  "text": "1）含PCBA电路板实物及其设计文档：",
+                  "type": "text"
+                },
+                {
+                  "refTagKey": [],
+                  "reqItemNo": "A",
+                  "reqItemId": 1038,
+                  "checked": true,
+                  "reqItemDesc": "含PCBA电路板设计",
+                  "type": "radio",
+                  "desc": "有"
+                },
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "无"
+                }
+              ],
+              "map": {
+                "1": "A(含PCBA电路板设计)"
+              }
+            },
+            {
+              "ref": "reqItem:B(含嵌入式软件设计)",
+              "items": [
+                {
+                  "text": "2）含嵌入式软件代码及其设计文档：",
+                  "type": "text"
+                },
+                {
+                  "refTagKey": [],
+                  "reqItemNo": "B",
+                  "reqItemId": 1039,
+                  "checked": true,
+                  "reqItemDesc": "含嵌入式软件设计",
+                  "type": "radio",
+                  "desc": "有"
+                },
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "无"
+                }
+              ],
+              "map": {
+                "1": "B(含嵌入式软件设计)"
+              }
+            },
+            {
+              "ref": "reqItem:C(含机械零部件设计)",
+              "items": [
+                {
+                  "text": "3）含机械零部件实物及其设计文档：",
+                  "type": "text"
+                },
+                {
+                  "refTagKey": [],
+                  "reqItemNo": "C",
+                  "reqItemId": 1040,
+                  "checked": true,
+                  "reqItemDesc": "含机械零部件设计",
+                  "type": "radio",
+                  "desc": "有"
+                },
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "无"
+                }
+              ],
+              "map": {
+                "1": "C(含机械零部件设计)"
+              }
+            }
+          ],
+          "key": "tagRadio$A37"
+        }
+      ],
+      "key": "tagText$A36"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "1.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "功能",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 3,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": false,
+      "value": [
+        {
+          "metadata": {
+            "text": "列出产品所有的功能。",
+            "type": "text"
+          }
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "1.1.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/20功能名称1",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：功能名称的说明0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A42"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "1.2.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/20功能名称2",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：功能名称的说明0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A44"
+        }
+      ],
+      "key": "tagText$A40"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "2.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "技术性能参数（默认：无）",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 4,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": false,
+      "value": [
+        {
+          "metadata": {
+            "text": "列出产品所有包含有数值指标的功能、技术参数、性能指标。",
+            "type": "text"
+          }
+        },
+        {
+          "horizontal": true,
+          "contentStart": 3,
+          "refString": "",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagRadio",
+          "rowLimit": 1,
+          "rows": 1,
+          "value": [
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "无（批注：关闭子标题）"
+                },
+                {
+                  "refTagKey": [
+                    "tagText$A49",
+                    "tagText$A52"
+                  ],
+                  "refString": "\"sheet\"$E48",
+                  "reqItemId": 0,
+                  "checked": true,
+                  "type": "radio",
+                  "desc": "有（批注：展开子标题）"
+                }
+              ],
+              "map": {}
+            }
+          ],
+          "key": "tagRadio$A48"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E48",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "2.1.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/20技术参数名称1",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 2,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagTextBox",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "text": "参数的单位：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "0/10",
+                          "type": "input",
+                          "value": ""
+                        },
+                        {
+                          "text": " ",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    {
+                      "items": [
+                        {
+                          "text": "参数的标准数值：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "0/10",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    },
+                    {
+                      "items": [
+                        {
+                          "text": "参数的误差：正+",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "0/10",
+                          "type": "input",
+                          "value": ""
+                        },
+                        {
+                          "text": "负-",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "0/10",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "key": "tagTextBox$A50"
+            },
+            {
+              "metadata": {
+                "text": "图文描述：参数的说明0/500",
+                "type": "text"
+              }
+            }
+          ],
+          "key": "tagText$A49"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E48",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "2.2.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/20技术参数名称2",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 2,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagTextBox",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "text": "参数的单位：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "0/10",
+                          "type": "input",
+                          "value": ""
+                        },
+                        {
+                          "text": " ",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    {
+                      "items": [
+                        {
+                          "text": "参数的标准数值：",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "0/10",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    },
+                    {
+                      "items": [
+                        {
+                          "text": "参数的误差：正+",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "0/10",
+                          "type": "input",
+                          "value": ""
+                        },
+                        {
+                          "text": "负-",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "0/10",
+                          "type": "input",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "key": "tagTextBox$A53"
+            },
+            {
+              "metadata": {
+                "placeholder": "图文描述：参数的说明0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A52"
+        }
+      ],
+      "key": "tagText$A46"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "3.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "产品的电器接口（默认：无）",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 4,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": false,
+      "value": [
+        {
+          "metadata": {
+            "text": "列出产品用于连接外部装置或设备的电路插头或插座的接口。例如：电源插座、USB插座、电路板卡上的信号线插头插座等等。",
+            "type": "text"
+          }
+        },
+        {
+          "horizontal": true,
+          "contentStart": 3,
+          "refString": "",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagRadio",
+          "rowLimit": 1,
+          "rows": 1,
+          "value": [
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "无（批注：关闭子标题） "
+                },
+                {
+                  "refTagKey": [
+                    "tagText$A58",
+                    "tagText$A60"
+                  ],
+                  "refString": "\"sheet\"$E57",
+                  "reqItemId": 0,
+                  "checked": true,
+                  "type": "radio",
+                  "desc": "有（批注：展开子标题）"
+                }
+              ],
+              "map": {}
+            }
+          ],
+          "key": "tagRadio$A57"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E57",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "3.1.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/20接口名称1",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：接口的信号端定义、功能、技术指标、数据通讯协议等0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A58"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E57",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "3.2.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/20接口名称2",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：接口的信号端定义、功能、技术指标、数据通讯协议等0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A60"
+        }
+      ],
+      "key": "tagText$A55"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "4.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "产品的光气液等接口（默认：无）",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 4,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": false,
+      "value": [
+        {
+          "metadata": {
+            "text": "列出产品用于连接外部装置或设备的光、气、液等插头或插座的接口。例如：气路连接器、液路连接器等等。",
+            "type": "text"
+          }
+        },
+        {
+          "horizontal": true,
+          "contentStart": 3,
+          "refString": "",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagRadio",
+          "rowLimit": 1,
+          "rows": 1,
+          "value": [
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "无（批注：关闭子标题）"
+                },
+                {
+                  "refTagKey": [
+                    "tagText$A65",
+                    "tagText$A67"
+                  ],
+                  "refString": "\"sheet\"$E64",
+                  "reqItemId": 0,
+                  "checked": true,
+                  "type": "radio",
+                  "desc": "有（批注：展开子标题）"
+                }
+              ],
+              "map": {}
+            }
+          ],
+          "key": "tagRadio$A64"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E64",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "4.1.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/20接口名称1",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：接口的定义、功能、技术指标等0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A65"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E64",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "4.2.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/20接口名称2",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：接口的定义、功能、技术指标等0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A67"
+        }
+      ],
+      "key": "tagText$A62"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "5.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "产品外壳或外观布局（默认：无）",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 14,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": false,
+      "value": [
+        {
+          "metadata": {
+            "text": "产品如果有外壳，就需要确定外壳上安装的所有零部件的名称、位置、大小；",
+            "type": "text"
+          }
+        },
+        {
+          "metadata": {
+            "text": "对无外壳的电路板或机械模块来说，外观布局是指电路板或机械模块上的接插件、特殊零部件的安放位置；",
+            "type": "text"
+          }
+        },
+        {
+          "metadata": {
+            "text": "如果用户需要对外壳或外观进行设计，则是指对产品的人机交互、产品形状、结构、材料、色彩、表面加工、装饰等进行的产品造型设计。",
+            "type": "text"
+          }
+        },
+        {
+          "metadata": {
+            "text": "（批注：以下为单选）",
+            "type": "text"
+          }
+        },
+        {
+          "horizontal": false,
+          "contentStart": 3,
+          "refString": "",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagRadio",
+          "rowLimit": 5,
+          "rows": 5,
+          "value": [
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "无产品外壳或外观布局要求（批注：点选后。关闭子标题）"
+                }
+              ],
+              "map": {}
+            },
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "有产品外壳或外观布局要求（批注：点选后。展开子标题）"
+                }
+              ],
+              "map": {}
+            },
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [
+                    "tagFile$A77"
+                  ],
+                  "refString": "\"sheet\"$D76",
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "已有产品造型设计图"
+                }
+              ],
+              "map": {}
+            },
+            {
+              "contentStart": 4,
+              "refString": "\"sheet\"$D76",
+              "depth": 3,
+              "tagTitle": [],
+              "show": false,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "documentId": 0,
+                      "type": "file",
+                      "desc": "上传造型设计图文件"
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A77"
+            },
+            {
+              "ref": "reqItem:D(造型设计)",
+              "items": [
+                {
+                  "refTagKey": [
+                    "tagText$A82",
+                    "tagText$A88",
+                    "tagText$A94",
+                    "tagText$A100",
+                    "tagText$A106",
+                    "tagText$A112"
+                  ],
+                  "refString": "\"sheet\"$D78",
+                  "reqItemNo": "D",
+                  "reqItemId": 1041,
+                  "checked": true,
+                  "reqItemDesc": "造型设计",
+                  "type": "radio",
+                  "desc": "需要产品造型的设计，且在协作的工作计划中增加产品造型设计阶段（批注：点选后。展开子标题，并启动造型设计阶段）"
+                }
+              ],
+              "map": {
+                "1": "D(造型设计)"
+              }
+            }
+          ],
+          "key": "tagRadio$A74"
+        },
+        {
+          "metadata": {
+            "text": "产品外观六面说明示意图：",
+            "type": "text"
+          }
+        },
+        {
+          "metadata": {
+            "text": "静态图",
+            "type": "text"
+          }
+        },
+        {
+          "metadata": {
+            "text": "以下六个面的图画出所有可看得到的显示屏、指示灯、按键、开关、插头/插座、把手等等功能部件。表格中列出上述零部件的名称、规格及功能说明。",
+            "type": "text"
+          }
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$D78",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "5.1.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "正面说明",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 4,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "text": "产品正面中的零部件布局图。（批注：有图就有表，无图无表）",
+                "type": "text"
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "limit": 1,
+                      "curIndex": 1,
+                      "type": "image",
+                      "desc": "正面：部件布局图",
+                      "documentIdList": []
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A84"
+            },
+            {
+              "metadata": {
+                "text": "图中部件名称和功能说明一览表：",
+                "type": "text"
+              }
+            },
+            {
+              "containsNoColumn": true,
+              "contentStart": 4,
+              "refString": "",
+              "titleRows": 1,
+              "titleRowLimit": 1,
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "序号",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件名称",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件型号/规格",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "功能说明",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 1,
+              "rows": 1,
+              "depth": 3,
+              "tableDict": {
+                "refObject": "",
+                "refParam": "",
+                "refSrc": 0,
+                "dbName": "ytb_project",
+                "fields": [
+                  {
+                    "fieldFormat": "3",
+                    "rowSpan": 0,
+                    "fieldIscal": false,
+                    "fieldName": "no",
+                    "refObject": "",
+                    "edit": false,
+                    "colSpan": 0,
+                    "fieldDisplaysize": 100,
+                    "fieldDefault": "0",
+                    "fieldReadonly": true,
+                    "mergeCell": false,
+                    "fieldSrc": 0,
+                    "refPool": "0",
+                    "refValue": 0,
+                    "hide": false,
+                    "refFilter": "",
+                    "fieldComponent": 0,
+                    "refParameter": "{}",
+                    "fieldType": "VARCHAR"
+                  },
+                  {
+                    "fieldFormat": "0",
+                    "rowSpan": 0,
+                    "fieldIscal": false,
+                    "fieldName": "part_name",
+                    "refObject": "",
+                    "edit": false,
+                    "colSpan": 0,
+                    "fieldDisplaysize": 300,
+                    "fieldDefault": "0",
+                    "fieldReadonly": false,
+                    "mergeCell": false,
+                    "fieldSrc": 0,
+                    "refPool": "0",
+                    "refValue": 0,
+                    "hide": false,
+                    "refFilter": "",
+                    "fieldComponent": 0,
+                    "refParameter": "{}",
+                    "fieldType": "VARCHAR"
+                  },
+                  {
+                    "fieldFormat": "0",
+                    "rowSpan": 0,
+                    "fieldIscal": false,
+                    "fieldName": "part_param",
+                    "refObject": "",
+                    "edit": false,
+                    "colSpan": 0,
+                    "fieldDisplaysize": 200,
+                    "fieldDefault": "0",
+                    "fieldReadonly": false,
+                    "mergeCell": false,
+                    "fieldSrc": 0,
+                    "refPool": "0",
+                    "refValue": 0,
+                    "hide": false,
+                    "refFilter": "",
+                    "fieldComponent": 0,
+                    "refParameter": "{}",
+                    "fieldType": "VARCHAR"
+                  },
+                  {
+                    "fieldFormat": "0",
+                    "rowSpan": 0,
+                    "fieldIscal": false,
+                    "fieldName": "fun_desc",
+                    "refObject": "",
+                    "edit": false,
+                    "colSpan": 0,
+                    "fieldDisplaysize": 200,
+                    "fieldDefault": "0",
+                    "fieldReadonly": false,
+                    "mergeCell": false,
+                    "fieldSrc": 0,
+                    "refPool": "0",
+                    "refValue": 0,
+                    "hide": false,
+                    "refFilter": "",
+                    "fieldComponent": 0,
+                    "refParameter": "{}",
+                    "fieldType": "VARCHAR"
+                  }
+                ],
+                "metadataAddDel": true,
+                "tableName": "demand_part_list"
+              },
+              "tagType": "tagTable",
+              "value": [
+                {
+                  "addable": true,
+                  "items": [
+                    {
+                      "fieldFormat": "3",
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "fieldName": "no",
+                      "refObject": "",
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 100,
+                      "fieldDefault": "0",
+                      "fieldReadonly": true,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "refPool": "0",
+                      "refValue": 0,
+                      "hide": false,
+                      "refFilter": "",
+                      "text": "1",
+                      "fieldComponent": 0,
+                      "refParameter": "{}",
+                      "fieldType": "VARCHAR"
+                    },
+                    {
+                      "fieldFormat": "0",
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "fieldName": "part_name",
+                      "refObject": "",
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 300,
+                      "fieldDefault": "0",
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "refPool": "0",
+                      "refValue": 0,
+                      "hide": false,
+                      "refFilter": "",
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refParameter": "{}",
+                      "fieldType": "VARCHAR"
+                    },
+                    {
+                      "fieldFormat": "0",
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "fieldName": "part_param",
+                      "refObject": "",
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 200,
+                      "fieldDefault": "0",
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "refPool": "0",
+                      "refValue": 0,
+                      "hide": false,
+                      "refFilter": "",
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refParameter": "{}",
+                      "fieldType": "VARCHAR"
+                    },
+                    {
+                      "fieldFormat": "0",
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "fieldName": "fun_desc",
+                      "refObject": "",
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 200,
+                      "fieldDefault": "0",
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "refPool": "0",
+                      "refValue": 0,
+                      "hide": false,
+                      "refFilter": "",
+                      "placeholder": "0/50",
+                      "fieldComponent": 0,
+                      "refParameter": "{}",
+                      "fieldType": "VARCHAR"
+                    }
+                  ],
+                  "removeable": false
+                }
+              ],
+              "key": "tagTable@demand_part_list$A86"
+            }
+          ],
+          "key": "tagText$A82"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$D78",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "5.2.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "后面说明",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 4,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "text": "产品后面中的零部件布局图。（批注：有图就有表，无图无表）",
+                "type": "text"
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "limit": 1,
+                      "curIndex": 1,
+                      "type": "image",
+                      "desc": "后面：部件布局图",
+                      "documentIdList": []
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A90"
+            },
+            {
+              "metadata": {
+                "text": "图中部件名称和功能说明一览表：",
+                "type": "text"
+              }
+            },
+            {
+              "containsNoColumn": false,
+              "contentStart": 4,
+              "refString": "",
+              "titleRows": 1,
+              "titleRowLimit": 1,
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "序号",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件名称",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件型号/规格",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "功能说明",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 1,
+              "rows": 1,
+              "depth": 3,
+              "tagType": "tagTable",
+              "value": [
+                {
+                  "addable": false,
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "1.0",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/50",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ],
+                  "removeable": false
+                }
+              ],
+              "key": "tagTable$A92"
+            }
+          ],
+          "key": "tagText$A88"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$D78",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "5.3.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "左侧说明",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 4,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "text": "产品左侧中的零部件布局图。（批注：有图就有表，无图无表）",
+                "type": "text"
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "limit": 1,
+                      "curIndex": 1,
+                      "type": "image",
+                      "desc": "左侧：部件布局图",
+                      "documentIdList": []
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A96"
+            },
+            {
+              "metadata": {
+                "text": "图中部件名称和功能说明一览表：",
+                "type": "text"
+              }
+            },
+            {
+              "containsNoColumn": false,
+              "contentStart": 4,
+              "refString": "",
+              "titleRows": 1,
+              "titleRowLimit": 1,
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "序号",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件名称",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件型号/规格",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "功能说明",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 1,
+              "rows": 1,
+              "depth": 3,
+              "tagType": "tagTable",
+              "value": [
+                {
+                  "addable": false,
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "1.0",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/50",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ],
+                  "removeable": false
+                }
+              ],
+              "key": "tagTable$A98"
+            }
+          ],
+          "key": "tagText$A94"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$D78",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "5.4.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "右侧说明",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 4,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "text": "产品右侧中的零部件布局图。（批注：有图就有表，无图无表）",
+                "type": "text"
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "limit": 1,
+                      "curIndex": 1,
+                      "type": "image",
+                      "desc": "右侧：部件布局图",
+                      "documentIdList": []
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A102"
+            },
+            {
+              "metadata": {
+                "text": "图中部件名称和功能说明一览表：",
+                "type": "text"
+              }
+            },
+            {
+              "containsNoColumn": false,
+              "contentStart": 4,
+              "refString": "",
+              "titleRows": 1,
+              "titleRowLimit": 1,
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "序号",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件名称",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件型号/规格",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "功能说明",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 1,
+              "rows": 1,
+              "depth": 3,
+              "tagType": "tagTable",
+              "value": [
+                {
+                  "addable": false,
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "1.0",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/50",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ],
+                  "removeable": false
+                }
+              ],
+              "key": "tagTable$A104"
+            }
+          ],
+          "key": "tagText$A100"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$D78",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "5.5.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "顶部说明",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 4,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "text": "产品顶部中的零部件布局图。（批注：有图就有表，无图无表）",
+                "type": "text"
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "limit": 1,
+                      "curIndex": 1,
+                      "type": "image",
+                      "desc": "顶部（电路板的Top层）：部件布局图",
+                      "documentIdList": []
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A108"
+            },
+            {
+              "metadata": {
+                "text": "图中部件名称和功能说明一览表：",
+                "type": "text"
+              }
+            },
+            {
+              "containsNoColumn": false,
+              "contentStart": 4,
+              "refString": "",
+              "titleRows": 1,
+              "titleRowLimit": 1,
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "序号",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件名称",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件型号/规格",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "功能说明",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 1,
+              "rows": 1,
+              "depth": 3,
+              "tagType": "tagTable",
+              "value": [
+                {
+                  "addable": false,
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "1.0",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/50",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ],
+                  "removeable": false
+                }
+              ],
+              "key": "tagTable$A110"
+            }
+          ],
+          "key": "tagText$A106"
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$D78",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "5.6.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "底部说明",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 4,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "text": "产品底部中的零部件布局图。（批注：有图就有表，无图无表）",
+                "type": "text"
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "limit": 1,
+                      "curIndex": 1,
+                      "type": "image",
+                      "desc": "底部（电路板的Bottom层）：部件布局图",
+                      "documentIdList": []
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A114"
+            },
+            {
+              "metadata": {
+                "text": "图中部件名称和功能说明一览表：",
+                "type": "text"
+              }
+            },
+            {
+              "containsNoColumn": false,
+              "contentStart": 4,
+              "refString": "",
+              "titleRows": 1,
+              "titleRowLimit": 1,
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "序号",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件名称",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "部件型号/规格",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "功能说明",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 1,
+              "rows": 1,
+              "depth": 3,
+              "tagType": "tagTable",
+              "value": [
+                {
+                  "addable": false,
+                  "items": [
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "1.0",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 1,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 1,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/50",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ],
+                  "removeable": false
+                }
+              ],
+              "key": "tagTable$A116"
+            }
+          ],
+          "key": "tagText$A112"
+        }
+      ],
+      "key": "tagText$A69"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "6.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "产品操作与显示界面（UI）（默认：无）",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 10,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": false,
+      "value": [
+        {
+          "metadata": {
+            "text": "产品操作与显示界面是指产品如果有显示的器件，如液晶显示屏幕、数码管、指示灯等，就需要定义产品操作、运行时和屏幕显示内容之间的关系。",
+            "type": "text"
+          }
+        },
+        {
+          "metadata": {
+            "text": "产品界面设计是指对产品的人机交互、操作逻辑、显示界面美观的整体设计，一般包含产品原型设计和界面美工设计两部分。界面（UI）设计不仅体现在美观，更重要的是让产品的操作变得舒适、简单。",
+            "type": "text"
+          }
+        },
+        {
+          "metadata": {
+            "text": "（批注：以下单选）",
+            "type": "text"
+          }
+        },
+        {
+          "horizontal": false,
+          "contentStart": 3,
+          "refString": "",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagRadio",
+          "rowLimit": 5,
+          "rows": 5,
+          "value": [
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "无显示界面（批注：点选后，关闭子标题）"
+                }
+              ],
+              "map": {}
+            },
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "有显示界面（批注：点选后，展开子标题）"
+                }
+              ],
+              "map": {}
+            },
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [
+                    "tagFile$A125"
+                  ],
+                  "refString": "\"sheet\"$D124",
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "已有界面原型设计和UI美工设计图"
+                }
+              ],
+              "map": {}
+            },
+            {
+              "contentStart": 4,
+              "refString": "\"sheet\"$D124",
+              "depth": 3,
+              "tagTitle": [],
+              "show": false,
+              "tagType": "tagFile",
+              "rowLimit": 2,
+              "rows": 2,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "documentId": 0,
+                      "type": "file",
+                      "desc": "上传原型设计图文件"
+                    }
+                  ]
+                },
+                {
+                  "items": [
+                    {
+                      "documentId": 0,
+                      "type": "file",
+                      "desc": "上传UI美工设计图文件"
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A125"
+            },
+            {
+              "ref": "reqItem:E(界面设计)",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemNo": "E",
+                  "reqItemId": 1042,
+                  "checked": true,
+                  "reqItemDesc": "界面设计",
+                  "type": "radio",
+                  "desc": "需要产品界面设计，在该项目的工作计划中增加界面设计阶段（批注：点选后，展开子标题，启动原型和UI设计阶段）"
+                }
+              ],
+              "map": {
+                "1": "E(界面设计)"
+              }
+            }
+          ],
+          "key": "tagRadio$A122"
+        },
+        {
+          "metadata": {
+            "text": "绘制产品界面布局图（简易原型图）的基本要求：",
+            "type": "text"
+          }
+        },
+        {
+          "metadata": {
+            "text": "（1） 布局图主要包括：显示内容的布局、文字、操作按键、图标、颜色等。",
+            "type": "text"
+          }
+        },
+        {
+          "metadata": {
+            "text": "（2） 布局图中包含不同页面之间切换的触发条件、状态。用箭头线加标注说明页面的切换。",
+            "type": "text"
+          }
+        },
+        {
+          "metadata": {
+            "text": "（3） 此处的布局图只能简单说明产品显示界面的功能描述，对复杂的界面建议增加界面设计阶段。",
+            "type": "text"
+          }
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "6.1.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/20显示页面名称1",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 3,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "text": "界面布局图",
+                "type": "text"
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "limit": 1,
+                      "curIndex": 1,
+                      "type": "image",
+                      "desc": "界面布局图",
+                      "documentIdList": []
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A134"
+            },
+            {
+              "metadata": {
+                "placeholder": "图文描述：显示页面的说明0/500",
+                "type": "input",
+                "value": ""
+              }
+            }
+          ],
+          "key": "tagText$A132"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "6.2.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/20显示页面名称2",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 3,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "界面布局图",
+                "type": "input",
+                "value": ""
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagFile",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "limit": 1,
+                      "curIndex": 1,
+                      "type": "image",
+                      "desc": "界面布局图",
+                      "documentIdList": []
+                    }
+                  ]
+                }
+              ],
+              "key": "tagFile$A138"
+            },
+            {
+              "metadata": {
+                "text": "图文描述：显示页面的说明0/500",
+                "type": "text"
+              }
+            }
+          ],
+          "key": "tagText$A136"
+        }
+      ],
+      "key": "tagText$A118"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "7.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "产品运行的工作环境",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 4,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": false,
+      "value": [
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "7.1.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "产品运行需要配套的硬件",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 4,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "text": "列出产品运行所需要特别指定配套使用的硬件、设备，包括仪器仪表、工具、计算机、服务器、仿真器、处理器芯片、电路板卡和模块等。例如嵌入式软件需要指定的CPU芯片、软件调试需要指定的电路板、应用软件需要指定最低配置的计算机；超声探头需要指定配套的超声探测仪等。",
+                "type": "text"
+              }
+            },
+            {
+              "horizontal": true,
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagRadio",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "ref": "",
+                  "items": [
+                    {
+                      "refTagKey": [],
+                      "reqItemId": 0,
+                      "checked": false,
+                      "type": "radio",
+                      "desc": "无（批注：点选后，关闭子标题） "
+                    },
+                    {
+                      "refTagKey": [
+                        "tagText$A144",
+                        "tagText$A147"
+                      ],
+                      "refString": "\"sheet\"$F143",
+                      "reqItemId": 0,
+                      "checked": true,
+                      "type": "radio",
+                      "desc": "有（批注：点选后，展开子标题）"
+                    }
+                  ],
+                  "map": {}
+                }
+              ],
+              "key": "tagRadio$A143"
+            },
+            {
+              "contentStart": 4,
+              "refString": "\"sheet\"$F143",
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "7.1.1.",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": true,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20硬件设备名称1",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 2147483647,
+              "topLevelDir": false,
+              "rows": 2,
+              "canAddDir": true,
+              "canRemoveDir": false,
+              "depth": 3,
+              "canAddDirChildLevel": true,
+              "tagType": "tagText",
+              "letterDir": false,
+              "value": [
+                {
+                  "contentStart": 5,
+                  "refString": "",
+                  "depth": 4,
+                  "tagTitle": [],
+                  "show": true,
+                  "tagType": "tagTextBox",
+                  "rowLimit": 1,
+                  "rows": 1,
+                  "value": [
+                    {
+                      "items": [
+                        {
+                          "items": [
+                            {
+                              "text": "厂家或品牌：",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            }
+                          ]
+                        },
+                        {
+                          "items": [
+                            {
+                              "text": "规格型号：",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            }
+                          ]
+                        },
+                        {
+                          "items": [
+                            {
+                              "text": "需用数量：",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/2",
+                              "type": "input",
+                              "value": ""
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "key": "tagTextBox$A145"
+                },
+                {
+                  "metadata": {
+                    "placeholder": "图文描述配套该硬件设备的理由，设备的主要功能、技术参数、连接使用方法等0/500",
+                    "type": "input",
+                    "value": ""
+                  }
+                }
+              ],
+              "key": "tagText$A144"
+            },
+            {
+              "contentStart": 4,
+              "refString": "\"sheet\"$F143",
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "7.1.2.",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": true,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20硬件设备名称2",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 2147483647,
+              "topLevelDir": false,
+              "rows": 2,
+              "canAddDir": true,
+              "canRemoveDir": false,
+              "depth": 3,
+              "canAddDirChildLevel": true,
+              "tagType": "tagText",
+              "letterDir": false,
+              "value": [
+                {
+                  "contentStart": 5,
+                  "refString": "",
+                  "depth": 4,
+                  "tagTitle": [],
+                  "show": true,
+                  "tagType": "tagTextBox",
+                  "rowLimit": 1,
+                  "rows": 1,
+                  "value": [
+                    {
+                      "items": [
+                        {
+                          "items": [
+                            {
+                              "text": "厂家或品牌：",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            }
+                          ]
+                        },
+                        {
+                          "items": [
+                            {
+                              "text": "规格型号：",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            }
+                          ]
+                        },
+                        {
+                          "items": [
+                            {
+                              "text": "需用数量：",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/2",
+                              "type": "input",
+                              "value": ""
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "key": "tagTextBox$A148"
+                },
+                {
+                  "metadata": {
+                    "placeholder": "图文描述配套该硬件设备的理由，设备的主要功能、技术参数、连接使用方法等0/500",
+                    "type": "input",
+                    "value": ""
+                  }
+                }
+              ],
+              "key": "tagText$A147"
+            }
+          ],
+          "key": "tagText$A141"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "7.2.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "产品运行需要配套的支持软件（默认：无）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 4,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "text": "列出产品运行所需要特别指定配套使用的软件，包括操作系统、浏览器、编译（或汇编）软件、数据处理软件、测试支持软件等。例如，财务管理软件运行需要指定某版本的Windows操作系统，数控机床控制器运行指定的某CAD软件等。",
+                "type": "text"
+              }
+            },
+            {
+              "horizontal": true,
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagRadio",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "ref": "",
+                  "items": [
+                    {
+                      "refTagKey": [],
+                      "reqItemId": 0,
+                      "checked": false,
+                      "type": "radio",
+                      "desc": "无（批注：点选后，关闭子标题）"
+                    },
+                    {
+                      "refTagKey": [
+                        "tagText$A153",
+                        "tagText$A156"
+                      ],
+                      "refString": "\"sheet\"$F152",
+                      "reqItemId": 0,
+                      "checked": true,
+                      "type": "radio",
+                      "desc": "有（批注：点选后，展开子标题）"
+                    }
+                  ],
+                  "map": {}
+                }
+              ],
+              "key": "tagRadio$A152"
+            },
+            {
+              "contentStart": 4,
+              "refString": "\"sheet\"$F152",
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "7.2.1.",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": true,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20软件名称1",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 2147483647,
+              "topLevelDir": false,
+              "rows": 2,
+              "canAddDir": true,
+              "canRemoveDir": false,
+              "depth": 3,
+              "canAddDirChildLevel": true,
+              "tagType": "tagText",
+              "letterDir": false,
+              "value": [
+                {
+                  "contentStart": 5,
+                  "refString": "",
+                  "depth": 4,
+                  "tagTitle": [],
+                  "show": true,
+                  "tagType": "tagTextBox",
+                  "rowLimit": 1,
+                  "rows": 1,
+                  "value": [
+                    {
+                      "items": [
+                        {
+                          "items": [
+                            {
+                              "text": "厂家或品牌：",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            },
+                            {
+                              "text": " ",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        {
+                          "items": [
+                            {
+                              "text": "版本：",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "key": "tagTextBox$A154"
+                },
+                {
+                  "metadata": {
+                    "placeholder": "图文描述配套该支持软件的理由，软件的主要功能、技术参数、连接使用方法等0/500",
+                    "type": "input",
+                    "value": ""
+                  }
+                }
+              ],
+              "key": "tagText$A153"
+            },
+            {
+              "contentStart": 4,
+              "refString": "\"sheet\"$F152",
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "7.2.2.",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": true,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20软件名称2",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 2147483647,
+              "topLevelDir": false,
+              "rows": 2,
+              "canAddDir": true,
+              "canRemoveDir": false,
+              "depth": 3,
+              "canAddDirChildLevel": true,
+              "tagType": "tagText",
+              "letterDir": false,
+              "value": [
+                {
+                  "contentStart": 5,
+                  "refString": "",
+                  "depth": 4,
+                  "tagTitle": [],
+                  "show": true,
+                  "tagType": "tagTextBox",
+                  "rowLimit": 1,
+                  "rows": 1,
+                  "value": [
+                    {
+                      "items": [
+                        {
+                          "items": [
+                            {
+                              "text": "厂家或品牌：",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            },
+                            {
+                              "text": " ",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        {
+                          "items": [
+                            {
+                              "text": "版本：",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "key": "tagTextBox$A157"
+                },
+                {
+                  "metadata": {
+                    "placeholder": "图文描述配套该支持软件的理由，软件的主要功能、技术参数、连接使用方法等0/500",
+                    "type": "input",
+                    "value": ""
+                  }
+                }
+              ],
+              "key": "tagText$A156"
+            }
+          ],
+          "key": "tagText$A150"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "7.3.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "产品运行的环境温度范围",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 1,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagTextBox",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "items": [
+                        {
+                          "placeholder": "填写最低温度",
+                          "type": "input",
+                          "value": ""
+                        },
+                        {
+                          "text": "℃ 至 ",
+                          "type": "text"
+                        },
+                        {
+                          "placeholder": "填写最高温度",
+                          "type": "input",
+                          "value": ""
+                        },
+                        {
+                          "text": "℃",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "key": "tagTextBox$A160"
+            }
+          ],
+          "key": "tagText$A159"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "7.4.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "产品运行需要输入的供电电源（默认：无）",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 5,
+          "canAddDir": false,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": false,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "text": "（批注：编制前，打开所有子标题。无为单选则关闭所有子标题。其它可多选，选中则打开对应的子标题）",
+                "type": "text"
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "depth": 3,
+              "tagTitle": [],
+              "show": true,
+              "tagType": "tagCheck",
+              "rowLimit": 1,
+              "rows": 1,
+              "value": [
+                {
+                  "items": [
+                    {
+                      "text": "可多选：",
+                      "type": "text"
+                    },
+                    {
+                      "refTagKey": [],
+                      "checked": false,
+                      "type": "check",
+                      "desc": "无"
+                    },
+                    {
+                      "refTagKey": [
+                        "tagText$A164"
+                      ],
+                      "checked": true,
+                      "type": "check",
+                      "desc": "外部交流电源"
+                    },
+                    {
+                      "refTagKey": [],
+                      "checked": false,
+                      "type": "check",
+                      "desc": "外部直流电源"
+                    },
+                    {
+                      "refTagKey": [],
+                      "checked": true,
+                      "type": "check",
+                      "desc": "内部电池供电"
+                    }
+                  ]
+                }
+              ],
+              "key": "tagCheck$A163"
+            },
+            {
+              "contentStart": 4,
+              "refString": "\"sheet\"$G163",
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "7.4.1.",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "外部交流电源",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 2147483647,
+              "topLevelDir": false,
+              "rows": 2,
+              "canAddDir": false,
+              "canRemoveDir": false,
+              "depth": 3,
+              "canAddDirChildLevel": false,
+              "tagType": "tagText",
+              "letterDir": false,
+              "value": [
+                {
+                  "contentStart": 5,
+                  "refString": "",
+                  "depth": 4,
+                  "tagTitle": [],
+                  "show": true,
+                  "tagType": "tagTextBox",
+                  "rowLimit": 1,
+                  "rows": 1,
+                  "value": [
+                    {
+                      "items": [
+                        {
+                          "items": [
+                            {
+                              "text": "电压范围",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/20",
+                              "type": "input",
+                              "value": ""
+                            },
+                            {
+                              "text": "V ",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        {
+                          "items": [
+                            {
+                              "text": "电流范围",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            },
+                            {
+                              "text": "A",
+                              "type": "text"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "key": "tagTextBox$A165"
+                },
+                {
+                  "metadata": {
+                    "placeholder": "图文描述：外部交流电源的说明0/500",
+                    "type": "input",
+                    "value": ""
+                  }
+                }
+              ],
+              "key": "tagText$A164"
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "7.4.2.",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "外部直流电源",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 2147483647,
+              "topLevelDir": false,
+              "rows": 2,
+              "canAddDir": false,
+              "canRemoveDir": false,
+              "depth": 3,
+              "canAddDirChildLevel": false,
+              "tagType": "tagText",
+              "letterDir": false,
+              "value": [
+                {
+                  "contentStart": 5,
+                  "refString": "",
+                  "depth": 4,
+                  "tagTitle": [],
+                  "show": true,
+                  "tagType": "tagTextBox",
+                  "rowLimit": 1,
+                  "rows": 1,
+                  "value": [
+                    {
+                      "items": [
+                        {
+                          "items": [
+                            {
+                              "text": "电压范围",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/20",
+                              "type": "input",
+                              "value": ""
+                            },
+                            {
+                              "text": "V ",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        {
+                          "items": [
+                            {
+                              "text": "电流范围",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            },
+                            {
+                              "text": "A",
+                              "type": "text"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "key": "tagTextBox$A168"
+                },
+                {
+                  "metadata": {
+                    "placeholder": "图文描述：外部直流电源的说明0/500",
+                    "type": "input",
+                    "value": ""
+                  }
+                }
+              ],
+              "key": "tagText$A167"
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "7.4.3.",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "内部电池供电",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 2147483647,
+              "topLevelDir": false,
+              "rows": 2,
+              "canAddDir": false,
+              "canRemoveDir": false,
+              "depth": 3,
+              "canAddDirChildLevel": false,
+              "tagType": "tagText",
+              "letterDir": false,
+              "value": [
+                {
+                  "contentStart": 5,
+                  "refString": "",
+                  "depth": 4,
+                  "tagTitle": [],
+                  "show": true,
+                  "tagType": "tagTextBox",
+                  "rowLimit": 1,
+                  "rows": 1,
+                  "value": [
+                    {
+                      "items": [
+                        {
+                          "items": [
+                            {
+                              "text": "电池名称",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/20",
+                              "type": "input",
+                              "value": ""
+                            },
+                            {
+                              "text": " ",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        {
+                          "items": [
+                            {
+                              "text": "电压范围",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            },
+                            {
+                              "text": "V ",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        {
+                          "items": [
+                            {
+                              "text": "容量范围",
+                              "type": "text"
+                            },
+                            {
+                              "placeholder": "0/10",
+                              "type": "input",
+                              "value": ""
+                            },
+                            {
+                              "text": "Ah",
+                              "type": "text"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "key": "tagTextBox$A171"
+                },
+                {
+                  "metadata": {
+                    "placeholder": "图文描述：内部电池供电的说明0/500",
+                    "type": "input",
+                    "value": ""
+                  }
+                }
+              ],
+              "key": "tagText$A170"
+            }
+          ],
+          "key": "tagText$A161"
+        }
+      ],
+      "key": "tagText$A140"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "8.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "产品外形尺寸估算",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 2,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": false,
+      "value": [
+        {
+          "contentStart": 3,
+          "refString": "",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagTextBox",
+          "rowLimit": 1,
+          "rows": 1,
+          "value": [
+            {
+              "items": [
+                {
+                  "items": [
+                    {
+                      "text": "长",
+                      "type": "text"
+                    },
+                    {
+                      "placeholder": "0/15",
+                      "type": "input",
+                      "value": ""
+                    },
+                    {
+                      "text": "cm ",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "items": [
+                    {
+                      "text": "宽",
+                      "type": "text"
+                    },
+                    {
+                      "placeholder": "0/15",
+                      "type": "input",
+                      "value": ""
+                    },
+                    {
+                      "text": "cm ",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "items": [
+                    {
+                      "text": "高",
+                      "type": "text"
+                    },
+                    {
+                      "placeholder": "0/15",
+                      "type": "input",
+                      "value": ""
+                    },
+                    {
+                      "text": "cm",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "key": "tagTextBox$A174"
+        },
+        {
+          "metadata": {
+            "placeholder": "图文描述：产品外形尺寸估算的说明0/500",
+            "type": "input",
+            "value": ""
+          }
+        }
+      ],
+      "key": "tagText$A173"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "9.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "产品材料成本估算",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 2,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": false,
+      "value": [
+        {
+          "contentStart": 3,
+          "refString": "",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagTextBox",
+          "rowLimit": 1,
+          "rows": 1,
+          "value": [
+            {
+              "items": [
+                {
+                  "items": [
+                    {
+                      "text": "单台成本（人民币）：",
+                      "type": "text"
+                    },
+                    {
+                      "placeholder": "0/10",
+                      "type": "input",
+                      "value": ""
+                    },
+                    {
+                      "text": "元",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "key": "tagTextBox$A177"
+        },
+        {
+          "metadata": {
+            "placeholder": "图文描述：产品材料成本估算的说明0/500",
+            "type": "input",
+            "value": ""
+          }
+        }
+      ],
+      "key": "tagText$A176"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "10.",
+              "fieldComponent": 0,
+              "refValue": 0
+            },
+            {
+              "rowSpan": 0,
+              "fieldIscal": false,
+              "hide": false,
+              "edit": false,
+              "colSpan": 0,
+              "fieldDisplaysize": 0,
+              "fieldReadonly": false,
+              "mergeCell": false,
+              "fieldSrc": 0,
+              "text": "标准/指南/规范的要求（默认：无）",
+              "fieldComponent": 0,
+              "refValue": 0
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "rowLimit": 2147483647,
+      "topLevelDir": true,
+      "rows": 3,
+      "canAddDir": false,
+      "canRemoveDir": false,
+      "depth": 1,
+      "canAddDirChildLevel": false,
+      "tagType": "tagText",
+      "letterDir": false,
+      "value": [
+        {
+          "horizontal": true,
+          "contentStart": 3,
+          "refString": "",
+          "depth": 2,
+          "tagTitle": [],
+          "show": true,
+          "tagType": "tagRadio",
+          "rowLimit": 1,
+          "rows": 1,
+          "value": [
+            {
+              "ref": "",
+              "items": [
+                {
+                  "refTagKey": [],
+                  "reqItemId": 0,
+                  "checked": false,
+                  "type": "radio",
+                  "desc": "无（批注：关闭图文描述框和子标题）"
+                },
+                {
+                  "refTagKey": [
+                    "tagText$A182"
+                  ],
+                  "refString": "\"sheet\"$E180",
+                  "reqItemId": 0,
+                  "checked": true,
+                  "type": "radio",
+                  "desc": "有（批注：展开图文描述框和子标题）"
+                }
+              ],
+              "map": {}
+            }
+          ],
+          "key": "tagRadio$A180"
+        },
+        {
+          "metadata": {
+            "placeholder": "图文描述：标准/指南/规范的要求的说明0/500",
+            "type": "input",
+            "value": ""
+          }
+        },
+        {
+          "contentStart": 3,
+          "refString": "\"sheet\"$E180",
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": false,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "text": "10.1.",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                },
+                {
+                  "rowSpan": 0,
+                  "fieldIscal": false,
+                  "hide": false,
+                  "edit": true,
+                  "colSpan": 0,
+                  "fieldDisplaysize": 0,
+                  "fieldReadonly": false,
+                  "mergeCell": false,
+                  "fieldSrc": 0,
+                  "placeholder": "0/30标准/指南/规范的名称1",
+                  "fieldComponent": 0,
+                  "refValue": 0
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 2147483647,
+          "topLevelDir": false,
+          "rows": 3,
+          "canAddDir": true,
+          "canRemoveDir": false,
+          "depth": 2,
+          "canAddDirChildLevel": true,
+          "tagType": "tagText",
+          "letterDir": false,
+          "value": [
+            {
+              "metadata": {
+                "placeholder": "图文描述：标准/指南/规范的要求的说明0/500",
+                "type": "input",
+                "value": ""
+              }
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "10.1.1.",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": true,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "1/20需求名称1",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 2147483647,
+              "topLevelDir": false,
+              "rows": 1,
+              "canAddDir": true,
+              "canRemoveDir": false,
+              "depth": 3,
+              "canAddDirChildLevel": true,
+              "tagType": "tagText",
+              "letterDir": false,
+              "value": [
+                {
+                  "metadata": {
+                    "placeholder": "图文描述：标准/指南/规范的要求的说明0/500",
+                    "type": "input",
+                    "value": ""
+                  }
+                }
+              ],
+              "key": "tagText$A184"
+            },
+            {
+              "contentStart": 4,
+              "refString": "",
+              "tagTitle": [
+                {
+                  "items": [
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": false,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "text": "10.1.2.",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    },
+                    {
+                      "rowSpan": 0,
+                      "fieldIscal": false,
+                      "hide": false,
+                      "edit": true,
+                      "colSpan": 0,
+                      "fieldDisplaysize": 0,
+                      "fieldReadonly": false,
+                      "mergeCell": false,
+                      "fieldSrc": 0,
+                      "placeholder": "0/20需求名称2",
+                      "fieldComponent": 0,
+                      "refValue": 0
+                    }
+                  ]
+                }
+              ],
+              "show": true,
+              "rowLimit": 2147483647,
+              "topLevelDir": false,
+              "rows": 1,
+              "canAddDir": true,
+              "canRemoveDir": false,
+              "depth": 3,
+              "canAddDirChildLevel": true,
+              "tagType": "tagText",
+              "letterDir": false,
+              "value": [
+                {
+                  "metadata": {
+                    "placeholder": "图文描述：标准/指南/规范的要求的说明0/500",
+                    "type": "input",
+                    "value": ""
+                  }
+                }
+              ],
+              "key": "tagText$A186"
+            }
+          ],
+          "key": "tagText$A182"
+        }
+      ],
+      "key": "tagText$A179"
+    },
+    {
+      "contentStart": 2,
+      "docName": "需求说明书",
+      "refString": "",
+      "depth": 1,
+      "tagTitle": [],
+      "show": true,
+      "tagType": "tagDocument",
+      "rowLimit": 0,
+      "rows": 0,
+      "value": [],
+      "key": "tagDocument@需求说明书$A188"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "depth": 1,
+      "tagTitle": [],
+      "show": true,
+      "tagType": "tagVersion",
+      "rowLimit": 0,
+      "rows": 0,
+      "value": [],
+      "version": "1.0",
+      "key": "tagVersion@1.0$A189"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserPaperMapper" >
+
+	<select id="getUserPaperById" resultType="map">
+      SELECT
+       user_id as userId,
+       paper_id as paperId,
+      date_format(
+       publication_date,
+        '%Y-%m-%d'
+        ) AS publicationDate,
+        `name` as name,
+        publication_num as publicationNum,
+        first_name as firstName,
+        this_name as thisName,
+        picture as picture
+       FROM user_paper where user_id = #{userId}
+    </select>
+
+
+    <insert id="adduserPaper" parameterType="ytb.user.model.UserPaperModel"
+            useGeneratedKeys="true" keyProperty="paperId">
+        INSERT INTO user_paper
+        (
+        user_id,
+        publication_date,
+        `name`,
+        publication_num,
+        first_name,
+        this_name,
+        picture,
+        create_time,
+        update_time
+        )
+        VALUES
+        (
+        #{userId},
+        #{publicationDate},
+        #{name},
+        #{publicationNum},
+        #{firstName},
+        #{thisName},
+        #{picture},
+        now(),
+        now()
+        )
+    </insert>
+
+    <delete id="deleteUserPaper">
+        DELETE FROM user_paper WHERE user_id = #{userId} AND paper_id = #{paperId}
+    </delete>
+
+    <update id="updateUserPaper" parameterType="ytb.user.model.UserPaperModel">
+        UPDATE user_paper
+        <set>
+            <if test="publicationDate != null">`publication_date` = #{publicationDate}, </if>
+            <if test="name != null">`name` = #{name}, </if>
+            <if test="publicationNum != null">`publication_num` = #{publicationNum},</if>
+            <if test="firstName != null">`first_name` = #{firstName} ,</if>
+            <if test="picture != null">`picture` = #{picture} ,</if>
+            <if test="thisName != null">`this_name` = #{thisName} ,</if>
+            update_time = now()
+        </set>
+    WHERE paper_id =#{paperId}
+    </update>
+
+</mapper>

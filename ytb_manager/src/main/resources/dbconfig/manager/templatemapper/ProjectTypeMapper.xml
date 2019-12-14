@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.ProjectTypeMapper">
+
+
+    <!--
+        <sql id="Base_Columns">
+            ProjectTypeId 'ProjectTypeId',
+            WorkJobTypeId 'WorkJobTypeId',
+            ParentId 'ParentId',
+            CreateBy 'createBy',
+            Title 'Title',
+            Depth 'Depth',
+            State 'State',
+            CreateTime 'CreateTime',
+            OrderNo 'OrderNo',
+        </sql>
+
+    -->
+    <!--<resultMap id="BaseMap" type="com.model.Dict_ProjectTypeModel">
+        <id column="ProjectTypeId" property="ProjectTypeId"/>
+        <result column="WorkJobTypeId" property="WorkJobTypeId"/>
+        <result column="ParentId" property="ParentId"/>
+        <result column="CreateBy" property="CreateBy"/>
+        <result column="Depth" property="Depth"/>
+        <result column="State" property="State"/>
+        <result column="CreateTime" property="CreateTime"/>
+        <result column="OrderNo" property="OrderNo"/>
+        <result column="TITLE" property="TITLE"/>
+    </resultMap>-->
+
+
+    <select id="getProjectType" parameterType="int" resultType="ytb.manager.template.model.Dict_ProjectTypeModel">
+      SELECT  * FROM dict_project_type where project_type_id = #{ProjectTypeId}
+    </select>
+
+    <select id="getProjectTypeByParent" parameterType="int" resultType="ytb.manager.template.model.Dict_ProjectTypeModel">
+      SELECT  * FROM dict_project_type p  where p.parent_id = #{ParentId} order by p.order_no
+    </select>
+
+    <insert id="addProjectType">
+		insert into dict_project_type (repository_id,parent_id,create_by,title,depth,create_time,order_no,project_type,fee_rate,tax_rate,stax_rate,c_rate,p_rate)
+		VALUES (#{repositoryId},#{parentId},#{createBy},#{title},#{depth},#{createTime},#{orderNo},#{projectType},#{feeRate},#{taxRate},#{staxRate},#{cRate},#{pRate})
+	</insert>
+
+    <select id="getProjectTypeList" resultType="ytb.manager.template.model.Dict_ProjectTypeModel">
+      SELECT  * FROM dict_project_type
+    </select>
+
+    <update id="modifyProjectType">
+        update dict_project_type set
+        repository_id = #{repositoryId},
+        parent_id = #{parentId},
+        title = #{title},
+        depth = #{depth},
+        order_no = #{orderNo},
+        project_type = #{projectType},
+        fee_rate = #{feeRate},
+        tax_rate = #{taxRate},
+        stax_rate = #{staxRate},
+        p_rate = #{pRate},
+        c_rate = #{cRate}
+        where project_type_id = #{projectTypeId}
+    </update>
+
+    <update id="modifySateById">
+        update dict_project_type set
+        state = #{state}
+        where project_type_id = #{projectTypeId}
+    </update>
+
+    <delete id="delProjectType">
+
+		delete from dict_project_type where project_type_id = #{projectTypeId}
+
+	</delete>
+
+
+
+
+</mapper>

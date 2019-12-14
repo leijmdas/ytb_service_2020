@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.mapper.GroupUserMapper">
+  <resultMap id="BaseResultMap" type="ytb.bangbang.model.GroupUser">
+    <id column="group_user_id" jdbcType="INTEGER" property="groupUserId" />
+    <result column="user_ID" jdbcType="INTEGER" property="userId" />
+    <result column="group_ID" jdbcType="INTEGER" property="groupId" />
+    <result column="create_Time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="group_User_Type" jdbcType="INTEGER" property="groupUserType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    group_user_id, user_ID, group_ID, create_Time, group_User_Type
+  </sql>
+  <select id="selectByExample" parameterType="ytb.bangbang.model.GroupUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from group_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from group_user
+    where group_user_id = #{groupUserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from group_user
+    where group_user_id = #{groupUserId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="ytb.bangbang.model.GroupUserExample">
+    delete from group_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="ytb.bangbang.model.GroupUser">
+    insert into group_user (group_user_id, user_ID, group_ID, 
+      create_Time, group_User_Type)
+    values (#{groupUserId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{groupUserType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="ytb.bangbang.model.GroupUser">
+    insert into group_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupUserId != null">
+        group_user_id,
+      </if>
+      <if test="userId != null">
+        user_ID,
+      </if>
+      <if test="groupId != null">
+        group_ID,
+      </if>
+      <if test="createTime != null">
+        create_Time,
+      </if>
+      <if test="groupUserType != null">
+        group_User_Type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupUserId != null">
+        #{groupUserId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="groupUserType != null">
+        #{groupUserType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ytb.bangbang.model.GroupUserExample" resultType="java.lang.Long">
+    select count(*) from group_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update group_user
+    <set>
+      <if test="record.groupUserId != null">
+        group_user_id = #{record.groupUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupId != null">
+        group_ID = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_Time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.groupUserType != null">
+        group_User_Type = #{record.groupUserType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update group_user
+    set group_user_id = #{record.groupUserId,jdbcType=INTEGER},
+      user_ID = #{record.userId,jdbcType=INTEGER},
+      group_ID = #{record.groupId,jdbcType=INTEGER},
+      create_Time = #{record.createTime,jdbcType=TIMESTAMP},
+      group_User_Type = #{record.groupUserType,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="ytb.bangbang.model.GroupUser">
+    update group_user
+    <set>
+      <if test="userId != null">
+        user_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null">
+        group_ID = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_Time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="groupUserType != null">
+        group_User_Type = #{groupUserType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where group_user_id = #{groupUserId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ytb.bangbang.model.GroupUser">
+    update group_user
+    set user_ID = #{userId,jdbcType=INTEGER},
+      group_ID = #{groupId,jdbcType=INTEGER},
+      create_Time = #{createTime,jdbcType=TIMESTAMP},
+      group_User_Type = #{groupUserType,jdbcType=INTEGER}
+    where group_user_id = #{groupUserId,jdbcType=INTEGER}
+  </update>
+</mapper>

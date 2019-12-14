@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.SingleChatFileDao" >
+
+    <insert id="addFile" parameterType="ytb.bangbang.model.SingleChatFile">
+        INSERT INTO single_chat_file(from_user_id,to_user_id,file_type,file_name,file_size,url,create_time)
+                              VALUES(#{fromUserId},#{toUserId},#{fileType},#{fileName},#{fileSize},#{url},now());
+    </insert>
+
+    <delete id="delFile">
+        DELETE FROM single_chat_file WHERE id=#{id};
+    </delete>
+
+    <select id="getFilelist" resultMap="getFilelistMap">
+        SELECT * from single_chat_file
+        WHERE
+        (from_user_id=#{fromUserId} and to_user_id=#{toUserId})
+        or(from_user_id=#{toUserId} and to_user_id=#{fromUserId})
+        and file_type=#{fileType}
+        <if test="beganTime !=null">
+            and create_time >=  #{beganTime}
+        </if>
+        <if test="endTime !=null">
+            and create_time &lt;= #{endTime}
+        </if>
+        ORDER BY create_time desc;
+    </select>
+    <resultMap id="getFilelistMap" type="ytb.bangbang.model.SingleChatFile">
+        <id column="id" property="id"/>
+        <result column="from_user_id" property="fromUserId"/>
+        <result column="to_user_id" property="toUserId"/>
+        <result column="file_type" property="fileType"/>
+        <result column="file_name" property="fileName"/>
+        <result column="file_size" property="fileSize"/>
+        <result column="url" property="url"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+</mapper>

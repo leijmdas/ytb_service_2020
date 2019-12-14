@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+    <!-- 确保可在@Value中, 使用SeEL表达式获取资源属性 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="properties" ref="configProperties" />
+    </bean>
+
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:/dbconfig/*.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Spring annotation扫描 -->
+    <context:component-scan base-package="com.baidu.fsg.uid" />
+
+    <!-- 创建SqlSessionFactory，同时指定数据源 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="uidDataSource" />
+        <property name="mapperLocations" value="classpath:/uid/WORKER*.xml" />
+    </bean>
+
+    <!-- 事务相关配置 -->
+    <tx:annotation-driven transaction-manager="txUid" order="1" />
+
+    <bean id="txUid" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="uidDataSource" />
+    </bean>
+
+    <!-- Mybatis Mapper扫描 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="annotationClass" value="org.springframework.stereotype.Repository" />
+        <property name="basePackage" value="com.baidu.fsg.uid.worker.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+    <!-- 数据源配置 -->
+    <bean id="uidDataSource" parent="abstractDataSource">
+        <property name="driverClassName" value="${driver}" />
+        <property name="maxActive" value="10" />
+        <property name="url" value="${tasklog.url}" />
+        <property name="username" value="${name}" />
+        <property name="password" value="${password}" />
+    </bean>
+    <bean name="abstractDataSource" abstract="true"
+          class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="url" value="${tasklog.url}" />
+        <property name="username" value="${name}" />
+        <property name="password" value="${password}" />
+        <property name="driverClassName" value="${driver}" />
+        <property name="initialSize" value="1" />
+        <property name="maxActive" value="20" />
+        <property name="minIdle" value="2" />
+        <property name="maxWait" value="60000" />
+        <property name="validationQuery" value="${validationQuery}" />
+        <property name="testOnBorrow" value="true" />
+        <property name="testOnReturn" value="true" />
+        <property name="testWhileIdle" value="true" />
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <property name="minEvictableIdleTimeMillis" value="25200000" />
+        <property name="removeAbandoned" value="true" />
+        <property name="removeAbandonedTimeout" value="1800" />
+        <property name="logAbandoned" value="true" />
+        <property name="filters" value="mergeStat" />
+    </bean>
+
+    <!--<bean id="abstractDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">-->
+        <!--<property name="filters" value="${datasource.filters}" />-->
+        <!--<property name="defaultAutoCommit" value="${datasource.defaultAutoCommit}" />-->
+        <!--<property name="initialSize" value="${datasource.initialSize}" />-->
+        <!--<property name="minIdle" value="${datasource.minIdle}" />-->
+        <!--<property name="maxWait" value="${datasource.maxWait}" />-->
+        <!--<property name="testWhileIdle" value="${datasource.testWhileIdle}" />-->
+        <!--<property name="testOnBorrow" value="${datasource.testOnBorrow}" />-->
+        <!--<property name="testOnReturn" value="${datasource.testOnReturn}" />-->
+        <!--<property name="validationQuery" value="${datasource.validationQuery}" />-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="${datasource.timeBetweenEvictionRunsMillis}" />-->
+        <!--<property name="minEvictableIdleTimeMillis" value="${datasource.minEvictableIdleTimeMillis}" />-->
+        <!--<property name="logAbandoned" value="${datasource.logAbandoned}" />-->
+        <!--<property name="removeAbandoned" value="${datasource.removeAbandoned}" />-->
+        <!--<property name="removeAbandonedTimeout" value="${datasource.removeAbandonedTimeout}" />-->
+    <!--</bean>-->
+
+    <bean id="batchSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+        <constructor-arg index="1" value="BATCH" />
+    </bean>
+
+
+</beans>
+

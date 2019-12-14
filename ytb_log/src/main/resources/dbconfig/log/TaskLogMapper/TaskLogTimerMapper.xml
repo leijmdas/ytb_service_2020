@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.log.notify.dao.TaskLogTimerMapper">
+    <select id="getTaskLogTimer" parameterType="int" resultType="ytb.log.notify.model.TaskLog_TimerModel">
+        select  * from tasklog_timer where task_id=#{taskId}
+    </select>
+
+    <select id="getTaskLogTimerList" resultType="ytb.log.notify.model.TaskLog_TimerModel">
+        select  *  from tasklog_timer order by subsys_id,exe_type
+    </select>
+
+    <insert id="addTaskLogTimer" parameterType="ytb.log.notify.model.TaskLog_TimerModel">
+    insert into tasklog_timer(
+    task_id,
+    user_id,
+    task_name,
+    exe_type,
+    exe_object,
+    params,
+    exe_firstday,
+    exe_period,
+    exe_time ,
+    retry_times,
+    subsys_id,
+    status )  values(
+    #{taskId},
+    #{userId},
+    #{taskName},
+    #{exeType},
+    #{exeObject},
+    #{ params},
+    #{ exeFirstday},
+    #{ exePeriod},
+    #{ exeTime },
+    #{ retryTimes},
+    #{ subsysId},
+    #{ status } )
+    </insert>
+
+    <update id="modifyTaskLogTimer" parameterType="ytb.log.notify.model.TaskLog_TimerModel">
+    update  tasklog_timer set
+    task_id =#{taskId},
+    user_id =#{ userId },
+    task_name =#{taskName},
+    exe_type=#{ exeType},
+    exe_object =#{ exeObject},
+    params=#{params},
+    exe_firstday=#{ exeFirstday},
+    exe_period =#{ exePeriod},
+    exe_time=#{exeTime},
+    retry_times=#{retryTimes},
+    subsys_id=#{subsysId},
+    status=#{status}
+    where task_id=#{taskId}
+    </update>
+    <update id="modifyTaskLogTimerStatus" parameterType="ytb.log.notify.model.TaskLog_TimerModel">
+    update  tasklog_timer set   status=#{status}
+    where task_id=#{taskId}
+    </update>
+
+    <delete id="delTaskLogTimer" parameterType="int">
+        delete from tasklog_timer where task_id=#{taskId}
+    </delete>
+
+
+</mapper>

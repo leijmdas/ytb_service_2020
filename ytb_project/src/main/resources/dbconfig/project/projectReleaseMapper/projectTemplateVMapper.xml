@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.projectTemplateVMapper" >
+    <insert id="addProjectTemplate" parameterType="ytb.project.model.ProjectTemplateModel" useGeneratedKeys="true"
+            keyProperty="templateId" keyColumn="template_id">
+        INSERT INTO project_template_v
+        (
+            template_id_v,
+            folder_id,
+            doc_seq,
+            title,
+            doc_ver,
+            doc_type,
+            document_id,
+            status,
+            author,
+            auditor,
+            share_num,
+            assist_num,
+            update_time
+        )
+		VALUES
+		(
+            #{templateIdV},
+            #{folderId},
+            #{docSeq},
+            #{title},
+            #{docVer},
+            #{docType},
+            #{documentId},
+            #{status},
+            #{author},
+            #{auditor},
+            #{shareNum},
+            #{assistNum},
+            now()
+		)
+	</insert>
+
+    <select id="selectHistoryDoc" resultType="ytb.project.model.ProjectTemplateModel">
+        select CONCAT(title,'V',doc_ver) as title,
+        document_id as documentId,
+        template_id as templateId,
+        doc_type as docType
+        from project_template_v
+        where  template_id_v = #{docListIdV}
+    </select>
+
+</mapper>

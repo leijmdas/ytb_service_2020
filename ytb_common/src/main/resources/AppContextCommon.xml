@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                   http://www.springframework.org/schema/beans/spring-beans.xsd
+                   http://www.springframework.org/schema/context
+                   http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/cache
+    http://www.springframework.org/schema/cache/spring-cache.xsd">
+    <context:property-placeholder location="classpath:dbconfig/jdbc.properties"
+                                  ignore-unresolvable="true" />
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+
+    <import resource="classpath:uid/cached-uid-spring.xml" />
+    <import resource="classpath:uid/default-uid-spring.xml" />
+
+    <!--<import resource="classpath:redis/spring-redis.xml" />-->
+    <import resource="classpath:ehcache/app_ehcache.xml" />
+    <import resource="classpath:dbconfig/log/dbContextLog.xml" />
+    <import resource="classpath:dbconfig/common/dbContextCommon.xml" />
+
+
+
+    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg type="java.util.Properties">
+                    <props>
+                        <prop key = "kaptcha.border ">yes</prop>
+                        <prop key="kaptcha.border.color">105,179,90</prop>
+                        <prop key="kaptcha.textproducer.font.color">blue</prop>
+                        <prop key="kaptcha.image.width">100</prop>
+                        <prop key="kaptcha.image.height">50</prop>
+                        <prop key="kaptcha.textproducer.font.size">27</prop>
+                        <prop key="kaptcha.session.key">code</prop>
+                        <prop key="kaptcha.textproducer.char.length">6</prop>
+                        <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+                        <prop key="kaptcha.textproducer.char.string">23456789ABCEFGHJKMNOPQRSTUVWXYZ</prop>
+                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
+                        <prop key="kaptcha.noise.color">black</prop>
+                        <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
+                        <!--<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.DefaultNoise</prop>-->
+                        <prop key="kaptcha.background.clear.from">185,56,213</prop>
+                        <prop key="kaptcha.background.clear.to">white</prop>
+                        <prop key="kaptcha.textproducer.char.space">3</prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <!--<context:component-scan base-package="ytb.common"></context:component-scan>-->
+    <!--<bean name="student" class="ytb.common.test.demo.Student" scope="prototype">-->
+    <!--<property name="name" value="小黄"/>-->
+    <!--<property name="age" value="19"/>-->
+    <!--</bean>-->
+</beans>

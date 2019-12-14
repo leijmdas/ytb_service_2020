@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.FriendApplyInfoDao" >
+    <resultMap id="friendApplyInfo" type="ytb.bangbang.model.Friend_Apply_InfoModel">
+        <id property="Apply_id"  column="apply_id"/>
+        <result property="ToUserID" column="to_user_id"/>
+        <result property="UserID" column="user_id"/>
+        <result property="CreateTime" column="create_time"/>
+        <result property="IsAgree" column="isagree"/>
+    </resultMap>
+    <!--获得当前这条申请添加好友的记录-->
+    <select id="GetFriendApplyInfo" resultMap="friendApplyInfo">
+        SELECT * FROM  friend_apply_info WHERE user_id=#{userId} And to_user_id=#{friendId} ;
+    </select>
+    <select id="getApplyId" resultType="int">
+        SELECT apply_id FROM friend_apply_info where
+        user_id=#{userId} and to_user_id=#{toUserId}
+        and friends_type_id=#{friendsTypeId} and isagree=1
+        ORDER BY create_time desc LIMIT 0,1;
+    </select>
+    <select id="getFriendsTypeIdByUserId" resultType="int">
+        SELECT friends_type_id from friend_apply_info where user_id=#{userId} and to_user_id=#{toUserID} ORDER BY create_time DESC LIMIT 0,1;
+    </select>
+
+    <select id="getFriendApplyModel" resultMap="getFriendApplyListMap">
+        SELECT * from friend_apply_info WHERE apply_id=#{inviteId};
+    </select>
+
+    <resultMap id="getFriendApplyListMap" type="ytb.bangbang.model.Friend_Apply_InfoModel">
+        <id column="apply_id" property="Apply_id"/>
+        <result column="user_id" property="UserID"/>
+        <result column="to_user_id" property="ToUserID"/>
+        <result column="create_time" property="CreateTime"/>
+        <result column="isagree" property="IsAgree"/>
+        <result column="friends_type_id" property="friendsTypeId"/>
+    </resultMap>
+    
+    <!-- 根据applayId获取记录-->
+    <select id="getFriendApplyInfoByAppId" resultType="ytb.bangbang.model.Friend_Apply_InfoModel">
+        SELECT apply_id as 'Apply_id',user_id as 'UserID',to_user_id as 'ToUserID',
+        create_time as 'CreateTime',isagree as 'IsAgree',friends_type_id as 'friendsTypeId'
+        from friend_apply_info where apply_id=#{inviteId};
+    </select>
+    <!--添加申请好友信息-->
+    <insert id="AddRecord"  useGeneratedKeys="true" keyProperty="Apply_id" parameterType="ytb.bangbang.model.Friend_Apply_InfoModel">
+        INSERT INTO friend_apply_info (user_id,to_user_id,create_time,friends_type_id) VALUES (#{UserID},#{ToUserID},now(),#{friendsTypeId});
+    </insert>
+    <!--是否同意添加好友-->
+    <update id="setIsAgree" parameterType="int">
+        UPDATE friend_apply_info SET isagree=#{IsAgree} WHERE apply_id=#{inviteId};
+    </update>
+    <!--收到的邀请好友id记录-->
+    <select id="GetRecieveList" resultMap="friendApplyInfo">
+         SELECT * FROM  friend_apply_info WHERE to_user_id=#{ToUserID};
+    </select>
+    <!--判断当前申请记录是否存在-->
+    <select id="IsExistence" resultType="int">
+        SELECT count(*) FROM  friend_apply_info WHERE user_id=#{userId} And to_user_id=#{ToUserID};
+    </select>
+    <!--删除好友记录-->
+    <delete id="DeleteApplyInfo">
+        DELETE FROM friend_apply_info WHERE user_id=#{userId} And to_user_id=#{ToUserID}
+    </delete>
+    <!--好友申请7天过期-->
+    <update id="FriendApplyIgnore">
+        UPDATE friend_apply_info SET isagree=4 WHERE to_user_id=#{userId} AND isagree=1 AND DATEDIFF(curdate(),create_time)>7
+    </update>
+</mapper>

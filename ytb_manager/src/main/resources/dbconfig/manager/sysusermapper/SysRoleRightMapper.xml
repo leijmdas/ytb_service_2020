@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.sysuser.dao.SysRoleRightMapper" >
+
+
+	<delete id="deltetSysRoleRight"  >
+		DELETE FROM sys_role_right WHERE roleId = #{roleId} and objtype = #{type}
+	</delete>
+
+	<insert id="addSysRoleRight">
+		insert into sys_role_right
+		(
+		roleId,
+		objType,
+		objId,
+		CreateBy,
+		CreateTime
+		)
+		values
+		<foreach collection="menuIdList" item="item" index="index" separator="," >
+			(
+			#{roleId},
+			#{type},
+			#{item},
+			#{createBy},
+			now()
+			)
+		</foreach>
+	</insert>
+
+	<select id="queryMenuIdList" resultType="long">
+		select objId from sys_role_right where roleId = #{roleId} AND objType = 2
+	</select>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.DocumentMapper">
+
+
+    <select id="getMngrReDocument" resultType="ytb.manager.template.model.Dict_document">
+      SELECT  * FROM dict_document where document_id = #{documentId}
+    </select>
+
+    <insert id="addMngrReDocument" useGeneratedKeys="true" keyProperty="documentId" keyColumn="document_id">
+
+		insert into dict_document (name,document,doc_type,save_mode,pic_type,doc_path,doc_size)
+		VALUES (#{name},#{document},#{docType},#{saveMode},#{picType},#{docPath},#{docSize})
+
+	</insert>
+
+    <update id="modifyDocument">
+		update dict_document set
+		document = #{document}
+		where document_id = #{documentId}
+	</update>
+
+    <delete id="delMngrReDocument">
+		delete from dict_document where document_id = #{documentId}
+	</delete>
+
+    <select id="getMngrReDocumentByT" parameterType="int" resultType="ytb.manager.template.model.Dict_document">
+		select mrd.* from  dict_document mrd left join dict_template dt on mrd.document_id = dt.doc_xls where dt.template_id =#{templateId}
+
+	</select>
+
+    <update id="modifyTemplateNewDoc" parameterType="ytb.manager.template.model.Dict_document">
+		update dict_document set document = #{document} where document_id = #{documentId}
+	</update>
+
+	<select id="getTemplateListByWorkJobId" parameterType="int" resultType="ytb.manager.template.model.Dict_document">
+		select d.* from dict_document d left join dict_template dt on mrd.document_id =dt.doc_xls
+		where dt.work_job_id = #{workJobId}
+
+	</select>
+
+
+</mapper>

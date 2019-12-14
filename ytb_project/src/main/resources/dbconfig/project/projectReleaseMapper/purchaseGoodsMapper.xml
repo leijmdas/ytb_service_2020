@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.PurchaseGoodsMapper">
+    <resultMap id="projectType" type="ytb.project.model.SearchProjectModel">
+        <id property="projectTypeId" column="ProjectTypeId"/>
+        <result property="title" column="Title"/>
+    </resultMap>
+    <!--获取供应商商品信息-->
+    <select id="getPurchaseGoodsPageInfo" resultType="map">
+        SELECT
+        purchase.purchase_id as purchaseId,
+        purchase.company_id as companyId,
+        purchase.user_id as userId,
+        purchase.purchase_name as purchaseName,
+        purchase.purchase_rule as purchaseRule,
+        purchase.purchase_factory as purchaseFactory,
+        login.user_head as userHead,
+        login.nick_name as nickName,
+        company.company_name as companyName,
+        userInfo.credit_grade as creditGrade,
+        pr.title as projectName,
+        DATE_FORMAT(purchase.create_time,'%Y-%m-%d %H:%s:%i') as createTime,
+        purchase.view_number as viewNumber,
+        login.user_type as userType
+        FROM
+        ytb_user.user_purchase purchase
+        LEFT JOIN ytb_manager.dict_projecttype pr ON pr.projecttypeid = purchase.type_id
+        LEFT JOIN ytb_user.user_login login ON login.user_id = purchase.user_id
+        LEFT JOIN ytb_user.user_info userInfo ON userInfo.user_id = login.user_id
+        LEFT JOIN ytb_user.company_info company ON company.company_id = purchase.company_id
+        <where>
+            <!-- 商品名称-->
+            <if test="purchaseName!=null and purchaseName!=''">
+                and purchase.purchase_name LIKE CONCAT('%',#{purchaseName},'%')
+            </if>
+            <!-- 厂家名称-->
+            <if test="purchaseFactory!=null and purchaseFactory!=''">
+                and purchase.purchase_factory LIKE CONCAT('%',#{purchaseFactory},'%')
+            </if>
+            <!--商品类别-->
+            <if test="projectTypeId!=null and projectTypeId!=''">
+                and pr.projecttypeid = #{projectTypeId}
+            </if>
+            <!--信用等级-->
+            <if test="creditGrade!=null and creditGrade!=''">
+                and userInfo.credit_grade = #{creditGrade}
+            </if>
+            <if test="week!=null and week!=''">
+                and purchase.create_time >= DATE_SUB(CURDATE(), INTERVAL 7 day)
+            </if>
+            <if test="month!=null and month!=''">
+                and purchase.create_time >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+            </if>
+            <if test="year!=null and year!=''">
+                and purchase.create_time >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+            </if>
+        </where>
+        order by purchase.create_time desc
+        <!--分页-->
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getPurchaseGoodsCount" resultType="int">
+        select count(purchaseId) from (
+        SELECT
+        purchase.purchase_id as purchaseId
+        FROM
+        ytb_user.user_purchase purchase
+        LEFT JOIN ytb_manager.dict_projecttype pr ON pr.projecttypeid = purchase.type_id
+        LEFT JOIN ytb_user.user_login login ON login.user_id = purchase.user_id
+        LEFT JOIN ytb_user.user_info userInfo ON userInfo.user_id = login.user_id
+        LEFT JOIN ytb_user.company_info company ON company.company_id = purchase.company_id
+        <where>
+            <!-- 商品名称-->
+            <if test="purchaseName!=null and purchaseName!=''">
+                and purchase.purchase_name LIKE CONCAT('%',#{purchaseName},'%')
+            </if>
+            <!-- 厂家名称-->
+            <if test="purchaseFactory!=null and purchaseFactory!=''">
+                and sell.purchase_factory LIKE CONCAT('%',#{purchaseFactory},'%')
+            </if>
+            <!--商品类别-->
+            <if test="projectTypeId!=null and projectTypeId!=''">
+                and pr.projecttypeid = #{projectTypeId}
+            </if>
+            <!--信用等级-->
+            <if test="creditGrade!=null and creditGrade!=''">
+                and userInfo.credit_grade = #{creditGrade}
+            </if>
+            <if test="week!=null and week!=''">
+                and purchase.create_time >= DATE_SUB(CURDATE(), INTERVAL 7 day)
+            </if>
+            <if test="month!=null and month!=''">
+                and purchase.create_time >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+            </if>
+            <if test="year!=null and year!=''">
+                and purchase.create_time >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+            </if>
+        </where>
+
+        )as b
+    </select>
+
+
+    <!--获取商品类别-->
+    <select id="getGoodsType" resultMap="projectType">
+        SELECT ProjectTypeId,Title FROM ytb_manager.dict_projecttype
+        <if test="parentId!=null and parentId!=''">
+            WHERE ParentId=#{parentId}
+        </if>
+    </select>
+
+
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.StudentPaperMapper" >
+
+	<select id="getStudentPaperListById" resultType="ytb.user.model.StudentPaperModel">
+      SELECT  * FROM student_paper WHERE user_id = #{userId}
+    </select>
+
+
+    <insert id="addStudentPaper" parameterType="ytb.user.model.StudentPaperModel"
+            useGeneratedKeys="true" keyProperty="paperId">
+        INSERT INTO student_paper
+        (
+        paper_no,
+        user_id,
+       `pass_date`,
+        paper_name,
+        picture1,
+        picture2,
+        `paper_grade`,
+        create_time
+        )
+        VALUES
+        (
+        #{paperNo},
+        #{userId},
+        #{passDate},
+        #{paperName},
+        #{picture1},
+        #{picture2},
+        #{paperGrade},
+        now()
+        )
+    </insert>
+
+    <delete id="deleteStudentPaper">
+        DELETE FROM student_paper WHERE user_id = #{userId} AND paper_id =#{paperId}
+    </delete>
+
+    <update id="updateStudentPaper" parameterType="ytb.user.model.StudentPaperModel">
+        UPDATE student_paper
+        <set>
+            <if test="paperNo != null">`paper_no` = #{paperNo}, </if>
+            <if test="userId != null">`user_id` = #{userId}, </if>
+            <if test="passDate != null">`pass_date` = #{passDate}, </if>
+            <if test="paperName != null">`paper_name` = #{paperName}, </if>
+            <if test="picture1 != null">`picture1` = #{picture1}, </if>
+            <if test="picture2 != null">`picture2` = #{picture2}, </if>
+            <if test="paperGrade != null">`paper_grade` = #{paperGrade}</if>
+        </set>
+    WHERE paper_id =#{paperId}
+    </update>
+
+</mapper>

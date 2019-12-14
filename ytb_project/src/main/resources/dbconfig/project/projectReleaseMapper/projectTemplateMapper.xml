@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectTemplateMapper" >
+
+    <insert id="addTemplate" parameterType="ytb.project.model.ProjectTemplateModel" useGeneratedKeys="true"
+            keyProperty="templateId" keyColumn="template_id">
+        insert into project_template (
+            template_id_v,
+            doc_seq,
+            title,
+            doc_ver,
+            document_id,
+            status,
+            folder_id,
+            doc_type,
+            author,
+            auditor,
+            update_time,
+            share_num,
+            assist_num)
+		VALUES (
+		#{templateIdV},
+		#{docSeq},
+		#{title},
+		#{docVer},
+		#{documentId},
+		#{status},
+		#{folderId},
+		#{docType},
+		#{author},
+		#{auditor},
+		#{updateTime},
+		#{shareNum},
+		#{assistNum})
+	</insert>
+
+    <select id="getTemplateListByFolder" parameterType="int" resultType="ytb.project.model.ProjectTemplateModel">
+           SELECT
+            pt.template_id,
+            pt.folder_id,
+            pt.template_id_v,
+            pt.doc_seq,
+            pt.title ,
+            pt.doc_ver,
+            pt.doc_type,
+            pt.document_id,
+            pt.author,
+            pt.auditor,
+            pt.status,
+            pd.doc_size,
+            pt.update_time
+        FROM project_template pt  inner JOIN project_document pd
+        ON pd.document_id =  pt.document_id
+        WHERE  folder_id = #{folderId}
+
+    </select>
+    <select id="getTemplateListByDocType" resultType="ytb.project.model.ProjectTemplateModel">
+           SELECT
+            pt.template_id,
+            pt.template_id_v,
+            pt.folder_id,
+            pt.doc_seq,
+            pt.title ,
+            pt.doc_ver,
+            pt.doc_type,
+            pt.document_id,
+            pt.author,
+            pt.auditor,
+            pt.status,
+            pd.doc_size,
+            pt.update_time
+        FROM project_template pt  inner JOIN project_document pd
+        ON pd.document_id =  pt.document_id
+        WHERE  pt.folder_id = #{folderId}
+          AND  pt.doc_type= #{docType}
+    </select>
+
+
+
+    <update id="modifyProjectTemplate">
+        update project_template
+        set status = #{status},  auditor = #{auditor}
+        where template_id = #{templateId}
+    </update>
+
+    <update id="modifyShareStatus">
+        update project_template
+        set  share_status = #{shareStatus
+        where template_id = #{templateId}
+    </update>
+
+
+    <update id="modifyDocVer">
+        update project_template
+        set  doc_ver = #{docVer}, template_id_v = #{templateIdV}
+        where template_id = #{templateId}
+    </update>
+
+    <select id="getProjectTemplateById" resultType="ytb.project.model.ProjectTemplateModel">
+      select * from project_template where template_id = #{templateId}
+    </select>
+
+
+    <select id="selectProjectTemplateUser" resultType="ytb.project.view.model.ProjectTaskViewModel.ViewProjectTemplateUserModel">
+        SELECT
+            CONCAT(pt.doc_seq,pt.title,'V',pt.doc_ver) AS title,
+            pt.template_id,
+            pt.document_id,
+            pt.doc_type,
+            pt.author,
+            pt.auditor,
+            pt.share_num,
+            pt.assist_num,
+            ptu.status,
+            ptu.active_status,
+            ptu.display_status,
+            date_format(ptu.create_time, '%Y-%m-%d %H:%i:%s') AS updateTime
+        FROM project_template pt
+        LEFT JOIN project_template_user ptu
+        USING (template_id)
+        WHERE pt.folder_id = #{folderId}
+        AND   ptu.user_id = #{userId}
+    </select>
+
+    <select id="selectViewProjectTemplateUserModel" resultType="ytb.project.view.model.ProjectTaskViewModel.ViewProjectTemplateUserModel">
+        SELECT
+            pt.folder_id,
+            CONCAT(pt.doc_seq,pt.title, 'V', pt.doc_ver) AS title,
+            pt.template_id,
+            pt.doc_type,
+            pt.document_id,
+            pt.author,
+            pt.auditor,
+            ptu.status,
+            ptu.display_status,
+            ptu.active_status,
+            ptu.create_time AS updateTime,
+            pt.share_num,
+            pt.assist_num,
+            CASE WHEN pt.author = #{author} THEN 1
+            ELSE 0 END AS owerTemplate,
+             a.author as shareReceive
+        FROM project_template pt
+          INNER JOIN project_template_user ptu
+            USING (template_id)
+          LEFT JOIN project_template_assist a ON a.template_id_ini = pt.template_id
+              WHERE pt.folder_id = #{folderId}
+                AND ptu.user_id = #{userId}
+                  AND ptu.template_id_assist = 0
+                  group by pt.template_id
+    </select>
+
+    <delete id="delProjectTemplateById">
+        delete  from  project_template where template_id = #{templateId}
+    </delete>
+
+    <update id="modifyTemplateAssistOrShareNum">
+        update project_template
+        <set>
+            <if test="assistType ==1">
+                assist_num = assist_num+1
+            </if>
+            <if test="assistType ==0">
+                share_num = share_num+1
+            </if>
+        </set>
+         where template_id = #{templateId}
+    </update>
+
+    <update id="modifyTemplateAssistNumber">
+        update project_template set share_num = share_num+1 where template_id = #{templateId}
+    </update>
+
+    <update id="reduceTemplateShareNumber">
+        update project_template set share_num = share_num-1 where template_id = #{templateId}
+    </update>
+
+</mapper>

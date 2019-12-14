@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserLoginMapper">
+
+    <select id="getUserLoginInfoById" resultType="ytb.user.model.UserLoginModel">
+      SELECT  * FROM user_login where user_id = #{userId}
+    </select>
+
+    <select id="getUserLoginInfoByMobile" resultType="ytb.user.model.UserLoginModel">
+        SELECT  * FROM user_login where mobile = #{mobile}
+    </select>
+
+    <select id="getUserLoginInfoByLoginMobile" resultType="ytb.user.model.UserLoginModel">
+        SELECT  * FROM user_login where login_mobile = #{loginMobile}
+    </select>
+
+    <select id="getUserLoginInfoByLoginMobileAndUserType" resultType="ytb.user.model.UserLoginModel">
+        SELECT  * FROM user_login a
+        inner join user_info b on a.user_id = b.user_id
+        where login_mobile = #{loginMobile} AND user_type = #{userType}
+    </select>
+
+    <select id="getUserLoginInfoByLoginMobileAndUserTypeList" resultType="ytb.user.model.UserLoginModel">
+        SELECT  * FROM user_login where login_mobile = #{loginMobile} AND user_type = #{userType}
+    </select>
+
+    <select id="getUserLoginInfoByLoginMobileAndUserTypeAndPasswordList" resultType="ytb.user.model.UserLoginModel">
+        SELECT  * FROM user_login where login_mobile = #{loginMobile} AND user_type = #{userType} AND  password =  #{password}
+    </select>
+
+
+    <select id="getUserLoginModelByUserType" resultType="ytb.user.model.UserLoginModel">
+        SELECT * FROM user_login
+        <if test="userType != 0">
+            where user_type = #{userType}
+        </if>
+
+    </select>
+
+
+    <insert id="addUserLogin" parameterType="ytb.user.model.UserLoginModel"
+            useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO sys_user
+        (
+        user_id,
+        company_user_id,
+        user_type,
+        user_status,
+        login_mobile,
+
+        password,
+        qq_number,
+        wx_number,
+        login_number,
+        view_number,
+        registered_time,
+        registered_ip,
+        user_head,
+        user_sign,
+        login_time,
+        login_ip,
+        is_online,
+        login_token
+        )
+        VALUES
+        (
+        #{userId},
+        #{companyUserId},
+        #{userType},
+        #{userStatus},
+        #{loginMobile},
+
+        #{password},
+        #{qqNumber},
+        #{wxNumber},
+        #{loginNumber},
+        #{viewNumber},
+        now(),
+        #{registeredIp},
+        #{userHead},
+        #{userSign},
+        #{loginTime},
+        #{loginIp},
+        #{isOnline},
+        #{loginToken}
+        )
+    </insert>
+
+
+    <!--邦邦修改个性签名-->
+    <update id="setUserSign">
+      update user_login set user_sign = #{userSign} where user_id =#{userId}
+    </update>
+
+    <update id="modifyPassword">
+      update user_login
+      set user_login.password = #{password}
+      where user_login.user_id =#{userId} AND user_login.password = #{oldPassword} AND user_login.user_Type = #{userType}
+    </update>
+
+    <update id="modifyPhone">
+      update user_login
+      set user_login.login_mobile = #{newLoginMobile}
+      where user_login.user_id =#{userId} AND user_login.password = #{password} AND user_login.login_mobile = #{oldLoginMobile}
+    </update>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="ytb.user.model.UserLoginModel">
+        update user_login
+        <set>
+            <if test="companyUserId != null">
+                company_user_id = #{companyUserId,jdbcType=INTEGER},
+            </if>
+            <if test="userType != null">
+                user_type = #{userType,jdbcType=INTEGER},
+            </if>
+            <if test="userStatus != null">
+                user_status = #{userStatus,jdbcType=INTEGER},
+            </if>
+            <if test="loginMobile != null">
+                login_mobile = #{loginMobile,jdbcType=VARCHAR},
+            </if>
+
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="qqNumber != null">
+                qq_number = #{qqNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="wxNumber != null">
+                wx_number = #{wxNumber,jdbcType=INTEGER},
+            </if>
+            <if test="loginNumber != null">
+                login_number = #{loginNumber,jdbcType=INTEGER},
+            </if>
+            <if test="viewNumber != null">
+                view_number = #{viewNumber,jdbcType=INTEGER},
+            </if>
+            <if test="registeredTime != null">
+                registered_time = #{registeredTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registeredIp != null">
+                registered_ip = #{registeredIp,jdbcType=VARCHAR},
+            </if>
+            <if test="userHead != null">
+                user_head = #{userHead,jdbcType=VARCHAR},
+            </if>
+            <if test="userSign != null">
+                user_sign = #{userSign,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                login_time = #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginIp != null">
+                login_ip = #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="isOnline != null">
+                is_online = #{isOnline,jdbcType=BIT},
+            </if>
+            <if test="loginToken != null">
+                login_token = #{loginToken,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+
+    <insert id="insertSelective" parameterType="ytb.user.model.UserLoginModel" useGeneratedKeys="true"
+            keyProperty="userId">
+        insert into user_login
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="companyUserId != null">
+                company_user_id,
+            </if>
+            <if test="userType != null">
+                user_type,
+            </if>
+            <if test="userStatus != null">
+                user_status,
+            </if>
+            <if test="loginMobile != null">
+                login_mobile,
+            </if>
+
+            <if test="password != null">
+                password,
+            </if>
+            <if test="qqNumber != null">
+                qq_number,
+            </if>
+            <if test="wxNumber != null">
+                wx_number,
+            </if>
+            <if test="loginNumber != null">
+                login_number,
+            </if>
+            <if test="viewNumber != null">
+                view_number,
+            </if>
+            <if test="registeredTime != null">
+                registered_time,
+            </if>
+            <if test="registeredIp != null">
+                registered_ip,
+            </if>
+            <if test="userHead != null">
+                user_head,
+            </if>
+            <if test="userSign != null">
+                user_sign,
+            </if>
+            <if test="loginTime != null">
+                login_time,
+            </if>
+            <if test="loginIp != null">
+                login_ip,
+            </if>
+            <if test="isOnline != null">
+                is_online,
+            </if>
+            <if test="loginToken != null">
+                login_token,
+            </if>
+            <if test="bangBangNo != null">
+                bangbang_no,
+            </if>
+            <if test="loginErrorTimes != null">
+                login_error_times,
+            </if>
+            <if test="lockTime != null">
+                lock_time,
+            </if>
+            <if test="isLock != null">
+                is_lock,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="companyUserId != null">
+                #{companyUserId,jdbcType=INTEGER},
+            </if>
+            <if test="userType != null">
+                #{userType,jdbcType=INTEGER},
+            </if>
+            <if test="userStatus != null">
+                #{userStatus,jdbcType=INTEGER},
+            </if>
+            <if test="loginMobile != null">
+                #{loginMobile,jdbcType=VARCHAR},
+            </if>
+
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="qqNumber != null">
+                #{qqNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="wxNumber != null">
+                #{wxNumber,jdbcType=INTEGER},
+            </if>
+            <if test="loginNumber != null">
+                #{loginNumber,jdbcType=INTEGER},
+            </if>
+            <if test="viewNumber != null">
+                #{viewNumber,jdbcType=INTEGER},
+            </if>
+            <if test="registeredTime != null">
+                #{registeredTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registeredIp != null">
+                #{registeredIp,jdbcType=VARCHAR},
+            </if>
+            <if test="userHead != null">
+                #{userHead,jdbcType=VARCHAR},
+            </if>
+            <if test="userSign != null">
+                #{userSign,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginIp != null">
+                #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="isOnline != null">
+                #{isOnline,jdbcType=BIT},
+            </if>
+            <if test="loginToken != null">
+                #{loginToken,jdbcType=VARCHAR},
+            </if>
+            <if test="bangBangNo != null">
+                #{bangBangNo,jdbcType=VARCHAR},
+            </if>
+            <if test="loginErrorTimes != null">
+                #{loginErrorTimes,jdbcType=INTEGER},
+            </if>
+            <if test="lockTime != null">
+                #{lockTime,jdbcType=VARCHAR},
+            </if>
+            <if test="isLock != null">
+                #{isLock,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getUserLoginList" resultType="ytb.user.model.BBUserModel">
+        SELECT
+        t1.user_id ,
+        t1.company_user_id,
+        t1.user_type ,
+        t1.login_mobile ,
+
+        t1.user_head ,
+        t1.user_sign ,
+        case t2.sex
+        when 1 then '男'
+        when 2 then '女'
+        else '其他' end AS sex,
+        case t2.school_id
+        when 1 then '小学'
+        when 2 then '初中'
+        when 3 then '高中'
+        when 4 then '中专'
+        when 5 then '大专'
+        when 6 then '大学'
+        when 7 then '硕士'
+        when 8 then '博士'
+        when 9 then '博士后'
+        else '其他' end schoolId,
+        t2.user_address ,
+        if(isnull( t2.birthday),0,ROUND(DATEDIFF(CURDATE(), t2.birthday)/365.2422)) as birthday,
+        t1.registered_time AS registeredTime,
+        group_concat(t4.TagName) AS tagName,
+        t2.credit_gread,
+        t5.company_name
+        FROM
+        user_login t1
+        LEFT JOIN user_info t2 ON t1.user_id = t2.user_id
+        LEFT JOIN user_tag t3 ON t3.user_id = t1.user_id
+        LEFT JOIN v_tag_specialty t4 ON t4.id = t3.tag_id
+        LEFT JOIN company_info t5 ON t5.company_id = t1.company_user_id
+        <where>
+            <if test="loginMobile !=null and loginMobile !=''">
+                t1.login_mobile=#{loginMobile}
+            </if>
+            <if test="sex !=null and sex !=''">
+                t2.sex=#{sex}
+            </if>
+        </where>
+        group by t1.user_id
+    </select>
+
+
+    <!--个人基本资料-->
+    <select id="getUserBaseInfo" resultType="map">
+            SELECT
+        t1.user_id AS userId,
+
+        t1.login_mobile AS loginMobile,
+        t1.user_head AS userHead,
+        t2.self_eval AS selfEval,
+        t2.idcard AS idCard,
+        CASE t2.sex
+    WHEN 1 THEN
+        '男'
+    WHEN 2 THEN
+        '女'
+    ELSE
+        '其他'
+    END AS sex,
+
+    IF (
+        isnull(t2.birthday),
+        0,
+        ROUND(
+            DATEDIFF(CURDATE(), t2.birthday) / 365.2422
+        )
+    ) AS age,
+     t2.credit_grade AS creditGrade,
+     t2.email AS email,
+     t2.real_name AS realName,
+     t2.nick_name AS nickName,
+     t3.`name` AS userAddress,
+     t1.bangbang_no as BBNo,
+     t2.detailed_address as detailedAddress,
+t2.city_id as cityId,
+t2.area_id as areaId,
+t2.province_id as provinceId
+    FROM
+        user_login t1
+    INNER JOIN user_info t2 ON t1.user_id = t2.user_id
+    inner join ytb_manager.dict_area t3 on t2.area_id = t3.area_id
+    WHERE
+        t1.user_id = #{userId}
+    </select>
+
+
+    <select id="getFCityByAreaId" resultType="map">
+
+
+ SELECT * from  ytb_manager.dict_area WHERE  area_id =
+  (SELECT parent_id from  ytb_manager.dict_area WHERE  area_id = #{areaId})
+
+    </select>
+
+
+    <select id="selectGoodPeople" resultType="map">
+        SELECT
+        t1.user_id as userId,
+        t1.user_head as userHead,
+				group_concat(t4.TagName) AS tagName,
+		t2.nick_name as nickName
+        FROM
+        user_login t1
+        LEFT JOIN user_info t2 ON t2.user_id = t1.user_id
+        LEFT JOIN user_tag t3 ON t3.user_id = t1.user_id
+        LEFT JOIN v_tag_specialty t4 ON t4.id = t3.tag_id
+        group by t1.user_id limit 1,11
+
+    </select>
+
+    <update id="updateUserPhone">
+        update user_login set login_mobile = #{phone} where user_id = #{userId}
+    </update>
+
+    <update id="updateUserPassword">
+        update user_login set password = #{newPwd} where user_id = #{userId}
+    </update>
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!--&lt;!&ndash; 开启注解，自动扫描,并实例化 &ndash;&gt;-->
+	<!--&lt;!&ndash; 配置事务管理器 &ndash;&gt;-->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<context:annotation-config/>
+
+	<context:component-scan base-package="ytb.manager" />
+
+	<bean
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:dbconfig/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="${manager.url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<property name="driverClassName" value="${driver}" />
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 注入数据库连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
+		<property name="configLocation" value="classpath:dbconfig/manager/MyBatisConfig.xml" />
+		<!-- 扫描entity包 使用别名 -->
+		<property name="typeAliasesPackage" value="ytb.model" />
+		<!-- 扫描sql配置文件:mapper需要的xml文件 -->
+		<property name="mapperLocations" value="classpath:dbconfig/manager/*/*Mapper.xml" />
+	</bean>
+
+
+	<!--<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">-->
+		<!--<constructor-arg index="0" ref="sqlSessionFactory" />-->
+	<!--</bean>-->
+
+	<!--&lt;!&ndash; 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 &ndash;&gt;-->
+	<!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+		<!--&lt;!&ndash; 注入sqlSessionFactory &ndash;&gt;-->
+		<!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
+		<!--&lt;!&ndash; 给出需要扫描Dao接口包 &ndash;&gt;-->
+		<!--<property name="basePackage" value="ytb.dao" />-->
+	<!--</bean>-->
+
+	<!--&lt;!&ndash; 配置事务管理器 &ndash;&gt;-->
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 注入数据库连接池 -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg type="java.util.Properties">
+					<props>
+						<prop key = "kaptcha.border ">yes</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.textproducer.font.color">blue</prop>
+						<prop key="kaptcha.image.width">100</prop>
+						<prop key="kaptcha.image.height">50</prop>
+						<prop key="kaptcha.textproducer.font.size">27</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">6</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+						<prop key="kaptcha.textproducer.char.string">23456789ABCEFGHJKMNOPQRSTUVWXYZ</prop>
+						<prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
+						<prop key="kaptcha.noise.color">black</prop>
+						<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
+						<!--<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.DefaultNoise</prop>-->
+						<prop key="kaptcha.background.clear.from">185,56,213</prop>
+						<prop key="kaptcha.background.clear.to">white</prop>
+						<prop key="kaptcha.textproducer.char.space">3</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+</beans>

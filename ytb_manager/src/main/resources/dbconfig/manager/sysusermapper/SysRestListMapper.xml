@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.sysuser.dao.SysRestListMapper" >
+
+	<select id="getRestList" resultType="ytb.manager.sysuser.model.Sys_RestListModel">
+select restId,parentId,cmdType,restName,model,CONCAT(restName,":",cmdType,":",cmd) as nameRemark from sys_restlist order by parentId,orderNum;	</select>
+
+	<select id="getSimpleRestList" resultType="ytb.manager.sysuser.model.SysRestListSimpleModel">
+
+		select restId,parentId,restName,model,cmdType from sys_restlist order by parentId,orderNum;
+	</select>
+
+
+	<select id="getRestListInfoById" resultType="ytb.manager.sysuser.model.Sys_RestListModel">
+		SELECT * FROM sys_restlist WHERE restId = #{restId}
+	</select>
+
+	<delete id="deleteRestListById">
+		DELETE FROM sys_restlist WHERE restId = #{restId}
+	</delete>
+
+	<insert id="addRestList" parameterType="ytb.manager.sysuser.model.Sys_RestListModel"
+			useGeneratedKeys="true" keyProperty="restId">
+		INSERT INTO sys_restlist
+		(
+		restName,
+		model,
+		url,
+		cmdType,
+		cmd,
+		parentId,
+		CreateTime,
+		memo,
+		orderNum,
+		system_type
+		)
+		VALUES
+		(
+		#{restName},
+		#{model},
+		#{url},
+		#{cmdType},
+		#{cmd},
+		#{parentId},
+		now(),
+		#{memo},
+		#{orderNum},
+		#{systemType}
+		)
+	</insert>
+
+	<update id="updateRestList" parameterType="ytb.manager.sysuser.model.Sys_RestListModel">
+		UPDATE sys_restlist
+		<set>
+			<if test="restName != null">`restName` = #{restName}, </if>
+			<if test="model != null">`model` = #{model}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="cmdType != null">`cmdType` = #{cmdType}, </if>
+			<if test="cmd != null">`cmd` = #{cmd}, </if>
+			<if test="orderNum != null">`orderNum` = #{orderNum}, </if>
+			<if test="memo != null">`memo` = #{memo}, </if>
+			<if test="systemType != null">`system_type` = #{systemType} </if>
+		</set>
+		WHERE restId = #{restId}
+	</update>
+
+	<!--查询角色所拥有的接口-->
+	<select id="getRestToRole" resultType="ytb.manager.sysuser.model.Sys_RestListModel">
+		select  t1.restId,t1.parentId,CONCAT(restName,":",cmdType,":",cmd) as nameRemark from sys_restlist t1
+		inner join sys_role_right t2 on t1.RestId =t2.objId
+		where t2.objType =2 and t2.RoleId= #{roleId} order by t1.restId
+	</select>
+
+	<select id="getRestParentId" resultType="ytb.manager.sysuser.model.Sys_RestListModel">
+		select * from sys_restlist where parentid = #{parentId}
+	</select>
+
+</mapper>

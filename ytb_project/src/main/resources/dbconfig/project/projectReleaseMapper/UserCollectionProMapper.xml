@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.UserCollectionProMapper" >
+    <select id="getUserCollectionList" resultType="map">
+        SELECT
+        a.collection_id AS collectionId,
+        b.project_name AS projectName,
+        c.nick_name AS nickName,
+        a.project_id AS projectId,
+        b.user_id1 AS sendUserId,
+        b.company_id1 as sendCompanyId,
+        DATE_FORMAT(
+        a.create_time,
+        '%Y-%m-%d %H:%i:%s'
+        ) AS collectionTime,
+        c.user_type as userType,
+        b.view_number as viewNumber,
+        b.favorite_number as favoriteNumber,
+        DATE_FORMAT(
+        b.create_time,
+        '%Y-%m-%d %H:%i:%s'
+        ) AS projectTime
+    FROM
+        user_collection a
+    INNER JOIN project b ON a.project_id = b.project_id
+    INNER JOIN ytb_user.user_login c ON c.user_id = b.user_id1
+    <where>
+        <if test="userId !=null and userId !=''">
+            a.user_id = #{userId}
+        </if>
+        <if test="companyId !=null and companyId !=''">
+            a.company_id = #{companyId}
+        </if>
+    </where>
+    ORDER BY a.create_time desc
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getUserCollectionCount" resultType="int">
+        select count(collectionId) from(
+ SELECT
+        a.collection_id AS collectionId,
+        b.project_name AS projectName,
+        c.nick_name AS nickName,
+        a.project_id AS projectId,
+        b.user_id1 AS sendUserId,
+        DATE_FORMAT(
+            a.create_time,
+            '%Y-%m-%d %H:%i:%s'
+        ) AS collectionTime
+    FROM
+        user_collection a
+    INNER JOIN project b ON a.project_id = b.project_id
+    INNER JOIN ytb_user.user_login c ON c.user_id = b.user_id1
+        <where>
+            <if test="userId !=null and userId !=''">
+                a.user_id = #{userId}
+            </if>
+            <if test="companyId !=null and companyId !=''">
+                a.company_id = #{companyId}
+            </if>
+        </where>
+    ) as b
+    </select>
+
+    <insert id="addUserCollection" parameterType="ytb.project.model.UserCollectionProModel">
+        INSERT  into user_collection(
+          user_id,
+          company_id,
+          project_id,
+          create_time
+        )VALUES (
+          #{userId},
+          #{companyId},
+          #{projectId},
+          now()
+        )
+    </insert>
+
+    <delete id="deleteUserCollection">
+        delete from user_collection where collection_id = #{collectionId}
+        <if test="userId !=null and userId !=''">
+           and user_id = #{userId}
+        </if>
+        <if test="companyId !=null and companyId !=''">
+            and company_id = #{companyId}
+        </if>
+    </delete>
+</mapper>

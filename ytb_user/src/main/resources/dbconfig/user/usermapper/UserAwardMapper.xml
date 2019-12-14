@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserAwardMapper" >
+
+	<select id="getUserAwardListById" resultType="ytb.user.model.UserAwardModel">
+      SELECT  * FROM user_award WHERE user_id = #{userId}
+    </select>
+
+
+    <insert id="addUserAward" parameterType="ytb.user.model.UserAwardModel"
+            useGeneratedKeys="true" keyProperty="awardId">
+        INSERT INTO user_award
+        (
+        user_id,
+       `award_date`,
+        award_name,
+        organ_name,
+        pic_url,
+        create_time,
+        update_time
+        )
+        VALUES
+        (
+        #{userId},
+        #{awardDate},
+        #{awardName},
+        #{organName},
+        #{picUrl},
+        now(),
+        now()
+        )
+    </insert>
+
+    <delete id="deleteUserAward">
+        DELETE FROM user_award WHERE user_id = #{userId} AND award_id =#{awardId}
+    </delete>
+
+    <update id="updateUserAward" parameterType="ytb.user.model.UserAwardModel">
+        UPDATE user_award
+        <set>
+            <if test="userId != null">`user_id` = #{userId}, </if>
+            <if test="awardDate != null">`award_date` = #{awardDate}, </if>
+            <if test="awardName != null">`award_name` = #{awardName}, </if>
+            <if test="organName != null">`organ_name` = #{organName}, </if>
+            <if test="picUrl != null">`pic_url` = #{picUrl}, </if>
+            update_time = now()
+        </set>
+    WHERE award_id =#{awardId}
+    </update>
+
+</mapper>

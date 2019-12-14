@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      uri: http://localhost:8769/
+      fail-fast: true
+      profile: dev
+
+  profiles:
+    active: dev
+foo1: test
+
+#    spring.application.name=config-client
+#    spring.cloud.config.label=master
+#    spring.cloud.config.profile=dev
+#    spring.cloud.config.uri= http://localhost:8888/
+#    server.port=8881
+#

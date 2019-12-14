@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.pfUser.dao.DictTagMapper" >
+
+
+	<select id="getDictTagList" resultType="ytb.manager.pfUser.model.Dict_Tag" parameterType="int" resultMap="Dict_TagResultMap">
+		SELECT * FROM dict_tag WHERE tag_type = #{tagType}
+	</select>
+
+	<select id="getDictTagListByID" resultType="ytb.manager.pfUser.model.Dict_Tag" parameterType="ytb.manager.pfUser.model.Dict_Tag" resultMap="Dict_TagResultMap">
+		SELECT * FROM dict_tag WHERE tag_type = #{tagType} and (tag_id = #{tagId} or parent_id = #{tagId}) order by parent_id,tag_id
+	</select>
+
+	<delete id="deleteDictTag" parameterType="int">
+		delete  FROM dict_tag WHERE tag_id = #{tagId}
+	</delete>
+
+	<insert id="insertDictTag" parameterType="ytb.manager.pfUser.model.Dict_Tag">
+		insert into dict_tag(parent_id,tag_name,tag_type,create_by)
+		values(#{parentId},#{tagName},#{tagType},#{createBy})
+	</insert>
+
+	<update id="updateDictTag" parameterType="ytb.manager.pfUser.model.Dict_Tag">
+		update dict_tag set tag_name=#{tagName}, tag_type=#{tagType},
+							parent_id=#{parentId},create_by=#{createBy}
+		where  tag_id = #{tagId}
+	</update>
+
+
+	<resultMap type="ytb.manager.pfUser.model.Dict_Tag" id="Dict_TagResultMap">
+		<!-- 用id属性来映射主键字段 -->
+		<id property="tagId" column="tag_id"/>
+		<!-- 用result属性来映射非主键字段 -->
+		<result property="parentId" column="parent_id"/>
+		<result property="tagName" column="tag_name"/>
+		<result property="tagType" column="tag_type"/>
+		<result property="createBy" column="create_by"/>
+	</resultMap>
+
+
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.common.basic.activititemplate.dao.ActivitiTemplateMapper" >
+
+
+
+	<select id="getActivitiTemplateList" resultType="ytb.common.basic.activititemplate.model.Manager_Template_ProcModel">
+      SELECT  * FROM manager_template_proc
+    </select>
+
+	<select id="getActivitiTemplate" resultType="ytb.common.basic.activititemplate.model.Manager_Template_ProcModel">
+		select * from manager_template_proc where proc_id=#{proc_id}
+	</select>
+
+    <insert id="addActivitiTemplate" useGeneratedKeys="true" keyProperty="proc_id" keyColumn="proc_id">
+		insert into manager_template_proc (proc_code,proc_file,proc_content,proc_type,status)
+		VALUES (#{proc_code},#{proc_file},#{proc_content},#{proc_type},#{status})
+	</insert>
+
+
+	<update id="modifyActivitiTemplate">
+		update manager_template_proc set
+		proc_code =#{proc_code},
+		proc_type = #{proc_type},
+		proc_file = #{proc_file}
+		where proc_id = #{proc_id}
+	</update>
+
+	<update id="modifyActivitiTemplateContent">
+		update manager_template_proc set
+		proc_content =#{proc_content}
+		<if test="proc_file != null and proc_file.trim() != ''">
+			,proc_file = #{proc_file}
+		</if>
+		where proc_id = #{proc_id}
+	</update>
+
+	<update id="modifyActivitiStatus">
+		update manager_template_proc set
+		status =#{status}
+		where proc_id = #{proc_id}
+	</update>
+
+	<delete id="removeActivitiTemplate">
+		delete from manager_template_proc where proc_id = #{proc_id}
+	</delete>
+
+
+</mapper>

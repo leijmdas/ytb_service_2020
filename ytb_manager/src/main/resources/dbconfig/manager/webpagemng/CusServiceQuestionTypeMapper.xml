@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.webpagemng.dao.CusServiceQuestionTypeMapper">
+
+    <insert id="insert" parameterType="ytb.manager.webpagemng.model.CusServiceQuestionType" useGeneratedKeys="true" keyProperty="id">
+       insert into cus_service_question_type(type_name,parent_id,create_time,create_by,sort_no)
+       values(#{typeName},#{parentId},#{createTime},#{createBy},#{sortNo})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        delete from cus_service_question_type where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="ytb.manager.webpagemng.model.CusServiceQuestionType">
+        update cus_service_question_type
+        <set>
+            <if test="typeName!=null and typeName!=''">
+                type_name = #{typeName},
+            </if>
+            <if test="sortNo!=null and sortNo!=0">
+                sort_no = #{sortNo}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectOne" parameterType="ytb.manager.webpagemng.model.CusServiceQuestionType"
+            resultType="ytb.manager.webpagemng.model.CusServiceQuestionType">
+        select * from cus_service_question_type
+        where id = #{id}
+    </select>
+
+    <select id="selectList" parameterType="ytb.manager.webpagemng.model.CusServiceQuestionType"
+            resultType="ytb.manager.webpagemng.model.CusServiceQuestionType">
+        select * from cus_service_question_type
+        order by sort_no asc
+    </select>
+
+
+</mapper>

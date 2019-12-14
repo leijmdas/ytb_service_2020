@@ -1,0 +1,10 @@
+server:
+    tomcat:
+        uri-encoding: UTF-8
+        max-threads: 100
+        min-spare-threads: 25
+    port: 80
+
+spring:
+    profiles:
+        active: dubbo

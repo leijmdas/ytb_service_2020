@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.metadata.dao.SysMetaDataFieldMapper" >
+
+	<select id="getFieldListByDictId" resultType="ytb.manager.metadata.model.Sys_MetaDataFieldModel" resultMap="MetaDataFieldResultMap">
+		SELECT * FROM metadata_field WHERE metadata_id = #{metaDataId} ORDER BY field_order
+	</select>
+
+	<select id="getFieldById" resultType="ytb.manager.metadata.model.Sys_MetaDataFieldModel" parameterType="int" resultMap="MetaDataFieldResultMap">
+		SELECT * FROM metadata_field WHERE field_id = #{fieldId}
+	</select>
+
+	<insert id="addField" parameterType="ytb.manager.metadata.model.Sys_MetaDataFieldModel">
+		INSERT INTO metadata_field
+		(
+		    metadata_id,
+		    field_name,
+		    field_memo,
+		    field_type,
+		    field_size,
+		    field_visible,
+		    field_displaysize,
+		    field_readonly,
+		    field_default,
+		    field_order,
+		    field_src,
+		    ref_table,
+		    ref_field,
+		    ref_displayid,
+		    field_pk,
+		    field_auto,
+		    field_ismust,
+		    ref_pool,
+		    ref_filter
+		)
+		VALUES
+		(
+		    #{metaDataId},
+		    #{fieldName},
+		    #{fieldMemo},
+		    #{fieldType},
+		    #{fieldSize},
+		    #{fieldVisible},
+		    #{fieldDisplaySize},
+		    #{fieldReadOnly},
+		    #{fieldDefault},
+		    #{fieldOrder},
+		    #{fieldSrc},
+		    #{refTable},
+		    #{fieldDisplayName},
+		    #{refDisplayId},
+		    #{fieldPK},
+		    #{fieldAuto},
+		    #{fieldIsMust},
+		    #{refPool},
+		    #{refFilter}
+		)
+	</insert>
+
+	<update id="updateFieldById" parameterType="ytb.manager.metadata.model.Sys_MetaDataFieldModel">
+		UPDATE metadata_field
+		<set>
+			<if test="metaDataId != null">`metadata_id` = #{metaDataId}, </if>
+			<if test="fieldName != null">`field_name` = #{fieldName},</if>
+			<if test="fieldMemo != null">`field_memo` = #{fieldMemo}, </if>
+			<if test="fieldType != null">`field_type` = #{fieldType},</if>
+			<if test="fieldSize!= null">`field_size` = #{fieldSize}, </if>
+			<if test="fieldVisible != null">`field_visible` = #{fieldVisible},</if>
+			<if test="fieldDisplaySize != null">`field_displaysize` = #{fieldDisplaySize}, </if>
+			<if test="fieldReadOnly != null">`field_readonly` = #{fieldReadOnly},</if>
+			<if test="fieldDefault != null">`field_default` = #{fieldDefault},</if>
+			<if test="fieldOrder != null">`field_order` = #{fieldOrder},</if>
+			<if test="fieldSrc != null">`field_src` = #{fieldSrc},</if>
+			<if test="refTable != null">`ref_table` = #{refTable},</if>
+			<if test="fieldDisplayName != null">`ref_field` = #{fieldDisplayName},</if>
+			<if test="refDisplayId != null">`ref_displayid` = #{refDisplayId},</if>
+			<if test="fieldPK != null">`field_pk` = #{fieldPK},</if>
+			<if test="fieldAuto != null">`field_auto` = #{fieldAuto},</if>
+			<if test="fieldIsMust != null">`field_ismust` = #{fieldIsMust},</if>
+			<if test="refPool != null">`ref_pool` = #{refPool},</if>
+			<if test="refFilter != null">`ref_filter` = #{refFilter}</if>
+		</set>
+		WHERE field_id = #{fieldId}
+	</update>
+
+	<delete id="deleteFieldById" parameterType="int">
+		delete from metadata_field WHERE field_id = #{fieldId}
+	</delete>
+
+    <resultMap type="ytb.manager.metadata.model.Sys_MetaDataFieldModel" id="MetaDataFieldResultMap">
+        <!-- 用id属性来映射主键字段 -->
+        <id property="fieldId" column="field_id"/>
+        <!-- 用result属性来映射非主键字段 -->
+        <result property="metaDataId" column="metadata_id"/>
+        <result property="fieldName" column="field_name"/>
+        <result property="fieldMemo" column="field_memo"/>
+        <result property="fieldType" column="field_type"/>
+        <result property="fieldSize" column="field_size"/>
+        <result property="fieldVisible" column="field_visible"/>
+        <result property="fieldReadOnly" column="field_readonly"/>
+        <result property="fieldDefault" column="field_default"/>
+        <result property="fieldOrder" column="field_order"/>
+        <result property="fieldSrc" column="field_src"/>
+        <result property="refTable" column="ref_table"/>
+        <result property="fieldDisplayName" column="ref_field"/>
+        <result property="refDisplayId" column="ref_displayID"/>
+        <result property="fieldPK" column="field_pk"/>
+        <result property="fieldAuto" column="field_auto"/>
+        <result property="fieldDisplaySize" column="field_displaysize"/>
+		<result property="fieldIsMust" column="field_ismust"/>
+		<result property="refPool" column="ref_pool"/>
+		<result property="refFilter" column="ref_filter"/>
+		<result property="refObject" column="ref_object"   />
+		<result  property="refParameter" column="ref_parameter"  />
+
+	</resultMap>
+</mapper>

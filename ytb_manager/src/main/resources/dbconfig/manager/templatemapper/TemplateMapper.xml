@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.TemplateMapper">
+
+    <select id="getTemplates" resultType="ytb.manager.template.model.Dict_TemplateModel">
+        SELECT
+            t1.*, t2. NO AS repositoryNo,
+            t2. NAME AS repositoryName
+        FROM dict_template t1
+        LEFT JOIN template_repository t2 ON t1.repository_id = t2.repository_id
+        WHERE t1.repository_id = #{repositoryId }
+          AND t1.work_job_id = #{workJobId}
+    </select>
+
+    <select id="getDocTemplateList" resultType="ytb.manager.template.model.Dict_TemplateModel">
+        SELECT
+            t1.*, t2. NO AS repositoryNo,
+            t2. NAME AS repositoryName
+        FROM dict_template t1
+        LEFT JOIN template_repository t2 ON t1.repository_id = t2.repository_id
+        WHERE t1.repository_id = #{repositoryId }
+          AND t1.work_job_id = #{workJobId}
+          AND t1.doc_type = #{docType}
+    </select>
+
+    <select id="getDocTplList" resultType="ytb.manager.template.model.Dict_TemplateModel">
+        SELECT
+            t1.*, t2. NO AS repositoryNo,
+            t2.name AS repositoryName,
+            t3.title AS workJobName
+        FROM dict_template t1
+        LEFT JOIN template_repository t2 ON t1.repository_id = t2.repository_id
+        LEFT JOIN dict_work_job t3 ON t1.work_job_id = t3.work_job_id
+        WHERE t1.repository_id = #{repositoryId }
+          AND t1.work_job_id = #{workJobId}
+          AND t1.doc_type in
+          <foreach collection="docTypeArr" open="(" separator="," close=")" item="docType" index="index">
+              #{docType}
+          </foreach>
+    </select>
+
+
+    <select id="getDocTemplate" resultType="ytb.manager.template.model.Dict_TemplateModel">
+      SELECT  * FROM dict_template where  template_id = #{templateId}
+    </select>
+
+    <select id="getDocTemplate_gen" parameterType="Integer" resultType="ytb.manager.template.model.Dict_TemplateModel">
+        SELECT * FROM dict_template
+        where repository_id = 0 and work_job_id = 0
+        and doc_type =#{docType}
+        order by user,sub_type,phase
+    </select>
+
+    <select id="getDocTemplateListinfo" resultType="ytb.manager.template.model.Dict_TemplateModel">
+
+        SELECT t.*,r.no as reposiroryNo,r.name as reposiroryName FROM dict_template t left join
+        template_repository r on t.repository_id = r.repository_id
+        <where>
+
+            <if test="state!=null">
+                t.state =#{state} and
+            </if>
+            t.repository_id = #{repositoryId } and t.workJobId = #{workJobId} and t.docType = #{docType}
+
+        </where>
+
+    </select>
+
+
+    <select id="getDocTemplateListinfoByw" resultType="ytb.manager.template.model.Dict_TemplateModel">
+
+        SELECT t.*,w.Title as workjobName FROM dict_template t left join dict_work_job w on t.work_job_id = w.work_job_id
+        <where>
+
+            <if test="state!=null">
+                t.state =#{state} and
+            </if>
+            t.repository_id = #{repositoryId } and t.workJobId = #{workJobId} and t.docType = #{docType}
+
+        </where>
+
+    </select>
+
+
+    <select id="getTemplateByState" resultType="ytb.manager.template.model.Dict_TemplateModel">
+      SELECT  * FROM dict_template where template_id_v = #{state}
+    </select>
+
+
+    <insert id="addTemplate">
+		insert into dict_template (template_id_v,repository_id,work_job_id,title,alias,doc_type,doc_xls,document_id,uuid,optional,create_by,user,phase,sub_type)
+		VALUES (#{templateIdV},#{repositoryId},#{workJobId},#{title},#{alias},#{docType},#{docXls},#{documentId},#{uuid},#{optional},#{createBy},#{user},#{phase},#{subType})
+    </insert>
+
+
+    <select id="getTemplate" parameterType="int" resultType="ytb.manager.template.model.Dict_TemplateModel">
+      SELECT  * FROM dict_template where template_id = #{templateId}
+    </select>
+
+
+    <select id="getTemplateBypro" parameterType="int" resultType="ytb.manager.template.model.Dict_TemplateModel">
+      SELECT  * FROM dict_template where projectTypeId = #{projectTypeId}
+    </select>
+
+
+    <select id="getTemplateBywor" parameterType="int" resultType="ytb.manager.template.model.Dict_TemplateModel">
+      SELECT  * FROM dict_template where work_job_id = #{workJobId}
+    </select>
+
+
+    <update id="modifyTemplate">
+        update dict_template
+        <set>
+            <if test="title!=null">
+                title = #{title},
+            </if>
+            <if test="alias!=null">
+                alias = #{alias},
+            </if>
+
+            <if test="documentId!=0">
+                document_id =#{documentId},
+            </if>
+
+            <if test="docType!=0">
+                doc_type =#{docType},
+            </if>
+            <if test="user!=null">
+                user =#{user},
+            </if>
+            <if test="phase!=null">
+                phase =#{phase},
+            </if>
+            <if test="subType!=null">
+                sub_type =#{subType}
+            </if>
+        </set>
+        where template_id = #{templateId}
+    </update>
+
+
+    <update id="modifyDocumentIdAlias">
+		update dict_template set
+			document_id =#{documentId},
+			alias = #{alias}
+		where template_id = #{templateId}
+	</update>
+
+
+    <update id="modifyTemplateByState">
+		update dict_template set
+
+			template_id_v = #{state}
+
+		where template_id = #{templateId}
+
+	</update>
+
+
+    <delete id="delTemplate">
+		delete from dict_template where template_id = #{templateId}
+	</delete>
+
+    <update id="modifyTemplateContentsNew">
+
+		update dict_template set
+
+		doc_new = #{documentId}
+
+		where template_id = #{templateId}
+
+
+
+	</update>
+
+    <update id="modifyTemplateDocument">
+
+        update dict_template
+        <set>
+            <if test="docXls!=0">
+                doc_xls = #{docXls},
+            </if>
+
+            <if test="title!=null and title!=''">
+                title = #{title}
+            </if>
+
+            <if test="documentId!=0">
+                document_id = #{documentId}
+            </if>
+        </set>
+        where template_id = #{templateId}
+    </update>
+
+    <select id="getTemplateRepo" parameterType="int" resultType="ytb.manager.template.model.Dict_TemplateModel">
+
+		 SELECT  t.*,r.no as reposiroryNo,r.name as reposiroryName FROM dict_template t left join template_repository r on t.repository_id = r.repository_id  where t.template_id = #{templateId}
+
+	</select>
+
+    <select id="getRequirements" parameterType="int" resultType="ytb.manager.template.model.Dict_TemplateModel">
+
+		select t.*  from dict_template t left join template_repository r on t.repository_id = r.repository_id
+
+		left join dict_project_type p on p.repository_id = r.repository_id where p.project_type_id = #{projectTypeId} and t.doc_type =#{docType}
+
+	</select>
+
+    <select id="getTemplateListByWorkJobId" parameterType="int" resultType="ytb.manager.template.model.Dict_TemplateModel">
+
+		select * from dict_template where work_job_id = #{workJobId}
+
+	</select>
+
+    <select id="getChangeTemplate" resultType="ytb.manager.template.model.Dict_TemplateModel">
+
+       select * from dict_template where sub_type = #{subType} and doc_type =#{docType}
+
+    </select>
+
+
+</mapper>

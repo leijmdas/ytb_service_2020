@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.pfUser.dao.PlatformUserManagerMapper" >
+    <select id="getPlatformUserList" resultType="map">
+        select * from v_platform_user
+        <where>
+            <if test="nickName !=null and nickName !=''">
+                nickName like concat('%',#{nickName},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+
+    <select id="getPlatformUserTotal" resultType="int">
+        select count(*) from v_platform_user
+        <where>
+            <if test="nickName !=null and nickName !=''">
+                nickName like concat('%',#{nickName},'%')
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getPlatformCompanyList" resultType="map">
+        select * from v_platform_company
+        <where>
+            <if test="nickName !=null and nickName !=''">
+                nickName like concat('%',#{nickName},'%')
+            </if>
+        </where>
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getPlatformCompanyTotal" resultType="int">
+        select count(*) from v_platform_company
+        <where>
+            <if test="nickName !=null and nickName !=''">
+                nickName like concat('%',#{nickName},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

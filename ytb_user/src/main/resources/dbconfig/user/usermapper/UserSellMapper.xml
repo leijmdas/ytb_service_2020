@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserSellMapper" >
+
+    <select id="getUserSellList" resultType="map">
+        SELECT
+        a.sell_Id AS sellId,
+        a.user_id AS userId,
+        a.company_id as companyId,
+        a.type_id AS typeId,
+        a.product_name AS productName,
+        a.product_rule AS productRule,
+        a.product_factory as productFactory,
+        a.product_price as productPrice,
+        a.rule_remark as ruleRemark,
+        a.product_pic_url as productPicUrl,
+        a.doc_url as docUrl,
+        m.title,
+        m.parentName,
+        b.`name` as docName
+        FROM
+        user_sell a
+        LEFT JOIN (
+        SELECT
+        t1.Project_Type_Id,
+        t1.title,
+        (
+        SELECT
+        p.Title
+        FROM
+        ytb_manager.dict_project_type p
+        WHERE
+        p.Project_Type_Id = t1.parent_id
+        ) AS parentName
+        FROM
+        ytb_manager.dict_project_type t1
+        ) AS m ON m.Project_Type_Id = a.type_id
+        left join user_image b on a.doc_url = b.document_id
+        <where>
+            <if test="userId !=null and userId !=''">
+                a.user_id = #{userId}
+            </if>
+            <if test="companyId !=null and companyId !=''">
+                a.company_id = #{companyId}
+            </if>
+        </where>
+  </select>
+
+
+    <select id="getUserSellType" resultType="map">
+        select DISTINCT a.type_id as typeId,m.title from user_sell a
+        left join
+        (SELECT
+        t1.Project_Type_Id,
+        t1.title,
+        (
+        SELECT
+        p.Title
+        FROM
+        ytb_manager.dict_project_type p
+        WHERE
+        p.Project_Type_Id = t1.parent_id
+        ) AS parentName
+        FROM
+        ytb_manager.dict_project_type t1
+        ) as m on m.Project_Type_Id = a.type_id
+        <where>
+        <if test="userId !=null and userId !=''">
+            user_id = #{userId}
+        </if>
+        <if test="companyId !=null and companyId !=''">
+            company_id = #{companyId}
+        </if>
+    </where>
+    </select>
+
+
+    <insert id="addUserSell" parameterType="ytb.user.model.UserSellModel" useGeneratedKeys="true" keyProperty="sellId">
+        INSERT into user_sell
+        (
+          user_id,
+          company_id,
+          type_id,
+          product_name,
+          product_rule,
+          product_factory,
+          product_price,
+          product_pic_url,
+          doc_url,
+          create_time
+        )values(
+          #{userId},
+          #{companyId},
+          #{typeId},
+          #{productName},
+          #{productRule},
+          #{productFactory},
+          #{productPrice},
+          #{productPicUrl},
+          #{docUrl},
+          now()
+        )
+    </insert>
+
+
+    <update id="updateUserSell" parameterType="ytb.user.model.UserSellModel">
+      update user_sell
+        <set>
+            <if test="userId != null and userId !=''">`user_id` = #{userId}, </if>
+            <if test="companyId != null and companyId !=''">`company_id` = #{companyId}, </if>
+            <if test="typeId != null">`type_id` = #{typeId},</if>
+            <if test="productName != null">`product_name` = #{productName},</if>
+            <if test="productRule != null">`product_rule` = #{productRule},</if>
+            <if test="productFactory != null">`product_factory` = #{productFactory},</if>
+            <if test="productPrice != null">`product_price` = #{productPrice}</if>
+        </set>
+        where sell_id = #{sellId}
+    </update>
+
+    <delete id="deleteUserSell">
+        delete from user_sell where sell_id = #{sellId}
+    </delete>
+
+    <update id="updateViewCountById">
+      update user_sell set view_number = view_number+1 where sell_id =  #{sellId}
+    </update>
+
+</mapper>

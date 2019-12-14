@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.UserInfoDao" >
+    <select id="getUserInfoById" resultMap="getUserInfoByIdMap">
+        SELECT
+             a.user_id as userId,
+             a.nick_name as nickName,
+             b.user_head as userHead,
+             IF(b.is_online,'online','hide') AS status,
+             b.user_sign as sign,
+             f.friends_type_id as friendsTypeId
+        from ytb_user.user_info a
+        LEFT JOIN  ytb_user.user_login b
+               on b.user_id = a.user_id
+        LEFT JOIN friend_apply_info f
+               on a.user_id=f.to_user_id
+        where f.apply_id=#{inviteId}
+    </select>
+    <resultMap id="getUserInfoByIdMap" type="ytb.bangbang.model.UserInfo">
+        <id column="userId" property="userId"/>
+        <result column="nickName" property="nickName"/>
+        <result column="userHead" property="userHead"/>
+        <result column="status" property="status"/>
+        <result column="sign" property="sign"/>
+        <result column="friendsTypeId" property="friendsTypeId"/>
+    </resultMap>
+
+    <select id="getUserInfoByUserId" resultMap="getUserInfoByUserIdMap">
+        SELECT
+             a.user_id,
+             a.nick_name,
+             b.user_head,
+             IF(b.is_online,'online','hide') AS status,
+             b.user_sign
+        from ytb_user.user_info a
+        LEFT JOIN  ytb_user.user_login b
+               on b.user_id = a.user_id
+        where a.user_id=#{userId}
+    </select>
+    <resultMap id="getUserInfoByUserIdMap" type="ytb.bangbang.model.UserInfo">
+        <id column="user_id" property="userId"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="user_head" property="userHead"/>
+        <result column="status" property="status"/>
+        <result column="user_sign" property="sign"/>
+    </resultMap>
+</mapper>

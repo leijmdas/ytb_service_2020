@@ -1,0 +1,3323 @@
+{
+  "header": {
+    "docType": 200,
+    "documentId": 369,
+    "projectId": 0,
+    "version": "1.0"
+  },
+  "body": [
+    {
+      "contentStart": 2,
+      "refString": "",
+      "depth": 1,
+      "titleRows": 1,
+      "titleRowLimit": 1,
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "text": "1."
+            },
+            {
+              "text": "乙方工作组"
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "tagType": "tagText",
+      "rowLimit": 2147483647,
+      "rows": 1,
+      "value": [
+        {
+          "contentStart": 3,
+          "refString": "",
+          "titleRows": 1,
+          "titleRowLimit": 1,
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "text": "岗位"
+                },
+                {
+                  "text": "人员"
+                },
+                {
+                  "text": "工作内容"
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 6,
+          "rows": 6,
+          "depth": 2,
+          "tableDict": {
+            "dbName": "ytb_project",
+            "fields": [
+              {
+                "refField": "work_job_id",
+                "fieldName": "work_job",
+                "refObject": "",
+                "refDisplayid": "work_job",
+                "fieldDefault": "",
+                "fieldSrc": 5,
+                "refParameter": "{}",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "user_id",
+                "fieldName": "user_name",
+                "refObject": "http://localhost/rest/tagTableService/manager",
+                "refDisplayid": "user_name",
+                "fieldDefault": "",
+                "fieldSrc": 5,
+                "refParameter": "{\"cmd\":\"project_member\",\"cmdtype\":\"tagTableServiceManager\"}",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "work_task",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 1,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              }
+            ],
+            "tableName": "work_group_task"
+          },
+          "tagType": "tagTable",
+          "value": [
+            {
+              "addable": true,
+              "items": [
+                {
+                  "work_job_id": 0,
+                  "fieldMemo": "岗位",
+                  "fieldName": "work_job",
+                  "edit": true,
+                  "text": "负责人",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "edit": true,
+                  "user_id": 0,
+                  "text": "A",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "任务",
+                  "fieldName": "work_task",
+                  "edit": true,
+                  "text": "项目管理与交付",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": true,
+              "items": [
+                {
+                  "work_job_id": 0,
+                  "fieldMemo": "岗位",
+                  "fieldName": "work_job",
+                  "edit": true,
+                  "text": "电路设计",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "edit": true,
+                  "user_id": 0,
+                  "text": "B",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "任务",
+                  "fieldName": "work_task",
+                  "edit": true,
+                  "text": "【电源板】电路板设计与测试；有加工任务；有采购任务",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": true,
+              "items": [
+                {
+                  "work_job_id": 0,
+                  "fieldMemo": "岗位",
+                  "fieldName": "work_job",
+                  "edit": true,
+                  "text": "机械设计",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "edit": true,
+                  "user_id": 0,
+                  "text": "D",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "任务",
+                  "fieldName": "work_task",
+                  "edit": true,
+                  "text": "【前壳】机械模块设计与测试；【后壳】机械模块设计与测试；有加工任务；有采购任务",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": true,
+              "items": [
+                {
+                  "work_job_id": 0,
+                  "fieldMemo": "岗位",
+                  "fieldName": "work_job",
+                  "edit": true,
+                  "text": "软件设计",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "edit": true,
+                  "user_id": 0,
+                  "text": "C",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "任务",
+                  "fieldName": "work_task",
+                  "edit": true,
+                  "text": "【前端】软件模块设计与测试；【社交】软件模块设计与测试",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": true,
+              "items": [
+                {
+                  "work_job_id": 0,
+                  "fieldMemo": "岗位",
+                  "fieldName": "work_job",
+                  "edit": true,
+                  "text": "界面美工设计",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "edit": true,
+                  "user_id": 0,
+                  "text": "E",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "任务",
+                  "fieldName": "work_task",
+                  "edit": true,
+                  "text": "界面UI美工设计",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": true,
+              "items": [
+                {
+                  "work_job_id": 0,
+                  "fieldMemo": "岗位",
+                  "fieldName": "work_job",
+                  "edit": true,
+                  "text": "产品造型设计",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "edit": true,
+                  "user_id": 0,
+                  "text": "F",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "任务",
+                  "fieldName": "work_task",
+                  "edit": true,
+                  "text": "产品外观造型设计（无模型制作）",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            }
+          ],
+          "key": "tagTable@work_group_task$A4"
+        }
+      ],
+      "key": "tagText$A3"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "depth": 1,
+      "titleRows": 1,
+      "titleRowLimit": 1,
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "text": "2."
+            },
+            {
+              "text": "工作天数一览表"
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "tagType": "tagText",
+      "rowLimit": 2147483647,
+      "rows": 1,
+      "value": [
+        {
+          "contentStart": 3,
+          "refString": "",
+          "titleRows": 2,
+          "titleRowLimit": 2,
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "工作组"
+                },
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "人员"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 6,
+                  "text": "交付阶段与工作天数"
+                },
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "工作总天数"
+                }
+              ]
+            },
+            {
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "提供3个以上造型\n和界面风格稿"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "完成2个以上造型效果图\n和80%界面美工图"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "完成造型结构图\n和界面美工设计图"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "完成需求80%以上"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "完成需求95%以上"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "完成需求100%，正式交付"
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 10,
+          "rows": 10,
+          "depth": 2,
+          "tableDict": {
+            "dbName": "ytb_account",
+            "fields": [
+              {
+                "refField": "",
+                "fieldName": "direction_name",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "乙方",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "user_name",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase1_day",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase2_day",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase3_day",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase4_day",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase5_day",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase6_day",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "sum_day",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              }
+            ],
+            "tableName": "project_work_day"
+          },
+          "tagType": "tagTableIrregular",
+          "value": [
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 9,
+                  "fieldMemo": "甲方乙方",
+                  "fieldName": "direction_name",
+                  "colSpan": 1,
+                  "text": "乙方",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "A",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第一阶段天数",
+                  "fieldName": "phase1_day",
+                  "colSpan": 1,
+                  "text": "15",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第二阶段天数",
+                  "fieldName": "phase2_day",
+                  "colSpan": 1,
+                  "text": "15",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第三阶段天数",
+                  "fieldName": "phase3_day",
+                  "colSpan": 1,
+                  "text": "10",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第四阶段天数",
+                  "fieldName": "phase4_day",
+                  "colSpan": 1,
+                  "text": "10",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第五阶段天数",
+                  "fieldName": "phase5_day",
+                  "colSpan": 1,
+                  "text": "25",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第六阶段天数",
+                  "fieldName": "phase6_day",
+                  "colSpan": 1,
+                  "text": "25",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "工作总天数",
+                  "fieldName": "sum_day",
+                  "colSpan": 1,
+                  "text": "100",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "hide": true,
+                  "fieldMemo": "甲方乙方",
+                  "fieldName": "direction_name",
+                  "text": "乙方",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "B",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第一阶段天数",
+                  "fieldName": "phase1_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第二阶段天数",
+                  "fieldName": "phase2_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第三阶段天数",
+                  "fieldName": "phase3_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第四阶段天数",
+                  "fieldName": "phase4_day",
+                  "colSpan": 1,
+                  "text": "20",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第五阶段天数",
+                  "fieldName": "phase5_day",
+                  "colSpan": 1,
+                  "text": "20",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第六阶段天数",
+                  "fieldName": "phase6_day",
+                  "colSpan": 1,
+                  "text": "20",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "工作总天数",
+                  "fieldName": "sum_day",
+                  "colSpan": 1,
+                  "text": "63",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "hide": true,
+                  "fieldMemo": "甲方乙方",
+                  "fieldName": "direction_name",
+                  "text": "乙方",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "D",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第一阶段天数",
+                  "fieldName": "phase1_day",
+                  "colSpan": 1,
+                  "text": "3",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第二阶段天数",
+                  "fieldName": "phase2_day",
+                  "colSpan": 1,
+                  "text": "10",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第三阶段天数",
+                  "fieldName": "phase3_day",
+                  "colSpan": 1,
+                  "text": "15",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第四阶段天数",
+                  "fieldName": "phase4_day",
+                  "colSpan": 1,
+                  "text": "25",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第五阶段天数",
+                  "fieldName": "phase5_day",
+                  "colSpan": 1,
+                  "text": "25",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第六阶段天数",
+                  "fieldName": "phase6_day",
+                  "colSpan": 1,
+                  "text": "25",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "工作总天数",
+                  "fieldName": "sum_day",
+                  "colSpan": 1,
+                  "text": "103",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "hide": true,
+                  "fieldMemo": "甲方乙方",
+                  "fieldName": "direction_name",
+                  "text": "乙方",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "C",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第一阶段天数",
+                  "fieldName": "phase1_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第二阶段天数",
+                  "fieldName": "phase2_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第三阶段天数",
+                  "fieldName": "phase3_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第四阶段天数",
+                  "fieldName": "phase4_day",
+                  "colSpan": 1,
+                  "text": "20",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第五阶段天数",
+                  "fieldName": "phase5_day",
+                  "colSpan": 1,
+                  "text": "20",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第六阶段天数",
+                  "fieldName": "phase6_day",
+                  "colSpan": 1,
+                  "text": "20",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "工作总天数",
+                  "fieldName": "sum_day",
+                  "colSpan": 1,
+                  "text": "63",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "hide": true,
+                  "fieldMemo": "甲方乙方",
+                  "fieldName": "direction_name",
+                  "text": "乙方",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "E",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第一阶段天数",
+                  "fieldName": "phase1_day",
+                  "colSpan": 1,
+                  "text": "8",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第二阶段天数",
+                  "fieldName": "phase2_day",
+                  "colSpan": 1,
+                  "text": "8",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第三阶段天数",
+                  "fieldName": "phase3_day",
+                  "colSpan": 1,
+                  "text": "8",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第四阶段天数",
+                  "fieldName": "phase4_day",
+                  "colSpan": 1,
+                  "text": "2",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第五阶段天数",
+                  "fieldName": "phase5_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第六阶段天数",
+                  "fieldName": "phase6_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "工作总天数",
+                  "fieldName": "sum_day",
+                  "colSpan": 1,
+                  "text": "28",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "hide": true,
+                  "fieldMemo": "甲方乙方",
+                  "fieldName": "direction_name",
+                  "text": "乙方",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "F",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第一阶段天数",
+                  "fieldName": "phase1_day",
+                  "colSpan": 1,
+                  "text": "10",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第二阶段天数",
+                  "fieldName": "phase2_day",
+                  "colSpan": 1,
+                  "text": "10",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第三阶段天数",
+                  "fieldName": "phase3_day",
+                  "colSpan": 1,
+                  "text": "10",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第四阶段天数",
+                  "fieldName": "phase4_day",
+                  "colSpan": 1,
+                  "text": "2",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第五阶段天数",
+                  "fieldName": "phase5_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第六阶段天数",
+                  "fieldName": "phase6_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "工作总天数",
+                  "fieldName": "sum_day",
+                  "colSpan": 1,
+                  "text": "34",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "hide": true,
+                  "fieldMemo": "甲方乙方",
+                  "fieldName": "direction_name",
+                  "text": "乙方",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "colSpan": 4,
+                  "text": "加工天数",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "第一阶段天数",
+                  "fieldName": "phase1_day",
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "第二阶段天数",
+                  "fieldName": "phase2_day",
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "第三阶段天数",
+                  "fieldName": "phase3_day",
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第四阶段天数",
+                  "fieldName": "phase4_day",
+                  "colSpan": 1,
+                  "text": "10",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第五阶段天数",
+                  "fieldName": "phase5_day",
+                  "colSpan": 1,
+                  "text": "8",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第六阶段天数",
+                  "fieldName": "phase6_day",
+                  "colSpan": 1,
+                  "text": "8",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "工作总天数",
+                  "fieldName": "sum_day",
+                  "colSpan": 1,
+                  "text": "26",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "hide": true,
+                  "fieldMemo": "甲方乙方",
+                  "fieldName": "direction_name",
+                  "text": "乙方",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "colSpan": 4,
+                  "text": "采购天数",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "第一阶段天数",
+                  "fieldName": "phase1_day",
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "第二阶段天数",
+                  "fieldName": "phase2_day",
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "第三阶段天数",
+                  "fieldName": "phase3_day",
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第四阶段天数",
+                  "fieldName": "phase4_day",
+                  "colSpan": 1,
+                  "text": "8",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第五阶段天数",
+                  "fieldName": "phase5_day",
+                  "colSpan": 1,
+                  "text": "6",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第六阶段天数",
+                  "fieldName": "phase6_day",
+                  "colSpan": 1,
+                  "text": "6",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "工作总天数",
+                  "fieldName": "sum_day",
+                  "colSpan": 1,
+                  "text": "20",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "hide": true,
+                  "fieldMemo": "甲方乙方",
+                  "fieldName": "direction_name",
+                  "text": "乙方",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "colSpan": 4,
+                  "text": "交付样机数量",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "第一阶段天数",
+                  "fieldName": "phase1_day",
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "第二阶段天数",
+                  "fieldName": "phase2_day",
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "第三阶段天数",
+                  "fieldName": "phase3_day",
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第四阶段天数",
+                  "fieldName": "phase4_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第五阶段天数",
+                  "fieldName": "phase5_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第六阶段天数",
+                  "fieldName": "phase6_day",
+                  "colSpan": 1,
+                  "text": "3",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "工作总天数",
+                  "fieldName": "sum_day",
+                  "colSpan": 1,
+                  "text": "5",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "甲方乙方",
+                  "fieldName": "direction_name",
+                  "colSpan": 1,
+                  "text": "甲方",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "甲方验收天数",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第一阶段天数",
+                  "fieldName": "phase1_day",
+                  "colSpan": 1,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第二阶段天数",
+                  "fieldName": "phase2_day",
+                  "colSpan": 1,
+                  "text": "2",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第三阶段天数",
+                  "fieldName": "phase3_day",
+                  "colSpan": 1,
+                  "text": "3",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第四阶段天数",
+                  "fieldName": "phase4_day",
+                  "colSpan": 1,
+                  "text": "4",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第五阶段天数",
+                  "fieldName": "phase5_day",
+                  "colSpan": 1,
+                  "text": "5",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "第六阶段天数",
+                  "fieldName": "phase6_day",
+                  "colSpan": 1,
+                  "text": "6",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "工作总天数",
+                  "fieldName": "sum_day",
+                  "colSpan": 1,
+                  "text": "21",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            }
+          ],
+          "key": "tagTableIrregular@project_work_day$A13"
+        }
+      ],
+      "key": "tagText$A12"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "depth": 1,
+      "titleRows": 1,
+      "titleRowLimit": 1,
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "text": "3."
+            },
+            {
+              "text": "工作计划里程碑"
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "tagType": "tagText",
+      "rowLimit": 2147483647,
+      "rows": 2,
+      "value": [
+        {
+          "contentStart": 3,
+          "refString": "",
+          "titleRows": 1,
+          "titleRowLimit": 1,
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "text": "阶段："
+                },
+                {
+                  "text": "项目开始日期"
+                },
+                {
+                  "text": "提供3个以上造型\n和界面风格稿"
+                },
+                {
+                  "text": "完成2个以上造型效果图\n和80%界面美工图"
+                },
+                {
+                  "text": "完成造型结构图\n和界面美工设计图"
+                },
+                {
+                  "text": "完成需求80%以上"
+                },
+                {
+                  "text": "完成需求95%以上"
+                },
+                {
+                  "text": "完成需求100%，正式交付"
+                },
+                {
+                  "text": "项目完成日期"
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 1,
+          "rows": 1,
+          "depth": 2,
+          "tableDict": {
+            "dbName": "ytb_account",
+            "fields": [
+              {
+                "refField": "",
+                "fieldName": "phase",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "TINYINT"
+              },
+              {
+                "refField": "",
+                "fieldName": "startTime",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "DATETIME"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase1",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase2",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase3",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase4",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase5",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase6",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "endTime",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "DATETIME"
+              }
+            ],
+            "tableName": "project_plan"
+          },
+          "tagType": "tagTable",
+          "value": [
+            {
+              "addable": false,
+              "items": [
+                {
+                  "fieldMemo": "阶段",
+                  "fieldName": "phase",
+                  "edit": true,
+                  "text": "完成日期：",
+                  "fieldType": "TINYINT"
+                },
+                {
+                  "fieldMemo": "项目开始日期",
+                  "fieldName": "startTime",
+                  "edit": true,
+                  "text": "2018-11-13",
+                  "fieldType": "DATETIME"
+                },
+                {
+                  "fieldMemo": "提供3个以上造型 和界面风格稿",
+                  "fieldName": "phase1",
+                  "edit": true,
+                  "text": "2018-11-28",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "完成2个以上造型效果图 和80%界面美工图",
+                  "fieldName": "phase2",
+                  "edit": true,
+                  "text": "2018-12-15",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "完成造型结构图 和界面美工设计图",
+                  "fieldName": "phase3",
+                  "edit": true,
+                  "text": "2019-1-2",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "完成需求80%以上",
+                  "fieldName": "phase4",
+                  "edit": true,
+                  "text": "2019-2-10",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "完成需求95%以上",
+                  "fieldName": "phase5",
+                  "edit": true,
+                  "text": "2019-3-20",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "完成需求100%，正式交付",
+                  "fieldName": "phase6",
+                  "edit": true,
+                  "text": "2019-4-28",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "项目完成日期",
+                  "fieldName": "endTime",
+                  "edit": true,
+                  "text": "2019-4-28",
+                  "fieldType": "DATETIME"
+                }
+              ],
+              "removeable": false
+            }
+          ],
+          "key": "tagTable@project_plan$A31"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "titleRows": 0,
+          "titleRowLimit": 1,
+          "tagTitle": [],
+          "show": true,
+          "rowLimit": 1,
+          "rows": 1,
+          "depth": 2,
+          "tableDict": {
+            "dbName": "ytb_account",
+            "fields": [
+              {
+                "refField": "",
+                "fieldName": "complete_desc",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "complete_time",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "DATETIME"
+              },
+              {
+                "refField": "",
+                "fieldName": "user_complete_desc",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "user_complete_time",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "DATETIME"
+              }
+            ],
+            "tableName": "project_plan_sum"
+          },
+          "tagType": "tagTableSum",
+          "value": [
+            {
+              "addable": false,
+              "items": [
+                {
+                  "fieldMemo": "完成时间（平台推荐时间）描述",
+                  "fieldName": "complete_desc",
+                  "edit": true,
+                  "text": "项目完成日期（平台推荐）：",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "完成时间（平台推荐）值",
+                  "fieldName": "complete_time",
+                  "edit": true,
+                  "text": "2018-4-28",
+                  "fieldType": "DATETIME"
+                },
+                {
+                  "fieldMemo": "调整项目完成时间-描述",
+                  "fieldName": "user_complete_desc",
+                  "edit": true,
+                  "text": "调整项目完成日期：",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "调整项目时间-值",
+                  "fieldName": "user_complete_time",
+                  "edit": true,
+                  "text": "2018-4-28",
+                  "fieldType": "DATETIME"
+                }
+              ],
+              "removeable": false
+            }
+          ],
+          "key": "tagTableSum@project_plan_sum$A33"
+        }
+      ],
+      "key": "tagText$A30"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "depth": 1,
+      "titleRows": 1,
+      "titleRowLimit": 1,
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "text": "4."
+            },
+            {
+              "text": "乙方采购和加工费用预算一览表（不能超出预算，超出费用由乙方承担，结余费用归还甲方。）"
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "tagType": "tagText",
+      "rowLimit": 2147483647,
+      "rows": 2,
+      "value": [
+        {
+          "contentStart": 3,
+          "refString": "",
+          "titleRows": 2,
+          "titleRowLimit": 2,
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "人员"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 2,
+                  "text": "采购费预算（RMB）"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 2,
+                  "text": "加工费预算（RMB）"
+                },
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "总预算（元）"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "乙方采购和加工费用的说明"
+                }
+              ]
+            },
+            {
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "数量（套）"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "元/套"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "数量（套）"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "元/套"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "必须提供采购和加工的发票。"
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 3,
+          "rows": 3,
+          "depth": 2,
+          "tableDict": {
+            "dbName": "ytb_account",
+            "fields": [
+              {
+                "refField": "",
+                "fieldName": "ppd_user_name",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "purchase_count",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "purchase_price",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "process_count",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "process_price",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "sum",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "0",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "tips",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              }
+            ],
+            "tableName": "pp_budget"
+          },
+          "tagType": "tagTableIrregular",
+          "value": [
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "采购加工人员姓名",
+                  "fieldName": "ppd_user_name",
+                  "colSpan": 1,
+                  "text": "A",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "采购费预算-数量",
+                  "fieldName": "purchase_count",
+                  "colSpan": 1,
+                  "text": "11",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "采购费预算-单价",
+                  "fieldName": "purchase_price",
+                  "colSpan": 1,
+                  "text": "￥30",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "加工费预算-数量",
+                  "fieldName": "process_count",
+                  "colSpan": 1,
+                  "text": "11",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "加工费预算-单价",
+                  "fieldName": "process_price",
+                  "colSpan": 1,
+                  "text": "￥100",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "总预算",
+                  "fieldName": "sum",
+                  "colSpan": 1,
+                  "text": "￥1,430",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "说明",
+                  "fieldName": "tips",
+                  "colSpan": 1,
+                  "text": "PCB加工和采购电子元器件",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "采购加工人员姓名",
+                  "fieldName": "ppd_user_name",
+                  "colSpan": 1,
+                  "text": "B",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "采购费预算-数量",
+                  "fieldName": "purchase_count",
+                  "colSpan": 1,
+                  "text": "11",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "采购费预算-单价",
+                  "fieldName": "purchase_price",
+                  "colSpan": 1,
+                  "text": "￥75",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "加工费预算-数量",
+                  "fieldName": "process_count",
+                  "colSpan": 1,
+                  "text": "11",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "加工费预算-单价",
+                  "fieldName": "process_price",
+                  "colSpan": 1,
+                  "text": "￥0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "总预算",
+                  "fieldName": "sum",
+                  "colSpan": 1,
+                  "text": "￥825",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "采购加工人员姓名",
+                  "fieldName": "ppd_user_name",
+                  "colSpan": 1,
+                  "text": "D",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "采购费预算-数量",
+                  "fieldName": "purchase_count",
+                  "colSpan": 1,
+                  "text": "11",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "采购费预算-单价",
+                  "fieldName": "purchase_price",
+                  "colSpan": 1,
+                  "text": "￥50",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "加工费预算-数量",
+                  "fieldName": "process_count",
+                  "colSpan": 1,
+                  "text": "11",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "加工费预算-单价",
+                  "fieldName": "process_price",
+                  "colSpan": 1,
+                  "text": "￥230",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "总预算",
+                  "fieldName": "sum",
+                  "colSpan": 1,
+                  "text": "￥3,080",
+                  "fieldType": "INTEGER"
+                }
+              ],
+              "removeable": false
+            }
+          ],
+          "key": "tagTableIrregular@pp_budget$A39"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "titleRows": 0,
+          "titleRowLimit": 1,
+          "tagTitle": [],
+          "show": true,
+          "rowLimit": 1,
+          "rows": 1,
+          "depth": 2,
+          "tableDict": {
+            "dbName": "ytb_account",
+            "fields": [
+              {
+                "refField": "",
+                "fieldName": "purchase_budge_desc",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "purchase_budge_value",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "process_budge_desc\t",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "process_budge_value",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "total_sum",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "tips",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              }
+            ],
+            "tableName": "pp_budget_sum"
+          },
+          "tagType": "tagTableSum",
+          "value": [
+            {
+              "addable": false,
+              "items": [
+                {
+                  "fieldMemo": "采购费预算小计-描述",
+                  "fieldName": "purchase_budge_desc",
+                  "edit": true,
+                  "text": "采购费预算小计",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "采购费预算小计-值",
+                  "fieldName": "purchase_budge_value",
+                  "edit": true,
+                  "text": "￥1,705",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "加工费预算小计-描述",
+                  "fieldName": "process_budge_desc\t",
+                  "edit": true,
+                  "text": "加工费预算小计",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "加工费预算小计-值",
+                  "fieldName": "process_budge_value",
+                  "edit": true,
+                  "text": "￥3,630",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "总预算",
+                  "fieldName": "total_sum",
+                  "edit": true,
+                  "text": "￥5,335",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            }
+          ],
+          "key": "tagTableSum@pp_budget_sum$A44"
+        }
+      ],
+      "key": "tagText$A38"
+    },
+    {
+      "contentStart": 2,
+      "refString": "",
+      "depth": 1,
+      "titleRows": 1,
+      "titleRowLimit": 1,
+      "tagTitle": [
+        {
+          "items": [
+            {
+              "text": "5."
+            },
+            {
+              "text": "费用一览表"
+            }
+          ]
+        }
+      ],
+      "show": true,
+      "tagType": "tagText",
+      "rowLimit": 2147483647,
+      "rows": 4,
+      "value": [
+        {
+          "contentStart": 3,
+          "refString": "",
+          "titleRows": 2,
+          "titleRowLimit": 2,
+          "tagTitle": [
+            {
+              "items": [
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "人员"
+                },
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "所在地域"
+                },
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "日薪"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 6,
+                  "text": "乙方人员在每个阶段的实际收入"
+                },
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "人员收入合计\n（元）"
+                },
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "服务费合计\n（元）"
+                },
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "税费合计\n（元）"
+                },
+                {
+                  "rowSpan": 2,
+                  "colSpan": 1,
+                  "text": "合同总金额（元）"
+                }
+              ]
+            },
+            {
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "提供3个以上造型\n和界面风格稿"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "完成2个以上造型效果图\n和80%界面美工图"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "完成造型结构图\n和界面美工设计图"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "完成需求80%以上"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "完成需求95%以上"
+                },
+                {
+                  "rowSpan": 1,
+                  "colSpan": 1,
+                  "text": "完成需求100%，正式交付"
+                }
+              ]
+            }
+          ],
+          "show": true,
+          "rowLimit": 6,
+          "rows": 6,
+          "depth": 2,
+          "tableDict": {
+            "dbName": "ytb_account",
+            "fields": [
+              {
+                "refField": "",
+                "fieldName": "user_name",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "area_name",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "day_pay",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "cost_phase1",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "cost_phase2",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "cost_phase3",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "cost_phase4",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "cost_phase5",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "cost_phase6",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "income_sum",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "service_sum",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "tax_sum",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "cost_sum",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              }
+            ],
+            "tableName": "cost"
+          },
+          "tagType": "tagTableIrregular",
+          "value": [
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "员工名称",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "A",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "所在地域",
+                  "fieldName": "area_name",
+                  "colSpan": 1,
+                  "text": "广州",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "日薪",
+                  "fieldName": "day_pay",
+                  "colSpan": 1,
+                  "text": "¥250",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "提供3个以上造型 和界面风格稿",
+                  "fieldName": "cost_phase1",
+                  "colSpan": 1,
+                  "text": "¥5,993",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成2个以上造型效果图 和80%界面美工图",
+                  "fieldName": "cost_phase2",
+                  "colSpan": 1,
+                  "text": "¥5,993",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成造型结构图 和界面美工设计图",
+                  "fieldName": "cost_phase3",
+                  "colSpan": 1,
+                  "text": "¥3,995",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求80%以上",
+                  "fieldName": "cost_phase4",
+                  "colSpan": 1,
+                  "text": "¥4,472",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求95%以上",
+                  "fieldName": "cost_phase5",
+                  "colSpan": 1,
+                  "text": "¥10,582",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求100%，正式交付",
+                  "fieldName": "cost_phase6",
+                  "colSpan": 1,
+                  "text": "¥26,750",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员收入合计 （元）",
+                  "fieldName": "income_sum",
+                  "colSpan": 1,
+                  "text": "¥57,783",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 6,
+                  "fieldMemo": "服务费合计 （元）",
+                  "fieldName": "service_sum",
+                  "colSpan": 1,
+                  "text": "¥22,493",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 6,
+                  "fieldMemo": "税费合计 （元）",
+                  "fieldName": "tax_sum",
+                  "colSpan": 1,
+                  "text": "¥7,827",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 6,
+                  "fieldMemo": "合同总金额（元）",
+                  "fieldName": "cost_sum",
+                  "colSpan": 1,
+                  "text": "¥158,285",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "员工名称",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "B",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "所在地域",
+                  "fieldName": "area_name",
+                  "colSpan": 1,
+                  "text": "桂林",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "日薪",
+                  "fieldName": "day_pay",
+                  "colSpan": 1,
+                  "text": "¥150",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "提供3个以上造型 和界面风格稿",
+                  "fieldName": "cost_phase1",
+                  "colSpan": 1,
+                  "text": "¥120",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成2个以上造型效果图 和80%界面美工图",
+                  "fieldName": "cost_phase2",
+                  "colSpan": 1,
+                  "text": "¥120",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成造型结构图 和界面美工设计图",
+                  "fieldName": "cost_phase3",
+                  "colSpan": 1,
+                  "text": "¥120",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求80%以上",
+                  "fieldName": "cost_phase4",
+                  "colSpan": 1,
+                  "text": "¥2,672",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求95%以上",
+                  "fieldName": "cost_phase5",
+                  "colSpan": 1,
+                  "text": "¥2,672",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求100%，正式交付",
+                  "fieldName": "cost_phase6",
+                  "colSpan": 1,
+                  "text": "¥5,692",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员收入合计 （元）",
+                  "fieldName": "income_sum",
+                  "colSpan": 1,
+                  "text": "¥11,396",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "服务费合计 （元）",
+                  "fieldName": "service_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "税费合计 （元）",
+                  "fieldName": "tax_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "合同总金额（元）",
+                  "fieldName": "cost_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "员工名称",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "D",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "所在地域",
+                  "fieldName": "area_name",
+                  "colSpan": 1,
+                  "text": "长沙",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "日薪",
+                  "fieldName": "day_pay",
+                  "colSpan": 1,
+                  "text": "¥200",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "提供3个以上造型 和界面风格稿",
+                  "fieldName": "cost_phase1",
+                  "colSpan": 1,
+                  "text": "¥479",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成2个以上造型效果图 和80%界面美工图",
+                  "fieldName": "cost_phase2",
+                  "colSpan": 1,
+                  "text": "¥1,598",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成造型结构图 和界面美工设计图",
+                  "fieldName": "cost_phase3",
+                  "colSpan": 1,
+                  "text": "¥2,397",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求80%以上",
+                  "fieldName": "cost_phase4",
+                  "colSpan": 1,
+                  "text": "¥5,022",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求95%以上",
+                  "fieldName": "cost_phase5",
+                  "colSpan": 1,
+                  "text": "¥5,022",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求100%，正式交付",
+                  "fieldName": "cost_phase6",
+                  "colSpan": 1,
+                  "text": "¥11,605",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员收入合计 （元）",
+                  "fieldName": "income_sum",
+                  "colSpan": 1,
+                  "text": "¥26,123",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "服务费合计 （元）",
+                  "fieldName": "service_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "税费合计 （元）",
+                  "fieldName": "tax_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "合同总金额（元）",
+                  "fieldName": "cost_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "员工名称",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "C",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "所在地域",
+                  "fieldName": "area_name",
+                  "colSpan": 1,
+                  "text": "武汉",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "日薪",
+                  "fieldName": "day_pay",
+                  "colSpan": 1,
+                  "text": "¥200",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "提供3个以上造型 和界面风格稿",
+                  "fieldName": "cost_phase1",
+                  "colSpan": 1,
+                  "text": "¥160",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成2个以上造型效果图 和80%界面美工图",
+                  "fieldName": "cost_phase2",
+                  "colSpan": 1,
+                  "text": "¥160",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成造型结构图 和界面美工设计图",
+                  "fieldName": "cost_phase3",
+                  "colSpan": 1,
+                  "text": "¥160",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求80%以上",
+                  "fieldName": "cost_phase4",
+                  "colSpan": 1,
+                  "text": "¥3,196",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求95%以上",
+                  "fieldName": "cost_phase5",
+                  "colSpan": 1,
+                  "text": "¥3,196",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求100%，正式交付",
+                  "fieldName": "cost_phase6",
+                  "colSpan": 1,
+                  "text": "¥7,223",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员收入合计 （元）",
+                  "fieldName": "income_sum",
+                  "colSpan": 1,
+                  "text": "¥14,094",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "服务费合计 （元）",
+                  "fieldName": "service_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "税费合计 （元）",
+                  "fieldName": "tax_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "合同总金额（元）",
+                  "fieldName": "cost_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "员工名称",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "E",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "所在地域",
+                  "fieldName": "area_name",
+                  "colSpan": 1,
+                  "text": "深圳",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "日薪",
+                  "fieldName": "day_pay",
+                  "colSpan": 1,
+                  "text": "¥350",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "提供3个以上造型 和界面风格稿",
+                  "fieldName": "cost_phase1",
+                  "colSpan": 1,
+                  "text": "¥2,237",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成2个以上造型效果图 和80%界面美工图",
+                  "fieldName": "cost_phase2",
+                  "colSpan": 1,
+                  "text": "¥2,237",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成造型结构图 和界面美工设计图",
+                  "fieldName": "cost_phase3",
+                  "colSpan": 1,
+                  "text": "¥2,237",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求80%以上",
+                  "fieldName": "cost_phase4",
+                  "colSpan": 1,
+                  "text": "¥559",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求95%以上",
+                  "fieldName": "cost_phase5",
+                  "colSpan": 1,
+                  "text": "¥280",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求100%，正式交付",
+                  "fieldName": "cost_phase6",
+                  "colSpan": 1,
+                  "text": "¥3,412",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员收入合计 （元）",
+                  "fieldName": "income_sum",
+                  "colSpan": 1,
+                  "text": "¥10,962",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "服务费合计 （元）",
+                  "fieldName": "service_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "税费合计 （元）",
+                  "fieldName": "tax_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "合同总金额（元）",
+                  "fieldName": "cost_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            },
+            {
+              "addable": false,
+              "items": [
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "员工名称",
+                  "fieldName": "user_name",
+                  "colSpan": 1,
+                  "text": "F",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "所在地域",
+                  "fieldName": "area_name",
+                  "colSpan": 1,
+                  "text": "武汉",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "日薪",
+                  "fieldName": "day_pay",
+                  "colSpan": 1,
+                  "text": "¥200",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "提供3个以上造型 和界面风格稿",
+                  "fieldName": "cost_phase1",
+                  "colSpan": 1,
+                  "text": "¥1,598",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成2个以上造型效果图 和80%界面美工图",
+                  "fieldName": "cost_phase2",
+                  "colSpan": 1,
+                  "text": "¥1,598",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成造型结构图 和界面美工设计图",
+                  "fieldName": "cost_phase3",
+                  "colSpan": 1,
+                  "text": "¥1,598",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求80%以上",
+                  "fieldName": "cost_phase4",
+                  "colSpan": 1,
+                  "text": "¥320",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求95%以上",
+                  "fieldName": "cost_phase5",
+                  "colSpan": 1,
+                  "text": "¥160",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "完成需求100%，正式交付",
+                  "fieldName": "cost_phase6",
+                  "colSpan": 1,
+                  "text": "¥2,333",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "rowSpan": 1,
+                  "fieldMemo": "人员收入合计 （元）",
+                  "fieldName": "income_sum",
+                  "colSpan": 1,
+                  "text": "¥7,606",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "服务费合计 （元）",
+                  "fieldName": "service_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "税费合计 （元）",
+                  "fieldName": "tax_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "hide": true,
+                  "fieldMemo": "合同总金额（元）",
+                  "fieldName": "cost_sum",
+                  "text": "",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            }
+          ],
+          "key": "tagTableIrregular@cost$A50"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "titleRows": 0,
+          "titleRowLimit": 1,
+          "tagTitle": [],
+          "show": true,
+          "rowLimit": 1,
+          "rows": 1,
+          "depth": 2,
+          "tableDict": {
+            "dbName": "ytb_account",
+            "fields": [
+              {
+                "refField": "",
+                "fieldName": "user_percent",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase1_percent",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase2_percent",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase3_percent",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase4_percent",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase5_percent",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "phase6_percent",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "percent_sum",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              }
+            ],
+            "tableName": "cost_sum"
+          },
+          "tagType": "tagTableSum",
+          "value": [
+            {
+              "addable": false,
+              "items": [
+                {
+                  "fieldMemo": "乙方各阶段的实际收入比例",
+                  "fieldName": "user_percent",
+                  "edit": true,
+                  "text": "乙方各个阶段的实际收入比例",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "第一阶段收入占比",
+                  "fieldName": "phase1_percent",
+                  "edit": true,
+                  "text": "8%",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "fieldMemo": "第二阶段收入占比",
+                  "fieldName": "phase2_percent",
+                  "edit": true,
+                  "text": "9%",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "fieldMemo": "第三阶段收入占比",
+                  "fieldName": "phase3_percent",
+                  "edit": true,
+                  "text": "8%",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "fieldMemo": "第四阶段收入占比",
+                  "fieldName": "phase4_percent",
+                  "edit": true,
+                  "text": "13%",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "fieldMemo": "第五阶段收入占比",
+                  "fieldName": "phase5_percent",
+                  "edit": true,
+                  "text": "17%",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "fieldMemo": "第六阶段收入占比",
+                  "fieldName": "phase6_percent",
+                  "edit": true,
+                  "text": "45%",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "fieldMemo": "收入占比总和",
+                  "fieldName": "percent_sum",
+                  "edit": true,
+                  "text": "100%",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            }
+          ],
+          "key": "tagTableSum@cost_sum$A58"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "titleRows": 0,
+          "titleRowLimit": 1,
+          "tagTitle": [],
+          "show": true,
+          "rowLimit": 1,
+          "rows": 1,
+          "depth": 2,
+          "tableDict": {
+            "dbName": "ytb_account",
+            "fields": [
+              {
+                "refField": "",
+                "fieldName": "rate_desc",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "rate_value",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "tips",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              }
+            ],
+            "tableName": "cost_sum_rate"
+          },
+          "tagType": "tagTableSum",
+          "value": [
+            {
+              "addable": false,
+              "items": [
+                {
+                  "fieldMemo": "毛利率-描述",
+                  "fieldName": "rate_desc",
+                  "edit": true,
+                  "text": "毛利率：",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "毛利率-值",
+                  "fieldName": "rate_value",
+                  "edit": true,
+                  "text": "40%",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "提示",
+                  "fieldName": "tips",
+                  "edit": true,
+                  "text": "毛利率带来的劳务费在最后一个阶段与其它款项一并支付。",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            }
+          ],
+          "key": "tagTableSum@cost_sum_rate$A59"
+        },
+        {
+          "contentStart": 3,
+          "refString": "",
+          "titleRows": 0,
+          "titleRowLimit": 1,
+          "tagTitle": [],
+          "show": true,
+          "rowLimit": 1,
+          "rows": 1,
+          "depth": 2,
+          "tableDict": {
+            "dbName": "ytb_account",
+            "fields": [
+              {
+                "refField": "",
+                "fieldName": "invoice_desc",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "invoice_no1",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "invoice_no2",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "invoice_y1",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "invoice_y2",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              },
+              {
+                "refField": "",
+                "fieldName": "invoice_pf1",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "INTEGER"
+              },
+              {
+                "refField": "",
+                "fieldName": "invoice_pf2",
+                "refObject": "",
+                "refDisplayid": "",
+                "fieldDefault": "",
+                "fieldSrc": 4,
+                "refParameter": "",
+                "fieldType": "VARCHAR"
+              }
+            ],
+            "tableName": "cost_sum_invoice"
+          },
+          "tagType": "tagTableSum",
+          "value": [
+            {
+              "addable": false,
+              "items": [
+                {
+                  "fieldMemo": "发票",
+                  "fieldName": "invoice_desc",
+                  "edit": true,
+                  "text": "发票：",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "不需要发票辅助值",
+                  "fieldName": "invoice_no1",
+                  "edit": true,
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "fieldMemo": "不需要发票",
+                  "fieldName": "invoice_no2",
+                  "edit": true,
+                  "text": "○不需要发票",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "乙方开发票辅助值",
+                  "fieldName": "invoice_y1",
+                  "edit": true,
+                  "text": "1",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "fieldMemo": "乙方开发票",
+                  "fieldName": "invoice_y2",
+                  "edit": true,
+                  "text": "○乙方开发票",
+                  "fieldType": "VARCHAR"
+                },
+                {
+                  "fieldMemo": "平台开发票辅助值",
+                  "fieldName": "invoice_pf1",
+                  "edit": true,
+                  "text": "0",
+                  "fieldType": "INTEGER"
+                },
+                {
+                  "fieldMemo": "平台代开发票",
+                  "fieldName": "invoice_pf2",
+                  "edit": true,
+                  "text": "●平台代开发票",
+                  "fieldType": "VARCHAR"
+                }
+              ],
+              "removeable": false
+            }
+          ],
+          "key": "tagTableSum@cost_sum_invoice$A60"
+        }
+      ],
+      "key": "tagText$A49"
+    }
+  ]
+}

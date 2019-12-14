@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.log.notify.dao.TaskLogTaskMapper" >
+
+
+
+	<select id="getTaskLogTaskList" parameterType="int" resultType="ytb.log.notify.model.TaskLog_TaskModel">
+        select tlt.* from tasklog_task tlt where template_type =#{template_type}
+    </select>
+
+    <select id="getTaskLogTask" parameterType="int" resultType="ytb.log.notify.model.TaskLog_TaskModel">
+        select * from tasklog_task where task_id =#{taskId}
+    </select>
+
+    <select id="getTaskLogTaskByObjType" resultType="ytb.log.notify.model.TaskLog_TaskModel">
+        select tlt.* from tasklog_task tlt left join template_policy tp on tlt.template_id = tp.template_id where tp.object_type = #{object_type} and tlt.activiti_inst_id = #{activiti_inst_id}
+    </select>
+
+    <insert id="addTaskLogTask" parameterType="ytb.log.notify.model.TaskLog_TaskModel" useGeneratedKeys="true" keyProperty="taskId" keyColumn="task_id">
+
+      insert into tasklog_task (user_id,to_user_id,activiti_inst_id,template_type,template_id,
+      task_param_in,task_param_out,task_remark,accept_time,finish_time,task_stat,create_by)
+      values (#{userId},#{toUserId},#{activitiInstId},#{templateType},#{templateId},#{taskParamIn},
+      #{taskParamOut},#{taskRemark},#{acceptTime},#{finishTime},#{taskStat},#{createBy})
+
+	</insert>
+
+    <update id="modifyTaskLogTask">
+
+        update tasklog_task set
+        task_remark = #{taskRemark},
+        <if test="activitiInstId!=null">
+          activiti_inst_id = #{activitiInstId},
+        </if>
+        <if test="acceptTime!=null">
+            accept_time = #{acceptTime},
+        </if>
+        <if test="acceptTime!=null">
+            finish_time = #{finishTime},
+        </if>
+        task_param_out = #{taskParamOut},
+        task_stat = #{taskStat}
+        where task_id =#{taskId}
+
+    </update>
+
+
+    <delete id="delTaskLogTask">
+
+      delete from tasklog_task where task_id =#{taskId}
+
+    </delete>
+
+
+</mapper>

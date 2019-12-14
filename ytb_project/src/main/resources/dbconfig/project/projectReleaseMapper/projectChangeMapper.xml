@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectChangeMapper">
+
+    <insert id="addChange" parameterType="ytb.project.model.ProjectChangeModel" useGeneratedKeys="true"
+            keyProperty="changeId" keyColumn="change_id">
+          INSERT INTO project_change (
+        project_id,
+        talk_id,
+        new_project_id,
+        change_type,
+        phase,
+        phase_status,
+        event_type,
+        items,
+        change_time
+        )
+    VALUES
+        (
+            #{projectId},
+            #{talkId},
+            #{newProjectId},
+            #{changeType},
+            #{phase},
+            #{phaseStatus},
+            #{eventType},
+            #{items},
+            now()
+            )
+	</insert>
+
+    <select id="getChangeById" resultType="ytb.project.model.ProjectChangeModel">
+        SELECT * FROM project_change
+            WHERE talk_id = #{talkId}
+            AND new_project_id = #{newProjectId}
+            AND phase = #{phase}
+    </select>
+
+    <select id="getChangeByTalkAndPhase" resultType="ytb.project.model.ProjectChangeModel">
+        SELECT * FROM project_change
+            WHERE talk_id = #{talkId}
+            AND phase = #{phase}
+            AND change_type in (701,702)
+    </select>
+
+    <select id="getChangeStop" resultType="ytb.project.model.ProjectChangeModel">
+        SELECT * FROM project_change
+            WHERE talk_id = #{talkId}
+            AND phase = #{phase}
+            AND change_type=800
+    </select>
+
+    <select id="getChangeModels" resultType="ytb.project.model.ProjectChangeModel">
+        SELECT * FROM project_change
+        WHERE talk_id = #{talkId}
+    </select>
+
+    <select id="getChangeModelList" resultType="ytb.project.model.TabPhaseModel">
+        SELECT * FROM project_change
+        WHERE project_id = #{projectId}
+    </select>
+    
+    <update id="updateProjectChange">
+        UPDATE
+          project_change
+        <set>
+            <if test="phaseStatus != null and phaseStatus !=''">`phase_status` = #{phaseStatus}, </if>
+            <if test="eventType != null and eventType !=''">`event_type` = #{eventType}
+            </if>
+        </set>
+        WHERE new_project_id = #{newProjectId}
+    </update>
+    
+</mapper>

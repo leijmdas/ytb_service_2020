@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.MeetingNoticeMapper" >
+
+    <insert id="addMeetingNotice" parameterType="ytb.project.model.MeetingNoticeModel" useGeneratedKeys="true" keyProperty="meetingNoticeId" keyColumn="meeting_notice_id">
+
+        INSERT INTO meeting_notice
+          (
+            project_id,
+            phase,
+            remark,
+            start_time,
+            stop_time,
+            issue,
+            sponsor,
+            participant,
+            create_time,
+            document_id)
+        VALUES
+          (
+          #{projectId},
+          #{phase},
+          #{remark},
+          #{startTime},
+          #{stopTime},
+          #{issue},
+          #{sponsor},
+          #{participant},
+          now(),
+          #{documentId})
+	</insert>
+
+
+    <select id="selectViewMeetingNoticeModel" resultType="ytb.project.view.model.ProjectTaskViewModel.ViewMeetingNoticeModel">
+
+         SELECT
+            m.sponsor,
+            m.issue,
+            m.participant,
+            m.create_time as createTime,
+            date_format(
+                m.stop_time,
+                '%Y-%m-%d %H:%i:%s'
+            ) AS stopTime,
+            date_format(
+                m.start_time,
+                '%Y-%m-%d %H:%i:%s'
+            ) AS startTime,
+            d.`name` as documentName,
+            m.document_id as documentId
+        FROM
+            meeting_notice m
+        INNER JOIN ytb_user.user_login u ON u.user_id = m.sponsor
+        INNER JOIN project_document d ON d.document_id = m.document_id
+        where project_id = #{projectId}  and phase = #{phase} and (sponsor = #{userId} or CONCAT(',',participant,',') like CONCAT('%,',#{userId} ,',%'))
+    </select>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.ConstraintMapper" >
+
+
+
+	<select id="getConstraint" resultType="ytb.manager.template.model.Dict_ConstraintModel">
+      SELECT  * FROM dict_constraint where ConstraintId = #{ConstraintId}
+    </select>
+
+    <insert id="addConstraint">
+
+		insert into dict_constraint (WorkJobTypeId,Title,isValid)
+		VALUES (#{WorkJobTypeId},#{Title},#{isValid})
+
+	</insert>
+
+    <select id="getConstraintList" parameterType="int" resultType="ytb.manager.template.model.Dict_ConstraintModel">
+      SELECT  * FROM dict_constraint where WorkJobTypeId = #{WorkJobTypeId}
+    </select>
+
+    <update id="modifyConstraint">
+		update dict_constraint set
+
+		WorkJobTypeId = #{WorkJobTypeId},
+
+		Title = #{Title},
+
+		IsValid = #{IsValid}
+
+		where ConstraintId = #{ConstraintId}
+
+	</update>
+
+    <delete id="delConstraint" >
+
+		delete from dict_constraint where ConstraintId = #{ConstraintId}
+
+	</delete>
+
+
+</mapper>

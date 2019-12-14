@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.OfflineMsgDao" >
+    <!--获取离线信息-->
+    <select id="GetRecordUserList" resultType="ytb.bangbang.model.OfflineMsgModel">
+        SELECT * FROM offline_msg WHERE userId=#{userId}
+    </select>
+    <!-- 获取离线消息条数-->
+    <select id="getOfflineMsgCount" resultType="int">
+        SELECT count(*) from offline_msg where userId=#{userId} and isRead=1
+    </select>
+    <!--记录离线信息-->
+    <insert id="AddOfflineMsg">
+        INSERT INTO offline_msg(userId,Msgbody,createTime,type) VALUES(#{userId},#{msgBody},now(),#{type})
+    </insert>
+    <!--删除离线消息-->
+    <delete id="DeleteOfflineMsg">
+        DELETE  FROM offline_msg WHERE userId=#{userId};
+    </delete>
+</mapper>

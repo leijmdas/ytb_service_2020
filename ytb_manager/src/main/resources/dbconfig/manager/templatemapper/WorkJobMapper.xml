@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.WorkJobMapper" >
+
+
+
+	<select id="getWorkJobList" parameterType="int" resultType="ytb.manager.template.model.Dict_WorkJobModel">
+      SELECT  t1.*,t2.work_job_type_name,t3.userName FROM dict_work_job t1
+      left join dict_work_job_type t2 on t1.work_job_type_id=t2.work_job_type_id
+      left join sys_user t3 on t1.create_by=t3.userId
+      where t1.work_job_type_id = #{workJobTypeId}
+    </select>
+
+    <insert id="addWorkJob">
+		insert into dict_work_job (work_job_type_id,title,title_alias,create_by,order_no,is_default,work_job_number)
+		VALUES (#{workJobTypeId},#{title},#{titleAlias},#{createBy},#{orderNo},#{isDefault},#{workJobNumber})
+	</insert>
+
+    <select id="getWorkJob" parameterType="int" resultType="ytb.manager.template.model.Dict_WorkJobModel">
+      SELECT  * FROM dict_work_job where work_job_id = #{WorkJobId}
+    </select>
+
+    <update id="modifyWorkJob">
+		update dict_work_job set
+		title = #{title},
+		title_alias = #{titleAlias},
+		order_no = #{orderNo},
+		is_default = #{isDefault},
+		work_job_number = #{workJobNumber}
+		where work_job_id = #{workJobId}
+	</update>
+
+    <delete id="delWorkJob" >
+
+		delete from dict_work_job where work_job_id = #{WorkJobId}
+
+	</delete>
+
+
+</mapper>

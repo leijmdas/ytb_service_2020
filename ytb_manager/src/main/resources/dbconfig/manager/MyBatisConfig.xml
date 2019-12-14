@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="dbconfig/jdbc.properties"/>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+
+    <!-- 类型命名  定义别名-->
+    <typeAliases>
+
+        <typeAlias type="ytb.common.MyBatis.DruidDataSourceFactory" alias="DRUID"/>
+    </typeAliases>
+
+    <typeHandlers/><!--类型处理器 -->
+
+
+    <environments default="development"><!-- 配置环境 -->
+        <environment id="development">
+            <transactionManager type="JDBC">
+                <property name="autoCommit" value="false"/>
+            </transactionManager>
+            <!-- 数据源 -->
+            <dataSource type="DRUID">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${manager.url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers><!-- 映射器 -->
+        <mapper resource="dbconfig/manager/templatemapper/ProjectTypeMapper.xml"/>
+        <mapper resource="dbconfig/manager/templatemapper/WorkJobTypeMapper.xml"/>
+        <mapper resource="dbconfig/manager/templatemapper/TemplateMapper.xml"/>
+        <mapper resource="dbconfig/manager/templatemapper/WorkJobMapper.xml"/>
+        <mapper resource="dbconfig/manager/templatemapper/TaskMapper.xml"/>
+        <mapper resource="dbconfig/manager/templatemapper/ConstraintMapper.xml"/>
+        <mapper resource="dbconfig/manager/templatemapper/DocumentMapper.xml"/>
+        <mapper resource="dbconfig/manager/templatemapper/TemplateRepositoryMapper.xml"/>
+        <mapper resource="dbconfig/manager/templatemapper/ReqItemMapper.xml"/>
+        <mapper resource="dbconfig/manager/templatemapper/WorkJobCheckMapper.xml"/>
+        <mapper resource="dbconfig/manager/templatemapper/ProjConfigMapper.xml"/>
+
+        <!-- 系统管理后台 -->
+        <mapper resource="dbconfig/manager/sysusermapper/SysMenuMapper.xml"/>
+        <mapper resource="dbconfig/manager/sysusermapper/SysRestListMapper.xml"/>
+        <mapper resource="dbconfig/manager/sysusermapper/SysRoleMapper.xml"/>
+        <mapper resource="dbconfig/manager/sysusermapper/SysRoleRightMapper.xml"/>
+        <mapper resource="dbconfig/manager/sysusermapper/SysUserMapper.xml"/>
+        <mapper resource="dbconfig/manager/sysusermapper/SysUserRoleMapper.xml"/>
+
+        <!-- 元数据字典-->
+        <!--<mapper resource="dbconfig/manager/sysmetadatamapper/SysDictDataTypeMapper.xml"/>-->
+        <mapper resource="dbconfig/manager/sysmetadatamapper/SysMetaDataDictMapper.xml"/>
+        <mapper resource="dbconfig/manager/sysmetadatamapper/SysMetaDataFieldMapper.xml"/>
+        <mapper resource="dbconfig/manager/sysmetadatamapper/SubsysDictMapper.xml"/>
+
+        <mapper resource="dbconfig/manager/sysmetadatamapper/MetadataDictMapper.xml"/>
+        <mapper resource="dbconfig/manager/sysmetadatamapper/MetadataFieldMapper.xml"/>
+        <mapper resource="dbconfig/manager/sysmetadatamapper/DictDatatypeMapper.xml"/>
+
+        <mapper resource="dbconfig/manager/charges/DictAreaMapper.xml"/>
+        <mapper resource="dbconfig/manager/charges/DictAreaSalaryMapper.xml"/>
+        <mapper resource="dbconfig/manager/charges/ServiceFeeMapper.xml"/>
+
+        <mapper resource="dbconfig/manager/pfUserMapper/DictTagMapper.xml"/>
+        <mapper resource="dbconfig/manager/pfUserMapper/DictCompanyTypeMapper.xml"/>
+        <mapper resource="dbconfig/manager/pfUserMapper/PlatformUserManagerMapper.xml"/>
+
+        <!-- 页面内容管理 -->
+        <mapper resource="dbconfig/manager/webpagemng/PageResourceMapper.xml"/>
+        <mapper resource="dbconfig/manager/webpagemng/CusServiceQuestionTypeMapper.xml"/>
+        <mapper resource="dbconfig/manager/webpagemng/CusServiceQuestionMapper.xml"/>
+        <mapper resource="dbconfig/manager/webpagemng/CurServiceHotSearchMapper.xml"/>
+        <mapper resource="dbconfig/manager/report/ReportMapper.xml"/>
+    </mappers>
+</configuration>

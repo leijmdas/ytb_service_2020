@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectEventMapper" >
+
+    <insert id="addProjectEvent" parameterType="ytb.project.model.ProjectEventModel" useGeneratedKeys="true" keyProperty="eventId" keyColumn="event_id">
+        insert into project_event(
+        phase_id,
+        phase_status,
+        event_type,
+        event_sponsor,
+        event_another,
+        remark,
+        fee,
+        service_type,
+        event_time)
+		VALUES (
+		#{phaseId},
+		#{phaseStatus},
+		#{eventType},
+		#{eventSponsor},
+		#{eventAnother},
+		#{remark},
+		#{fee},
+		#{serviceType},
+		now()
+		)
+	</insert>
+
+    <select id="getProjectEvent" resultType="map" parameterType="map">
+        SELECT
+            e.remark,
+            date_format( e.event_time, '%Y-%m-%d %H:%i:%s') as eventTime,
+            e.event_type AS eventType,
+            u.nick_name AS nickName
+        FROM
+          project_event e
+        INNER JOIN project_phase p ON p.phase_id = e.phase_id
+        INNER JOIN ytb_user.user_info u ON u.user_id = e.event_sponsor
+        WHERE
+          p.talk_id = #{talkId}
+         <if test="phase==null or phase ==''">
+            and p.phase &lt; 600
+         </if>
+         <if test="phase!=null and phase !=''">
+            and p.phase = #{phase}
+         </if>
+    </select>
+
+    <select id="getBeforeTalkEvent" parameterType="map" resultType="map">
+        SELECT
+            e.remark,
+            date_format( e.event_time, '%Y-%m-%d %H:%i:%s') as eventTime,
+            e.event_type AS eventType,
+            u.nick_name AS nickName
+        FROM
+          project_event e
+        INNER JOIN project_phase p ON p.phase_id = e.phase_id
+        INNER JOIN ytb_user.user_info u ON u.user_id = e.event_sponsor
+        WHERE
+          p.project_id = #{projectId}
+          and p.talk_id =0
+          and (e.event_type = 0 or e.event_sponsor = #{userId} or e.event_another =#{userId})
+    </select>
+
+    <select id="selectProjectEventViewModel" resultType="ytb.project.model.ProjectEventViewModel" >
+        select
+          date_format(e.event_time, '%Y-%m-%d %H:%i:%s') as eventTime,
+          e.event_type,
+          e.fee as totalFee
+          from project_event e
+          left join project_phase p on p.phase_id = e.phase_id
+          where p.project_id = #{projectId} and p.phase = #{phase} and e.event_type = #{eventType} and e.event_sponsor = #{userId}
+    </select>
+
+    <select id="selectProjectEvent" resultType="map" >
+        select
+        date_format(e.event_time, '%Y-%m-%d %H:%i:%s') as eventTime,
+        e.event_type,
+        e.fee as totalFee
+        from project_event e
+        left join project_phase p on p.phase_id = e.phase_id
+        where p.project_id = #{projectId} and p.phase = #{phase} and e.event_type = #{eventType} and e.event_sponsor = #{userId}
+    </select>
+
+
+    <select id="selectProjectEventByP" resultType="map">
+        select
+        e.remark,
+        date_format(e.event_time, '%Y-%m-%d %H:%i:%s') as eventTime,
+        u.nick_name as partyA,
+        u1.nick_name as partyB,
+        e.event_type as eventType
+        from project_event e
+        left join project_phase p on p.phase_id = e.phase_id
+        left join ytb_user.user_login u on u.user_id = e.event_sponsor
+        left join ytb_user.user_login u1 on u1.user_id = e.event_another
+        where p.project_id = #{projectId} and p.phase = #{phase} order by e.event_time desc
+    </select>
+
+    <select id="selectProjectEventByUserId" resultType="map">
+         select
+         e.remark,
+         date_format(e.event_time, '%Y-%m-%d %H:%i:%s') as eventTime,
+         u.nick_name as partyA,
+         u1.nick_name as partyB,
+         e.event_type as eventType,
+         e.fee,
+         e.event_sponsor
+        from project_event e
+        left join project_phase p on p.phase_id = e.phase_id
+        left join ytb_user.user_login u on u.user_id = e.event_sponsor
+        left join ytb_user.user_login u1 on u1.user_id = e.event_another
+        where p.project_id = #{projectId} and p.phase = #{phase} and project_phase_status = #{phaseStatus} and (e.event_sponsor = #{userId} OR e.event_another =#{userId} )order by e.event_time asc,e.event_id asc
+    </select>
+    <!--add by leijm 2019.3.13-->
+    <select id="selectPayEventViewModel" resultType="ytb.project.model.ProjectEventViewModel">
+         select
+         e.remark,
+         date_format(e.event_time, '%Y-%m-%d %H:%i:%s') as eventTime,
+         u.nick_name as partyA,
+         u1.nick_name as partyB,
+         e.event_type as eventType,
+         e.fee,
+         e.event_sponsor
+        from project_event e
+        left join project_phase p on p.phase_id = e.phase_id
+        left join ytb_user.user_info u on u.user_id = e.event_sponsor
+        left join ytb_user.user_info u1 on u1.user_id = e.event_another
+        where p.talk_id = #{talkId} and p.phase = #{phase}
+         and (e.event_sponsor = #{userId})
+         and e.event_type >= 0
+         and service_type = 10
+         order by e.event_time asc,e.event_id asc
+    </select>
+
+    <select id="selectProjectEventViewModelByUserId" resultType="ytb.project.model.ProjectEventViewModel">
+         SELECT
+             e.remark,
+             date_format(e.event_time, '%Y-%m-%d %H:%i:%s') AS eventTime,
+             u.nick_name AS partyA,
+             u1.nick_name AS partyB,
+             e.event_type AS eventType,
+             e.fee,
+             e.event_sponsor
+        FROM project_event e
+        LEFT JOIN project_phase p ON p.phase_id = e.phase_id
+        LEFT JOIN ytb_user.user_info u ON u.user_id = e.event_sponsor
+        LEFT JOIN ytb_user.user_info u1 ON u1.user_id = e.event_another
+        WHERE p.project_id = #{projectId} AND p.phase = #{phase} AND p.phase_status = #{phaseStatus} AND (e.event_sponsor = #{userId} OR e.event_another =#{userId} )
+        ORDER BY e.event_time ASC,e.event_id ASC
+    </select>
+
+    <select id="selectProEventViewModelByPhaseStatus" resultType="ytb.project.model.ProjectEventViewModel">
+             SELECT
+        e.remark,
+        date_format(
+            e.event_time,
+            '%Y-%m-%d %H:%i:%s'
+        ) AS eventTime,
+        u.nick_name AS partyA,
+        u1.nick_name AS partyB,
+        e.event_type AS eventType,
+        e.fee
+    FROM
+        project_event e
+    LEFT JOIN project_phase p ON p.phase_id = e.phase_id
+    LEFT JOIN ytb_user.user_info u ON u.user_id = e.event_sponsor
+    LEFT JOIN ytb_user.user_info u1 ON u1.user_id = e.event_another
+    WHERE
+        p.project_id = #{projectId}
+    AND p.phase_status = #{phaseStatus}
+    AND (
+        e.event_sponsor = #{userId}
+        OR e.event_another = #{userId} )
+        ORDER BY
+            e.event_time ASC,
+            e.event_id ASC
+    </select>
+
+    <select id="selectProEventByPhaseStatus" resultType="map">
+             SELECT
+        e.remark,
+        date_format(
+            e.event_time,
+            '%Y-%m-%d %H:%i:%s'
+        ) AS eventTime,
+        u.nick_name AS partyA,
+        u1.nick_name AS partyB,
+        e.event_type AS eventType,
+        e.fee
+    FROM
+        project_event e
+    LEFT JOIN project_phase p ON p.phase_id = e.phase_id
+    LEFT JOIN ytb_user.user_info u ON u.user_id = e.event_sponsor
+    LEFT JOIN ytb_user.user_info u1 ON u1.user_id = e.event_another
+    WHERE
+        p.project_id = #{projectId}
+    AND p.phase_status = #{phaseStatus}
+    AND (
+        e.event_sponsor = #{userId}
+        OR e.event_another = #{userId} )
+        ORDER BY
+            e.event_time ASC,
+            e.event_id ASC
+    </select>
+
+
+    <select id="getProEventInChange" resultType="ytb.project.model.ProjectEventViewModel">
+            SELECT
+        e.remark,
+        date_format(
+            e.event_time,
+            '%Y-%m-%d %H:%i:%s'
+        ) AS eventTime,
+        u.nick_name AS partyA,
+        u1.nick_name AS partyB,
+        e.event_type AS eventType,
+        e.fee,
+        e.event_sponsor
+    FROM
+        project_event e
+    LEFT JOIN project_phase p ON p.phase_id = e.phase_id
+    LEFT JOIN ytb_user.user_info u ON u.user_id = e.event_sponsor
+    LEFT JOIN ytb_user.user_info u1 ON u1.user_id = e.event_another
+    WHERE
+        p.phase = #{phase}
+    AND (
+        e.event_sponsor = #{userId}
+        OR e.event_another = #{userId}
+    )
+    AND p.project_id = #{projectId}
+    ORDER BY
+        e.event_time ASC,
+        e.event_id ASC
+    </select>
+
+
+</mapper>

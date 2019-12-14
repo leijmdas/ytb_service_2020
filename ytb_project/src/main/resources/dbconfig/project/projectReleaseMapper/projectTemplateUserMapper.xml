@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectTemplateUserMapper" >
+
+    <insert id="addProjectTemplateUserModel" parameterType="ytb.project.model.ProjectTemplateUserModel" >
+        insert into project_template_user
+        (user_id,
+        project_id,
+        talk_id,
+        template_id,
+        display_status,
+        active_status,
+        status,
+        author,
+        template_id_assist,
+        create_time)
+        values (
+        #{userId},
+        #{projectId},
+        #{talkId},
+        #{templateId},
+        #{displayStatus},
+        #{activeStatus},
+        #{status},
+        #{author},
+        #{templateIdAssist},
+        now())
+	</insert>
+
+    <update id="modifyProjectTemplateUserModel">
+
+        update project_template_user
+        set  status = #{status},
+        active_status = #{activeStatus},
+        display_status = #{displayStatus},
+        create_time = now()
+        where project_id = #{projectId} and template_id =#{templateId} and user_id = #{userId}
+
+    </update>
+
+
+    <update id="updateProjectTemplateUserStatus">
+        UPDATE project_template_user
+          SET active_status = #{activeStatus},
+              status = #{status},
+              display_status = #{displayStatus},
+              create_time = now()
+        WHERE pk_id = #{id}
+    </update>
+
+    <update id="updateProjectTemplateUserStatusAssist">
+         UPDATE project_template_user
+         SET  active_status = #{activeStatus},
+              status = #{status},
+              display_status = #{displayStatus},
+              create_time = now()
+        WHERE user_id = #{userId} and template_id_assist = #{templateIdAssist}
+    </update>
+
+
+    <select id="selectProjectTemplateUser" resultType="ytb.project.model.ProjectTemplateUserModel">
+
+        select * from project_template_user
+        where user_id = #{userId}
+        and template_id = #{templateId}
+        and template_id_assist = 0
+
+    </select>
+
+    <select id="getProjectTemplateUserListAssist" resultType="ytb.project.model.ProjectTemplateUserModel">
+            SELECT  a.*,
+            CASE
+        WHEN a.template_id_assist > 0 THEN
+        CONCAT(
+            b.title,
+            '-',
+            c.nick_name,
+            "-协助"
+        )
+    ELSE
+        b.title
+    END title,
+     c.nick_name,
+     d.auditor
+    FROM
+        project_template_user a
+    INNER JOIN project_template b ON b.template_id = a.template_id
+    inner join project_template_assist d on d.template_id_ini = b.template_id
+    INNER JOIN ytb_user.user_info c ON a.author = c.user_id
+    WHERE
+        a.user_id = #{userId}
+    AND a.template_id = #{templateId}
+    and d.assist_type =1
+    </select>
+
+    <select id="getProTemplateUserByUserIdAndTemplateIdAssist" resultType="ytb.project.model.ProjectTemplateUserModel">
+        SELECT * from project_template_user where user_id = #{userId} and template_id_assist = #{templateIdAssist}
+    </select>
+
+    <!--结项递交-->
+    <update id="modifyProjectTemplateUserBatch" parameterType="java.util.List">
+        <foreach collection="templateUserList" item="templateUser" index="index" open="" close=""
+                 separator=";">
+            UPDATE hy_template
+            <set>
+                <if test="templateUser.display_status != null and templateUser.display_status != ''">
+                    display_status = #{templateUser.display_status,jdbcType=INTERENT},
+                </if>
+            </set>
+            <where>
+                project_id = #{templateUser.projectId,jdbcType=INTERENT}
+                and user_id = #{templateUser.user_id,jdbcType=INTERENT}
+                and template_id = #{templateUser.template_id,jdbcType=INTERENT}
+            </where>
+        </foreach>
+    </update>
+
+</mapper>

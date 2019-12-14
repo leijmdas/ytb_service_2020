@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.sysuser.dao.SysRoleMapper">
+
+    <select id="getSysRoleList" resultType="ytb.manager.sysuser.model.Sys_RoleModel">
+        SELECT RoleId,RoleName,Desp,CreateBy,role_code,
+        date_format(createTime, '%Y-%m-%d %H:%i:%s') as createStrTime,user_type
+        FROM sys_role
+        <where>
+            <if test="roleName != null and roleName.trim() != ''">
+                `RoleName` like concat('%',#{roleName},'%')
+            </if>
+        </where>
+        ORDER by user_type,role_code
+    </select>
+
+
+    <insert id="addRole" parameterType="ytb.manager.sysuser.model.Sys_RoleModel"
+            useGeneratedKeys="true" keyProperty="roleId">
+		INSERT INTO sys_role
+		(
+		RoleName,
+		Desp,
+		CreateBy,
+		CreateTime,
+		role_code
+		)
+		VALUES
+		(
+		#{roleName},
+		#{desp},
+		#{createBy},
+		now(),
+		#{roleCode}
+		)
+	</insert>
+
+    <update id="updateRole" parameterType="ytb.manager.sysuser.model.Sys_RoleModel">
+        UPDATE sys_role
+        <set>
+            <if test="roleName != null">`RoleName` = #{roleName},</if>
+            <if test="desp != null">`Desp` = #{desp},</if>
+            <if test="roleCode != null">`role_code` = #{roleCode}</if>
+        </set>
+        WHERE RoleId = #{roleId}
+    </update>
+
+    <delete id="deleteRole" parameterType="Integer">
+		delete from sys_role  WHERE RoleId = #{roleId}
+		;
+		delete from sys_role_right WHERE RoleId = #{roleId}
+		;
+		delete from sys_user_role WHERE RoleId = #{roleId}
+	</delete>
+
+    <select id="getUserRoleList" resultType="ytb.manager.sysuser.model.Sys_RoleModel">
+		SELECT
+			t1.RoleId,
+			t1.RoleName,
+			t1.desp,
+			t1.role_code
+		FROM sys_role t1
+		INNER JOIN sys_user_role t2 ON t1.RoleId = t2.RoleId
+		WHERE t2.UserId = #{userId} ORDER BY t1.roleId
+	</select>
+
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 属性 -->
+	<properties resource="dbconfig/jdbc.properties"/>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="callSettersOnNulls" value="true"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="ytb.common.MyBatis.DruidDataSourceFactory" alias="DRUID"/>
+	</typeAliases>
+	<typeHandlers/>
+
+	<environments default="development"><!-- 配置环境 -->
+		<environment id="development"><!-- 环境变量 -->
+			<transactionManager type="JDBC"><!--采用JDBC 事务管理器 -->
+				<property name="autoCommit" value="false"/>
+			</transactionManager>
+			<!-- 数据源 -->
+			<dataSource type="DRUID">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${user.url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+
+		<mapper resource="dbconfig/user/usermapper/CompanyDeviceMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/CompanyEmployeesMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/CompanyEnvMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/CompanyHonorMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/CompanyIncomeMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/CompanyInfoMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/CompanyPatentMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/CompanyProductMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/CompanyProjectMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/CompanyTagMapper.xml"/>
+
+		<mapper resource="dbconfig/user/usermapper/StudentPaperMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserAddressMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserAwardMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserEducationMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserInfoMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserLoginMapper.xml"/>
+
+		<mapper resource="dbconfig/user/usermapper/UserPaperMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserPatentMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserTagMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserWorkHistroyMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserWorkPrjMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserImgMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserProjectScodeMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserPurchaseMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserSellMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/VTagSpecialtyMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserBlackMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/VDictAreaMapper.xml"/>
+
+		<mapper resource="dbconfig/user/usermapper/SearchPersonMapper.xml"/>
+		<mapper resource="dbconfig/user/usermapper/UserAttendMapper.xml"/>
+	</mappers>
+
+
+</configuration>

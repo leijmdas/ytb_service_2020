@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectMapper">
+    <select id="getProjectList" parameterType="map" resultType="ytb.project.model.projectview.ProjectViewModel">
+        SELECT
+            p.project_id,
+            p.project_name,
+            p. STATUS,
+            p.view_number,
+            p.favorite_number,
+            p.enter_time,
+            u.nick_name AS groupName,
+            fnFindTemplateReqWorkplanByFolder (p.folder_id, 100, 199) AS reqTemplateId,
+            fnFindTemplateReqWorkplanByFolder (p.folder_id, 200, 299) AS workplanTemplateId,
+            p.user_id1 AS userId
+        FROM
+          project p
+        INNER JOIN ytb_user.user_info u ON p.user_id1 = u.user_id
+        WHERE
+          p.user_id1 = #{userId}
+        AND p.company_id1 = #{companyId}
+        AND p.status > 2
+        <if test="status!=0">
+            AND p.status = ${status}
+        </if>
+    </select>
+
+    <select id="getProjectTalkList" parameterType="map" resultType="ytb.project.model.projectview.ProjectTalkViewModel">
+        SELECT * FROM(
+        SELECT
+        "PA" AS type,
+        p.project_name,
+        p.view_number,
+        t.talk_id ,
+        p.project_id,
+        p.favorite_number AS favoriteNumber,
+        p.enter_time,
+        CONCAT(u.nick_name, '-工作组') AS groupName,
+        t.phase,
+        t.phase_status,
+        t.change_status,
+        t.finish_time,
+        p.phase_no,
+        p.new_project_id,
+        p.old_talk_id,
+        p.change_type,
+        p.status,
+        w.group_id,
+        w.bb_group_id
+        FROM
+        project p
+        INNER JOIN project_talk t ON p.project_id = t.project_id
+        INNER JOIN work_group w ON t.talk_id = w.talk_id
+        LEFT JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+        WHERE p.user_id1 = #{userId}
+        AND p.company_id1 = #{companyId}
+        AND p.status > -1
+        <if test="phaseStart !=0">
+            and t.phase between #{phaseStart} and #{phaseEnd}
+        </if>
+        <if test="changeStatus ==600">
+            and t.change_status &lt; 702
+        </if>
+        <if test="changeStatus ==900">
+            and t.change_status = #{changeStatus}
+        </if>
+        union all
+        SELECT
+            "PB" AS type,
+            p.project_name,
+            p.view_number,
+            t.talk_id,
+            p.project_id,
+            p.favorite_number,
+            p.enter_time,
+            CONCAT(u.nick_name, '-工作组') AS groupName,
+            t.phase,
+            t.phase_status,
+            t.change_status,
+            t.finish_time,
+            p.phase_no,
+            p.new_project_id,
+            p.old_talk_id,
+            p.change_type,
+            p.status,
+            w.group_id,
+            w.bb_group_id
+        FROM
+          project p
+        INNER JOIN project_talk t ON p.project_id = t.project_id
+        INNER JOIN work_group w ON t.talk_id = w.talk_id
+        LEFT JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+        WHERE
+          t.user_id2 = #{userId}
+        AND t.company_id2 = #{companyId}
+        AND p.status > -1
+        <if test="phaseStart !=0">
+            and t.phase between #{phaseStart} and #{phaseEnd}
+        </if>
+        <if test="changeStatus ==600">
+            and t.change_status &lt; 702
+        </if>
+        <if test="changeStatus ==900">
+            and t.change_status = #{changeStatus}
+        </if>
+        union all
+        SELECT
+            "PM" AS type,
+            p.project_name,
+            p.view_number,
+            t.talk_id,
+            p.project_id,
+            p.favorite_number,
+            p.enter_time,
+            CONCAT(u.nick_name, '-工作组') AS groupName,
+            t.phase,
+            t.phase_status,
+            t.change_status,
+            t.finish_time,
+            p.phase_no,
+            p.new_project_id,
+            p.old_talk_id,
+            p.change_type,
+            p.status,
+            w.group_id,
+            w.bb_group_id
+        FROM
+          project p
+        INNER JOIN project_talk t ON p.project_id = t.project_id
+        INNER JOIN talk_invite_status tis ON tis.document_id = t.workplan_id
+        INNER JOIN work_group w ON t.talk_id = w.talk_id
+        INNER JOIN work_group_member m ON w.group_id = m.group_id
+        LEFT JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+        WHERE m.user_id = #{userId}
+          AND m.company_id = #{companyId}
+          AND m.is_admin = 2
+          AND p.user_id1 != #{userId}
+          AND p.status > -1
+          AND tis.`status` = 2
+        <if test="phaseStart !=0">
+            AND t.phase BETWEEN #{phaseStart} AND #{phaseEnd}
+        </if>
+        <if test="changeStatus ==600">
+            and t.change_status &lt; 702
+        </if>
+        <if test="changeStatus ==900">
+            and t.change_status = #{changeStatus}
+        </if>
+        )  AS a ORDER BY a.finish_time DESC
+    </select>
+
+    <select id="getEndProject" resultType="map" parameterType="map">
+
+        SELECT * FROM (
+        SELECT
+            "甲方" AS type,
+            p.project_name AS projectName,
+            p.view_number AS viewNumber,
+            p.STATUS,
+            t.finish_time as stopTime,
+            u.nick_name AS nickName,
+            ci.company_name AS companyName,
+            p.favorite_number AS favoriteNumber,
+            p.finish_time AS updateTime,
+            w.group_name AS grounName,
+            t.phase,
+            p.project_id AS projectId,
+            t.talk_id AS talkId
+        FROM
+          project p
+        LEFT JOIN project_talk t ON p.project_id = t.project_id
+        LEFT JOIN work_group w ON t.talk_id = w.talk_id
+        LEFT JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+        LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = t.user_id2
+        LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+        WHERE
+        p.user_id1 =#{userId}
+        <if test="status==null">
+            AND (p.status = 5 OR t.change_status IN(400,800))
+        </if>
+        <if test="status!=null">
+            AND (p.status =#{status} OR t.change_status =#{status})
+        </if>
+        UNION ALL
+        SELECT
+            "乙方" AS type,
+            p.project_name AS projectName,
+            p.view_number AS viewNumber,
+            p.STATUS,
+            t.finish_time AS stopTime,
+            u.nick_name AS nickName,
+            ci.company_name AS companyName,
+            p.favorite_number AS favoriteNumber,
+            p.finish_time AS updateTime,
+            w.group_name AS grounName,
+            t.phase,
+            p.project_id AS projectId,
+            t.talk_id AS talkId
+        FROM
+            project p
+        INNER JOIN project_talk t ON p.project_id = t.project_id
+        LEFT JOIN work_group w ON t.talk_id = w.talk_id
+        LEFT JOIN ytb_user.user_info u ON u.user_id = p.user_id1
+        LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = p.user_id1
+        LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+        WHERE
+        t.user_id2 =#{userId}
+        <if test="status==null">
+            AND (p.status = 5 OR t.change_status IN(400,800))
+        </if>
+        <if test="status!=null">
+            AND (p.status =#{status} OR t.change_status =#{status})
+        </if>
+        ) p2 WHERE 1=1
+
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+
+    </select>
+
+    <!--查询终止项目个数 -->
+
+    <select id="getEndProjectCount" resultType="int" parameterType="map">
+        select count(*) from (
+            SELECT
+                "甲方" AS type,
+                p.project_name AS projectName,
+                p.view_number AS viewNumber,
+                p. STATUS,
+                u.nick_name AS nickName,
+                ci.company_name AS companyName,
+                p.favorite_number AS favoriteNumber,
+                w.group_name AS grounName,
+                t.phase,
+                p.project_id AS projectId,
+                t.talk_id AS talkId
+            FROM
+                project p
+            LEFT JOIN project_talk t ON p.project_id = t.project_id
+            LEFT JOIN work_group w ON t.talk_id = w.talk_id
+            LEFT JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+            LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = t.user_id2
+            LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+            where p.user_id1 = #{userId}
+            <if test="status==null">
+                and (p.status = 5 or t.change_status in(400,800))
+            </if>
+            <if test="status!=null">
+                and (p.status = #{status} or t.phase = #{status})
+            </if>
+            union all
+            SELECT
+                "乙方" AS type,
+                p.project_name AS projectName,
+                p.view_number AS viewNumber,
+                p. STATUS,
+                u.nick_name AS nickName,
+                ci.company_name AS companyName,
+                p.favorite_number AS favoriteNumber,
+                w.group_name AS grounName,
+                t.phase,
+                p.project_id AS projectId,
+                t.talk_id AS talkId
+            FROM
+                project p
+            LEFT JOIN project_talk t ON p.project_id = t.project_id
+            LEFT JOIN work_group w ON t.talk_id = w.talk_id
+            LEFT JOIN ytb_user.user_info u ON u.user_id = p.user_id1
+            LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = p.user_id1
+            LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+            where t.user_id2 = #{userId}
+            <if test="status==null">
+                and (p.status = 5 or t.change_status in(400,800))
+            </if>
+            <if test="status!=null">
+                and (p.status =#{status} or t.phase = #{status})
+            </if>
+        ) as p2
+    </select>
+
+
+    <select id="getProjectsByCompany" parameterType="map" resultType="map">
+
+        SELECT * FROM( SELECT p.project_name as projectName,p.status,p.view_number as viewNumber,
+        p.favorite_number as favoriteNumber,p.create_time as createTime,w.group_name as grounName,u.nick_name
+        as leadName,p.user_id1 as userId,p.project_id as projectId,ci.company_name as companyName,t.company_id2 as
+        companyId,u.user_type as userType
+
+        FROM project p left join project_talk t on p.project_id = t.project_id
+
+        inner join work_group w on t.talk_id = w.talk_id
+
+        inner join ytb_user.user_login u on u.user_id = t.user_id2
+
+        inner join ytb_user.company_info ci on ci.company_id = t.company_id2
+
+        where p.company_id1 =#{companyId1} AND p.talk_id>0 and p.talk_id = t.talk_id
+
+        union all
+
+        SELECT p.project_name as projectName,p.status,p.view_number as viewNumber,
+        p.favorite_number as favoriteNumber,p.create_time as createTime,"" as grounName ,u.nick_name
+        as leadName,p.user_id1 as userId,p.project_id as projectId,ci.company_name as companyName,p.company_id1 as
+        companyId,
+        u.user_type as userType
+
+        FROM project p
+
+        inner join ytb_user.user_login u on u.user_id = p.user_id1
+
+        inner join ytb_user.company_info ci on ci.company_id = p.company_id1
+
+        where p.company_id1 =#{companyId1} AND p.talk_id=0
+        union all
+        SELECT p.project_name as projectName,t.phase as status,p.view_number as viewNumber,
+        p.favorite_number as favoriteNumber,p.create_time as createTime,w.group_name as grounName,u.nick_name
+        as leadName,p.user_id1 as userId,p.project_id as projectId,ci.company_name as companyName,t.company_id2 as
+        companyId,u.user_type as userType
+
+        FROM project p left join project_talk t on p.project_id = t.project_id
+
+        inner join work_group w on t.talk_id = w.talk_id
+
+        inner join ytb_user.user_login u on u.user_id = t.user_id2
+
+        inner join ytb_user.company_info ci on ci.company_id = t.company_id2
+
+        where t.company_id2 =#{companyId1} AND p.talk_id>0 and t.talk_id = p.talk_id
+
+        union all
+
+        SELECT p.project_name as projectName,t.phase as status,p.view_number as viewNumber,
+        p.favorite_number as favoriteNumber,p.create_time as createTime,w.group_name as grounName,u.nick_name
+        as leadName,p.user_id1 as userId,p.project_id as projectId,ci.company_name as companyName,t.company_id2 as
+        companyId,u.user_type as userType
+
+        FROM project p left join project_talk t on p.project_id = t.project_id
+
+        LEFT JOIN work_group w on t.talk_id = w.talk_id
+
+        inner join ytb_user.user_login u on u.user_id = p.user_id1
+
+        inner join ytb_user.company_info ci on ci.company_id = t.company_id2
+
+        where t.company_id2 =#{companyId1} AND p.talk_id=0
+        ) p where 1
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+
+    </select>
+
+    <select id="getProjectListByComPCount" parameterType="map" resultType="int">
+
+        SELECT count(*) from( SELECT p.project_name as projectName,p.status,p.view_number as viewNumber,
+        p.favorite_number as favoriteNumber,p.create_time as createTime,w.group_name as grounName,u.nick_name
+        as leadName,p.user_id1 as userId,p.project_id as projectId,ci.company_name as companyName,t.company_id2 as
+        companyId
+
+        FROM project p left join project_talk t on p.project_id = t.project_id
+
+        inner join work_group w on t.talk_id = w.talk_id
+
+        inner join ytb_user.user_login u on u.user_id = t.user_id2
+
+        inner join ytb_user.company_info ci on ci.company_id = t.company_id2
+
+        where p.company_id1 =#{companyId1} AND p.talk_id>0 and p.talk_id = t.talk_id
+
+        union all
+
+        SELECT p.project_name as projectName,p.status,p.view_number as viewNumber,
+        p.favorite_number as favoriteNumber,p.create_time as createTime,"" as grounName ,u.nick_name
+        as leadName,p.user_id1 as userId,p.project_id as projectId,ci.company_name as companyName,"" as companyId2
+
+        FROM project p
+
+        inner join ytb_user.user_login u on u.user_id = p.user_id1
+
+        inner join ytb_user.company_info ci on ci.company_id = p.company_id1
+
+        where p.company_id1 =#{companyId1} AND p.talk_id=0
+        union all
+        SELECT p.project_name as projectName,p.status,p.view_number as viewNumber,
+        p.favorite_number as favoriteNumber,p.create_time as createTime,w.group_name as grounName,u.nick_name
+        as leadName,p.user_id1 as userId,p.project_id as projectId,ci.company_name as companyName,t.company_id2 as
+        companyId2
+
+        FROM project p left join project_talk t on p.project_id = t.project_id
+
+        inner join work_group w on t.talk_id = w.talk_id
+
+        inner join ytb_user.user_login u on u.user_id = t.user_id2
+
+        inner join ytb_user.company_info ci on ci.company_id = t.company_id2
+
+        where t.company_id2 =#{companyId1} AND p.talk_id>0 and t.talk_id = p.talk_id
+
+        union all
+
+        SELECT p.project_name as projectName,p.status,p.view_number as viewNumber,
+        p.favorite_number as favoriteNumber,p.create_time as createTime,w.group_name as grounName,u.nick_name
+        as leadName,p.user_id1 as userId,p.project_id as projectId,ci.company_name as companyName,t.company_id2 as
+        companyId2
+
+        FROM project p left join project_talk t on p.project_id = t.project_id
+
+        LEFT JOIN work_group w on t.talk_id = w.talk_id
+
+        inner join ytb_user.user_login u on u.user_id = p.user_id1
+
+        inner join ytb_user.company_info ci on ci.company_id = t.company_id2
+
+        where t.company_id2 =#{companyId1} AND p.talk_id=0
+        ) p
+
+    </select>
+
+
+    <select id="getReleaseProjectList" parameterType="map" resultType="map">
+        SELECT
+          p.project_name AS projectName,
+          p.view_number AS viewNumber,
+          p.favorite_number AS favoriteNumber,
+          p.create_time AS createTime,
+          p.project_id AS projectId,
+          p.user_id1 AS userId,
+          u.nick_name AS nickName,
+          l.user_type AS userType
+        FROM project p
+        LEFT JOIN ytb_user.user_login l ON p.user_id1 = l.user_id
+        LEFT JOIN ytb_user.user_info u  ON p.user_id1 = u.user_id
+        WHERE p.status =#{status} AND p.company_id1 =#{companyId1}
+    </select>
+
+
+    <select id="selectProjectTalk" resultType="map" parameterType="map">
+        SELECT
+          p.project_name AS projectName,
+          u.nick_name AS leadName,
+          uu.user_type AS userType,
+          u.nick_name AS nickName,
+          date_format(p.create_time, '%Y-%m-%d %H:%i:%s') AS createTime,
+          p.view_number AS viewNumber,
+          p.favorite_number AS favoriteNumber,
+          w.group_name AS grounName,
+          p.project_id AS projectId,
+          c.company_name AS companyName,
+          p.user_id1 AS userId
+        FROM
+          project p
+        INNER JOIN  project_talk t ON p.project_id = t.project_id
+        INNER JOIN ytb_user.company_info c ON c.company_id = p.company_id1
+        INNER JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+        INNER JOIN ytb_user.login uu ON uu.user_id = t.user_id2
+        LEFT JOIN work_group w ON t.talk_id = w.talk_id
+        WHERE t.phase =200 AND p.company_id1 = #{companyId1}
+    </select>
+
+
+    <select id="selectProjectRun" resultType="map">
+         SELECT
+            p.project_name AS projectName,
+            u.nick_name AS leadName ,
+            uu.user_type AS userType,
+            u.nick_name AS nickName,
+            date_format(p.create_time, '%Y-%m-%d %H:%i:%s') AS createTime,
+            p.view_number AS viewNumber,
+            p.favorite_number AS favoriteNumber,
+            w.group_name AS grounName,
+            p.project_id AS projectId,
+            p.user_id1 AS userId
+        FROM project p
+        LEFT JOIN  project_talk t ON p.project_id = t.project_id
+        LEFT JOIN ytb_user.company_info c ON c.company_id = p.company_id1
+        INNER JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+        INNER JOIN ytb_user.login uu ON uu.user_id = t.user_id2
+        LEFT JOIN work_group w ON t.talk_id = w.talk_id
+        WHERE t.phase >=600 AND t.phase &lt; 700
+        AND p.company_id1 = #{companyId1}
+        AND t.change_status &lt; 702
+    </select>
+
+
+    <select id="selectProjectList" parameterType="map" resultType="map">
+        SELECT
+            p.project_name,
+            p.view_number,
+            p.favorite_number,
+            p.enter_time,
+            d.Title,
+            p.project_id AS projectId,
+            ci.company_name AS companyName,
+            p.user_id1 AS userId1,
+            p.company_id1 AS companyId1,
+            u.user_type AS userType,
+            u1.nick_name AS nickName
+        FROM  project p
+        LEFT JOIN ytb_manager.dict_project_type d ON p.project_type_id = d.Project_Type_Id
+        LEFT JOIN ytb_user.user_login u ON u.user_id = p.user_id1
+        LEFT JOIN ytb_user.user_info u1 ON u1.user_id = p.user_id1
+        LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = p.user_id1
+        LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+        WHERE p.status = 4 AND p.is_publish =TRUE
+        <if test="projectName!=null and projectName!=''">
+            AND p.project_name LIKE concat(concat('%',#{projectName}),'%')
+        </if>
+        <if test="projectTypeId!=null and projectTypeId!='' ">
+            AND p.project_type_id = #{projectTypeId}
+        </if>
+        <if test="week!=null and week!=''">
+            AND p.enter_time >= DATE_SUB(CURDATE(), INTERVAL 7 day)
+        </if>
+        <if test="month!=null and month!=''">
+            AND p.enter_time >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+        </if>
+        <if test="year!=null and year!=''">
+            AND p.enter_time >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+        </if>
+        ORDER BY p.enter_time DESC
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+
+    </select>
+
+    <select id="selectFinishProject" resultType="map">
+
+        SELECT
+        date_format(
+        p.enter_time,
+        '%Y-%m-%d %H:%i:%s'
+        ) AS createTime,
+        date_format(
+        t.finish_time,
+        '%Y-%m-%d %H:%i:%s'
+        ) AS endTime,
+        "负责人" AS type,
+        p.project_name AS projectName,
+        ci.company_name AS companyName,
+        u.user_type AS userType,
+        u1.nick_name AS nickName
+        FROM  project p
+        INNER JOIN project_talk t ON p.project_id = t.project_id
+        LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = p.user_id1
+        LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+        LEFT JOIN ytb_user.user_login u ON u.user_id = t.user_id2
+        LEFT JOIN ytb_user.user_info u1 ON u.user_id = t.user_id2
+        WHERE
+        t.user_id2 = #{userId} and t.change_status =900
+        UNION ALL
+        SELECT
+        date_format(
+        p.enter_time,
+        '%Y-%m-%d %H:%i:%s'
+        ) AS createTime,
+        date_format(
+        t.finish_time,
+        '%Y-%m-%d %H:%i:%s'
+        ) AS endTime,
+        "组员" AS type,
+        p.project_name AS projectName,
+        ci.company_name AS companyName,
+        u.user_type AS userType,
+        u1.nick_name AS nickName
+        FROM
+        project p
+        INNER JOIN project_talk t ON p.project_id = t.project_id
+        LEFT JOIN work_group_member m ON m.group_id = t.group_id
+        LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = p.user_id1
+        LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+        LEFT JOIN ytb_user.user_login u ON u.user_id = m.user_id
+        LEFT JOIN ytb_user.user_info u1 ON u.user_id = m.user_id
+        WHERE
+        m.user_id = #{userId} AND m.is_admin = FALSE AND  t.change_status =900
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+
+    </select>
+
+    <!--获取已完成项目总数，根据ID-->
+    <select id="selectFinishProjectCount" resultType="int">
+        SELECT
+	count(1)
+FROM
+	(
+		SELECT
+			p.project_name AS projectName
+		FROM
+			project p
+		INNER JOIN project_talk t ON p.project_id = t.project_id
+		LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = p.user_id1
+		LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+		WHERE
+			t.user_id2 = 125
+		AND t.phase = 999
+		UNION ALL
+			SELECT
+			p.project_name AS projectName
+			FROM
+				project p
+			INNER JOIN project_talk t ON p.project_id = t.project_id
+			LEFT JOIN work_group_member m ON m.group_id = t.group_id
+			LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = p.user_id1
+			LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+			WHERE
+				m.user_id = 125
+			AND m.is_admin = FALSE
+			AND t.phase = 999
+	) AS b
+    </select>
+
+
+    <select id="getProjectListCount" resultType="int">
+        SELECT count(1) FROM project p
+        WHERE p.status = 4 AND p.is_publish =TRUE
+        <if test="projectName!=null and projectName!=''">
+            AND p.project_name LIKE concat(concat('%',#{projectName}),'%')
+        </if>
+        <if test="projectTypeId!=null and projectTypeId!='' ">
+            AND p.project_type_id = #{projectTypeId}
+        </if>
+        <if test="week!=null and week!=''">
+            AND p.enter_time >= DATE_SUB(CURDATE(), INTERVAL 7 day)
+        </if>
+        <if test="month!=null and month!=''">
+            AND p.enter_time >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+        </if>
+        <if test="year!=null and year!=''">
+            AND p.enter_time >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+        </if>
+    </select>
+
+
+    <select id="getProjectListByCompUser" parameterType="map" resultType="map">
+        SELECT
+        p.project_id as projectId,
+        p.user_id1 as userId,
+        p.company_id1 as companyId,
+        p.project_name AS projectName,
+        p. STATUS,
+        p.view_number AS viewNumber,
+        p.favorite_number AS favoriteNumber,
+        p.create_time AS createTime,
+        w.group_name AS grounName,
+        u.user_type AS userType,
+        u.nick_name AS nickName
+        FROM
+        project p
+        LEFT JOIN project_talk t ON p.project_id = t.project_id
+        LEFT JOIN work_group w ON t.talk_id = w.talk_id
+        LEFT JOIN ytb_user.user_login u ON u.user_id = p.user_id1
+        WHERE p.user_id1 =#{userId} AND p.company_id1 = #{companyId} OR #{userId} IN(SELECT m.user_id FROM
+        work_group_member m WHERE m.company_id =#{companyId} AND m.group_id =w.group_id )
+
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+
+    </select>
+
+    <select id="getProjectById" parameterType="int" resultType="ytb.project.model.ProjectModel">
+        SELECT * FROM project WHERE project_id = #{projectId}
+    </select>
+
+    <select id="selectNewProject" parameterType="map" resultType="map">
+           SELECT
+        p.project_name,
+        p.view_number,
+        p.favorite_number,
+        date_format(
+            p.finish_time,
+            '%Y-%m-%d %H:%i:%s'
+        ) AS create_time,
+        u.nick_name AS nickName,
+        p.project_id AS projectId
+    FROM
+        project p
+    LEFT JOIN ytb_user.user_info u ON u.user_id = p.user_id1
+    LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = p.user_id1
+    LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+    ORDER BY p.finish_time DESC limit 1,11
+    </select>
+
+    <select id="selectGoodPeople" parameterType="map" resultType="map">
+        SELECT
+        p.project_name,
+        p.view_number,
+        p.favorite_number,
+        date_format(
+        p.create_time,
+        '%Y-%m-%d %H:%i:%s'
+        ) AS create_time,
+        u.nick_name AS nickName,
+        p.project_id AS projectId,
+        ci.company_name AS companyName
+        FROM
+        project p
+        LEFT JOIN ytb_user.user_info u ON u.user_id = p.user_id1
+        LEFT JOIN ytb_user.company_employees ce ON ce.company_user_id = p.user_id1
+        LEFT JOIN ytb_user.company_info ci ON ci.company_id = ce.company_id
+        ORDER BY p.create_time DESC limit 1,11
+    </select>
+
+    <insert id="addProject" parameterType="ytb.project.model.ProjectModel" useGeneratedKeys="true"
+            keyProperty="projectId" keyColumn="project_id">
+          INSERT INTO project (
+        user_id1,
+        company_id1,
+        project_type_id,
+        project_name,
+        STATUS,
+        view_number,
+        favorite_number,
+        is_publish,
+        is_invite,
+        folder_id,
+        phase_no,
+        old_Talk_id,
+         enter_time
+        )
+    VALUES
+        (
+            #{userId1},
+            #{companyId1},
+            #{projectTypeId},
+            #{projectName},
+            #{status},
+            #{viewNumber},
+            #{favoriteNumber},
+            #{isPublish},
+            #{isInvite},
+            #{folderId},
+            #{phaseNo},
+            #{oldTalkId},
+            now()
+            )
+	</insert>
+
+    <update id="modifyProjectStatus">
+      UPDATE project SET
+        status =#{status},
+        finish_time = now()
+      WHERE project_id = #{projectId}
+    </update>
+
+    <update id="modifyFolder">
+      UPDATE project SET  folder_id = #{folderId}  WHERE project_id = #{projectId}
+     </update>
+
+    <update id="modifyStopTime">
+         UPDATE project SET stop_time = now() WHERE project_id = #{projectId}
+    </update>
+
+    <update id="modifyProjectPayTimes">
+      UPDATE project SET pay_times = pay_times + 1
+      WHERE project_id = #{projectId} AND pay_times = 0
+    </update>
+
+    <update id="modifyProjectModelFlag">
+      UPDATE project SET  model_flag = #{modelFlag}
+      WHERE project_id = #{projectId}
+    </update>
+
+    <update id="modifyViewNumber">
+      UPDATE project SET view_number = view_number+1 WHERE project_id = #{projectId}
+    </update>
+
+    <update id="modifyFavorite">
+        UPDATE project SET favorite_number = favorite_number+1 WHERE project_id = #{projectId}
+    </update>
+
+    <update id="cancelFavorite">
+     UPDATE project SET favorite_number = favorite_number-1 WHERE project_id = #{projectId}
+    </update>
+
+    <!--获取用户所发布过的项目-->
+    <select id="getUserSendPro" resultType="map">
+        SELECT
+            a.project_id AS projectId,
+            a.user_id1 AS sendUserId,
+            a.project_name AS projectName,
+            a.folder_id AS folderId,
+            DATE_FORMAT(a.create_time,'%Y-%m-%d %H:%i:%s') AS createTime,
+            b.user_type AS userType
+        FROM
+            project a
+        INNER JOIN ytb_user.user_login b ON a.user_id1 = b.user_id
+        WHERE
+            a.user_id1 = #{userId}
+        ORDER BY
+            a.create_time DESC
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getUserSendProCount" resultType="int">
+        SELECT
+          count(project_id)
+        FROM
+        project
+        WHERE
+        user_id1 = #{userId}
+    </select>
+
+    <select id="getFinishProjectView" resultType="map">
+        SELECT
+            u.nick_name AS PAnickName,
+            u1.nick_name AS PBnickName,
+            p.project_name AS projectName,
+            t.update_time AS endTime,
+            d.template_id AS templateID,
+            m.member_id AS memberId,
+            c.company_name AS PAcompanyName,
+            c1.company_name AS PBcompanyName
+        FROM  project p
+        INNER JOIN ytb_user.user_info u ON p.user_id1 = u.user_id
+        INNER JOIN project_talk t ON p.project_id = t.project_id
+        INNER JOIN work_group_member m ON m.group_id = t.group_id
+        INNER JOIN project_folder f ON f.project_id = p.project_id
+        INNER JOIN project_template d ON d.folder_id = f.folder_id
+        INNER JOIN ytb_user.user_info u1 ON t.user_id2 = u1.user_id
+        LEFT JOIN ytb_user.company_info c ON c.company_id = p.company_id1
+        LEFT JOIN ytb_user.company_info c1 ON c1.company_id = t.company_id2
+        WHERE  p.project_id = #{projectId}
+        AND d.doc_type = 100
+        AND f.user_id = t.user_id2
+        AND t.change_status =900
+        AND m.user_id = #{userId}
+    </select>
+
+
+    <!--获取公司发布、洽谈过的项目-->
+    <select id="getCompanySendAndTalkPro" resultType="map">
+    SELECT
+        project_id AS projectId,
+        project_name AS projectName,
+        company_id1 AS companyId,
+        phase_no AS phaseNo,
+        talk_id as talkId
+    FROM
+        project
+    WHERE
+        company_id1 = #{companyId}
+    UNION
+        SELECT
+            a.project_id AS projectId,
+            b.project_name AS projectName,
+            a.company_id2 AS companyId,
+            b.phase_no AS phaseNo,
+            b.talk_id as talkId
+        FROM
+            project_talk a
+        INNER JOIN project b ON b.project_id = a.project_id
+        WHERE
+            a.company_id2 = #{companyId}
+    </select>
+    <!--获取公司发布、洽谈过的项目-->
+    <select id="getUserSendAndTalkPro" resultType="map">
+        SELECT
+            project_id AS projectId,
+            project_name AS projectName,
+            company_id1 AS companyId,
+            phase_no AS phaseNo,
+            talk_id as talkId
+        FROM
+          project
+        WHERE
+          user_id1 = #{userId}
+        UNION
+        SELECT
+            a.project_id AS projectId,
+            b.project_name AS projectName,
+            a.company_id2 AS companyId,
+            b.phase_no AS phaseNo,
+            b.talk_id as talkId
+        FROM
+        project_talk a
+        INNER JOIN project b ON b.project_id = a.project_id
+        WHERE
+        a.user_id2 = #{userId}
+    </select>
+    <!--修改项目变更阶段状态-->
+    <update id="updateProjectInfoInChangeStage">
+        UPDATE project
+        <set>
+            <if test="changeType != null and changeType !=''">`change_type` = #{changeType}, </if>
+            <if test="newProjectId != null and newProjectId !=''">`new_project_id` =
+                #{newProjectId},
+            </if>
+            <if test="oldTalkId != null and oldTalkId !=''">`old_talk_id` = #{oldTalkId}
+            </if>
+        </set>
+        WHERE project_id = #{projectId}
+    </update>
+
+    <select id="getVProjectTalkConfirmInfo"   resultType="ytb.project.model.VProjectTalkConfirmModel">
+        SELECT * FROM v_project_talk_confirm WHERE project_id = #{projectId}
+    </select>
+
+    <select id="getProjectByChangeStatus" parameterType="map" resultType="map">
+        SELECT
+          p.project_name AS projectName,
+          u.nick_name AS leadName ,
+          uu.user_type AS userType,
+          date_format(p.create_time, '%Y-%m-%d %H:%i:%s') as createTime,
+          p.view_number AS viewNumber,
+          p.favorite_number AS favoriteNumber ,
+          w.group_name AS grounName,
+          p.project_id AS projectId,
+          p.user_id1 AS userId ,
+          u.nick_name AS nickName
+        FROM project p
+        LEFT JOIN  project_talk t ON p.project_id = t.project_id
+        LEFT JOIN ytb_user.company_info c ON c.company_id = p.company_id1
+		INNER JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+		INNER JOIN ytb_user.login uu ON uu.user_id = t.user_id2
+        LEFT JOIN work_group w ON t.talk_id =w.talk_id
+        WHERE t.change_status =#{status} AND p.company_id1 =#{companyId1}
+    </select>
+</mapper>

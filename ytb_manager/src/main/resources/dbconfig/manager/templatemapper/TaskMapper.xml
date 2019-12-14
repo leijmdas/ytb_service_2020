@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.TaskMapper">
+
+
+    <select id="getTaskDetailsInfoList" resultType="ytb.manager.template.model.Dict_TaskModel">
+      SELECT  t.*,w.Title as workJobName FROM dict_task t left join dict_work_job w on t.work_job_id = w.work_job_id  where t.work_job_id = #{workJobId}
+    </select>
+
+    <insert id="addTask">
+		insert into dict_task (work_job_id,task_name,task_name_alias,doc_type,is_default,is_optional,order_no)
+		VALUES (#{workJobId},#{taskName},#{taskNameAlias},#{docType},#{isDefault},#{isOptional},#{orderNo})
+	</insert>
+
+    <select id="getTask" parameterType="int" resultType="ytb.manager.template.model.Dict_TaskModel">
+      SELECT  * FROM dict_task where task_id = #{taskId}
+    </select>
+
+    <update id="modifyTask">
+        update dict_task set
+                task_name = #{taskName},
+                task_name_alias = #{taskNameAlias},
+                doc_type = #{docType},
+                is_default = #{isDefault},
+                is_optional = #{isOptional},
+                order_no = #{orderNo}
+        where task_id = #{taskId}
+
+    </update>
+
+    <delete id="delTask">
+		delete from dict_task where task_id = #{taskId}
+	</delete>
+
+
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserTagMapper" >
+
+	<select id="getUserTagById" resultType="map">
+          SELECT
+        a.user_tag_id AS userTagId,
+        a.user_id AS userId,
+        a.tag_Id AS tagId,
+        m.tag_name as tagName,
+        m.parentName
+    FROM
+        user_tag a
+    inner JOIN (
+        SELECT
+            t1.tag_id,
+            t1.tag_name,
+            (
+                SELECT
+                    p.tag_name
+                FROM
+                    ytb_manager.dict_tag p
+                WHERE
+                    p.tag_id = t1.parent_id
+            ) AS parentName
+        FROM
+            ytb_manager.dict_tag t1  where t1.tag_type=#{tagType}
+    ) AS m ON m.tag_id = a.tag_id
+  where a.user_id =#{userId}
+    </select>
+
+    <select id="getUserTagToBB" resultType="ytb.user.model.UserTagModel">
+        SELECT
+        t1.tag_id,
+        t2.id,
+        t2.tagname
+        FROM
+        USER_Tag t1
+        LEFT JOIN v_tag_specialty t2 ON t1.tag_id = t2.ID
+        LEFT JOIN user_login t3 ON t1.user_id = t3.user_Id
+        WHERE
+        t3.user_id = #{userId}
+        AND t1.tag_type = 2
+
+    </select>
+
+
+
+
+    <insert id="addUserTag" parameterType="ytb.user.model.UserTagModel"
+            useGeneratedKeys="true" keyProperty="userTagId">
+        INSERT INTO user_tag
+        (
+        user_id,
+        tag_id,
+        tag_type,
+        create_time,
+        update_time
+        )
+        VALUES
+        (
+        #{userId},
+        #{tagId},
+        #{tagType},
+        now(),
+        now()
+        )
+    </insert>
+
+    <delete id="deleteUserTag">
+        DELETE FROM user_tag WHERE user_id = #{userId} AND user_tag_id = #{userTagId}
+    </delete>
+
+    <update id="updateUserTag" parameterType="ytb.user.model.UserTagModel">
+        UPDATE user_tag
+        <set>
+            <if test="tagId != null">`tag_id` = #{tagId}, </if>
+            <if test="userId != null">`user_id` = #{userId}, </if>
+            <if test="tagType != null">`tag_type` = #{tagType}, </if>
+            <if test="updateTime != null">`update_time` = now() </if>
+        </set>
+    WHERE user_tag_id =#{userTagId}
+    </update>
+
+</mapper>

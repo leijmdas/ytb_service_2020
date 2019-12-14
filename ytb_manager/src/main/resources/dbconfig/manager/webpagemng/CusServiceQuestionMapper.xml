@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.webpagemng.dao.CusServiceQuestionMapper">
+
+    <insert id="insert" parameterType="ytb.manager.webpagemng.model.CusServiceQuestion">
+       insert into cus_service_question(title,content,create_time,create_by,mark,pic_doc_id,btn_name,forward_url,sort_no,type_id)
+       values(#{title},#{content},#{createTime},#{createBy},#{mark},#{picDocId},#{btnName},#{forwardUrl},#{sortNo},#{typeId})
+    </insert>
+
+    <delete id="deleteByQid" parameterType="int">
+        delete from cus_service_question where qid = #{qid}
+    </delete>
+
+    <update id="update" parameterType="ytb.manager.webpagemng.model.CusServiceQuestion">
+        update cus_service_question
+        <set>
+            <if test="title!=null and title!=''">
+                title = #{title},
+            </if>
+            <if test="content!=null and content!=''">
+                content = #{content},
+            </if>
+            <if test="mark!=null">
+                mark = #{mark},
+            </if>
+            <if test="picDocId!=null and picDocId!=0">
+                pic_doc_id = #{picDocId},
+            </if>
+            <if test="btnName!=null">
+                btn_name = #{btnName},
+            </if>
+            <if test="forwardUrl!=null">
+                forward_url = #{forwardUrl},
+            </if>
+            <if test="sortNo!=null">
+                sort_no = #{sortNo}
+            </if>
+        </set>
+        where qid = #{qid}
+    </update>
+
+    <select id="selectOne" parameterType="ytb.manager.webpagemng.model.CusServiceQuestion"
+            resultType="ytb.manager.webpagemng.model.CusServiceQuestion">
+        select * from cus_service_question
+        where qid = #{qid}
+    </select>
+
+    <select id="selectList" parameterType="java.util.Map"
+            resultType="ytb.manager.webpagemng.model.CusServiceQuestion">
+        select a.*,b.type_name as typeName from cus_service_question a,cus_service_question_type b
+        where a.type_id = b.id
+        <if test="q.typeId!=null and q.typeId!=0">
+            and a.type_id = #{q.typeId}
+        </if>
+        <if test="q.mark!=null and q.mark!=0">
+            and a.mark = #{q.mark}
+        </if>
+        <if test="q.title!=null and q.title!=''">
+            and a.title like concat('%',concat(#{q.title},'%'))
+        </if>
+        order by a.sort_no asc,a.create_time desc
+        <if test="offset!=null and limit!=null">
+            limit #{offset},#{limit}
+        </if>
+    </select>
+
+    <select id="count" parameterType="java.util.Map" resultType="int">
+        select count(1) from cus_service_question a,cus_service_question_type b
+        where a.type_id = b.id
+        <if test="q.typeId!=null and q.typeId!=0">
+            and a.type_id = #{q.typeId}
+        </if>
+        <if test="q.mark!=null and q.mark!=0">
+            and a.mark = #{q.mark}
+        </if>
+        <if test="q.title!=null and q.title!=''">
+            and a.title like concat('%',concat(#{q.title},'%'))
+        </if>
+    </select>
+
+
+</mapper>

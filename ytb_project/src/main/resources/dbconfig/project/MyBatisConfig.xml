@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties resource="dbconfig/jdbc.properties"/>
+    <!--驼峰命名 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="callSettersOnNulls" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="ytb.common.MyBatis.DruidDataSourceFactory" alias="DRUID"/>
+    </typeAliases>
+    <typeHandlers/>
+
+    <environments default="development"><!-- 配置环境 -->
+        <environment id="development"><!-- 环境变量 -->
+            <transactionManager type="JDBC"><!--采用JDBC 事务管理器 -->
+                <property name="autoCommit" value="false"/>
+            </transactionManager>
+            <!-- 数据源 -->
+            <dataSource type="DRUID">
+                <property name="url" value="${project.url}"/>
+                <property name="driver" value="${driver}"/>
+                <property name="username" value="${name}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers><!-- 映射器 -->
+
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectTalkMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectFolderMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectDocumentMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectTemplateMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectDocumentVMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectTemplateVMapper.xml"/>
+
+
+        <mapper resource="dbconfig/project/projectReleaseMapper/workGroupMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/workGroupMemberMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectMemberDutyMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectEventMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectPhaseMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectMemberTaskMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectPlanMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/supplierCommodityMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/purchaseGoodsMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/costMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectTradeMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectTemplateUserMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/buyPriceListAllMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/UserCollectionProMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/processPriceListAllMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectReportMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/meetingNoticeMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/customTaskMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/shipmentNumberMapper.xml"/>
+
+        <mapper resource="dbconfig/project/projectReleaseMapper/InvoiceInfoMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/InvoiceMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/InvoiceInfoProjectMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/talkInviteStatusMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectInviteMapper.xml"/>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectFolderAssistMapper.xml"></mapper>
+        <mapper resource="dbconfig/project/projectReleaseMapper/projectChangeMapper.xml"></mapper>
+    </mappers>
+
+
+</configuration>

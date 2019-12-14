@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserWorkHistroyMapper" >
+
+	<select id="getUserWorkHistroyListById" resultType="ytb.user.model.UserWorkHistroyModel">
+      SELECT  * FROM user_work_histroy WHERE user_id = #{userId}
+    </select>
+
+
+    <insert id="addUserWorkHistroy" parameterType="ytb.user.model.UserWorkHistroyModel"
+            useGeneratedKeys="true" keyProperty="workId">
+        INSERT INTO user_work_histroy
+        (
+        user_id,
+       `start_date`,
+        end_date,
+        company_name,
+        dpt,
+        `duty`,
+        super_name,
+        create_time,
+        update_time
+        )
+        VALUES
+        (
+        #{userId},
+        #{startDate},
+        #{endDate},
+        #{companyName},
+        #{dpt},
+        #{duty},
+        #{superName},
+        now(),
+        now()
+        )
+    </insert>
+
+    <delete id="deleteUserWorkHistroy">
+        DELETE FROM user_work_histroy WHERE user_id = #{userId} AND work_id =#{workId}
+    </delete>
+
+    <update id="updateUserWorkHistroy" parameterType="ytb.user.model.UserWorkHistroyModel">
+        UPDATE user_work_histroy
+        <set>
+
+            <if test="startDate != null">`start_date` = #{startDate}, </if>
+            <if test="endDate != null">`end_date` = #{endDate}, </if>
+            <if test="companyName != null">`company_name` = #{companyName}, </if>
+            <if test="dpt != null">`dpt` = #{dpt}, </if>
+            <if test="duty != null">`duty` = #{duty}, </if>
+            <if test="superName != null">`super_name` = #{superName},</if>
+            `update_time` = now()
+        </set>
+    WHERE work_id =#{workId}
+    </update>
+
+</mapper>

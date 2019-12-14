@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.springframework.org/schema/beans" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="beans" type="bean:beansType" xmlns:bean="http://www.springframework.org/schema/beans"/>
+  <xs:complexType name="importType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="resource"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="beansType">
+    <xs:sequence>
+      <xs:element ref="con:component-scan" xmlns:con="http://www.springframework.org/schema/context"/>
+      <xs:element type="bean:beanType" name="bean" xmlns:bean="http://www.springframework.org/schema/beans"/>
+      <xs:element type="bean:importType" name="import" xmlns:bean="http://www.springframework.org/schema/beans"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="beanType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="class"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

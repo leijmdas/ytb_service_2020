@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.log.smslog.dao.TaskLogSmsCodeMapper" >
+
+
+
+    <select id="getTemplateLogSmsCodeByPhone" resultType="ytb.log.smslog.model.Tasklog_Sms_CodeModel">
+        select * from tasklog_sms_code where phone =#{phone}
+    </select>
+
+    <select id="selectByPrimaryKey" resultType="ytb.log.smslog.model.Tasklog_Sms_CodeModel">
+        select * from tasklog_sms_code where phone =#{phone}
+    </select>
+
+
+
+
+
+    <select id="getTemplateLogSmsCode" resultType="ytb.log.smslog.model.Tasklog_Sms_CodeModel">
+        select * from tasklog_sms_code where phone =#{phone}
+    </select>
+
+    <insert id="addTaskLogSmsCode" parameterType="ytb.log.smslog.model.Tasklog_Sms_CodeModel">
+
+        insert into tasklog_sms_code (phone,sms_id,user_id,sms_code,sendtime,endtime) values (#{phone},#{smsId},#{userId},#{smsCode},#{sendTime},#{endTime})
+
+	</insert>
+
+    <update id="modifyTaskLogSmsCode">
+
+      update tasklog_sms_code set
+
+       sms_id = #{smsId},
+
+       user_id = #{userId},
+
+       sms_code = #{smsCode},
+
+       sendtime = #{sendTime},
+
+       endtime = #{endTime}
+
+     where   phone =#{phone}
+
+    </update>
+
+    <delete id="deleteSmsCode">
+      delete from tasklog_sms_code where  phone =#{phone}
+
+    </delete>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from tasklog_sms_code
+        where phone = #{phone,jdbcType=VARCHAR}
+    </delete>
+
+
+
+</mapper>

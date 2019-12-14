@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.common.basic.userid.dao.UserIdMapper" >
+
+
+
+	<select id="getRecordByUuId" resultType="ytb.common.basic.userid.model.User_IdModel">
+      SELECT  * FROM User_Id where UUID = #{uuId}
+    </select>
+
+    <insert id="addUserId" parameterType="ytb.common.basic.userid.model.User_IdModel" useGeneratedKeys="true" keyProperty="id">
+		insert into User_Id (UUID)
+		VALUES (#{uuId})
+	</insert>
+
+
+
+</mapper>

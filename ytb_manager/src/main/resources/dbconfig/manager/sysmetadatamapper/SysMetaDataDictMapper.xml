@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.metadata.dao.SysMetaDataDictMapper" >
+
+	<select id="getDictList" resultType="ytb.manager.metadata.model.Sys_MetaDataDictModel" resultMap="DictResultMap">
+		SELECT * FROM metadata_dict
+	</select>
+
+	<select id="getDictByName" resultType="ytb.manager.metadata.model.Sys_MetaDataDictModel" resultMap="DictResultMap">
+		SELECT * FROM metadata_dict WHERE metadata_name = #{metaDataName}
+	</select>
+
+	<select id="getDictListByType" resultType="ytb.manager.metadata.model.Sys_MetaDataDictModel" parameterType="int" resultMap="DictResultMap">
+		SELECT * FROM metadata_dict WHERE metadata_type = #{metaDataType}
+	</select>
+
+	<select id="getDictById" resultType="ytb.manager.metadata.model.Sys_MetaDataDictModel" parameterType="int" resultMap="DictResultMap">
+		SELECT * FROM metadata_dict WHERE metadata_id = #{metaDataId}
+	</select>
+
+	<insert id="addDict" parameterType="ytb.manager.metadata.model.Sys_MetaDataDictModel">
+		INSERT INTO metadata_dict
+		(
+			metadata_name,
+			metadata_alias,
+			metadata_memo,
+			metadata_parentid,
+			metadata_type,
+			metadata_db,
+			metadata_autocreate,
+			metadata_stmt,
+			is_cached,
+			metadata_index
+		)
+		VALUES
+		(
+			#{metaDataName},
+			#{metaDataAlias},
+			#{metaDataMemo},
+			#{metaDataParentId},
+			#{metaDataType},
+			#{metaDataDB},
+			#{metaDataAutoCreate},
+			#{metaDataStmt},
+			#{isCached},
+			#{metaDataIndex}
+		)
+	</insert>
+
+	<update id="updateDictById" parameterType="ytb.manager.metadata.model.Sys_MetaDataDictModel">
+		UPDATE metadata_dict
+		<set>
+			<if test="metaDataName != null">`metadata_name` = #{metaDataName}, </if>
+			<if test="metaDataAlias != null">`metadata_alias` = #{metaDataAlias},</if>
+			<if test="metaDataMemo != null">`metadata_memo` = #{metaDataMemo}, </if>
+			<if test="metaDataParentId != null">`metadata_parentid` = #{metaDataParentId},</if>
+			<if test="metaDataType!= null">`metadata_type` = #{metaDataType}, </if>
+			<if test="metaDataDB != null">`metadata_db` = #{metaDataDB},</if>
+			<if test="metaDataAutoCreate != null">`metadata_autocreate` = #{metaDataAutoCreate}, </if>
+			<if test="metaDataStmt != null">`metadata_stmt` = #{metaDataStmt},</if>
+			<if test="isCached != null">`is_cached` = #{metaDataAutoCreate}, </if>
+			<if test="metaDataIndex != null">`metadata_index` = #{metaDataIndex}</if>
+		</set>
+		WHERE metadata_id = #{metaDataId}
+	</update>
+
+	<delete id="deleteDictById" parameterType="int">
+		delete from metadata_dict WHERE metadata_id = #{metaDataId}
+	</delete>
+
+	<select id="getTreeByTypeAndSubSys" parameterType="map" resultType="ytb.manager.metadata.model.Sys_MetaDataDictModel" resultMap="DictResultMap">
+		SELECT * FROM metadata_dict t where t.metadata_type =#{typeId} and t.metadata_db =#{metadataDb}
+	</select>
+
+	<resultMap type="ytb.manager.metadata.model.Sys_MetaDataDictModel" id="DictResultMap">
+		<!-- 用id属性来映射主键字段 -->
+		<id property="metaDataId" column="metadata_id"/>
+		<!-- 用result属性来映射非主键字段 -->
+		<result property="metaDataName" column="metadata_name"/>
+		<result property="metaDataAlias" column="metadata_alias"/>
+		<result property="metaDataMemo" column="metadata_memo"/>
+		<result property="metaDataParentId" column="metadata_parentid"/>
+		<result property="metaDataType" column="metadata_type"/>
+		<result property="metaDataDB" column="metadata_db"/>
+		<result property="metaDataAutoCreate" column="metadata_autocreate"/>
+		<result property="metaDataStmt" column="metadata_stmt"/>
+		<result property="isCached" column="is_cached"/>
+		<result property="metaDataIndex" column="metadata_index"/>
+	</resultMap>
+
+</mapper>

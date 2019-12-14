@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.CompanyIncomeMapper" >
+
+	<select id="getCompanyIncomeListById" resultType="ytb.user.model.CompanyIncomeModel">
+      SELECT  * FROM company_income WHERE company_id = #{companyId}
+    </select>
+
+    <insert id="addCompanyIncome" parameterType="ytb.user.model.CompanyIncomeModel"
+            useGeneratedKeys="true" keyProperty="incomeId">
+        INSERT INTO company_income
+        (
+        company_id,
+        `income_year`,
+       `create_time`,
+        income_money
+        )
+        VALUES
+        (
+        #{companyId},
+        #{incomeYear},
+        now(),
+       #{incomeMoney}
+        )
+    </insert>
+
+    <delete id="deleteCompanyIncome">
+        delete from company_income where company_id = #{companyId} and income_id = #{incomeId}
+
+    </delete>
+
+    <update id="updateCompanyIncome" parameterType="ytb.user.model.CompanyIncomeModel">
+      update company_income
+      <set>
+          <if test="companyId != null">`company_id` = #{companyId}, </if>
+          <if test="incomeYear != null">`income_year` = #{incomeYear}, </if>
+          <if test="incomeMoney != null">`income_money` = #{incomeMoney} </if>
+      </set>
+        where income_id = #{incomeId}
+    </update>
+
+</mapper>

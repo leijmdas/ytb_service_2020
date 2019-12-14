@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectInviteMapper" >
+
+    <!--查询收到的邀请-->
+    <select id="getInviteRecList" resultType="ytb.project.model.ProjectInviteViewModel">
+        SELECT * FROM
+        (SELECT
+        t.talk_id,
+        t.phase,
+        t.event_type AS eventType,
+        t.finish_time,
+        t.enter_time,
+        "邀请成为负责人" AS workJob,
+        "pb"AS workJobType,
+        p.project_id,
+        p.project_name,
+        p.view_number,
+        p.favorite_number,
+        p.user_id1 AS userId,
+        p.company_id1 as companyId,
+        u.credit_grade,
+        u.nick_name,
+        u.user_address,
+        u1.user_type AS userType,
+        u1.user_id as toUserId,
+        cm.company_name,
+        0 as documentId,
+        p.is_invite as inviteType
+        FROM
+        project_invite t
+        inner JOIN project p ON t.project_id = p.project_id
+        inner JOIN ytb_user.user_info u ON u.user_id = p.user_id1
+        inner JOIN ytb_user.user_login u1 ON u1.user_id = p.user_id1
+        LEFT JOIN ytb_user.company_info cm ON cm.company_id = p.company_id1
+        WHERE
+        t.user_id2 = #{userId} and t.phase_status = 1
+        union ALL
+        SELECT
+        t.talk_id,
+        t.phase,
+        tis.status AS eventType,
+        t.finish_time,
+        t.enter_time,
+        "邀请成为组员" AS workJob,
+        "pm" AS workJobType,
+        p.project_id,
+        p.project_name,
+        p.view_number,
+        p.favorite_number,
+        p.user_id1 AS userId,
+        p.company_id1 AS companyId,
+        u.credit_grade,
+        u.nick_name,
+        u.user_address,
+        u1.user_type AS userType,
+        u1.user_id as toUserId,
+        cm.company_name,
+        tis.document_Id,
+        p.is_invite as inviteType
+        FROM
+        project_talk t
+        inner JOIN project p ON t.project_id = p.project_id
+        inner JOIN talk_invite_status tis ON tis.document_id = t.workplan_id
+        inner JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+        inner JOIN ytb_user.user_login u1 ON u1.user_id = t.user_id2
+        LEFT JOIN ytb_user.company_info cm ON cm.company_id = p.company_id1
+        where tis.user_id = #{userId}
+        )
+        AS a
+        ORDER BY
+        a.enter_time DESC
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getInviteRecCount" resultType="int">
+                    SELECT
+        count(*)
+    FROM
+        (
+            SELECT
+                p.project_name AS projectName
+            FROM
+                project_invite t
+            INNER JOIN project p ON t.project_id = p.project_id
+            WHERE
+                t.user_id2 = #{userId}
+            AND t.phase_status = 1
+            UNION
+                SELECT
+                    p.project_name AS projectName
+                FROM
+                    project_talk t
+                INNER JOIN project p ON t.project_id = p.project_id
+                INNER JOIN talk_invite_status tis ON tis.document_id = t.workplan_id
+                WHERE
+                    tis.user_id = #{userId}
+        ) AS p
+    </select>
+
+    <!--查询发出的邀请-->
+    <select id="getInviteSendList" resultType="ytb.project.model.ProjectInviteViewModel">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        u.user_id as toUserId,
+        "邀请成为负责人" AS workJob,
+        "pb" AS workJobType,
+        p.project_name,
+        p.view_number,
+        p.favorite_number,
+        u.credit_grade,
+        u.nick_name,
+        u.user_address,
+        t.event_type AS eventType,
+        t.enter_time,
+        t.finish_time,
+        p.is_invite as inviteType
+        FROM
+        project_invite t
+        inner JOIN project p ON t.project_id = p.project_id
+        inner JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+        WHERE
+        p.user_id1 = #{userId}
+        AND t.phase_status = 1
+        UNION ALL
+        SELECT
+        u.user_id as toUserId,
+        "邀请成为组员" AS workJobType,
+        "pm" AS userType,
+        p.project_name,
+        p.view_number,
+        p.favorite_number,
+        u.credit_grade,
+        u.nick_name,
+        u.user_address,
+        tis.status AS eventType,
+        t.enter_time,
+        t.finish_time,
+        p.is_invite as inviteType
+        FROM
+        project_talk t
+        INNER JOIN project p ON t.project_id = p.project_id
+        INNER JOIN talk_invite_status tis ON tis.document_id = t.workplan_id
+        inner JOIN ytb_user.user_info u ON u.user_id = tis.user_id
+        WHERE
+        t.user_id2 = #{userId}
+        ) AS a
+        ORDER BY
+        a.enter_time DESC,a.eventType
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getInviteSendCount" resultType="int">
+            SELECT
+        count(*)
+    FROM
+        (
+            SELECT
+                p.project_name
+            FROM
+                project_invite t
+            INNER JOIN project p ON t.project_id = p.project_id
+            INNER JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+            WHERE
+                p.user_id1 = #{userId}
+            AND t.phase_status = 1
+            UNION ALL
+                SELECT
+                    p.project_name
+                FROM
+                    project_talk t
+                INNER JOIN project p ON t.project_id = p.project_id
+                INNER JOIN talk_invite_status tis ON tis.document_id = t.workplan_id
+                INNER JOIN ytb_user.user_info u ON u.user_id = tis.user_id
+                WHERE
+                    t.user_id2 = #{userId}
+        ) AS p
+    </select>
+
+
+    <!--查询发出的申请-->
+    <select id="getApplySendList" resultType="ytb.project.model.projectview.ProjectApplyViewModel">
+        SELECT
+            p.project_id,
+            t.phase,
+            t.event_type,
+            t.remark,
+            p.project_name,
+            p.view_number,
+            p.favorite_number,
+            t.enter_time AS projectApplyTime,
+            p.enter_time AS projectSendTime,
+            p.is_invite as inviteType
+        FROM project_invite t
+        LEFT JOIN project p ON t.project_id = p.project_id
+        WHERE t.user_id2 =#{userId}
+        AND t.phase_status = 2
+        ORDER BY t.enter_time DESC
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getApplySendCount" resultType="java.lang.Integer">
+        SELECT
+       count(1)
+        FROM project_invite t
+        LEFT JOIN project p ON t.project_id = p.project_id
+        WHERE t.user_id2 =#{userId}
+        AND t.phase_status = 2
+    </select>
+    <!--查询收到的申请-->
+    <select id="getApplyReceivedList" resultType="ytb.project.model.projectview.ProjectApplyViewModel">
+        SELECT
+        p.project_id,
+        p.project_name,
+        p.view_number,
+        p.favorite_number,
+        c.company_name,
+        p.enter_time as projectSendTime,
+        p.is_invite as inviteType
+        FROM
+        project_invite t
+        LEFT JOIN project p ON t.project_id = p.project_id
+        LEFT JOIN ytb_user.company_info c ON c.company_id = t.company_id2
+        WHERE
+        p.user_id1 = #{userId} and t.phase_status = 2
+        GROUP BY p.project_id
+        ORDER BY t.enter_time DESC
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getApplyReceivedCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM project_invite t
+        LEFT JOIN project p ON t.project_id = p.project_id
+        LEFT JOIN ytb_user.company_info c ON c.company_id = t.company_id2
+        WHERE  p.user_id1 = #{userId} and t.phase_status = 2
+    </select>
+
+    <insert id="addProjectInvite" parameterType="ytb.project.model.ProjectInviteModel" useGeneratedKeys="true"
+            keyProperty="talkId" keyColumn="talk_id">
+        insert into project_invite(
+          project_id,
+          user_id2,
+          company_id2,
+          phase,
+          phase_status,
+          event_type,
+          enter_time,
+          finish_time,
+          remark
+        )VALUES (
+          #{projectId},
+          #{userId2},
+          #{companyId2},
+          #{phase},
+          #{phaseStatus},
+          #{eventType},
+          now(),
+          now(),
+          #{remark}
+        )
+    </insert>
+
+    <update id="updateInviteEventType">
+        update project_invite set event_type = #{eventType},finish_time = now() where talk_id = #{talkId}
+    </update>
+
+
+    <select id="getInviteRecDetailsList" resultType="map">
+        SELECT
+        date_format(t.enter_time, '%Y-%m-%d %H:%i:%s') AS approvalTime,
+        t.remark AS reqRemark,
+        t.phase,
+        u.nick_name AS nickName,
+        u.credit_grade AS creditGread,
+        u.user_address AS userAddress,
+        t.company_id2 AS companyId,
+        p.project_name AS projectName,
+        p.project_id AS projectId,
+        u.user_id AS userId,
+        if(t.company_id2=0,1,2) AS userType,
+        p.enter_time AS createTime,
+        p.view_number AS viewNumber,
+        p.favorite_number AS favoriteNumber,
+        c.company_name AS companyName,
+        t.talk_id AS talkId,
+        p.is_invite as inviteType
+        FROM  project p
+        INNER JOIN project_invite t ON t.project_id = p.project_id
+        LEFT JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+        LEFT JOIN ytb_user.company_info c ON c.company_id = t.company_id2
+        WHERE  p.project_id =#{projectId}
+        order by t.finish_time desc
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="countInviteRecordsRec" resultType="int">
+        SELECT count(1) FROM   project p
+    INNER JOIN project_invite t ON t.project_id = p.project_id
+    LEFT JOIN ytb_user.user_info u ON u.user_id = t.user_id2
+    LEFT JOIN ytb_user.company_info c ON c.company_id = t.company_id2
+    WHERE  p.project_id = #{projectId}
+    </select>
+
+    <select id="getProjectInviteByTalkId"  resultType="ytb.project.model.ProjectInviteModel">
+        select * from project_invite
+        where talk_id = #{talkId}
+    </select>
+
+    <select id="getProjectInvitesByProject" resultType="ytb.project.model.ProjectInviteModel">
+        select * from project_invite
+        where project_id = #{projectId}
+    </select>
+
+    <select id="getProjectInvitesByPB" resultType="ytb.project.model.ProjectInviteModel">
+        select * from project_invite
+        where project_id = #{projectId}
+        and user_id2 = #{userId}
+
+    </select>
+
+
+</mapper>

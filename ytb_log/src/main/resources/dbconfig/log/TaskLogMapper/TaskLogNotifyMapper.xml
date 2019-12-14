@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.log.notify.dao.TaskLogNotifyMapper">
+
+
+    <select id="getTaskNotifyList" parameterType="int" resultType="ytb.log.notify.model.TaskLog_notifyModel">
+
+        SELECT * FROM tasklog_notify
+
+    </select>
+
+    <insert id="addTaskNotify" parameterType="ytb.log.notify.model.TaskLog_notifyModel">
+
+      insert into tasklog_notify (user_id,to_user_id,service_type,template_id,
+      template_param,notify,notify_time,proc_id)
+      values (#{userId},#{toUserId},#{serviceType},#{templateId},#{templateParam},
+      #{notify},#{notifyTime},#{procId})
+
+	</insert>
+
+    <update id="modifyTaskNotify">
+
+        update tasklog_notify set
+          notify_status = 2
+        where notify_id = #{notifyId}
+    </update>
+
+    <delete id="deleteTaskNotifyByList" parameterType="java.util.List">
+        DELETE FROM tasklog_notify WHERE
+        notify_id IN
+        <foreach item="notifyId" collection="templateList" open="(" separator="," close=")">
+            #{notifyId}
+        </foreach>
+    </delete>
+    <delete id="deleteTaskNotifyById" parameterType="java.util.List">
+        DELETE FROM tasklog_notify WHERE
+        notify_id = #{notifyId}
+    </delete>
+
+    <select id="getTaskNotifyListByType" resultType="map">
+                SELECT
+            t1.notify_id AS messageId,t1.notify AS messageContent,t1.notify_status AS messageIsRead,date_format(t1.notify_time, '%Y-%m-%d
+        %H:%i:%s') as messageSendTime,t1.notify_title
+     AS messageTitle,t2.template_url AS templateUrl
+        FROM
+            tasklog_notify t1
+        INNER JOIN template_notify t2 ON t1.template_id = t2.template_id
+        WHERE t1.to_user_id =#{userId} and service_type=#{type}
+        ORDER BY t1.notify_time DESC
+        <if test="offset != null  and limit != null">
+        LIMIT #{offset}, #{limit}
+    </if>
+    </select>
+
+
+    <select id="getUnReadTaskNotify" resultType="map">
+                     SELECT
+            COUNT(
+                CASE
+                WHEN u.service_type = 1 THEN
+                    1
+                END
+            ) AS taskCount,
+            COUNT(
+                CASE
+                WHEN u.service_type = 2 THEN
+                    1
+                END
+            ) AS dealCount
+        FROM
+            tasklog_notify u
+        WHERE
+            u.notify_status = 1
+        AND u.to_user_id = #{userId}
+    </select>
+
+
+    <select id="getUnReadNumber" resultType="int">
+        SELECT COUNT(*) FROM tasklog_notify WHERE to_user_id = #{userId} AND service_type = #{type} AND notify_status = 1
+    </select>
+
+    <select id="getTaskNumByType" resultType="int">
+
+    select count(*)  from tasklog_notify where to_user_Id =#{userId} and service_type=#{type}
+    </select>
+
+
+    <update id="setSignRead">
+
+        update tasklog_notify set
+        notify_status = 2
+        where notify_id = #{notifyId}
+    </update>
+
+</mapper>

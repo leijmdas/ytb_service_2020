@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserPurchaseMapper" >
+    <select id="getUserPurchaseList" resultType="map">
+        SELECT
+        a.purchase_id AS purchaseId,
+        a.user_id AS userId,
+        a.type_id AS typeId,
+        a.create_time AS createTime,
+        a.isprivate AS isPrivate,
+        a.purchase_name as purchaseName,
+        a.purchase_rule as purchaseRule,
+        a.purchase_factory as purchaseFactory,
+        m.title,
+        m.parentName
+        FROM
+        user_purchase a
+        LEFT JOIN (
+        SELECT
+        t1.Project_Type_Id,
+        t1.title,
+        (
+        SELECT
+        p.Title
+        FROM
+        ytb_manager.dict_project_type p
+        WHERE
+        p.Project_Type_Id = t1.parent_id
+        ) AS parentName
+        FROM
+        ytb_manager.dict_project_type t1
+        ) AS m ON m.Project_Type_Id = a.type_id
+        <where>
+            <if test="userId !=null and userId !=''">
+                user_id = #{userId}
+            </if>
+            <if test="companyId !=null and companyId !=''">
+                company_id = #{companyId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserPurchaseType" resultType="map">
+        SELECT DISTINCT
+        a.type_id AS typeId,
+        m.title
+        FROM
+        user_purchase a
+        LEFT JOIN (
+        SELECT
+        t1.Project_Type_Id,
+        t1.title,
+        (
+        SELECT
+        p.Title
+        FROM
+        ytb_manager.dict_project_type p
+        WHERE
+        p.Project_Type_Id = t1.parent_id
+        ) AS parentName
+        FROM
+        ytb_manager.dict_project_type t1
+        ) AS m ON m.Project_Type_Id = a.type_id
+        <where>
+        <if test="userId !=null and userId !=''">
+            user_id = #{userId}
+        </if>
+        <if test="companyId !=null and companyId !=''">
+            company_id = #{companyId}
+        </if>
+    </where>
+    </select>
+
+
+
+
+    <insert id="addUserPurchase" parameterType="ytb.user.model.UserPurchaseModel" useGeneratedKeys="true" keyProperty="purchaseId">
+        insert into user_purchase
+        (
+        user_id,
+        company_id,
+        type_id,
+        purchase_name,
+        purchase_rule,
+        purchase_factory,
+        create_time
+        )values(
+          #{userId},
+          #{companyId},
+          #{typeId},
+          #{purchaseName},
+          #{purchaseRule},
+          #{purchaseFactory},
+          now()
+        )
+    </insert>
+
+    <update id="updateUserPurchase" parameterType="ytb.user.model.UserPurchaseModel">
+        UPDATE user_purchase
+        <set>
+            <if test="userId != null and userId !=''">`user_id` = #{userId}, </if>
+            <if test="companyId != null and companyId !=''">`company_id` = #{companyId}, </if>
+            <if test="typeId != null">`type_id` = #{typeId},</if>
+            <if test="purchaseName != null">`purchase_name` = #{purchaseName},</if>
+            <if test="purchaseRule != null">`purchase_rule` = #{purchaseRule},</if>
+            <if test="purchaseFactory != null">`purchase_factory` = #{purchaseFactory}</if>
+        </set>
+       WHERE purchase_id = #{purchaseId}
+    </update>
+
+    <delete id="deleteUserPurchase">
+        DELETE FROM user_purchase WHERE purchase_id = #{purchaseId}
+    </delete>
+
+    <update id="updatePurchaseViewNumberById">
+        update user_purchase set view_number = view_number+1 where purchase_id = #{purchaseId}
+    </update>
+</mapper>

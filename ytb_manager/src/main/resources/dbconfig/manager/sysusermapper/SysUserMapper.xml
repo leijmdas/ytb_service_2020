@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.sysuser.dao.SysUserMapper" >
+
+	<select id="getSysUserList" resultType="ytb.manager.sysuser.model.SysUserModel">
+		select t1.UserId,
+		t1.userName,
+		t1.password,
+		t1.mobile,
+		t1.status,
+		t1.isAdmin,
+		t1.createBy,
+		t1.userEmail,
+		t1.bangbang_no as bangbangNo,
+		(select p.userName from sys_user p where p.userId = t1.createBy) as createName,
+		date_format(t1.startTime, '%Y-%m-%d %H:%i:%s') as startStrTime,
+		date_format(t1.endTime, '%Y-%m-%d %H:%i:%s') as endStrTime,
+		date_format(t1.createTime, '%Y-%m-%d %H:%i:%s') as createStrTime from sys_user t1
+		<where>
+			<if test="userName != null and userName.trim() != ''">
+				`userName` like concat('%',#{userName},'%')
+			</if>
+		</where>
+		order by t1.userName
+	</select>
+
+	<select id="getSysUserInfoById" resultType="ytb.manager.sysuser.model.SysUserModel">
+		SELECT * FROM sys_user WHERE userId = #{userId}
+	</select>
+
+	<delete id="deleteUserbyId">
+		DELETE FROM sys_user WHERE UserId = #{userId};
+		delete from sys_user_role where UserId = #{userId}
+	</delete>
+
+	<insert id="addUserInfo" parameterType="ytb.manager.sysuser.model.SysUserModel"
+			useGeneratedKeys="true" keyProperty="userId">
+		INSERT INTO sys_user
+		(
+		userId,
+		userName,
+		password,
+		mobile,
+		status,
+		isAdmin,
+		createBy,
+		createTime,
+		userEmail,
+		bangbang_no
+		)
+		VALUES
+		(
+		#{userId},
+		#{userName},
+		#{password},
+		#{mobile},
+		1,
+		FALSE,
+		#{createBy},
+		now(),
+		#{userEmail},
+		#{bangbangNo}
+		)
+	</insert>
+
+	<update id="updateSysUserInfo" parameterType="ytb.manager.sysuser.model.SysUserModel">
+		UPDATE sys_user
+		<set>
+			<if test="userName != null">`userName` = #{userName}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="isAdmin != null">`isAdmin` = #{isAdmin}, </if>
+			<if test="userEmail != null">`userEmail` = #{userEmail}, </if>
+			<if test="bangbangNo != null">`bangbang_No` = #{bangbangNo}, </if>
+			<if test="createBy != null">`createBy` = #{createBy} </if>
+		</set>
+		where UserId = #{userId}
+	</update>
+
+
+	<update id="updatePassword" >
+		update sys_user set `password` = #{newPwd}
+		where userId = #{userId}
+	</update>
+
+	<!--禁用/启用用户状态-->
+	<update id="updateStatus" parameterType="map">
+		UPDATE sys_user set status = #{status}
+		where userId = #{userId}
+	</update>
+
+
+	<select id="getUserByUserName" resultType="ytb.manager.sysuser.model.SysUserModel">
+		select * from sys_user where userName = #{userName}
+	</select>
+
+	<select id="getUserByMobile" resultType="ytb.manager.sysuser.model.SysUserModel">
+		select * from sys_user where mobile = #{mobile}
+	</select>
+</mapper>

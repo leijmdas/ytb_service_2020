@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<context:property-placeholder location="classpath:dbconfig/jdbc.properties"
+								  ignore-unresolvable="true" />
+	<context:annotation-config/>
+	<context:component-scan base-package="ytb.common.context"></context:component-scan>
+
+	<tx:annotation-driven transaction-manager="commonTxManager" />
+	<!--<tx:annotation-driven/>-->
+
+
+	<!-- 配置事务管理器 -->
+	<bean primary="true"  id="commonTxManager"  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 注入数据库连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<qualifier value="commonTxManager"/>
+	</bean>
+
+		<!-- 配置数据源  init-method="init"-->
+	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		  destroy-method="close">
+		<property name="url" value="${manager.url}" />
+		<property name="username" value="${name}" />
+		<property name="password" value="${password}" />
+		<property name="driverClassName" value="${driver}" />
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="20" />
+		<property name="minIdle" value="2" />
+		<property name="maxWait" value="60000" />
+		<property name="validationQuery" value="${validationQuery}" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="minEvictableIdleTimeMillis" value="25200000" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="1800" />
+		<property name="logAbandoned" value="true" />
+		<property name="filters" value="mergeStat" />
+	</bean>
+	<!-- myBatis文件 -->
+	<bean primary="true" id="commonSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:dbconfig/MyBatisConfig.xml" />
+        <property name="dataSource" ref="dataSource" />
+		<!-- 配置数据库表对应的java实体类 -->
+		<property name="typeAliasesPackage" value="ytb.common.basic.config.model" />
+		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+		<!--<property name="mapperLocations" value="classpath:dbconfig/common/subsysmapper/*.xml" />-->
+		<property name="mapperLocations" >
+			<list>
+				<value>classpath:dbconfig/common/subsysmapper/*.xml</value>
+				<value>classpath:dbconfig/common/activitiTemplatemapper/*.xml</value>
+				<value>classpath:dbconfig/manager/sysmetadatamapper/*.xml</value>
+				<!--<value>classpath:dbconfig/manager/sysusermapper/*.xml</value>-->
+				<!--<value>classpath:dbconfig/manager/templatemapper/*.xml</value>-->
+			</list>
+		</property>
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--<property name="annotationClass" value="javax.annotation.Resource"/>-->
+		<property name="basePackage" value="ytb.common.basic.safecontext.dao" />
+		<property name="sqlSessionFactoryBeanName" value="commonSqlSessionFactory" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="ytb.common.basic.config.dao" />
+		<property name="sqlSessionFactoryBeanName" value="commonSqlSessionFactory" />
+	</bean>
+
+
+	<bean primary="true" id="commonSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="commonSqlSessionFactory" />
+        <qualifier value="commonSqlSessionTemplate"/>
+
+	</bean>
+
+
+</beans>

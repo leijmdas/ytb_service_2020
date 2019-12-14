@@ -1,0 +1,54 @@
+<definitions id="definitions"
+             targetNamespace="http://activiti.org/bpmn20"
+             xmlns:activiti="http://activiti.org/bpmn"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+
+    <process id="financialReport" name="Monthly financial report reminderprocess"
+             isExecutable="true">
+
+        <startEvent id="theStart"/>
+
+        <sequenceFlow id='flow1' sourceRef='theStart' targetRef='writeReportTask'/>
+        <userTask id="writeReportTask" name="Write monthly financial report"
+                  activiti:class="ytb.activiti.servicetask.DemoDelegate1">
+            <documentation>
+                Write monthly financial reportfor publication to shareholders.
+            </documentation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <formalExpression>sales1</formalExpression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+
+        <sequenceFlow id='flow2' sourceRef='writeReportTask' targetRef='verifyReportTask'/>
+        <userTask id="verifyReportTask" name="Verify monthly financial report"
+                  activiti:class="ytb.activiti.servicetask.DemoDelegate2">
+            <documentation>
+                Verify monthly financial reportcomposed by the accountancy department.
+                This financial report is goingto be sent to all the company shareholders.
+            </documentation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <formalExpression>management1</formalExpression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+
+
+        <sequenceFlow id='flow3' sourceRef='verifyReportTask' targetRef='serviceTask1'/>
+        <serviceTask id="serviceTask1" name="Java service DemoDelegateServiceParam"
+                  activiti:class="ytb.activiti.servicetask.DemoDelegateServiceParam">
+            <extensionElements>
+                <activiti:field name="json">
+                    <activiti:expression>Hello Mr. Bai msg</activiti:expression>
+                </activiti:field>
+            </extensionElements>
+        </serviceTask>
+
+        <sequenceFlow id='flow4' sourceRef='serviceTask1' targetRef='theEnd' />
+        <endEvent id="theEnd" />
+
+    </process>
+
+</definitions>

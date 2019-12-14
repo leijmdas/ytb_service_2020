@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.common.basic.config.dao.SubSysMapper">
+
+
+<select id="getSubsys_address" resultType="ytb.common.basic.config.model.SubSysDictModel">
+      SELECT  * FROM subsys_dict
+    </select>
+
+
+</mapper>

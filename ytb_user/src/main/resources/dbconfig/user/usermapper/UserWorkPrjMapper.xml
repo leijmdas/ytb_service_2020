@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserWorkPrjMapper">
+
+	<select id="getUserWorkPrjList" resultType="map">
+      SELECT
+       prj_id as prjId,
+       user_id as userId,
+        prj_leader as prjLeader,
+       date_format(start_date,'%Y-%m-%d %H:%s:%i') as startDate,
+       date_format(end_date,'%Y-%m-%d %H:%s:%i') as endDate,
+       company_name as companyName,
+       prj_name as prjName,
+       `describe` as `describe`,
+        date_format(create_time,'%Y-%m-%d %H:%s:%i') as createTime,
+       date_format(update_time,'%Y-%m-%d %H:%s:%i') as updateTime,
+       image as image
+       FROM user_work_prj WHERE user_id = #{userId}
+    </select>
+
+
+    <insert id="addUserWorkPrj" parameterType="ytb.user.model.UserWorkPrjModel"
+            useGeneratedKeys="true" keyProperty="prjId">
+        INSERT INTO user_work_prj
+        (
+        user_id,
+       `start_date`,
+        end_date,
+        company_name,
+        prj_name,
+        `describe`,
+        prj_leader,
+        create_time,
+        update_time,
+        image
+        )
+        VALUES
+        (
+        #{userId},
+        #{startDate},
+        #{endDate},
+        #{companyName},
+        #{prjName},
+        #{describe},
+        #{prjLeader},
+        now(),
+        now(),
+        #{image}
+        )
+    </insert>
+
+    <delete id="deleteUserWorkPrj">
+        DELETE FROM user_work_prj WHERE user_id = #{userId} AND prj_id =#{prjId}
+    </delete>
+
+    <update id="updateUserWorkPrj" parameterType="ytb.user.model.UserWorkPrjModel">
+        UPDATE user_work_prj
+        <set>
+
+            <if test="startDate != null">`start_date` = #{startDate}, </if>
+            <if test="endDate != null">`end_date` = #{endDate}, </if>
+            <if test="companyName != null">`company_name` = #{companyName}, </if>
+            <if test="prjName != null">`prj_name` = #{prjName}, </if>
+            <if test="describe != null">`describe` = #{describe}, </if>
+            <if test="prjLeader != null">`prj_leader` = #{prjLeader},</if>
+           `update_time` = now()
+        </set>
+    WHERE prj_id =#{prjId}
+    </update>
+
+</mapper>

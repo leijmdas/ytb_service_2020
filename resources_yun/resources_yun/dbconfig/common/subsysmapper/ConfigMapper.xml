@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.common.basic.config.dao.ConfigMapper" >
+
+
+
+	<select id="getConfig" parameterType="String" resultType="ytb.common.basic.config.model.Dict_ConfigModel">
+      SELECT  * FROM dict_config order by config_item
+    </select>
+
+
+</mapper>

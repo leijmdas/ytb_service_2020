@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.common.basic.userid.dao.BBNoMapper" >
+
+
+
+	<select id="getBBNoByUUId" resultType="ytb.common.basic.userid.model.BBNoModel">
+      SELECT  * FROM bb_no where UUID = #{uuId}
+    </select>
+
+    <insert id="addBBNOInfo" parameterType="ytb.common.basic.userid.model.BBNoModel" useGeneratedKeys="true" keyProperty="id">
+		insert into bb_no (UUID,create_time)
+		VALUES (#{uuId},now())
+	</insert>
+
+</mapper>

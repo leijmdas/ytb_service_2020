@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.CompanyEmployeesMapper" >
+
+    <select id="getCompanyEmployeesListById" resultType="ytb.user.model.CompanyEmployeesModel">
+          SELECT
+        t1.is_enable AS isEnable,
+        t1.company_id AS companyId,
+        t1.company_user_id AS companyUserId,
+        t2.nick_name AS nickName,
+        t2.user_id AS userId,
+        t1.remark as remark,
+        t1.employee_id as employeeId
+    FROM
+        company_employees t1
+    INNER JOIN user_info t2 ON t1.company_user_id = t2.user_id
+    WHERE
+        t1.company_id =#{companyId}
+    </select>
+
+
+    <insert id="addCompanyEmployees" parameterType="ytb.user.model.CompanyEmployeesModel"
+            useGeneratedKeys="true" keyProperty="employeeId">
+        INSERT INTO company_employees
+        (
+        company_id,
+        company_user_id,
+       `invite_time`,
+       create_time
+        )
+        VALUES
+        (
+        #{companyId},
+        #{companyUserId},
+        now(),
+        now()
+        )
+    </insert>
+
+    <select id="getCompanyEmpList" resultType="map">
+        SELECT
+        t1.is_enable AS isEnable,
+        t1.company_id AS companyId,
+        t2.nick_name AS nickName,
+        t2.user_id AS userId,
+        t1.remark as remark,
+        t1.employee_id as employeeId,
+        t2.user_type as userType
+    FROM
+        company_employees t1
+    INNER JOIN user_login t2 ON t1.company_user_id = t2.user_id
+    WHERE
+        t1.company_id =#{companyId}
+        <if test="nickName !=null and nickName !=''">
+           and t2.nick_name=#{nickName}
+        </if>
+        <if test="empType !=null">
+           and t1.is_enable=#{empType}
+        </if>
+    </select>
+
+    <delete id="deleteCompanyEmp">
+        DELETE FROM company_employees WHERE employee_id = #{empId} and  company_user_id = #{userId}
+    </delete>
+
+    <update id="updateCompanyEmp" parameterType="ytb.user.model.CompanyEmployeesModel">
+        update company_employees
+        <set>
+            <if test="isEnable != null and isEnable !=''">`is_enable` = #{isEnable}, </if>
+            <if test="remark != null">`remark` = #{remark} </if>
+        </set>
+        where employee_id = #{employeeId}
+
+    </update>
+</mapper>

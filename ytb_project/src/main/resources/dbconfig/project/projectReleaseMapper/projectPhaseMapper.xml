@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectPhaseMapper" >
+
+    <insert id="addProjectPhase" parameterType="ytb.project.model.ProjectPhaseModel" useGeneratedKeys="true" keyProperty="phaseId" keyColumn="phase_id">
+
+        insert into project_phase(
+        talk_id,
+        project_id,
+        folder_id,
+        phase,
+        phase_status,
+        enter_time,
+        finish_time
+       )
+		VALUES (
+		#{talkId},
+		#{projectId},
+		#{folderId},
+		#{phase},
+		#{phaseStatus},
+		now(),
+		now()
+		)
+
+	</insert>
+
+    <select id="getProjectPhase" resultType="ytb.project.model.ProjectPhaseModel">
+
+        select * from project_phase where talk_id = #{talkId} and phase = #{phase}
+
+    </select>
+
+    <select id="getProjectPhaseByProjectId" resultType="ytb.project.model.ProjectPhaseModel">
+
+        select * from project_phase where project_id = #{projectId} and phase = #{phase}
+
+    </select>
+
+    <update id="modifyProjectPhase" >
+
+        update project_phase set
+
+        update_time = #{updateTime}
+
+        where phase_id = #{phaseId}
+
+    </update>
+
+</mapper>

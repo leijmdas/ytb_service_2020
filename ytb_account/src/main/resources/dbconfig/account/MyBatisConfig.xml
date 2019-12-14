@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration><!-- org.apache.ibatis.session.Configuration -->
+
+    <!-- 属性 -->
+    <properties resource="dbconfig/jdbc.properties"/>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="ytb.common.MyBatis.DruidDataSourceFactory" alias="DRUID"/>
+    </typeAliases>
+    <typeHandlers/><!--类型处理器 -->
+    <!-- <objectFactory/>&lt;!&ndash; 对象工厂 &ndash;&gt;
+      <plugins/>&lt;!&ndash;插件 &ndash;&gt;
+-->
+    <environments default="development"><!-- 配置环境 -->
+        <environment id="development"><!-- 环境变量 -->
+            <transactionManager type="JDBC"><!--采用JDBC 事务管理器 -->
+                <property name="autoCommit" value="false"/>
+            </transactionManager>
+            <!-- 数据源 -->
+            <dataSource type="DRUID">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${account.url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers><!-- 映射器 -->
+        <mapper resource="dbconfig/account/wallet/AccountPfDetailMapper.xml"/>
+        <mapper resource="dbconfig/account/wallet/AccountPfInnerMapper.xml"/>
+        <mapper resource="dbconfig/account/wallet/AccountPfOutMapper.xml"/>
+        <mapper resource="dbconfig/account/wallet/AccountTradeMapper.xml"/>
+        <mapper resource="dbconfig/account/wallet/AccountTradeProjectMapper.xml"/>
+        <mapper resource="dbconfig/account/wallet/AccountUserDetailMapper.xml"/>
+        <mapper resource="dbconfig/account/wallet/AccountUserInnerMapper.xml"/>
+        <mapper resource="dbconfig/account/wallet/AccountUserInnerBalanceMapper.xml"/>
+
+        <mapper resource="dbconfig/account/wallet/AccountUserOutMapper.xml"/>
+        <mapper resource="dbconfig/account/wallet/AccountPfInnerBalanceMapper.xml"/>
+        <mapper resource="dbconfig/account/wallet/AccountPfTradeMapper.xml"/>
+        <mapper resource="dbconfig/account/wallet/AccountTradeOutMapper.xml"/>
+
+        <mapper resource="dbconfig/account/project/ProjectMapper.xml"/>
+        <mapper resource="dbconfig/account/project/ProjectTradeMapper.xml"/>
+
+        <mapper resource="dbconfig/account/user/CompanyInfoMapper.xml"/>
+        <mapper resource="dbconfig/account/user/UserInfoMapper.xml"/>
+    </mappers>
+
+
+</configuration>

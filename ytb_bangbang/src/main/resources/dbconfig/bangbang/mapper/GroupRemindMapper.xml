@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.GroupRemindDao" >
+    <resultMap id="groupRemind" type="ytb.bangbang.model.Group_RemindModel">
+        <id property="Remind_id"  column="remind_id"/>
+        <result property="ToUser" column="to_user"/>
+        <result property="MessageId " column="message_id "/>
+    </resultMap>
+</mapper>

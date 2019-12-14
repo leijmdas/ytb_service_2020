@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.account.wallet.dao.AccountUserInnerMapper">
+    <resultMap id="BaseResultMap" type="ytb.account.wallet.model.AccountUserInner">
+        <id column="inner_id" jdbcType="INTEGER" property="innerId"/>
+        <result column="term_id" jdbcType="SMALLINT" property="termId"/>
+        <result column="user_type" jdbcType="TINYINT" property="userType"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="company_id" jdbcType="INTEGER" property="companyId"/>
+        <result column="balance" jdbcType="DECIMAL" property="balance"/>
+        <result column="payout_agent" jdbcType="DECIMAL" property="payoutAgent"/>
+        <result column="income_agent" jdbcType="DECIMAL" property="incomeAgent"/>
+        <result column="pay_password" jdbcType="VARCHAR" property="payPassword"/>
+        <result column="takeout_money" jdbcType="DECIMAL" property="takeoutMoney"/>
+        <result column="balance_in" jdbcType="DECIMAL" property="balanceIn"/>
+        <result column="balance_out" jdbcType="DECIMAL" property="balanceOut"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="open_time" jdbcType="TIMESTAMP" property="openTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    inner_id, term_id, user_type, user_id, company_id, balance, payout_agent, income_agent, 
+    pay_password, takeout_money, balance_in, balance_out, status, open_time
+  </sql>
+    <select id="selectByExample" parameterType="ytb.account.wallet.model.AccountUserInnerExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from account_user_inner
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from account_user_inner
+        where inner_id = #{innerId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from account_user_inner
+    where inner_id = #{innerId,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="ytb.account.wallet.model.AccountUserInnerExample">
+        delete from account_user_inner
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="ytb.account.wallet.model.AccountUserInner">
+    insert into account_user_inner (inner_id, term_id, user_type, 
+      user_id, company_id, balance, 
+      payout_agent, income_agent, pay_password, 
+      takeout_money, balance_in, balance_out, 
+      status, open_time)
+    values (#{innerId,jdbcType=INTEGER}, #{termId,jdbcType=SMALLINT}, #{userType,jdbcType=TINYINT}, 
+      #{userId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, 
+      #{payoutAgent,jdbcType=DECIMAL}, #{incomeAgent,jdbcType=DECIMAL}, #{payPassword,jdbcType=VARCHAR}, 
+      #{takeoutMoney,jdbcType=DECIMAL}, #{balanceIn,jdbcType=DECIMAL}, #{balanceOut,jdbcType=DECIMAL}, 
+      #{status,jdbcType=TINYINT}, #{openTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="ytb.account.wallet.model.AccountUserInner" useGeneratedKeys="true"
+            keyProperty="innerId" keyColumn="inner_id">
+        insert into account_user_inner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="innerId != null">
+                inner_id,
+            </if>
+            <if test="termId != null">
+                term_id,
+            </if>
+            <if test="userType != null">
+                user_type,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="payoutAgent != null">
+                payout_agent,
+            </if>
+            <if test="incomeAgent != null">
+                income_agent,
+            </if>
+            <if test="payPassword != null">
+                pay_password,
+            </if>
+            <if test="takeoutMoney != null">
+                takeout_money,
+            </if>
+            <if test="balanceIn != null">
+                balance_in,
+            </if>
+            <if test="balanceOut != null">
+                balance_out,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="openTime != null">
+                open_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="innerId != null">
+                #{innerId,jdbcType=INTEGER},
+            </if>
+            <if test="termId != null">
+                #{termId,jdbcType=SMALLINT},
+            </if>
+            <if test="userType != null">
+                #{userType,jdbcType=TINYINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="payoutAgent != null">
+                #{payoutAgent,jdbcType=DECIMAL},
+            </if>
+            <if test="incomeAgent != null">
+                #{incomeAgent,jdbcType=DECIMAL},
+            </if>
+            <if test="payPassword != null">
+                #{payPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="takeoutMoney != null">
+                #{takeoutMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="balanceIn != null">
+                #{balanceIn,jdbcType=DECIMAL},
+            </if>
+            <if test="balanceOut != null">
+                #{balanceOut,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="openTime != null">
+                #{openTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="ytb.account.wallet.model.AccountUserInnerExample" resultType="java.lang.Long">
+        select count(*) from account_user_inner
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update account_user_inner
+        <set>
+            <if test="record.innerId != null">
+                inner_id = #{record.innerId,jdbcType=INTEGER},
+            </if>
+            <if test="record.termId != null">
+                term_id = #{record.termId,jdbcType=SMALLINT},
+            </if>
+            <if test="record.userType != null">
+                user_type = #{record.userType,jdbcType=TINYINT},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.companyId != null">
+                company_id = #{record.companyId,jdbcType=INTEGER},
+            </if>
+            <if test="record.balance != null">
+                balance = #{record.balance,jdbcType=DECIMAL},
+            </if>
+            <if test="record.payoutAgent != null">
+                payout_agent = #{record.payoutAgent,jdbcType=DECIMAL},
+            </if>
+            <if test="record.incomeAgent != null">
+                income_agent = #{record.incomeAgent,jdbcType=DECIMAL},
+            </if>
+            <if test="record.payPassword != null">
+                pay_password = #{record.payPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="record.takeoutMoney != null">
+                takeout_money = #{record.takeoutMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="record.balanceIn != null">
+                balance_in = #{record.balanceIn,jdbcType=DECIMAL},
+            </if>
+            <if test="record.balanceOut != null">
+                balance_out = #{record.balanceOut,jdbcType=DECIMAL},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=TINYINT},
+            </if>
+            <if test="record.openTime != null">
+                open_time = #{record.openTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update account_user_inner
+        set inner_id = #{record.innerId,jdbcType=INTEGER},
+        term_id = #{record.termId,jdbcType=SMALLINT},
+        user_type = #{record.userType,jdbcType=TINYINT},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        company_id = #{record.companyId,jdbcType=INTEGER},
+        balance = #{record.balance,jdbcType=DECIMAL},
+        payout_agent = #{record.payoutAgent,jdbcType=DECIMAL},
+        income_agent = #{record.incomeAgent,jdbcType=DECIMAL},
+        pay_password = #{record.payPassword,jdbcType=VARCHAR},
+        takeout_money = #{record.takeoutMoney,jdbcType=DECIMAL},
+        balance_in = #{record.balanceIn,jdbcType=DECIMAL},
+        balance_out = #{record.balanceOut,jdbcType=DECIMAL},
+        status = #{record.status,jdbcType=TINYINT},
+        open_time = #{record.openTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="ytb.account.wallet.model.AccountUserInner">
+        update account_user_inner
+        <set>
+            <if test="termId != null">
+                term_id = #{termId,jdbcType=SMALLINT},
+            </if>
+            <if test="userType != null">
+                user_type = #{userType,jdbcType=TINYINT},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="payoutAgent != null">
+                payout_agent = #{payoutAgent,jdbcType=DECIMAL},
+            </if>
+            <if test="incomeAgent != null">
+                income_agent = #{incomeAgent,jdbcType=DECIMAL},
+            </if>
+            <if test="payPassword != null">
+                pay_password = #{payPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="takeoutMoney != null">
+                takeout_money = #{takeoutMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="balanceIn != null">
+                balance_in = #{balanceIn,jdbcType=DECIMAL},
+            </if>
+            <if test="balanceOut != null">
+                balance_out = #{balanceOut,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="openTime != null">
+                open_time = #{openTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where inner_id = #{innerId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="ytb.account.wallet.model.AccountUserInner">
+    update account_user_inner
+    set term_id = #{termId,jdbcType=SMALLINT},
+      user_type = #{userType,jdbcType=TINYINT},
+      user_id = #{userId,jdbcType=INTEGER},
+      company_id = #{companyId,jdbcType=INTEGER},
+      balance = #{balance,jdbcType=DECIMAL},
+      payout_agent = #{payoutAgent,jdbcType=DECIMAL},
+      income_agent = #{incomeAgent,jdbcType=DECIMAL},
+      pay_password = #{payPassword,jdbcType=VARCHAR},
+      takeout_money = #{takeoutMoney,jdbcType=DECIMAL},
+      balance_in = #{balanceIn,jdbcType=DECIMAL},
+      balance_out = #{balanceOut,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      open_time = #{openTime,jdbcType=TIMESTAMP}
+    where inner_id = #{innerId,jdbcType=INTEGER}
+  </update>
+</mapper>

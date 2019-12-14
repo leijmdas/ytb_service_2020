@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration><!-- org.apache.ibatis.session.Configuration -->
+    <!-- 属性 -->
+    <properties resource="dbconfig/jdbc.properties"/>
+    <!--设置 -->
+    <!-- 类型命名  定义别名-->
+    <typeAliases>
+        <typeAlias type="ytb.common.MyBatis.DruidDataSourceFactory" alias="DRUID"/>
+    </typeAliases>
+    <typeHandlers/><!--类型处理器 -->
+    <!-- <objectFactory/>&lt;!&ndash; 对象工厂 &ndash;&gt;
+      <plugins/>&lt;!&ndash;插件 &ndash;&gt;
+-->
+    <environments default="development"><!-- 配置环境 -->
+        <environment id="development"><!-- 环境变量 -->
+            <transactionManager type="JDBC"><!--采用JDBC 事务管理器 -->
+                <property name="autoCommit" value="false"/>
+            </transactionManager>
+            <!-- 数据源 -->
+            <dataSource type="DRUID">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${bangbang.url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers><!-- 映射器 -->
+        <mapper resource="dbconfig/bangbang/mapper/UserFriendsMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/FriendApplyInfoMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/GroupInfoMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/GroupRemindMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/GroupUserMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/RecordGroupMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/RecordUserMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/OfflineMsgMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/GroupApplyInfoMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/GroupNoticeMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/TalkInviteStatusMapper.xml"/>
+
+        <mapper resource="dbconfig/bangbang/mappers/UserFriendsMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mappers/GroupInfoMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mappers/GroupUserMapper.xml"/>
+
+        <mapper resource="dbconfig/bangbang/mapper/MessageMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/AnswerMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/FriendsTypeMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/UserInfoMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/GroupTypeMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/SingleChatFileMapper.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/GroupChatFileMappr.xml"/>
+        <mapper resource="dbconfig/bangbang/mapper/BBDocumentMapper.xml"/>
+
+    </mappers>
+
+
+</configuration>

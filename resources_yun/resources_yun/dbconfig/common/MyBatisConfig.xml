@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 属性 -->
+	<properties resource="dbconfig/common/jdbc.properties"/>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+
+	<!--设置 -->
+	<!-- 类型命名  定义别名-->
+	<typeAliases>
+		<!--<typeAlias alias="ModelDict" type="com.ytb.mybatis.model.ModelDict"/>-->
+		<!--<typeAlias alias="ModelField" type="com.ytb.mybatis.model.ModelField"/>-->
+
+		<typeAlias type="ytb.common.MyBatis.DruidDataSourceFactory" alias="DRUID"/>
+	</typeAliases>
+
+	<typeHandlers/><!--类型处理器 -->
+	<!-- <objectFactory/>&lt;!&ndash; 对象工厂 &ndash;&gt;
+      <plugins/>&lt;!&ndash;插件 &ndash;&gt;
+-->
+	<environments default="development"><!-- 配置环境 -->
+		<environment id="development"><!-- 环境变量 -->
+			<transactionManager type="JDBC"><!--采用JDBC 事务管理器 -->
+				<property name="autoCommit" value="false"/>
+			</transactionManager>
+			<!-- 数据源 -->
+			<dataSource type="DRUID">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+
+		<environment id="work"><!-- 环境变量 -->
+			<transactionManager type="JDBC"><!--采用JDBC 事务管理器 -->
+				<property name="autoCommit" value="false"/>
+			</transactionManager>
+			<!-- 数据源 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers><!-- 映射器 -->
+		<mapper resource="dbconfig/common/subsysmapper/ConfigMapper.xml"/>
+		<mapper resource="dbconfig/common/subsysmapper/SubSysMapper.xml"/>
+			 <mapper resource="dbconfig/common/subsysmapper/ErrorCodeMapper.xml"/>
+		 </mappers>
+
+
+	 </configuration>

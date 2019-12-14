@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.TalkInviteStatusMapper" >
+
+    <insert id="addTalkInviteStatus" parameterType="ytb.project.model.TalkInviteStatusModel" useGeneratedKeys="true" keyProperty="inviteId" keyColumn="invite_id">
+
+        insert  into  talk_invite_status (project_id,document_id,user_id,status )
+
+        values (#{projectId},#{documentId},#{userId},#{status})
+
+	</insert>
+
+    <select id="getTalkInviteStatus" resultType="ytb.project.model.TalkInviteStatusModel">
+
+        select * from talk_invite_status where project_id = #{projectId} and user_id = #{userId} and document_id = #{documentId}
+
+    </select>
+
+    <update id="modifyStatus">
+
+        update talk_invite_status set
+
+        status = #{status}
+
+        where invite_id = #{inviteId}
+
+    </update>
+
+
+</mapper>

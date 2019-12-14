@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.CompanyTagMapper" >
+
+	<select id="getCompanyTagListById" resultType="map">
+          SELECT
+        a.company_tag_id AS companyTagId,
+        a.company_id AS companyId,
+        a.tag_Id AS tagId,
+        m.tag_name as tagName,
+        m.parentName
+    FROM
+        company_tag a
+    LEFT JOIN (
+        SELECT
+            t1.tag_id,
+            t1.tag_name,
+            (
+                SELECT
+                    p.tag_name
+                FROM
+                    ytb_manager.dict_tag p
+                WHERE
+                    p.tag_id = t1.parent_id
+            ) AS parentName
+        FROM
+            ytb_manager.dict_tag t1  where t1.tag_type=2
+    ) AS m ON m.tag_id = a.tag_id
+   where company_id = #{companyId}
+    </select>
+
+    <insert id="addCompanyTag" parameterType="ytb.user.model.CompanyTagModel"
+            useGeneratedKeys="true" keyProperty="companyTagId">
+        INSERT INTO company_tag
+        (
+        company_id,
+        `tag_id`,
+       `create_time`,
+        update_time
+        )
+        VALUES
+        (
+        #{companyId},
+        #{tagId},
+        now(),
+        now()
+        )
+    </insert>
+
+    <delete id="deleteCompanyTag">
+        delete from company_tag where company_id = #{companyId} and company_tag_id = #{companyTagId}
+
+    </delete>
+
+    <update id="updateCompanyTag" parameterType="ytb.user.model.CompanyTagModel">
+      update company_tag
+      <set>
+          <if test="companyId != null">`company_id` = #{companyId}, </if>
+          <if test="tagId != null">`tag_id` = #{tagId}, </if>
+          <if test="updateTime != null">`update_time` = now() </if>
+      </set>
+        where rest_id = #{restId}
+    </update>
+
+</mapper>

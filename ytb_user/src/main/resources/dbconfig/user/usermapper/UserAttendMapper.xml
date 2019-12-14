@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserAttendMapper" >
+
+    <select id="getAttendList" resultType="map">
+        SELECT
+        a.attend_id AS attendId,
+        DATE_FORMAT(a.attend_time, '%y-%m-%d') AS attendTime,
+        b.nick_name AS nickName,
+        a.user_id AS attendUserId,
+        a.company_id as attendCompanyId,
+        a.attend_obj_id AS attendToUserId
+        FROM
+        user_attend a
+        INNER JOIN user_login b ON a.attend_obj_id = b.user_Id
+        <where>
+            <if test="userId !=null">
+                a.user_id = #{userId}
+            </if>
+            <if test="companyId !=null">
+                a.company_id = #{companyId}
+            </if>
+        </where>
+        UNION ALL
+        SELECT
+        a.attend_id AS attendId,
+        DATE_FORMAT(a.attend_time, '%Y-%m-%d') AS attendTime,
+        c.company_name AS nickName,
+        a.user_id AS attendUserId,
+        a.company_id as attendCompanyId,
+        a.attend_obj_id AS attendToUserId
+        FROM
+        user_attend a
+        INNER JOIN company_info c ON a.attend_obj_id = c.company_Id
+        <where>
+            <if test="userId !=null">
+                a.user_id = #{userId}
+            </if>
+            <if test="companyId !=null">
+                a.company_id = #{companyId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addAttend" parameterType="ytb.user.model.UserAttendModel" useGeneratedKeys="true" keyProperty="attendId">
+        insert into user_attend(
+          company_id,
+          user_id,
+          attend_obj_id,
+          attend_obj_type,
+          attend_time
+        )VALUES (
+          #{companyId},
+          #{userId},
+          #{attendObjId},
+          #{attendObjType},
+          now()
+        )
+    </insert>
+
+    <delete id="deleteUserAttend">
+        DELETE from user_attend where attend_id = #{attendId}
+        <if test="userId !=null and userId !=''">
+            and user_id = #{userId}
+        </if>
+        <if test="companyId !=null and companyId !=''">
+            and company_id = #{companyId}
+        </if>
+    </delete>
+
+    <select id="getAttendRepeat" resultType="int">
+        select count(attend_id) from user_attend
+        where attend_obj_id = #{toAttendId}
+        <if test="userId !=null and userId !=''">
+            and user_id = #{userId}
+        </if>
+        <if test="companyId !=null and companyId !=''">
+            and company_id = #{companyId}
+        </if>
+    </select>
+
+</mapper>

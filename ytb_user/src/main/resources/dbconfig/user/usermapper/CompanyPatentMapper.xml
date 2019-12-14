@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.CompanyPatentMapper" >
+
+	<select id="getCompanyPatentListById" resultType="ytb.user.model.CompanyPatentModel">
+      SELECT  * FROM company_patent WHERE company_id = #{companyId} and patent_type = #{patentType}
+    </select>
+    
+    <select id="getCompanyAllPantent" resultType="ytb.user.model.CompanyPatentModel">
+    SELECT  * FROM company_patent WHERE company_id = #{companyId}
+    </select>
+    
+    <insert id="addCompanyPatent" parameterType="ytb.user.model.CompanyPatentModel"
+            useGeneratedKeys="true" keyProperty="patentId">
+        INSERT INTO company_patent
+        (
+        company_id,
+        `patent_name`,
+       `patent_no`,
+        patent_type,
+        `image`,
+        create_time,
+        update_time
+        )
+        VALUES
+        (
+        #{companyId},
+        #{patentName},
+        #{patentNo},
+        #{patentType},
+        #{image},
+        now(),
+        now()
+        )
+    </insert>
+
+    <delete id="deleteCompanyPatent">
+        delete from company_patent where company_id = #{companyId} and patent_id = #{patentId}
+
+    </delete>
+
+    <update id="updateCompanyPatent" parameterType="ytb.user.model.CompanyPatentModel">
+      update company_patent
+      <set>
+          <if test="companyId != null">`company_id` = #{companyId}, </if>
+          <if test="patentName != null">`patent_name` = #{patentName}, </if>
+          <if test="patentNo != null">`patent_no` = #{patentNo}, </if>
+          <if test="patentType != null">`patent_type` = #{patentType}, </if>
+          <if test="image != null">`image` = #{image}, </if>
+          <if test="updateTime != null">`update_time` = now() </if>
+      </set>
+        where patent_id = #{patentId}
+    </update>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.CompanyEnvMapper" >
+
+	<select id="getCompanyEnvListById" resultType="ytb.user.model.CompanyEnvModel">
+      SELECT  * FROM company_env WHERE company_id = #{companyId}
+    </select>
+
+    <insert id="addCompanyEnv" parameterType="ytb.user.model.CompanyEnvModel"
+            useGeneratedKeys="true" keyProperty="envId">
+        INSERT INTO company_env
+        (
+        company_id,
+        `image_type`,
+       `work_image`,
+        life_image
+        )
+        VALUES
+        (
+        #{companyId},
+        #{imageType},
+        #{workImage},
+        #{lifeImage}
+        )
+    </insert>
+
+    <delete id="deleteCompanyEnv">
+        delete from company_env where company_id = #{companyId} and env_id = #{envId}
+
+    </delete>
+
+    <!--<modify id="updateCompanyEnv" parameterType="ytb.user.model.CompanyEnvModel">-->
+      <!--modify company_env-->
+      <!--<set>-->
+          <!--<if test="companyId != null">`company_id` = #{companyId}, </if>-->
+          <!--<if test="imageType != null">`image_type` = #{imageType}, </if>-->
+          <!--<if test="img != null">`img` = #{img}, </if>-->
+      <!--</set>-->
+        <!--where env_id = #{envId}-->
+    <!--</modify>-->
+
+</mapper>

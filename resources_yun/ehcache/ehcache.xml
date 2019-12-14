@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ytb.common.ehcache updateCheck="false">
+    <!-- 设定缓存的默认数据过期策略 -->
+    <defaultCache maxElementsInMemory="10000"
+            eternal="false"
+            overflowToDisk="true"
+            timeToIdleSeconds="100"
+            timeToLiveSeconds="200"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"/>
+    !-- 设定全局缓存的默认数据过期策略 -->
+    <cache name="cacheCommon"
+           maxElementsInMemory="10000"
+           eternal="false"
+           overflowToDisk="false"
+           timeToIdleSeconds="100"
+           timeToLiveSeconds="3600"/>
+    !-- 设定用户缓存的默认数据过期策略 -->
+    <cache name="cacheUser"
+           maxElementsInMemory="300000"
+           eternal="false"
+           overflowToDisk="false"
+           timeToIdleSeconds="100"
+           timeToLiveSeconds="300"/>
+
+    <cache name="cachePicCode"
+           maxElementsInMemory="100000"
+           eternal="false"
+           overflowToDisk="false"
+           timeToIdleSeconds="100"
+           timeToLiveSeconds="90"/>
+
+</ytb.common.ehcache>

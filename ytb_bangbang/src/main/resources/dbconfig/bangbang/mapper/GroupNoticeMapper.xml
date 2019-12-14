@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.bangbang.dao.GroupNoticeDao">
+    <!--发布公告-->
+    <insert id="addGroupNotice" useGeneratedKeys="true" keyColumn="noticeId" keyProperty="noticeId"
+            parameterType="ytb.bangbang.model.GroupNoticeModel">
+        INSERT INTO group_notice(groupId, title,noticeMsg, createTime) VALUES (#{groupId},#{title},#{noticeMsg},now());
+     </insert>
+    <!--获取公告-->
+    <select id="getGroupNotice" resultType="ytb.bangbang.model.GroupNoticeModel">
+        SELECT noticeId,groupId,noticeMsg,createTime FROM group_notice
+        WHERE groupId=#{groupId} ORDER BY createTime DESC;
+    </select>
+    <!--删除已读公告-->
+    <delete id="deleteGroupNotice">
+        DELETE FROM group_notice
+        WHERE noticeId=#{noticeId}
+    </delete>
+</mapper>

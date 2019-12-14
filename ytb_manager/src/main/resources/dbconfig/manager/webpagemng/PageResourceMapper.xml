@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.webpagemng.dao.PageResourceMapper">
+
+    <insert id="insert" parameterType="ytb.manager.webpagemng.model.PageResource">
+       insert into page_resource(res_type,title,content,img_doc_id,sort_no,create_time,create_by)
+       values(#{resType},#{title},#{content},#{imgDocId},#{sortNo},#{createTime},#{createBy})
+    </insert>
+
+    <delete id="deleteByResId" parameterType="int">
+        delete from page_resource where res_id = #{resId}
+    </delete>
+
+    <update id="update" parameterType="ytb.manager.webpagemng.model.PageResource">
+        update page_resource
+        <set>
+            <if test="resType!=null">
+                res_type = #{resType},
+            </if>
+            <if test="title!=null">
+                title = #{title},
+            </if>
+            <if test="content!=null">
+                content = #{content},
+            </if>
+            <if test="imgDocId!=null">
+                img_doc_id = #{imgDocId},
+            </if>
+            <if test="sortNo!=null">
+                sort_no = #{sortNo}
+            </if>
+        </set>
+        where res_id = #{resId}
+    </update>
+
+    <select id="selectOne" parameterType="ytb.manager.webpagemng.model.PageResource"
+            resultType="ytb.manager.webpagemng.model.PageResource">
+        select * from page_resource
+        where res_id = #{resId}
+    </select>
+
+    <select id="selectList" parameterType="java.util.Map"
+            resultType="ytb.manager.webpagemng.model.PageResource">
+        select * from page_resource
+        <where>
+            <if test="pr.resType!=null">
+                res_type = #{pr.resType}
+            </if>
+        </where>
+        order by sort_no asc,create_time desc
+        <if test="offset!=null and limit!=null">
+            limit #{offset},#{limit}
+        </if>
+    </select>
+
+    <select id="count" parameterType="java.util.Map" resultType="int">
+        select count(1) from page_resource
+        <where>
+            <if test="pr.resType!=null">
+                res_type = #{pr.resType}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

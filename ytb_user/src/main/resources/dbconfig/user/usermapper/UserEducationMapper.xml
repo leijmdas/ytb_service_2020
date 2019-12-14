@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserEducationMapper" >
+
+	<select id="getUserEducationById" resultType="map">
+      SELECT
+        user_id as userId,
+        education_name as educationName,
+        school_name as schoolName,
+        date_format(
+       start_date,
+        '%Y-%m-%d'
+        ) AS startDate,
+ date_format(
+       end_date,
+        '%Y-%m-%d'
+        ) AS endDate,
+      head_master as headMaster,
+      tutor as tutor,
+      student_cadres as studentCadres,
+      `level` as level,
+      major_name as majorName,
+      `is_valid` as isValid,
+        education_id as educationId
+       FROM user_education WHERE user_id = #{userId}
+       order by level
+    </select>
+
+    <select id="getUserEduById" resultType="ytb.user.model.UserEducationModel">
+        select * FROM user_education WHERE user_id = #{userId}
+       order by level
+    </select>
+
+    <insert id="addUserEducation" parameterType="ytb.user.model.UserEducationModel"
+            useGeneratedKeys="true" keyProperty="educationId">
+        INSERT INTO user_education
+        (
+        user_id,
+        education_name,
+        school_name,
+        start_date,
+        end_date,
+        head_master,
+        tutor,
+        student_cadres,
+        create_time,
+        update_time,
+        `level`,
+        major_name,
+        `is_valid`
+        )
+        VALUES
+        (
+        #{userId},
+        #{educationName},
+        #{schoolName},
+        #{startDate},
+        #{endDate},
+        #{headMaster},
+        #{tutor},
+        #{studentCadres},
+        now(),
+        now(),
+        #{level},
+        #{majorName},
+        #{isValid}
+        )
+    </insert>
+
+    <delete id="deleteUserTag">
+        DELETE FROM user_education WHERE user_id = #{userId} AND education_id = #{educationId}
+    </delete>
+
+    <update id="updateUserEducation" parameterType="ytb.user.model.UserEducationModel">
+        UPDATE user_education
+        <set>
+            <if test="educationName != null">`education_name` = #{educationName}, </if>
+            <if test="schoolName != null">`school_name` = #{schoolName}, </if>
+            `start_date` = #{startDate},
+            `end_date` = #{endDate},
+            <if test="headMaster != null">`head_master` = #{headMaster}, </if>
+            <if test="tutor != null">`tutor` = #{tutor}, </if>
+            <if test="studentCadres != null">`student_cadres` = #{studentCadres}, </if>
+            <if test="majorName != null">`major_name` = #{majorName}, </if>
+            update_time = now()
+        </set>
+    WHERE education_id =#{educationId}
+    </update>
+
+</mapper>

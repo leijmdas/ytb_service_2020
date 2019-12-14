@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.log.notify.dao.SystemNoticesReadMapper">
+
+
+    <insert id="addSysNoticesReadInfo" parameterType="ytb.log.notify.model.SystemNoticesReadModel" useGeneratedKeys="true" keyProperty="id">
+        insert into message_notice_read
+        (
+          rec_id,
+          message_id,
+          status,
+          delete_flag
+        )
+        values(
+          #{recId},
+          #{messageId},
+          2,
+          #{deleteFlag}
+        )
+    </insert>
+
+
+
+    <insert id="addSysNoticesReadInfoByList" parameterType="java.util.List">
+        insert into message_notice_read
+        (
+        rec_id,
+        message_id,
+        status,
+        delete_flag
+        )
+        values
+        <foreach collection ="templateList" item="systemNoticesRead" index= "index" separator =",">
+            (
+            #{systemNoticesRead.recId},
+            #{systemNoticesRead.messageId},
+            #{systemNoticesRead.status},
+            #{systemNoticesRead.deleteFlag}
+            )
+        </foreach >
+    </insert>
+
+
+    <!--标识系统通知已读-->
+    <update id="signSysMarkRead" parameterType="java.util.List">
+        update message_notice_read set delete_flag =2
+        where rec_id=#{userId} and id IN
+        <foreach item="id" collection="templateList" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--标记单个删除-->
+    <update id="deleteOneSysNotices">
+        update message_notice_read set delete_flag =2
+        where rec_id=#{userId} and id =#{id}
+    </update>
+
+</mapper>

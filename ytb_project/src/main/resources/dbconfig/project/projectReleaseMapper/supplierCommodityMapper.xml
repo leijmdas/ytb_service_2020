@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.SupplierCommodityMapper">
+    <resultMap id="projectType" type="ytb.project.model.SearchProjectModel">
+        <id property="projectTypeId" column="ProjectTypeId"/>
+        <result property="title" column="Title"/>
+    </resultMap>
+    <!--获取供应商商品信息-->
+    <select id="getSellGoodsPageInfo" resultType="map">
+        SELECT
+        sell.sell_id as sellId,
+        sell.company_id as companyId,
+        sell.user_id as userId,
+        sell.product_name as productName,
+        sell.product_rule as productRule,
+        sell.product_price as productPrice,
+        sell.product_factory as productFactory,
+        sell.product_pic_url as productImg,
+        sell.doc_url AS docUrl,
+        login.user_head as userHead,
+        login.nick_name as nickName,
+        company.company_name as companyName,
+        userInfo.credit_grade as creditGrade,
+        pr.title as projectName,
+        DATE_FORMAT(sell.create_time,'%Y-%m-%d %H:%s:%i')as createTime,
+        sell.view_number as viewNumber,
+        login.user_type as userType,
+        b.`name` as docName
+        FROM ytb_user.user_sell sell
+        left JOIN ytb_manager.dict_projecttype pr ON pr.projecttypeid=sell.type_id
+        left JOIN ytb_user.user_login login ON login.user_id=sell.user_id
+        left JOIN ytb_user.user_info userInfo ON userInfo.user_id=login.user_id
+        left JOIN ytb_user.company_info company ON company.company_id=sell.company_id
+        left join ytb_user.user_image b on sell.doc_url = b.document_id
+        <where>
+            <!-- 商品名称-->
+            <if test="productName!=null and productName!=''">
+                and sell.product_name LIKE CONCAT ('%',#{productName},'%')
+            </if>
+            <!-- 厂家名称-->
+            <if test="productFactory!=null and productFactory!=''">
+                and sell.product_factory LIKE CONCAT('%',#{productFactory},'%')
+            </if>
+            <!--商品类别-->
+            <if test="projectTypeId!=null and projectTypeId!=''">
+                and pr.projecttypeid = #{projectTypeId}
+            </if>
+            <!--信用等级-->
+            <if test="creditGrade!=null and creditGrade!=''">
+                and userInfo.credit_grade = #{creditGrade}
+            </if>
+            <if test="week!=null and week!=''">
+                and sell.create_time >= DATE_SUB(CURDATE(), INTERVAL 7 day)
+            </if>
+            <if test="month!=null and month!=''">
+                and sell.create_time >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+            </if>
+            <if test="year!=null and year!=''">
+                and sell.create_time >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+            </if>
+        </where>
+        order by sell.create_time desc
+        <!--分页-->
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+
+    <select id="getSellGoodsPageInfoCount" resultType="int">
+        SELECT
+        count(sellId)
+        FROM
+        (
+        SELECT
+        sell.sell_id AS sellId,
+        sell.company_id AS companyId,
+        sell.user_id AS userId,
+        sell.product_name AS productName,
+        sell.product_rule AS productRule,
+        sell.product_price AS productPrice,
+        sell.product_factory AS productFactory,
+        sell.product_pic_url AS productImg,
+        login.user_head AS userHead,
+        login.nick_name AS nickName,
+        company.company_name AS companyName,
+        userInfo.credit_grade AS creditGrade,
+        pr.title AS projectName,
+        DATE_FORMAT(
+        sell.create_time,
+        '%y-%m-%d %H:%s:%i'
+        ) AS createTime,
+        login.view_number AS viewNumber,
+        login.user_type AS userType
+        FROM
+        ytb_user.user_sell sell
+        LEFT JOIN ytb_manager.dict_projecttype pr ON pr.projecttypeid = sell.type_id
+        LEFT JOIN ytb_user.user_login login ON login.user_id = sell.user_id
+        LEFT JOIN ytb_user.user_info userInfo ON userInfo.user_id = login.user_id
+        LEFT JOIN ytb_user.company_info company ON company.company_id = sell.company_id
+        <where>
+            <!-- 商品名称-->
+            <if test="productName!=null and productName!=''">
+                and sell.product_name LIKE CONCAT ('%',#{productName},'%')
+            </if>
+            <!-- 厂家名称-->
+            <if test="productFactory!=null and productFactory!=''">
+                and sell.product_factory LIKE CONCAT('%',#{productFactory},'%')
+            </if>
+            <!--商品类别-->
+            <if test="projectTypeId!=null and projectTypeId!=''">
+                and pr.projecttypeid = #{projectTypeId}
+            </if>
+            <!--信用等级-->
+            <if test="creditGrade!=null and creditGrade!=''">
+                and userInfo.credit_grade = #{creditGrade}
+            </if>
+            <if test="createTime=='week'">
+                and sell.create_time >= DATE_SUB(CURDATE(), INTERVAL 7 day)
+            </if>
+            <if test="createTime=='month'">
+                and sell.create_time >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+            </if>
+            <if test="createTime=='year'">
+                and sell.create_time >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+            </if>
+        </where>
+        ) AS b
+    </select>
+
+
+    <!--获取商品类别-->
+    <select id="getGoodsType" resultMap="projectType">
+        SELECT ProjectTypeId,Title FROM ytb_manager.dict_projecttype
+        <if test="parentId!=null and parentId!=''">
+            WHERE ParentId=#{parentId}
+        </if>
+    </select>
+</mapper>

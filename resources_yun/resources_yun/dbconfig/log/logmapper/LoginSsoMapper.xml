@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.common.basic.loginsso.dao.LoginSsoMapper">
+  <resultMap id="BaseResultMap" type="ytb.common.basic.safecontext.model.LoginSso">
+    <id column="ssoid" jdbcType="INTEGER" property="ssoid" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="token" jdbcType="CHAR" property="token" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="json" jdbcType="VARCHAR" property="json" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ssoid, userId, token, login_time, login_ip, code, json
+  </sql>
+  <select id="selectByExample" parameterType="ytb.common.basic.safecontext.model.LoginSsoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from login_sso
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from login_sso
+    where ssoid = #{ssoid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from login_sso
+    where ssoid = #{ssoid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="ytb.common.basic.safecontext.model.LoginSsoExample">
+    delete from login_sso
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="ytb.common.basic.safecontext.model.LoginSso">
+    insert into login_sso (ssoid, userId, token,
+      login_time, login_ip, code,
+      json)
+    values (#{ssoid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{token,jdbcType=CHAR},
+      #{loginTime,jdbcType=TIMESTAMP}, #{loginIp,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
+      #{json,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ytb.common.basic.safecontext.model.LoginSso">
+    insert into login_sso
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ssoid != null">
+        ssoid,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="loginTime != null">
+        login_time,
+      </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="json != null">
+        json,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ssoid != null">
+        #{ssoid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=CHAR},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="json != null">
+        #{json,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ytb.common.basic.safecontext.model.LoginSsoExample" resultType="java.lang.Long">
+    select count(*) from login_sso
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update login_sso
+    <set>
+      <if test="record.ssoid != null">
+        ssoid = #{record.ssoid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null">
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=CHAR},
+      </if>
+      <if test="record.loginTime != null">
+        login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginIp != null">
+        login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.json != null">
+        json = #{record.json,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update login_sso
+    set ssoid = #{record.ssoid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      token = #{record.token,jdbcType=CHAR},
+      login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      json = #{record.json,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="ytb.common.basic.safecontext.model.LoginSso">
+    update login_sso
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=CHAR},
+      </if>
+      <if test="loginTime != null">
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null">
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="json != null">
+        json = #{json,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ssoid = #{ssoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ytb.common.basic.safecontext.model.LoginSso">
+    update login_sso
+    set userId = #{userid,jdbcType=INTEGER},
+      token = #{token,jdbcType=CHAR},
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      json = #{json,jdbcType=VARCHAR}
+    where ssoid = #{ssoid,jdbcType=INTEGER}
+  </update>
+</mapper>

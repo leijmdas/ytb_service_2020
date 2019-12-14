@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserImgMapper" >
+
+
+
+    <insert id="addUserImg" parameterType="ytb.user.model.UserImgModel"
+            useGeneratedKeys="true" keyProperty="documentId">
+        INSERT INTO user_image
+        (
+        `name`,
+       `user_id`,
+        doc_type,
+        `save_mode`,
+        pic_type,
+        doc_path,
+        document,
+        create_time,
+        doc_size
+        )
+        VALUES
+        (
+        #{name},
+        #{userId},
+        #{docType},
+        #{saveMode},
+        #{picType},
+        #{docPath},
+        #{document},
+        now(),
+        #{docSize}
+        )
+    </insert>
+
+    <select id="getUserImgInfo" resultType="ytb.user.model.UserImgModel">
+        select * from user_image where document_id = #{imgId}
+    </select>
+
+    <delete id="deleteUserImg">
+        delete from user_image where document_id = #{imgId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.tagtable.CostMapper" >
+
+    <insert id="addProjectFee" parameterType="ytb.project.model.tagtable.CostModel" useGeneratedKeys="true" keyProperty="feeId" keyColumn="fee_id">
+
+
+
+	</insert>
+
+<select id="getProjectFeeByTalkId" resultType="ytb.project.model.tagtable.CostModel">
+
+    select * from cost where project_id = #{projectId} and user_id = #{userId} and document_id = #{documentId}
+
+</select>
+
+<select id="getProjectCostByTalk" resultType="ytb.project.model.tagtable.CostModel">
+
+    select * from cost where talk_id = #{talkId}  and document_id = #{documentId}
+
+</select>
+
+</mapper>

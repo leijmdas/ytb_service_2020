@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.CustomTaskMapper" >
+
+    <insert id="addCustomTask" parameterType="ytb.project.model.CustomTaskModel" useGeneratedKeys="true" keyProperty="customTaskId" keyColumn="custom_task_id">
+
+        insert into custom_task (
+        receiver,
+        user_id,
+        project_id,
+        template_id,
+        remark,
+        phase,
+        custom_type,
+        task_folder,
+        create_time
+        )
+        values (
+        #{receiver},
+        #{userId},
+        #{projectId},
+        #{templateId},
+        #{remark},
+        #{phase},
+        #{customType},
+        #{taskFolder},
+        now())
+	</insert>
+
+    <update id="modifyCustomTask">
+        update  custom_task set new_project_id = #{newProjectId}
+        where custom_task_id = #{customTaskId}
+    </update>
+
+
+    <select id="selectCustomTask" resultType="map">
+        SELECT
+			t.receiver,
+			t.remark ,
+			t.create_time as createTime,
+            u.nick_name as userId,
+            d.`name` as documentName,
+            t.template_id as documentId,
+            t.task_folder as taskFolder
+        FROM
+            custom_task t
+        INNER JOIN ytb_user.user_info u ON u.user_id = t.user_id
+        LEFT JOIN ytb_project.project_document d ON d.document_id = t.template_id
+        where t.project_id = #{projectId}  and phase = #{phase} and (t.user_id = #{userId} or CONCAT(',',receiver,',') like CONCAT('%,',#{userId} ,',%'))
+    </select>
+
+    <select id="selectViewCustomTaskModel" resultType="ytb.project.view.model.ProjectTaskViewModel.ViewCustomTaskModel">
+        SELECT
+			t.receiver,
+			t.remark ,
+			t.create_time as createTime,
+            u.nick_name as userId,
+            d.`name` as documentName,
+            t.template_id as documentId,
+            t.task_folder as taskFolder
+        FROM
+            custom_task t
+        INNER JOIN ytb_user.user_info u ON u.user_id = t.user_id
+        LEFT JOIN ytb_manager.dict_document d ON d.document_id = t.template_id
+        where t.project_id = #{projectId}  and phase = #{phase} and (t.user_id = #{userId} or CONCAT(',',receiver,',') like CONCAT('%,',#{userId} ,',%'))
+    </select>
+    <select id="getCustomTaskList" resultType="ytb.project.model.CustomTaskModel">
+        SELECT * from custom_task where user_id = #{userId} and project_id = #{projectId} and
+        custom_type = 3
+    </select>
+</mapper>

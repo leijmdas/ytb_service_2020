@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.UserInfoMapper">
+
+    <select id="getUserInfoById" resultType="ytb.user.model.UserInfoModel">
+        SELECT
+            a.*, b.is_online,
+            b.user_sign
+        FROM  user_info a
+        INNER JOIN user_login b
+        ON b.user_id = a.user_id
+        WHERE  a.user_id = #{userId}
+    </select>
+
+    <select id="getUsetInfoByIds" resultType="ytb.user.model.UserInfoModel">
+        SELECT * from user_info
+        WHERE user_id in
+        <foreach collection="ids" item="userId" open="(" close=")" separator=",">
+            #{userId}
+        </foreach>
+    </select>
+
+    <insert id="addUserInfo" parameterType="ytb.user.model.UserInfoModel"
+            useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO user_info
+        (
+        user_id,
+        company_user_id,
+        nick_name,
+        sex,
+        birthday,
+        real_name,
+        email,
+        user_flag,
+        status,
+        idcard,
+        idcard_photo1,
+        idcard_photo2,
+        user_address,
+        self_eval,
+        school_id,
+        create_time,
+        update_time,
+        area_id,
+        detailed_address
+        )
+        VALUES
+        (
+        #{userId},
+        #{companyUserId},
+              #{nickName},
+        #{sex},
+        #{birthday},
+        #{realName},
+        #{email},
+        #{userFlag},
+        #{status},
+        #{idcard},
+        #{idcardPhoto1},
+        #{idcardPhoto2},
+        #{userAddress},
+        #{selfEval},
+        #{schoolId},
+        now(),
+        now(),
+        #{areaId},
+        #{detailedAddress}
+        )
+    </insert>
+
+    <!--邦邦修改个性签名-->
+    <update id="updateUserInfo" parameterType="ytb.user.model.UserInfoModel">
+        update user_info
+        <set>
+            <if test="sex != null">`sex` = #{sex},</if>
+            <if test="birthday != null">`birthday` = #{birthday},</if>
+            <if test="realName != null">`real_name` = #{realName},</if>
+            <if test="nickName != null">`nick_name` = #{nickName},</if>
+            <if test="email != null">`email` = #{email},</if>
+            <if test="userFlag != null">`user_flag` = #{userFlag},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="idcard != null">`idcard` = #{idcard},</if>
+            <if test="idcardPhoto1 != null">`idcard_photo1` = #{idcardPhoto1},</if>
+            <if test="idcardPhoto2 != null">`idcard_photo2` = #{idcardPhoto2},</if>
+            <if test="userAddress != null">`user_address` = #{userAddress},</if>
+            <if test="selfEval != null">`self_eval` = #{selfEval},</if>
+            <if test="schoolId != null">`school_id` = #{schoolId},</if>
+            <if test="updateTime != null">`update_time` = now()</if>
+        </set>
+        where user_id =#{userId}
+    </update>
+
+    <!--设置自我评价-->
+    <update id="updateUserSelfEval">
+        update user_info
+        set  `self_eval` = #{selfEval}
+        where user_id =#{userId}
+    </update>
+    <update id="updateUserStatus">
+        update user_info
+        <set>
+            <if test="status != null">`status` = #{status},</if>
+            `update_time` = now()
+        </set>
+        where user_id =#{userId}
+    </update>
+
+    <update id="updatUserBaseInfo" parameterType="ytb.user.model.UserInfoModel">
+        update user_info
+        <set>
+            <if test="sex != null">`sex` = #{sex},</if>
+            <if test="birthday != null">`birthday` = #{birthday},</if>
+            <if test="nickName != null">`nick_name` = #{nickName},</if>
+            <if test="realName != null">`real_name` = #{realName},</if>
+            <if test="email != null">`email` = #{email},</if>
+            <if test="userFlag != null">`user_flag` = #{userFlag},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="idcard != null">`idcard` = #{idcard},</if>
+            <if test="detailedAddress != null">`detailed_address` = #{detailedAddress},</if>
+            <if test="areaId != null">`area_id` = #{areaId},</if>
+            <if test="cityId != null">`city_id` = #{cityId},</if>
+            <if test="provinceId != null">`province_id` = #{provinceId},</if>
+            <if test="updateTime != null">`update_time` = now()</if>
+        </set>
+        where user_id =#{userId}
+    </update>
+
+    <!--邦邦添加好友-->
+    <select id="getUserListToBB" resultType="map">
+            SELECT DISTINCT
+        b.nick_name AS nickName,
+        a.user_id AS userId,
+        a.registered_time AS registeredTime,
+        a.bangbang_no AS bangbangNo,
+        a.view_number AS viewNumber,
+        b.credit_grade AS userGrade,
+        b.user_address AS userAddress,
+        d.tagName AS tagName,
+        b.sex,
+     CASE c.`LEVEL`
+    WHEN 1 THEN
+        '小学'
+    WHEN 2 THEN
+        '初中'
+    WHEN 3 THEN
+        '高中'
+    WHEN 4 THEN
+        '中专'
+    WHEN 5 THEN
+        '大专'
+    WHEN 6 THEN
+        '大学'
+    WHEN 7 THEN
+        '硕士'
+    WHEN 8 THEN
+        '博士'
+    WHEN 9 THEN
+        '博士后'
+    ELSE
+        '其他'
+    END userEdu,
+
+    IF (
+        isnull(b.birthday),
+        0,
+        ROUND(
+            DATEDIFF(CURDATE(), b.birthday) / 365.2422
+        )
+    ) AS age,
+     f.title AS title
+    FROM
+        user_login a
+    INNER JOIN user_info b ON a.user_id = b.user_id
+    LEFT JOIN (
+        SELECT
+            max(LEVEL) AS LEVEL,
+            user_id
+        FROM
+            user_education
+        WHERE
+            is_valid = 1
+        GROUP BY
+            user_id
+    ) c ON c.user_id = a.user_id
+    LEFT JOIN (
+        SELECT
+            tag_id,
+            user_id,
+            bb.tagName
+        FROM
+            user_tag aa
+        INNER JOIN v_tag_specialty bb ON aa.tag_id = bb.ID
+        WHERE
+            tag_type = 2
+        GROUP BY
+            aa.user_id
+    ) d ON d.user_id = a.user_id
+    LEFT JOIN user_tag e ON e.user_id = a.user_id
+    LEFT JOIN (
+        SELECT
+            s.user_id,
+            s.type_id,
+            v.title
+        FROM
+            user_project_scope s
+        INNER JOIN v_project_type v ON s.type_id = v.type_id
+        WHERE
+            s.isprivate = TRUE
+        GROUP BY
+            s.user_id
+    ) f ON f.user_id = a.user_id
+    LEFT JOIN user_project_scope g ON g.user_id = a.user_id
+    INNER JOIN v_dict_area ar ON b.area_id = ar.area_id
+    WHERE
+        a.user_type = 1
+        <!--昵称模糊查询-->
+        <if test="nickName!=null and nickName!=''">
+            AND b.nick_Name LIKE concat('%',#{nickName},'%')
+        </if>
+        <if test="sex !=null">
+            AND b.sex  between #{sexStart} and #{sexEnd}
+        </if>
+        <!--年龄的搜索-->
+        <if test="ageStart !=0 and ageStart !=null and ageEnd !=0">
+            and IF (
+            isnull(b.birthday),
+            0,
+            ROUND(
+            DATEDIFF(CURDATE(), b.birthday) / 365.2422
+            )
+            ) BETWEEN  #{ageStart} AND #{ageEnd}
+        </if>
+        <if test="bangbangNo!=null and bangbangNo!=''">
+            AND a.bangbang_no = #{bangbangNo}
+        </if>
+        <!--专业标签Id查询-->
+        <if test="level!=null and level!=''">
+            AND c.`LEVEL`=#{level}
+        </if>
+        <if test="userGread!=null and userGread!=''">
+            and b.credit_grade=#{userGread}
+        </if>
+        <if test="tagId!=null and tagId!=''">
+            AND e.tag_id=#{tagId}
+        </if>
+        <!--项目标签Id查询-->
+        <if test="typeId!=null and typeId!=''">
+            AND g.type_id=#{typeId}
+        </if>
+        <!--工作或生活地址查询-->
+        <if test="userAddress!=null and userAddress!=''">
+            and  b.area_id IN (
+            SELECT
+            a.area_id
+            FROM
+            v_dict_area a
+            WHERE
+            a.area_id = #{userAddress}
+            UNION
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            UNION
+            SELECT
+            c.area_id
+            FROM
+            v_dict_area c
+            WHERE
+            c.parent_id IN (
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            )
+            )
+        </if>
+
+        <!--分页-->
+        <if test="offset != null  and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getUserListToBBCount" resultType="int">
+        select count(*) from(
+SELECT DISTINCT
+	b.nick_name AS nickName,
+	a.user_id AS userId,
+	b.credit_grade AS userGrade,
+	b.user_address AS userAddress,
+	d.tagName AS tagName,
+ f.title AS title
+FROM
+	user_login a
+INNER JOIN user_info b ON a.user_id = b.user_id
+LEFT JOIN (
+	SELECT
+		max(LEVEL) AS LEVEL,
+		user_id
+	FROM
+		user_education
+	WHERE
+		is_valid = 1
+	GROUP BY
+		user_id
+) c ON c.user_id = a.user_id
+LEFT JOIN (
+	SELECT
+		tag_id,
+		user_id,
+		bb.tagName
+	FROM
+		user_tag aa
+	INNER JOIN v_tag_specialty bb ON aa.tag_id = bb.ID
+	WHERE
+		tag_type = 2
+	GROUP BY
+		aa.user_id
+) d ON d.user_id = a.user_id
+LEFT JOIN user_tag e ON e.user_id = a.user_id
+LEFT JOIN (
+	SELECT
+		s.user_id,
+		s.type_id,
+		v.title
+	FROM
+		user_project_scope s
+	INNER JOIN v_project_type v ON s.type_id = v.type_id
+	WHERE
+		s.isprivate = TRUE
+	GROUP BY
+		s.user_id
+) f ON f.user_id = a.user_id
+LEFT JOIN user_project_scope g ON g.user_id = a.user_id
+INNER JOIN v_dict_area ar ON b.area_id = ar.area_id
+WHERE
+	a.user_type = 1
+        <if test="nickName!=null and nickName!=''">
+            AND b.nick_Name LIKE concat('%',#{nickName},'%')
+        </if>
+        <if test="bangbangNo!=null and bangbangNo!=''">
+            AND a.bangbang_no = #{bangbangNo}
+        </if>
+        <!--专业标签Id查询-->
+        <if test="level!=null and level!=''">
+            AND c.`LEVEL`=#{level}
+        </if>
+        <!--年龄的搜索-->
+        <if test="ageStart !=0 and ageStart !=null and ageEnd !=0">
+            and IF (
+            isnull(b.birthday),
+            0,
+            ROUND(
+            DATEDIFF(CURDATE(), b.birthday) / 365.2422
+            )
+            ) BETWEEN  #{ageStart} AND #{ageEnd}
+        </if>
+        <if test="userGread!=null and userGread!=''">
+            and b.credit_grade=#{userGread}
+        </if>
+        <if test="sex !=null">
+            AND b.sex  between #{sexStart} and #{sexEnd}
+        </if>
+        <if test="tagId!=null and tagId!=''">
+            AND e.tag_id=#{tagId}
+        </if>
+        <!--项目标签Id查询-->
+        <if test="typeId!=null and typeId!=''">
+            AND g.type_id=#{typeId}
+        </if>
+        <!--工作或生活地址查询-->
+        <if test="userAddress!=null and userAddress!=''">
+            and  b.area_id IN (
+            SELECT
+            a.area_id
+            FROM
+            v_dict_area a
+            WHERE
+            a.area_id = #{userAddress}
+            UNION
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            UNION
+            SELECT
+            c.area_id
+            FROM
+            v_dict_area c
+            WHERE
+            c.parent_id IN (
+            SELECT
+            b.area_id
+            FROM
+            v_dict_area b
+            WHERE
+            b.parent_id = #{userAddress}
+            )
+            )
+        </if>) as p
+    </select>
+
+
+</mapper>

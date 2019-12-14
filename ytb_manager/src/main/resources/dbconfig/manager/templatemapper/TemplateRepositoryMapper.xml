@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.TemplateRepositoryMapper">
+
+
+    <select id="getTemplateRepositoryList" resultType="ytb.manager.template.model.Template_Repository">
+      SELECT  * FROM template_repository  order by no
+    </select>
+
+    <select id="getPubTemplateRepositoryList" resultType="ytb.manager.template.model.Template_Repository">
+      SELECT  * FROM template_repository where state = 1 order by no
+</select>
+
+    <insert id="addTemplateRepository">
+		insert into template_repository (workjob_type,no,name,order_no,state,create_by,uuid)
+		VALUES (#{workJobType},#{no},#{name},#{orderNo},#{state},#{createBy},#{uuid})
+	</insert>
+
+
+    <!--
+        <select id="getConstraintList" parameterType="int" resultType="ytb.manager.template.model.Dict_WorkJob_Check
+          SELECT  * FROM dict_constraint where WorkJobTypeId = #{WorkJobTypeId}
+        </select>-->
+
+    <update id="modifyTemplateRepository">
+            update template_repository set
+            no = #{no},
+            name = #{name},
+            workjob_type = #{workJobType},
+            state = #{state}
+            where repository_id = #{repositoryId}
+        </update>
+
+    <update id="modifySateById">
+        update template_repository set
+        state = #{state}
+        where repository_id = #{repositoryId}
+    </update>
+
+    <delete id="delTemplateRepository">
+        delete from template_repository where repository_id = #{repositoryId}
+    </delete>
+
+    <select id="getTemplateRepository" parameterType="int" resultType="ytb.manager.template.model.Template_Repository">
+        select * from template_repository where repository_id=#{repositoryId}
+    </select>
+
+
+</mapper>

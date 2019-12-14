@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.template.dao.ProjConfigMapper" >
+
+
+	<select id="selectProjConfig" parameterType="Integer" resultType="ytb.manager.template.model.Dict_Prj_Config">
+      SELECT  * FROM Dict_Prj_Config where project_type = #{projectType}
+    </select>
+
+    <insert id="addProjConfig" parameterType="ytb.manager.template.model.Dict_Prj_Config">
+        insert into Dict_Prj_Config(
+        config_id,
+        project_type,
+        code,
+        `name`,
+        scene,
+        value_type,
+        `value`,
+        remark )  values(
+        #{configId},
+        #{projectType},
+        #{code},
+        #{name},
+        #{scene},
+        #{valueType},
+        #{ value},
+        #{ remark} )
+    </insert>
+
+    <update id="modifyProjConfig" parameterType="ytb.manager.template.model.Dict_Prj_Config">
+        update  Dict_Prj_Config set
+        config_id=#{configId},
+        project_type=#{projectType},
+        code=#{code},
+        `name`=#{name},
+        scene=#{scene},
+        value_type=#{valueType},
+        `value`=#{ value},
+        remark =#{ remark}
+        where config_id=#{configId}
+    </update>
+
+    <delete id="delProjConfig" parameterType="int">
+        delete from Dict_Prj_Config where config_id=#{configId}
+    </delete>
+
+
+</mapper>

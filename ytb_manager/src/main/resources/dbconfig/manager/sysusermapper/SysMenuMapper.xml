@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.sysuser.dao.SysMenuMapper" >
+
+	<select id="getMenuList" resultType="ytb.manager.sysuser.model.Sys_MenuModel">
+		select m.menuid,m.menuname,m.parentid,(select p.menuname from sys_menu p where p.menuid = m.parentid) as parentName
+			from sys_menu m  order by m.parentid,m.orderNum
+	</select>
+
+	<select id="getMenuInfoById" resultType="ytb.manager.sysuser.model.Sys_MenuModel">
+		SELECT * FROM sys_menu m WHERE m.menuId = #{menuId} order by m.parentid,m.orderNum
+	</select>
+
+	<delete id="deleteMenuById">
+		DELETE FROM sys_menu WHERE MenuId = #{menuId}
+	</delete>
+
+	<insert id="addMenu" parameterType="ytb.manager.sysuser.model.Sys_MenuModel"
+			useGeneratedKeys="true" keyProperty="menuId">
+		INSERT INTO sys_menu
+		(
+		MenuName,
+		ParentId,
+		MenuType,
+		MenuUrl,
+		OrderNum,
+		CreateBy,
+		CreateTime
+		)
+		VALUES
+		(
+		#{menuName},
+		#{parentId},
+		#{menuType},
+		#{menuUrl},
+		#{orderNum},
+		#{createBy},
+		now()
+		)
+	</insert>
+
+	<update id="updateMenu" parameterType="ytb.manager.sysuser.model.Sys_MenuModel">
+		UPDATE sys_menu
+		<set>
+			<if test="menuName != null">`MenuName` = #{menuName}, </if>
+			<if test="menuType != null">`MenuType` = #{menuType}, </if>
+			<if test="menuUrl != null">`MenuUrl` = #{menuUrl}, </if>
+			<if test="menuCode != null">`MenuCode` = #{menuCode}, </if>
+			<if test="orderNum != null">`OrderNum` = #{orderNum} </if>
+		</set>
+		WHERE MenuId = #{menuId}
+	</update>
+
+	<!-- 查询用户的权限列表 -->
+	<!--<select id="queryUserList" resultType="ytb.manager.sysuser.model.Sys_MenuModel">
+		select distinct m.*,(select p.name from sys_menu p where p.menu_id = m.parent_id) as parentName
+		from sys_user_role ur
+		LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
+		LEFT JOIN sys_menu m on rm.menu_id = m.menu_id
+		where ur.user_id = #{userId} order by m.order_num asc
+	</select>-->
+
+
+	<!--查询页面左边的菜单数据（用户所对应的接口权限）-->
+	<select id="queryNotButtonList" resultType="ytb.manager.sysuser.model.LeftMenuModel">
+		select t1.MenuName,
+		t1.ParentId,
+		t1.MenuType,
+		t1.MenuUrl,
+		t1.MenuCode,t1.MenuId from sys_menu t1
+		where t1.isShow=1
+			 and t1.menuId in (select objid from sys_role_right where objtype = 1
+			 and roleid in(select RoleId from sys_user_role where userId = #{userId} ) )
+		order by t1.ordernum asc
+	</select>
+
+	<!-- 查询角色所拥有的菜单-->
+	<select id="getMenuToRole" resultType="ytb.manager.sysuser.model.Sys_MenuModel">
+		select t1.menuname,t1.menuid,t1.parentid,(select p.menuname from sys_menu p where p.menuid = t1.parentid) as parentName from sys_menu t1
+			INNER JOIN sys_role_right t2 on t1.menuId = t2.objid where t2.roleid =#{roleId} and t2.objType =1 ORDER by parentid,orderNum
+	</select>
+
+	<select id="getMenuParentId" resultType="ytb.manager.sysuser.model.Sys_MenuModel">
+		select * from sys_menu where parentid = #{parentId}
+	</select>
+
+</mapper>

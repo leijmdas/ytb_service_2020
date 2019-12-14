@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.tagtable.WorkGroupMemberMapper" >
+
+
+    <insert id="addWorkGroupMember" parameterType="ytb.project.model.tagtable.WorkGroupMemberModel" useGeneratedKeys="true" keyProperty="memberId" keyColumn="member_id">
+        insert into
+        work_group_member(
+        group_id,
+        project_id,
+        user_id,
+        company_id,
+        Is_admin,
+        create_time,
+        order_no,
+        talk_id,
+        document_id)
+        values (
+        #{groupId},
+        #{projectId},
+        #{userId},
+        #{companyId},
+        #{IsAdmin},
+        now(),
+        #{orderNo},
+        #{talkId},
+        #{documentId}
+        )
+	</insert>
+
+    <select id="getWorkGroupMember" resultType="ytb.project.model.tagtable.WorkGroupMemberModel">
+        select * from work_group_member where group_id =#{groupId}
+        <if test="userId !=null and userId !=''">
+            and user_id = #{userId}
+        </if>
+    </select>
+    
+    <select id="getWorkGroupMemberById" resultType="ytb.project.model.tagtable.WorkGroupMemberModel">
+        select * from work_group_member where user_id = #{userId} and project_id = #{projectId} and document_id = #{documentId}
+
+    </select>
+
+    <delete id="deleteWorkMember">
+        delete from work_group_member where member_id = #{memberId}
+    </delete>
+
+    <select id="getWorkGroupMemberInfo" resultType="map">
+        select
+        m.user_id as userId,
+        u.nick_name as nickName,
+        is_admin as isAdmin
+        from work_group_member m
+         inner join ytb_user.user_info u on u.user_id = m.user_id
+         where group_id =#{groupId}
+    </select>
+
+    <update id="modifyActive">
+        update work_group_member set
+
+        is_active = #{isActive}
+
+        where member_id = #{memberId}
+
+    </update>
+
+</mapper>

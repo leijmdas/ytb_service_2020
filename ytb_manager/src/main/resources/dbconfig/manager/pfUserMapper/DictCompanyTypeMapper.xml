@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.manager.pfUser.dao.DictCompanyTypeMapper" >
+
+
+	<select id="getDictCompanyTypeList" resultType="ytb.manager.pfUser.model.Dict_CompanyType" resultMap="Dict_CompanyTypeResultMap">
+		SELECT * FROM dict_company_type
+	</select>
+
+	<select id="getDictCompanyTypeListByID" resultType="ytb.manager.pfUser.model.Dict_CompanyType" parameterType="ytb.manager.pfUser.model.Dict_CompanyType" resultMap="Dict_CompanyTypeResultMap">
+		SELECT * FROM dict_company_type WHERE company_type = #{companyType}  or parent_id = #{companyType}  order by parent_id,company_type
+	</select>
+
+	<delete id="deleteDictCompanyType" parameterType="int">
+		delete  FROM dict_company_type WHERE company_type = #{companyType}
+	</delete>
+
+	<insert id="insertDictCompanyType" parameterType="ytb.manager.pfUser.model.Dict_Tag">
+		insert into dict_company_type(parent_id,remark )
+		values(#{parentId},#{remark} )
+	</insert>
+
+	<update id="updateDictCompanyType" parameterType="ytb.manager.pfUser.model.Dict_Tag">
+		update dict_company_type set  remark=#{remark}
+		where  company_type  = #{companyType}
+	</update>
+
+
+	<resultMap type="ytb.manager.pfUser.model.Dict_CompanyType" id="Dict_CompanyTypeResultMap">
+		<!-- 用id属性来映射主键字段 -->
+		<id property="companyType" column="company_type"/>
+		<!-- 用result属性来映射非主键字段 -->
+		<result property="parentId" column="parent_id"/>
+		<result property="remark" column="remark"/>
+	</resultMap>
+
+	<select id="getDictCompanyTypeListByParentID" resultType="ytb.manager.pfUser.model.Dict_CompanyType">
+		select * from dict_company_type where parent_id = #{parentId}
+	</select>
+
+
+</mapper>

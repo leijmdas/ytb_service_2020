@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.log.notify.dao.TemplatePolicyMapper" >
+
+
+
+	<select id="getTemplatePolicy" parameterType="int" resultType="ytb.log.notify.model.Template_policyModel">
+
+      SELECT * FROM template_policy WHERE template_id = #{templateId}
+
+    </select>
+
+    <select id="getTemplatePolicyList" resultType="ytb.log.notify.model.Template_policyModel">
+
+      SELECT * FROM template_policy
+
+    </select>
+
+    <insert id="addTemplatePolicy" parameterType="ytb.log.notify.model.Template_policyModel">
+      insert into template_policy (template_name,template_type,object_type,template_class,page_url,
+      create_by)
+      values (#{templateName},#{templateType},#{objectType},#{templateClass},#{pageUrl},
+      #{createBy})
+
+	</insert>
+
+    <update id="modifyTemplatePolicy">
+
+        update template_policy set
+        template_name = #{templateName},
+        template_type = #{templateType},
+        object_type = #{objectType},
+        template_class = #{templateClass},
+        page_url = #{pageUrl}
+        where template_id = #{templateId}
+
+    </update>
+
+    <delete id="delTemplatePolicy">
+
+      delete from template_policy where template_id = #{templateId}
+
+    </delete>
+
+    <select id="getTemplatePolicyByType" parameterType="int" resultType="ytb.log.notify.model.Template_policyModel">
+
+      select * from template_policy where template_type = #{templateType} and object_type = #{objectType}
+
+    </select>
+
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.user.dao.CompanyProductMapper" >
+
+	<select id="getCompanyProductListById" resultType="ytb.user.model.CompanyProductModel">
+      SELECT  * FROM company_product WHERE company_id = #{companyId}
+    </select>
+
+
+    <insert id="addCompanyProduct" parameterType="ytb.user.model.CompanyProductModel"
+            useGeneratedKeys="true" keyProperty="productId">
+        INSERT INTO company_product
+        (
+        company_id,
+        product_name,
+       `product_rule`,
+        product_img,
+        product_sell_number,
+        create_time,
+        update_time
+        )
+        VALUES
+        (
+        #{companyId},
+        #{productName},
+        #{productRule},
+        #{productImg},
+        #{productSellNumber},
+        now(),
+        now()
+        )
+    </insert>
+
+    <update id="updateCompanyProduct" parameterType="ytb.user.model.CompanyProductModel">
+        UPDATE company_product
+        <set>
+            <if test="companyId != null and companyId !=''">`company_id` = #{companyId}, </if>
+            <if test="productName != null and productName !=''">`product_name` = #{productName}, </if>
+            <if test="productRule != null and productRule !=''">`product_rule` = #{productRule}, </if>
+            <if test="productImg != null and productImg !=''">`product_img` = #{productImg}, </if>
+            <if test="productSellNumber != null and productSellNumber !=''">`product_sell_number` = #{productSellNumber}, </if>
+            <if test="updateTime != null">`update_time` = now() </if>
+        </set>
+    WHERE product_id =#{productId}
+    </update>
+
+    <delete id="deleteCompanyProduct">
+        delete from company_product where product_id =#{productId} and company_id = #{companyId}
+    </delete>
+
+</mapper>

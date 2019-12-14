@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.account.wallet.dao.transaction.AccountPfInnerBalanceMapper">
+
+
+    <update id="updateBalanceReduceByInnerId">
+
+		UPDATE account_pf_inner
+
+		SET
+
+		account_pf_inner.balance = account_pf_inner.balance - #{balance},
+
+		account_pf_inner.balance_out = account_pf_inner.balance_out + #{balance}
+
+		 WHERE
+
+		 account_pf_inner.pf_inner_id  = #{pfInnerId}
+		 AND
+
+		  account_pf_inner.ac_type = #{acType}
+			AND
+
+		 account_pf_inner.balance >= #{balance}
+
+
+
+	</update>
+
+
+    <update id="updateBalanceIncreaseByInnerId">
+
+		UPDATE account_pf_inner
+
+		SET
+
+		account_pf_inner.balance = account_pf_inner.balance + #{balance},
+
+		account_pf_inner.balance_in = account_pf_inner.balance_in + #{balance}
+
+		 WHERE
+
+		 account_pf_inner.pf_inner_id  = #{pfInnerId}
+		 AND
+
+		account_pf_inner.ac_type = #{acType}
+
+
+
+
+
+	</update>
+
+    <!--balance_agent-->
+    <update id="updateProjectBalanceAgentIncreaseByInnerId">
+
+		UPDATE account_pf_inner
+
+		SET
+
+		account_pf_inner.balance_agent = account_pf_inner.balance_agent + #{balance}
+
+
+		 WHERE
+
+		 account_pf_inner.pf_inner_id  = #{pfInnerId}
+		 AND
+
+			account_pf_inner.ac_type = #{acType}
+
+
+	</update>
+
+
+    <update id="updateBalanceAgentReduce">
+
+		UPDATE account_pf_inner
+
+		SET
+
+		account_pf_inner.balance_agent = account_pf_inner.balance_agent - #{balance}
+
+
+		 WHERE
+
+		 account_pf_inner.pf_inner_id  = #{pfInnerId}
+		 AND
+
+			account_pf_inner.ac_type = #{acType}
+
+		  AND
+		 account_pf_inner.balance_agent >= #{balance}
+
+
+	</update>
+
+    <!--takeout_money-->
+    <update id="updateTakeoutMoneyIncrease">
+
+		UPDATE account_pf_inner
+
+		SET
+
+		account_pf_inner.takeout_money = account_pf_inner.takeout_money + #{balance}
+
+
+		 WHERE
+
+		 account_pf_inner.pf_inner_id  = #{pfInnerId}
+		 AND
+
+		account_pf_inner.ac_type = #{acType}
+
+
+
+	</update>
+
+
+    <update id="updateTakeoutMoneyReduce">
+
+		UPDATE account_pf_inner
+
+		SET
+
+		account_pf_inner.takeout_money = account_pf_inner.takeout_money - #{balance}
+
+
+		 WHERE
+
+		 account_pf_inner.pf_inner_id  = #{pfInnerId}
+		 AND
+
+			account_pf_inner.ac_type = #{acType}
+			AND
+		 account_pf_inner.takeout_money >= #{balance}
+
+
+	</update>
+
+    <!--无-->
+    <update id="updateBalanceReduceByWithdraw">
+
+		UPDATE account_pf_inner
+
+		SET
+
+		account_pf_inner.balance = account_pf_inner.balance - #{balance},
+
+		account_pf_inner.balance_agent= account_pf_inner.balance_agent + #{balance},
+
+		account_pf_inner.balance_out= account_pf_inner.balance_out + #{balance}
+
+
+		 WHERE
+
+		 account_pf_inner.pf_inner_id  = #{pfInnerId}
+		 AND
+
+			account_pf_inner.ac_type = #{acType}
+			AND
+		 account_pf_inner.balance >= #{balance}
+
+	   AND account_pf_inner.balance - #{balance}>0
+
+	</update>
+
+    <update id="updateTakeoutMoneyByInnerId">
+
+		UPDATE account_user_inner
+
+		SET
+
+		account_pf_inner.balance = account_pf_inner.balance - #{balance},
+
+		account_pf_inner.takeout_money= account_pf_inner.takeout_money + #{takeoutMoney},
+
+
+		WHERE
+
+		 account_pf_inner.pf_inner_id  = #{pfInnerId}
+		 AND
+
+		  account_pf_inner.ac_type = #{acType}
+		AND
+		 account_pf_inner.balance >= #{balance}
+
+		 AND
+
+		account_pf_inner.takeout_money>0
+
+	</update>
+
+
+</mapper>

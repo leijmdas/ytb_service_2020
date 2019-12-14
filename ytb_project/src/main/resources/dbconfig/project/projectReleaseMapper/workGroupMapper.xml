@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.tagtable.WorkGroupMapper" >
+
+    <insert id="addWorkGroup" parameterType="ytb.project.model.tagtable.WorkGroupModel"
+            useGeneratedKeys="true" keyProperty="groupId" keyColumn="group_id">
+        insert into work_group (bb_group_id,group_name,project_id,document_id,talk_id,is_active,create_by,create_time,type)
+        values (#{bbGroupId},#{groupName},#{projectId},#{documentId},#{talkId},#{isActive},#{createBy},#{createTime},#{type})
+	</insert>
+
+    <update id="modifyWorkGroup">
+
+        update work_group set
+        bb_group_id = #{bbGroupId}
+        where group_id = #{groupId}
+
+    </update>
+
+    <select id="getWorkGroupById" resultType="ytb.project.model.tagtable.WorkGroupModel">
+        select * from work_group where group_id = #{groupId}
+    </select>
+
+    <select id="getWorkGroupByTalkId" resultType="ytb.project.model.tagtable.WorkGroupModel">
+        select * from work_group where talk_id = #{talkId}
+    </select>
+
+</mapper>

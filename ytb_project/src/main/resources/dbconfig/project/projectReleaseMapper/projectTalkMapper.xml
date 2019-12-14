@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ytb.project.dao.ProjectTalkMapper" >
+
+    <select id="getProjectTalk" parameterType="int" resultType="ytb.project.model.ProjectTalkModel">
+        SELECT t.*
+        FROM project_talk t
+        LEFT JOIN project p ON t.project_id = p.project_id
+        WHERE p.project_id = #{projectId}
+    </select>
+
+    <select id="getProjectTalkById" parameterType="int" resultType="ytb.project.model.ProjectTalkModel">
+        SELECT * FROM project_talk WHERE talk_id = #{talkId}
+    </select>
+
+    <insert id="addProjectTalk" parameterType="ytb.project.model.ProjectTalkModel" useGeneratedKeys="true" keyProperty="talkId">
+        INSERT INTO project_talk (
+            talk_id,
+            project_id,
+            user_id2,
+            company_id2,
+            phase,
+            phase_status,
+            enter_time,
+            finish_time,
+            remark,
+            folder_id,
+            group_id,
+            change_status,
+            pay_date )
+        VALUES
+        (
+            #{talkId},
+            #{projectId},
+            #{userId2},
+            #{companyId2},
+            #{phase},
+            #{phaseStatus},
+            now(),
+            now(),
+            #{remark},
+            #{folderId},
+            #{groupId},
+            #{changeStatus},
+            now()
+        )
+	</insert>
+    <update id="modifyChangeType">
+          UPDATE project_talk SET
+          change_type = #{changeType}
+          WHERE talk_id = #{talkId}
+    </update>
+
+    
+    <select id="getTalkByProjectAndUser" resultType="int">
+        SELECT count(talk_id) FROM project_talk WHERE project_id = #{projectId}
+         <if test="userId !=null">
+             AND user_id2 = #{userId}
+         </if>
+        <if test="companyId !=null">
+            AND company_id2 = #{companyId}
+        </if>
+    </select>
+
+    <update id="confirmTalk">
+        UPDATE project_talk   SET  project_id_ok = project_id,
+          phase_status = #{phaseStatus},  event_type = #{eventType}
+         WHERE talk_id = #{talkId}
+    </update>
+
+
+    <update id="updateNewProjectTalk">
+        UPDATE project_talk SET
+          group_id = #{groupId},
+          workplan_id = #{workplanId}
+        WHERE talk_id = #{talkId}
+    </update>
+
+
+    <update id="modifyTalkConfirm">
+         UPDATE project_talk SET
+          folder_id  = #{folderId},
+          phase = #{phase},
+          group_id =#{groupId},
+          workplan_id =#{documentId}
+          WHERE talk_id = #{talkId}
+     </update>
+
+
+    <update id="modifyTalkPhasePayDate">
+          UPDATE project_talk SET
+          phase =#{phase},
+          phase_status = #{phaseStatus},
+          pay_date = now()
+          WHERE talk_id = #{talkId}
+    </update>
+
+    <update id="modifyTalkPhase">
+         UPDATE project_talk  SET  phase =#{phase}
+         WHERE talk_id = #{talkId}
+     </update>
+
+    <update id="modifyTalkPhaseAndStatus">
+      UPDATE project_talk
+        <set>
+            <if test="phase != null and phase !=''">`phase` = #{phase}, </if>
+            <if test="phaseStatus != null and phaseStatus !=''">`phase_status` =
+                #{phaseStatus},</if>
+            <if test="changeStatus != null and changeStatus !=''">`change_status` =
+                #{changeStatus},</if>
+            finish_time = now()
+        </set>
+      WHERE talk_id = #{talkId}
+     </update>
+
+    <update id="modifyTalkRemark">
+        UPDATE project_talk SET
+        proposer =#{proposer},
+        <if test="remark!=null and remark!='' ">
+            remark = #{remark},
+        </if>
+        <if test="phaseStatus==0">
+            phase =#{phase},
+        </if>
+        <if test="changeStatus!=0">
+            change_status = #{changeStatus},
+        </if>
+        phase_status = #{phaseStatus}
+        WHERE talk_id = #{talkId}
+    </update>
+
+    <update id="modifyPhaseStatusEventType">
+          UPDATE project_talk
+          SET  phase_status = #{phaseStatus},
+          event_type = #{eventType}
+          WHERE talk_id = #{talkId}
+    </update>
+
+
+    <update id="modifyGroupId">
+          UPDATE project_talk SET
+          group_id = #{groupId}
+          WHERE talk_id = #{talkId}
+    </update>
+
+    <update id="modifyWorkplanId">
+          UPDATE project_talk
+          SET   workplan_id = #{workplanId}
+          WHERE talk_id = #{talkId}
+    </update>
+
+    <select id="getProjectTalkByProjectId" resultType="ytb.project.model.ProjectTalkModel">
+        SELECT * FROM project_talk WHERE project_id = #{projectId}
+    </select>
+</mapper>
