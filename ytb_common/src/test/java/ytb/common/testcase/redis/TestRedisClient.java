@@ -31,7 +31,8 @@ public class TestRedisClient extends ITestImpl {
     private JedisPool jedisPool;//非切片连接池
     private ShardedJedis shardedJedis;//切片额客户端连接
     private ShardedJedisPool shardedJedisPool;//切片连接池
-    String ip = "mysql.kunlong.com";
+    //String ip = "120.78.136.63";
+    String ip = "122.51.227.25";
 
     public TestRedisClient() {
         initialPool();
@@ -61,6 +62,7 @@ public class TestRedisClient extends ITestImpl {
         config.setTestOnBorrow(false);
 
         jedisPool = new JedisPool(config,ip,6379);
+
     }
 
     /**
@@ -74,6 +76,7 @@ public class TestRedisClient extends ITestImpl {
         config.setMaxIdle(5);
         config.setMaxWaitMillis(1000l);
         config.setTestOnBorrow(false);
+
         // slave链接
         List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
         shards.add(new JedisShardInfo(ip, 6379, "master"));
