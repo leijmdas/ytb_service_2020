@@ -22,9 +22,7 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
-        <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
-        <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>

@@ -3,14 +3,14 @@ server:
         uri-encoding: UTF-8
         max-threads: 100
         min-spare-threads: 25
-    port: 80
+    port: 880
 #    servlet:
 #        context-path: /hotel
 management:
     security:
         enables: false
     server:
-      port: 81
+      port: 881
 spring:
     application:
         name: ytb_common

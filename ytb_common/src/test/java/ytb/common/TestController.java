@@ -28,7 +28,8 @@ import java.util.*;
 
 @JTestClass.author("leijm")
 public class TestController extends ITestYtb {
-	String url_base="http://localhost/service";
+	String url_base="http://localhost:880/hld";
+
 	String url ="http://localhost/service/selectList";
 
 	@Inject(filename = "node.xml", value = "httpclient")
@@ -67,9 +68,10 @@ public class TestController extends ITestYtb {
 	@JTestClass.exp("ok")
 	public void test0001_selectList() {
 
-		String ret = httpclient.post(url_base+"/selectList",req.toJSONString() , "application/json");
+		String ret = httpclient.post(url_base+"/select",req.toJSONString() , "application/json");
 		httpclient.checkStatusCode(200);
 		JSONObject json=JSONObject.parseObject(ret);
+		System.out.println(ret);
 		checkEQ(0,json.getInteger("retcode"));
 	}
 

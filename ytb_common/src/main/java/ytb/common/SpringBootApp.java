@@ -5,32 +5,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableAsync;
-import ytb.common.redis.RedisUtil;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import ytb.common.test.CorsConfig;
 import ytb.common.test.rest.DemoController;
 import ytb.common.test.rest.RestDemo;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"ytb.common"})
 @ImportResource({"classpath:AppContextCommon.xml"})
 @EnableAsync
-public class SpringBootCommon {
+@EnableSwagger2
+public class SpringBootApp {
 
     public static void main(String[] args) {
 
         ConfigurableApplicationContext ctxt = SpringApplication.run(new Class[]{
-                CorsConfig.class, SpringBootCommon.class,
-                DemoController.class, RestDemo.class}, args);
-//        Task t = ctxt.getBean(Task.class);
-//        try {
-//            t.doTestAsync();
-//            t.doTest();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        RedisUtil.getInstance().set("rediusKey","redis value");
-//        RedisUtil.getInstance().expire("rediusKey",4000);
-//        String a=RedisUtil.getInstance().getValue("rediusKey");
-//        System.out.println(a);
+                CorsConfig.class }, args);
+
     }
 
 
