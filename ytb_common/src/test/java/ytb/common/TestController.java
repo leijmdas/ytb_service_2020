@@ -28,7 +28,7 @@ import java.util.*;
 
 @JTestClass.author("leijm")
 public class TestController extends ITestYtb {
-	String url_base="http://localhost:880/hld";
+	String url_base="http://localhost:880/hongld";
 
 	String url ="http://localhost/service/selectList";
 

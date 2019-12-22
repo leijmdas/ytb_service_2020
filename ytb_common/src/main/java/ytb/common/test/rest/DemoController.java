@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hld")
+@RequestMapping("/hongld")
 public final class DemoController {
 
 	@RequestMapping(value = "/select", produces = {"application/json;charset=UTF-8"})
