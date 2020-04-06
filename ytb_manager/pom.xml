@@ -57,7 +57,7 @@
             <!--<plugin>-->
                 <!--<groupId>org.springframework.boot</groupId>-->
                 <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-                <!--<version>2.1.8.RELEASE</version>-->
+                <!--<version>3.6.1</version>-->
 
                 <!--<configuration>-->
                     <!--<mainClass>ytb.manager.Application</mainClass>-->

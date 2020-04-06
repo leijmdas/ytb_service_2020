@@ -5,14 +5,14 @@ server:
         uri-encoding: UTF-8
         max-threads: 100
         min-spare-threads: 25
-    port: 10080
+    port: 13080
 #    servlet:
 #        context-path: /hotel
 management:
     security:
         enables: false
     server:
-      port: 10081
+      port: 13081
 spring:
     application:
         name: manager

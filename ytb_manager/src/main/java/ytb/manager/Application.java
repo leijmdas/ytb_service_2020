@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.web.client.RestTemplate;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import ytb.common.test.CorsConfig;
 
@@ -23,10 +24,10 @@ public class Application {
 
     public static void main(String[] args) {
         logger.info("start mngr");
-        Class[] bootLst = new Class[]{
-                CorsConfig.class,   Application.class
-        };
+        //Class[] bootLst = new Class[]{  CorsConfig.class,   Application.class  };
+        RestTemplate restTemplate;
+        Class[] classes = new Class[]{   Application.class  };
 
-        SpringApplication.run(bootLst, args);
+        SpringApplication.run(classes, args);
     }
 }

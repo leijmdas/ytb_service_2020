@@ -37,7 +37,7 @@
             <repositories>
                 <repository>
                     <id>MyReleasesNexus</id>
-                    <url>http://122.51.227.25:8081/repository/maven-releases/</url>
+                    <url>http://nexus.akunkong.top:8081/repository/maven-releases/</url>
                     <releases>
                         <enabled>true</enabled>
                         <updatePolicy>always</updatePolicy>
@@ -46,7 +46,7 @@
                 </repository>
                 <repository>
                     <id>MySnapshotNexus</id>
-                    <url>http://122.51.227.25:8081/repository/maven-snapshots/</url>
+                    <url>http://nexus.akunkong.top:8081/repository/maven-snapshots/</url>
 
                     <snapshots>
                         <enabled>true</enabled>
@@ -55,19 +55,7 @@
                 </repository>
             </repositories>
 
-            <!--<pluginRepositories>-->
-            <!--<pluginRepository>-->
-            <!--<id>MySnapshotNexus</id>-->
-            <!--<url>http://122.51.227.25:8081/repository/maven-snapshots/</url>-->
 
-            <!--<releases>-->
-            <!--<enabled>true</enabled>-->
-            <!--</releases>-->
-            <!--<snapshots>-->
-            <!--<enabled>true</enabled>-->
-            <!--</snapshots>-->
-            <!--</pluginRepository>-->
-            <!--</pluginRepositories>-->
 
         </profile>
 
@@ -75,7 +63,6 @@
 
     <activeProfiles>
         <activeProfile>nexus</activeProfile>
-        <!--<activeProfile>nexus-aliyun</activeProfile>-->
     </activeProfiles>
 
 
